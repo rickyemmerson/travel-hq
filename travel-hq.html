@@ -1,0 +1,2430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Travel HQ">
+<title>Travel HQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ─── RESET & BASE ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{height:100%;font-size:16px}
+body{height:100%;font-family:'Inter',sans-serif;background:#0a0a0f;color:#f0f0f5;overflow:hidden;position:fixed;width:100%;-webkit-font-smoothing:antialiased}
+
+/* ─── CSS VARIABLES ─── */
+:root{
+  --bg:#0a0a0f;
+  --surface:rgba(255,255,255,0.06);
+  --surface-raised:rgba(255,255,255,0.09);
+  --surface-high:rgba(255,255,255,0.13);
+  --border:rgba(255,255,255,0.10);
+  --border-bright:rgba(255,255,255,0.18);
+  --text-primary:#f0f0f5;
+  --text-secondary:rgba(240,240,245,0.60);
+  --text-muted:rgba(240,240,245,0.38);
+  --nav-h:68px;
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+  --accent-london:#5b7fa6;
+  --accent-grindelwald:#4a8c7a;
+  --accent-como:#7a8f6e;
+  --accent-rome:#c47a4a;
+  --accent-sorrento:#c4954a;
+  --accent-naples:#b85c4a;
+  --accent-athens:#7a9bb5;
+  --accent-singapore:#5a9e7a;
+  --accent:#c47a4a;
+  --green:#34c759;
+  --amber:#ff9f0a;
+  --red:#ff453a;
+  --radius-sm:10px;
+  --radius-md:14px;
+  --radius-lg:20px;
+  --radius-xl:28px;
+}
+
+/* ─── LIGHT MODE ─── */
+@media(prefers-color-scheme:light){
+  :root{
+    --bg:#f2f2f7;
+    --surface:rgba(255,255,255,0.82);
+    --surface-raised:rgba(255,255,255,0.92);
+    --surface-high:#ffffff;
+    --border:rgba(0,0,0,0.08);
+    --border-bright:rgba(0,0,0,0.14);
+    --text-primary:#1c1c1e;
+    --text-secondary:rgba(28,28,30,0.60);
+    --text-muted:rgba(28,28,30,0.38);
+  }
+  body{background:#f2f2f7}
+  .bg-scene{display:none}
+  .nav-bar{background:rgba(242,242,247,0.88)!important;border-top:1px solid rgba(0,0,0,0.10)!important}
+}
+
+/* ─── BACKGROUND SCENE ─── */
+.bg-scene{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg-blob{position:absolute;border-radius:50%;filter:blur(120px);opacity:.5}
+.blob1{width:600px;height:600px;top:-200px;left:-200px;background:radial-gradient(circle,rgba(100,130,180,0.4),transparent 70%)}
+.blob2{width:700px;height:700px;bottom:-300px;right:-200px;background:radial-gradient(circle,rgba(196,122,74,0.35),transparent 70%)}
+.blob3{width:400px;height:400px;top:35%;left:25%;background:radial-gradient(circle,rgba(90,158,122,0.25),transparent 70%)}
+
+/* ─── LAYOUT ─── */
+#app{position:relative;z-index:1;height:100%;display:flex;flex-direction:column}
+.screen{display:none;flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--nav-h) + var(--safe-bottom) + 24px)}
+.screen.active{display:block}
+
+/* ─── NAV BAR ─── */
+.nav-bar{
+  position:fixed;bottom:0;left:0;right:0;
+  height:calc(var(--nav-h) + var(--safe-bottom));
+  background:rgba(10,10,15,0.92);
+  backdrop-filter:blur(40px) saturate(180%);
+  -webkit-backdrop-filter:blur(40px) saturate(180%);
+  border-top:1px solid var(--border);
+  display:flex;align-items:flex-start;padding-top:8px;
+  z-index:500
+}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:4px 0;cursor:pointer;transition:opacity .15s}
+.nav-item:active{opacity:.6}
+.nav-icon{width:24px;height:24px;display:flex;align-items:center;justify-content:center;transition:transform .2s}
+.nav-item.active .nav-icon{transform:scale(1.1)}
+.nav-label{font-size:10px;font-weight:500;color:var(--text-muted);letter-spacing:.3px;transition:color .2s}
+.nav-item.active .nav-label{color:var(--accent)}
+.nav-item.active .nav-svg{stroke:var(--accent)}
+.nav-svg{stroke:var(--text-muted);transition:stroke .2s}
+
+/* ─── SCREEN HEADER ─── */
+.screen-header{padding:56px 20px 20px;position:sticky;top:0;z-index:10;background:var(--bg)}
+@supports(backdrop-filter:blur(1px)){
+  .screen-header{background:transparent;backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%)}
+}
+.screen-title{font-size:28px;font-weight:700;letter-spacing:-.5px;color:var(--text-primary)}
+.screen-subtitle{font-size:13px;color:var(--text-secondary);margin-top:3px;font-weight:400}
+
+/* ─── DESTINATION CARDS (TRIP SCREEN) ─── */
+.destinations-grid{padding:0 16px 16px;display:flex;flex-direction:column;gap:12px}
+.dest-card{
+  border-radius:var(--radius-lg);overflow:hidden;cursor:pointer;
+  background:var(--surface);border:1px solid var(--border);
+  transition:transform .2s,box-shadow .2s
+}
+.dest-card:active{transform:scale(.98)}
+.dest-hero{height:160px;background-size:cover;background-position:center;position:relative}
+.dest-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0) 30%,rgba(0,0,0,0.7) 100%)}
+.dest-hero-content{position:absolute;bottom:0;left:0;right:0;padding:16px;z-index:1}
+.dest-name{font-size:22px;font-weight:700;color:#fff;letter-spacing:-.3px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+.dest-dates{font-size:12px;color:rgba(255,255,255,0.75);font-weight:500;margin-top:2px;text-shadow:0 1px 3px rgba(0,0,0,.5)}
+.dest-meta{padding:12px 16px;display:flex;align-items:center;gap:12px}
+.dest-nights{font-size:12px;font-weight:600;color:var(--text-secondary);background:var(--surface-raised);padding:4px 10px;border-radius:20px}
+.dest-status{font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;margin-left:auto}
+.dest-status.current{background:rgba(52,199,89,0.15);color:#34c759}
+.dest-status.upcoming{background:rgba(255,159,10,0.12);color:#ff9f0a}
+.dest-status.completed{background:rgba(255,255,255,0.06);color:var(--text-muted)}
+.dest-status.traveling{background:rgba(100,130,180,0.15);color:#5b7fa6}
+
+/* ─── DAY LIST (inside destination) ─── */
+.back-btn{display:flex;align-items:center;gap:6px;padding:14px 16px 0;cursor:pointer;color:var(--accent);font-size:14px;font-weight:500}
+.back-btn svg{stroke:var(--accent)}
+.days-list{padding:0 16px;display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.day-row{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-md);padding:14px 16px;
+  display:flex;align-items:center;gap:12px;cursor:pointer;
+  transition:background .15s
+}
+.day-row:active{background:var(--surface-raised)}
+.day-num{font-size:11px;font-weight:700;color:var(--text-muted);letter-spacing:.5px;min-width:36px}
+.day-row-date{font-size:15px;font-weight:600;color:var(--text-primary);flex:1}
+.day-row-preview{font-size:12px;color:var(--text-secondary);margin-top:2px}
+.day-row-arrow{color:var(--text-muted)}
+.day-today-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+
+/* ─── DAY VIEW ─── */
+.day-view-header{padding:56px 20px 0}
+.day-view-dest{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+.day-view-title{font-size:26px;font-weight:700;letter-spacing:-.4px;color:var(--text-primary)}
+.day-view-subtitle{font-size:13px;color:var(--text-secondary);margin-top:4px}
+.day-view-hero{margin:16px;border-radius:var(--radius-lg);overflow:hidden;height:180px;position:relative}
+.day-view-hero img{width:100%;height:100%;object-fit:cover}
+.day-photo-btn{
+  position:absolute;bottom:10px;right:10px;
+  background:rgba(0,0,0,0.5);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.2);
+  color:#fff;font-size:11px;font-weight:600;
+  padding:6px 12px;border-radius:20px;cursor:pointer;
+  display:flex;align-items:center;gap:5px
+}
+
+/* ─── WARNING CARD ─── */
+.warning-card{
+  margin:0 16px 12px;
+  background:rgba(255,159,10,0.10);
+  border:1px solid rgba(255,159,10,0.30);
+  border-radius:var(--radius-md);padding:14px 16px;
+}
+.warning-title{font-size:12px;font-weight:700;color:#ff9f0a;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.warning-item{font-size:13px;color:var(--text-primary);line-height:1.5;padding:3px 0}
+
+/* ─── ACTIVITY CARDS ─── */
+.activities-section{padding:0 16px}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text-muted);padding:16px 0 8px}
+.activity-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-md);margin-bottom:8px;overflow:hidden;
+  cursor:pointer;transition:background .15s,transform .1s
+}
+.activity-card:active{transform:scale(.99);background:var(--surface-raised)}
+.activity-card-inner{display:flex;gap:0}
+.activity-thumb{
+  width:72px;flex-shrink:0;background-size:cover;background-position:center;
+  background-color:var(--surface-raised);position:relative
+}
+.activity-content{flex:1;padding:12px 14px}
+.activity-time-row{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.activity-time{font-size:11px;font-weight:700;color:var(--text-muted);letter-spacing:.3px}
+.activity-duration{font-size:11px;color:var(--text-muted);background:var(--surface-raised);padding:2px 7px;border-radius:10px}
+.activity-type-badge{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:2px 7px;border-radius:10px;margin-left:auto}
+.activity-name{font-size:15px;font-weight:600;color:var(--text-primary);line-height:1.3}
+.activity-note{font-size:12px;color:var(--text-secondary);margin-top:4px;line-height:1.5}
+.activity-links{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.activity-link-btn{
+  font-size:11px;font-weight:600;padding:5px 10px;
+  border-radius:20px;border:1px solid var(--border-bright);
+  color:var(--text-primary);background:var(--surface-raised);
+  display:flex;align-items:center;gap:4px;cursor:pointer;
+  transition:background .15s
+}
+.activity-link-btn:active{background:var(--surface-high)}
+.activity-link-btn svg{width:11px;height:11px;stroke:currentColor}
+
+/* TRANSIT CARD */
+.transit-card{
+  background:transparent;border:1px dashed var(--border);
+  border-radius:var(--radius-md);margin-bottom:8px;padding:10px 14px;
+  display:flex;align-items:center;gap:10px;cursor:pointer;
+  transition:background .15s
+}
+.transit-card:active{background:var(--surface)}
+.transit-icon{width:32px;height:32px;border-radius:50%;background:var(--surface-raised);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.transit-info{flex:1}
+.transit-name{font-size:13px;font-weight:600;color:var(--text-primary)}
+.transit-detail{font-size:11px;color:var(--text-secondary);margin-top:2px}
+.transit-time{font-size:11px;font-weight:700;color:var(--text-muted)}
+.transit-map-btn{font-size:11px;font-weight:600;color:var(--accent);display:flex;align-items:center;gap:3px}
+
+/* FLIGHT CARD */
+.flight-card{
+  margin:0 16px 12px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-lg);overflow:hidden
+}
+.flight-header{padding:14px 16px 10px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
+.flight-airline{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text-muted)}
+.flight-number{font-size:18px;font-weight:700;color:var(--text-primary);cursor:pointer;display:flex;align-items:center;gap:6px}
+.flight-number-link{color:var(--accent);text-decoration:none}
+.flight-route{padding:14px 16px;display:flex;align-items:center}
+.flight-city{flex:1}
+.flight-city-code{font-size:24px;font-weight:700;letter-spacing:-.5px;color:var(--text-primary)}
+.flight-city-name{font-size:11px;color:var(--text-secondary);margin-top:2px}
+.flight-city-time{font-size:15px;font-weight:600;color:var(--text-primary);margin-top:4px}
+.flight-arrow{padding:0 12px;color:var(--text-muted);display:flex;flex-direction:column;align-items:center;gap:4px}
+.flight-arrow-line{width:60px;height:1px;background:var(--border-bright);position:relative}
+.flight-arrow-line::after{content:'';position:absolute;right:-1px;top:-3px;width:6px;height:6px;border-right:1.5px solid var(--text-muted);border-top:1.5px solid var(--text-muted);transform:rotate(45deg)}
+.flight-duration{font-size:10px;font-weight:600;color:var(--text-muted);margin-top:4px}
+.flight-footer{padding:10px 16px;display:flex;gap:8px;flex-wrap:wrap;border-top:1px solid var(--border)}
+.flight-ref-btn{
+  font-size:12px;font-weight:600;padding:6px 12px;
+  border-radius:20px;background:var(--surface-raised);
+  border:1px solid var(--border-bright);color:var(--text-primary);
+  cursor:pointer;display:flex;align-items:center;gap:5px
+}
+.flight-ref-btn:active{background:var(--surface-high)}
+.copied-toast{position:fixed;bottom:calc(var(--nav-h) + var(--safe-bottom) + 12px);left:50%;transform:translateX(-50%);background:rgba(52,199,89,0.9);color:#fff;font-size:13px;font-weight:600;padding:8px 20px;border-radius:30px;z-index:999;pointer-events:none;opacity:0;transition:opacity .2s}
+.copied-toast.show{opacity:1}
+
+/* HOTEL CARD */
+.hotel-card{
+  margin:0 16px 12px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-lg);overflow:hidden
+}
+.hotel-inner{padding:16px}
+.hotel-label{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px}
+.hotel-name{font-size:17px;font-weight:700;color:var(--text-primary)}
+.hotel-address{font-size:12px;color:var(--text-secondary);margin-top:3px}
+.hotel-times{display:flex;gap:16px;margin-top:12px}
+.hotel-time-item{flex:1;background:var(--surface-raised);border-radius:var(--radius-sm);padding:10px}
+.hotel-time-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted)}
+.hotel-time-val{font-size:15px;font-weight:600;color:var(--text-primary);margin-top:2px}
+.hotel-footer{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.hotel-btn{
+  font-size:12px;font-weight:600;padding:7px 14px;
+  border-radius:20px;background:var(--surface-raised);
+  border:1px solid var(--border-bright);color:var(--text-primary);
+  cursor:pointer;display:flex;align-items:center;gap:5px
+}
+.hotel-btn:active{background:var(--surface-high)}
+
+/* ─── ADD ACTIVITY MODAL ─── */
+.modal-overlay{
+  position:fixed;inset:0;z-index:800;
+  background:rgba(0,0,0,0.7);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  display:flex;align-items:flex-end;
+  opacity:0;pointer-events:none;transition:opacity .25s
+}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-sheet{
+  width:100%;background:var(--surface-raised);
+  border-radius:var(--radius-xl) var(--radius-xl) 0 0;
+  border:1px solid var(--border-bright);
+  padding:20px 20px calc(var(--safe-bottom) + 20px);
+  transform:translateY(100%);transition:transform .3s cubic-bezier(0.32,0.72,0,1);
+  max-height:85vh;overflow-y:auto
+}
+.modal-overlay.open .modal-sheet{transform:translateY(0)}
+.modal-title{font-size:18px;font-weight:700;color:var(--text-primary);margin-bottom:20px;display:flex;align-items:center;justify-content:space-between}
+.modal-close{width:28px;height:28px;border-radius:50%;background:var(--surface-high);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-secondary)}
+.form-group{margin-bottom:14px}
+.form-label{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;display:block}
+.form-input{
+  width:100%;background:var(--surface);border:1px solid var(--border-bright);
+  border-radius:var(--radius-sm);padding:10px 14px;
+  font-size:15px;color:var(--text-primary);font-family:inherit;outline:none;
+  transition:border-color .15s
+}
+.form-input:focus{border-color:var(--accent)}
+.form-input::placeholder{color:var(--text-muted)}
+.form-row{display:flex;gap:10px}
+.form-row .form-group{flex:1}
+select.form-input{-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(240,240,245,0.4)' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.form-submit{
+  width:100%;padding:14px;border-radius:var(--radius-md);
+  background:var(--accent);color:#fff;font-size:15px;font-weight:700;
+  border:none;cursor:pointer;font-family:inherit;margin-top:4px;
+  transition:opacity .15s
+}
+.form-submit:active{opacity:.8}
+.type-pills{display:flex;gap:6px;flex-wrap:wrap}
+.type-pill{
+  padding:7px 14px;border-radius:20px;font-size:12px;font-weight:600;
+  border:1px solid var(--border-bright);color:var(--text-secondary);
+  background:var(--surface);cursor:pointer;transition:all .15s
+}
+.type-pill.selected{border-color:var(--accent);color:var(--accent);background:rgba(196,122,74,0.10)}
+
+/* ─── BUDGET SCREEN ─── */
+.budget-overview{margin:0 16px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px}
+.budget-total-label{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px}
+.budget-total-amount{font-size:36px;font-weight:300;letter-spacing:-1px;color:var(--text-primary)}
+.budget-total-aud{font-size:13px;color:var(--text-secondary);margin-top:2px}
+.budget-progress-track{height:4px;background:var(--surface-high);border-radius:2px;margin:16px 0 10px;overflow:hidden}
+.budget-progress-fill{height:100%;border-radius:2px;background:var(--green);transition:width .4s ease}
+.budget-progress-fill.warn{background:var(--amber)}
+.budget-progress-fill.over{background:var(--red)}
+.budget-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--text-secondary)}
+.budget-remaining{color:var(--green);font-weight:600}
+.budget-remaining.warn{color:var(--amber)}
+.budget-remaining.over{color:var(--red)}
+
+.budget-cats{padding:0 16px;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.budget-cat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:14px}
+.budget-cat-icon{font-size:20px;margin-bottom:6px}
+.budget-cat-name{font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px}
+.budget-cat-amount{font-size:18px;font-weight:600;color:var(--text-primary);margin-top:4px}
+.budget-cat-sub{font-size:11px;color:var(--text-secondary);margin-top:2px}
+
+.transactions-section{padding:0 16px}
+.tx-day-group{margin-bottom:16px}
+.tx-day-label{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text-muted);padding:8px 0}
+.tx-item{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-md);padding:12px 14px;
+  display:flex;align-items:center;gap:12px;margin-bottom:6px
+}
+.tx-icon{width:36px;height:36px;border-radius:10px;background:var(--surface-raised);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.tx-info{flex:1}
+.tx-name{font-size:14px;font-weight:600;color:var(--text-primary)}
+.tx-meta{font-size:11px;color:var(--text-muted);margin-top:2px}
+.tx-amount{text-align:right}
+.tx-local{font-size:14px;font-weight:600;color:var(--text-primary)}
+.tx-aud{font-size:11px;color:var(--text-secondary);margin-top:2px}
+.tx-payment{font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;margin-top:4px;display:inline-block}
+.tx-payment.cash{background:rgba(255,159,10,0.12);color:#ff9f0a}
+.tx-payment.card{background:rgba(90,120,180,0.12);color:#5a7ab4}
+
+/* ADD TRANSACTION BUTTON */
+.fab{
+  position:fixed;bottom:calc(var(--nav-h) + var(--safe-bottom) + 16px);right:16px;
+  width:52px;height:52px;border-radius:50%;
+  background:var(--accent);box-shadow:0 4px 20px rgba(196,122,74,0.4);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;z-index:400;transition:transform .2s,box-shadow .2s
+}
+.fab:active{transform:scale(.92);box-shadow:0 2px 10px rgba(196,122,74,0.3)}
+.fab svg{stroke:#fff}
+
+/* CURRENCY & RATES */
+.rates-section{padding:0 16px 16px}
+.rates-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px}
+.rates-title{font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
+.rates-edit-btn{font-size:12px;color:var(--accent);font-weight:600;cursor:pointer}
+.rate-row{display:flex;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)}
+.rate-row:last-child{border-bottom:none}
+.rate-currency{font-size:14px;font-weight:700;color:var(--text-primary);min-width:50px}
+.rate-flag{font-size:18px;margin-right:8px}
+.rate-value{font-size:13px;color:var(--text-secondary);flex:1}
+.rate-aud{font-size:13px;font-weight:600;color:var(--text-primary)}
+
+/* CONVERTER */
+.converter-card{margin:0 16px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px}
+.converter-title{font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:12px}
+.converter-row{display:flex;gap:10px;align-items:center}
+.converter-input{flex:1;background:var(--surface-raised);border:1px solid var(--border-bright);border-radius:var(--radius-sm);padding:10px 12px;font-size:16px;font-weight:600;color:var(--text-primary);font-family:inherit;outline:none}
+.converter-result{font-size:18px;font-weight:700;color:var(--accent);min-width:120px;text-align:right}
+
+/* DEST BUDGET CARDS */
+.dest-budgets{padding:0 16px;margin-bottom:16px}
+.dest-budget-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:14px 16px;margin-bottom:8px}
+.dest-budget-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.dest-budget-name{font-size:14px;font-weight:700;color:var(--text-primary)}
+.dest-budget-dates{font-size:11px;color:var(--text-muted)}
+.dest-budget-bar{height:3px;background:var(--surface-high);border-radius:2px;overflow:hidden;margin-bottom:8px}
+.dest-budget-fill{height:100%;border-radius:2px;background:var(--green);transition:width .4s}
+.dest-budget-fill.warn{background:var(--amber)}
+.dest-budget-fill.over{background:var(--red)}
+.dest-budget-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--text-secondary)}
+.dest-budget-spent{font-weight:600;color:var(--text-primary)}
+
+/* ─── SETTINGS / TRIP INFO ─── */
+.info-section{padding:0 16px 8px}
+.info-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:12px}
+.info-row{padding:13px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.info-row:last-child{border-bottom:none}
+.info-row-label{font-size:14px;color:var(--text-secondary)}
+.info-row-value{font-size:14px;font-weight:600;color:var(--text-primary);cursor:pointer;display:flex;align-items:center;gap:6px}
+.info-row-value.copyable{color:var(--accent)}
+.info-section-label{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text-muted);padding:12px 16px 6px}
+
+/* EMERGENCY */
+.emergency-card{margin:0 16px 12px;background:rgba(255,69,58,0.08);border:1px solid rgba(255,69,58,0.20);border-radius:var(--radius-lg);padding:16px}
+.emergency-title{font-size:13px;font-weight:700;color:#ff453a;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.emergency-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,69,58,0.10);font-size:13px}
+.emergency-row:last-child{border-bottom:none}
+.emergency-label{color:var(--text-secondary)}
+.emergency-value{font-weight:600;color:var(--text-primary)}
+
+/* WEATHER WIDGET */
+.weather-widget{margin:0 16px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:12px 16px;display:flex;align-items:center;gap:12px}
+.weather-icon{font-size:28px}
+.weather-info{flex:1}
+.weather-temp{font-size:18px;font-weight:700;color:var(--text-primary)}
+.weather-desc{font-size:12px;color:var(--text-secondary)}
+.weather-location{font-size:11px;color:var(--text-muted);margin-top:2px}
+
+/* MISC */
+.empty-state{text-align:center;padding:40px 20px;color:var(--text-muted)}
+.empty-state-icon{font-size:40px;margin-bottom:12px}
+.empty-state-title{font-size:16px;font-weight:600;color:var(--text-secondary);margin-bottom:6px}
+.empty-state-sub{font-size:13px;line-height:1.5}
+.section-add-btn{
+  width:100%;padding:12px;border-radius:var(--radius-md);
+  background:transparent;border:1px dashed var(--border-bright);
+  color:var(--accent);font-size:13px;font-weight:600;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;
+  margin-top:4px;font-family:inherit;transition:background .15s
+}
+.section-add-btn:active{background:var(--surface)}
+.delete-zone{color:var(--red);font-size:11px;font-weight:600;padding:4px 0;cursor:pointer;margin-top:6px;display:none}
+.activity-card.edit-mode .delete-zone{display:block}
+
+/* PHOTO STRIP */
+.photo-strip{padding:0 16px 12px;display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.photo-strip::-webkit-scrollbar{display:none}
+.photo-item{width:80px;height:80px;border-radius:var(--radius-sm);background:var(--surface-raised);flex-shrink:0;overflow:hidden;cursor:pointer;position:relative;border:1px solid var(--border)}
+.photo-item img{width:100%;height:100%;object-fit:cover}
+.photo-add{display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--text-muted)}
+
+/* DONUT CHART */
+.donut-wrap{display:flex;align-items:center;gap:20px;padding:0 16px 16px}
+.donut-svg{flex-shrink:0}
+.donut-legend{flex:1;display:flex;flex-direction:column;gap:8px}
+.donut-legend-item{display:flex;align-items:center;gap:8px;font-size:12px}
+.donut-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.donut-legend-label{color:var(--text-secondary);flex:1}
+.donut-legend-val{font-weight:600;color:var(--text-primary)}
+
+/* SETTINGS SCREEN */
+.settings-section{padding:0 16px 8px}
+.settings-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:12px}
+.settings-row{padding:14px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border);cursor:pointer}
+.settings-row:last-child{border-bottom:none}
+.settings-row:active{background:var(--surface-raised)}
+.settings-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.settings-label{font-size:14px;color:var(--text-primary);flex:1}
+.settings-value{font-size:13px;color:var(--text-muted)}
+.settings-arrow{color:var(--text-muted)}
+
+/* TYPE BADGE COLORS */
+.badge-flight{background:rgba(91,127,166,0.15);color:#5b7fa6}
+.badge-hotel{background:rgba(196,122,74,0.15);color:#c47a4a}
+.badge-activity{background:rgba(74,140,122,0.15);color:#4a8c7a}
+.badge-food{background:rgba(196,149,74,0.15);color:#c4954a}
+.badge-transit{background:rgba(150,150,170,0.12);color:rgba(200,200,220,0.7)}
+.badge-ferry{background:rgba(90,120,180,0.15);color:#5a78b4}
+.badge-free{background:rgba(122,155,181,0.12);color:#7a9bb5}
+
+/* EDIT MODE TOGGLE */
+.edit-toggle{
+  position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);right:16px;
+  background:var(--surface-raised);border:1px solid var(--border-bright);
+  color:var(--text-secondary);font-size:12px;font-weight:600;
+  padding:6px 14px;border-radius:20px;cursor:pointer;z-index:200;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)
+}
+.edit-toggle.active{color:var(--accent);border-color:var(--accent)}
+
+/* JOURNAL LINK */
+.journal-link-card{
+  margin:0 16px 12px;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:16px;display:flex;align-items:center;gap:14px;cursor:pointer
+}
+.journal-link-card:active{background:var(--surface-raised)}
+.journal-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#1c7ed6,#4dabf7);display:flex;align-items:center;justify-content:center;font-size:22px}
+.journal-link-info{flex:1}
+.journal-link-title{font-size:15px;font-weight:600;color:var(--text-primary)}
+.journal-link-sub{font-size:12px;color:var(--text-secondary);margin-top:2px}
+
+/* SCROLL SNAP INDICATOR */
+.day-counter{
+  font-size:12px;font-weight:600;color:var(--text-muted);
+  display:flex;align-items:center;gap:6px;margin-top:6px
+}
+.day-counter-dot{width:5px;height:5px;border-radius:50%;background:var(--text-muted)}
+.day-counter-dot.active{background:var(--accent);width:14px;border-radius:3px}
+
+/* ANIMATION */
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.screen.active .anim{animation:fadeSlideUp .25s ease both}
+.anim-1{animation-delay:.05s}
+.anim-2{animation-delay:.10s}
+.anim-3{animation-delay:.15s}
+.anim-4{animation-delay:.20s}
+
+/* SYNC INDICATOR */
+.sync-dot{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;margin-left:4px}
+.sync-dot.syncing{background:var(--amber);animation:pulse 1s infinite}
+.sync-dot.error{background:var(--red)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+</style>
+</head>
+<body>
+
+<div class="bg-scene">
+  <div class="bg-blob blob1"></div>
+  <div class="bg-blob blob2"></div>
+  <div class="bg-blob blob3"></div>
+</div>
+
+<div id="app">
+
+  <!-- ══════════════════════════════════════════
+       TRIP SCREEN — Destination Overview
+  ══════════════════════════════════════════ -->
+  <div id="screen-trip" class="screen active">
+    <div class="screen-header">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between">
+        <div>
+          <div class="screen-title">Travel HQ</div>
+          <div class="screen-subtitle">Europe &amp; Singapore · Sep–Oct 2026 <span class="sync-dot" id="syncDot"></span></div>
+        </div>
+        <div style="font-size:12px;color:var(--text-muted);font-weight:500;padding-bottom:2px">30 days</div>
+      </div>
+    </div>
+
+    <div id="trip-destinations" class="destinations-grid anim anim-1"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       DAY LIST SCREEN
+  ══════════════════════════════════════════ -->
+  <div id="screen-daylist" class="screen">
+    <div class="back-btn" onclick="showDestinations()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      All Destinations
+    </div>
+    <div class="screen-header" style="padding-top:12px">
+      <div class="screen-title" id="daylist-title"></div>
+      <div class="screen-subtitle" id="daylist-subtitle"></div>
+    </div>
+    <div id="daylist-days" class="days-list anim anim-1"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       DAY VIEW SCREEN
+  ══════════════════════════════════════════ -->
+  <div id="screen-day" class="screen">
+    <div class="back-btn" id="dayBackBtn" onclick="goBackFromDay()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      <span id="dayBackLabel">Back</span>
+    </div>
+    <div id="dayViewContent"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       BUDGET SCREEN
+  ══════════════════════════════════════════ -->
+  <div id="screen-budget" class="screen">
+    <div class="screen-header">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between">
+        <div>
+          <div class="screen-title">Budget</div>
+          <div class="screen-subtitle">On-trip spending tracker</div>
+        </div>
+        <div id="budgetViewToggle" style="font-size:12px;color:var(--accent);font-weight:600;cursor:pointer;padding-bottom:2px">By Destination</div>
+      </div>
+    </div>
+    <div id="budgetContent" class="anim anim-1"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       INFO SCREEN — Bookings & Emergency
+  ══════════════════════════════════════════ -->
+  <div id="screen-info" class="screen">
+    <div class="screen-header">
+      <div class="screen-title">Trip Info</div>
+      <div class="screen-subtitle">Bookings, refs &amp; essentials</div>
+    </div>
+    <div id="infoContent" class="anim anim-1"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       NAV BAR
+  ══════════════════════════════════════════ -->
+  <nav class="nav-bar">
+    <div class="nav-item active" id="nav-trip" onclick="navTo('trip')">
+      <div class="nav-icon"><svg class="nav-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+      <div class="nav-label">Trip</div>
+    </div>
+    <div class="nav-item" id="nav-today" onclick="navTo('today')">
+      <div class="nav-icon"><svg class="nav-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+      <div class="nav-label">Today</div>
+    </div>
+    <div class="nav-item" id="nav-budget" onclick="navTo('budget')">
+      <div class="nav-icon"><svg class="nav-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <div class="nav-label">Budget</div>
+    </div>
+    <div class="nav-item" id="nav-info" onclick="navTo('info')">
+      <div class="nav-icon"><svg class="nav-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div class="nav-label">Info</div>
+    </div>
+  </nav>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     ADD TRANSACTION MODAL
+══════════════════════════════════════════ -->
+<div class="modal-overlay" id="txModal">
+  <div class="modal-sheet">
+    <div class="modal-title">
+      Add Expense
+      <div class="modal-close" onclick="closeTxModal()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Category</label>
+      <div class="type-pills" id="txCatPills">
+        <div class="type-pill selected" data-cat="dining" onclick="selectTxCat(this)">🍽️ Dining</div>
+        <div class="type-pill" data-cat="experiences" onclick="selectTxCat(this)">🎭 Experiences</div>
+        <div class="type-pill" data-cat="transport" onclick="selectTxCat(this)">🚕 Transport</div>
+        <div class="type-pill" data-cat="shopping" onclick="selectTxCat(this)">🛍️ Shopping</div>
+        <div class="type-pill" data-cat="essentials" onclick="selectTxCat(this)">💊 Essentials</div>
+        <div class="type-pill" data-cat="misc" onclick="selectTxCat(this)">📌 Other</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Amount</label>
+        <input class="form-input" id="txAmount" type="number" inputmode="decimal" placeholder="0.00" step="0.01">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Currency</label>
+        <select class="form-input" id="txCurrency">
+          <option value="AUD">AUD</option>
+          <option value="GBP">GBP</option>
+          <option value="CHF">CHF</option>
+          <option value="EUR">EUR</option>
+          <option value="SGD">SGD</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Payment Method</label>
+      <div class="type-pills">
+        <div class="type-pill selected" data-method="card" id="pillCard" onclick="selectMethod('card')">💳 Card</div>
+        <div class="type-pill" data-method="cash" id="pillCash" onclick="selectMethod('cash')">💵 Cash</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Note (optional)</label>
+      <input class="form-input" id="txNote" type="text" placeholder="e.g. Cacio e pepe, Campo de' Fiori">
+    </div>
+    <div id="txAudPreview" style="font-size:12px;color:var(--text-muted);margin-bottom:12px;min-height:18px"></div>
+    <button class="form-submit" onclick="submitTransaction()">Add Expense</button>
+  </div>
+</div>
+
+<!-- ADD ACTIVITY MODAL -->
+<div class="modal-overlay" id="activityModal">
+  <div class="modal-sheet">
+    <div class="modal-title">
+      <span id="actModalTitle">Add Activity</span>
+      <div class="modal-close" onclick="closeActivityModal()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Type</label>
+      <div class="type-pills" id="actTypePills">
+        <div class="type-pill selected" data-type="activity" onclick="selectActType(this)">🎯 Activity</div>
+        <div class="type-pill" data-type="transit" onclick="selectActType(this)">🚶 Transit</div>
+        <div class="type-pill" data-type="food" onclick="selectActType(this)">🍽️ Food</div>
+        <div class="type-pill" data-type="hotel" onclick="selectActType(this)">🏨 Hotel</div>
+        <div class="type-pill" data-type="flight" onclick="selectActType(this)">✈️ Flight</div>
+        <div class="type-pill" data-type="ferry" onclick="selectActType(this)">⛴️ Ferry</div>
+        <div class="type-pill" data-type="free" onclick="selectActType(this)">☀️ Free Time</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Name</label>
+      <input class="form-input" id="actName" type="text" placeholder="e.g. Vatican Museums">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Start Time</label>
+        <input class="form-input" id="actTime" type="time">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Duration (mins)</label>
+        <input class="form-input" id="actDuration" type="number" inputmode="numeric" placeholder="120">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Notes</label>
+      <input class="form-input" id="actNote" type="text" placeholder="Address, booking ref, tips...">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Maps Link (optional)</label>
+      <input class="form-input" id="actMapsUrl" type="url" placeholder="https://maps.google.com/...">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Website (optional)</label>
+      <input class="form-input" id="actWebUrl" type="url" placeholder="https://...">
+    </div>
+    <button class="form-submit" onclick="submitActivity()">Save Activity</button>
+    <div id="actDeleteBtn" style="display:none;margin-top:10px">
+      <button style="width:100%;padding:12px;border-radius:var(--radius-md);background:rgba(255,69,58,0.10);border:1px solid rgba(255,69,58,0.25);color:#ff453a;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit" onclick="deleteActivity()">Delete Activity</button>
+    </div>
+  </div>
+</div>
+
+<!-- RATES EDIT MODAL -->
+<div class="modal-overlay" id="ratesModal">
+  <div class="modal-sheet">
+    <div class="modal-title">
+      Exchange Rates
+      <div class="modal-close" onclick="closeRatesModal()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;line-height:1.5">Update rates as you travel. Previous transactions keep their original converted values — only new transactions use the updated rate.</p>
+    <div id="ratesFormContent"></div>
+    <button class="form-submit" onclick="saveRates()">Save Rates</button>
+  </div>
+</div>
+
+<!-- COPIED TOAST -->
+<div class="copied-toast" id="copiedToast">Copied!</div>
+
+<script>
+// ══════════════════════════════════════════
+// SUPABASE CONFIG
+// ══════════════════════════════════════════
+const SUPA_URL = 'https://qeakwgownoldcmibyyur.supabase.co';
+const SUPA_KEY = 'sb_publishable_QsbcPtQVy20baZ1aVbHRhg_fLcBQMRm';
+const USE_CLOUD = true;
+let _cache = null;
+let syncTimeout = null;
+
+async function syncFromCloud() {
+  setSyncState('syncing');
+  try {
+    const res = await fetch(SUPA_URL + '/rest/v1/data?select=value&id=eq.1', {
+      headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY }
+    });
+    if (!res.ok) { setSyncState('error'); return; }
+    const rows = await res.json();
+    if (!rows.length || !rows[0].value) { setSyncState('ok'); return; }
+    const cloud = JSON.parse(rows[0].value);
+    const local = loadLocal();
+    // Merge: cloud wins for transactions and custom activities; local wins for rates if newer
+    const merged = Object.assign({}, local, cloud);
+    if (local.ratesUpdatedAt && cloud.ratesUpdatedAt && local.ratesUpdatedAt > cloud.ratesUpdatedAt) {
+      merged.rates = local.rates;
+      merged.ratesUpdatedAt = local.ratesUpdatedAt;
+    }
+    _cache = merged;
+    saveLocal(merged);
+    setSyncState('ok');
+    refreshCurrentView();
+  } catch(e) { setSyncState('error'); }
+}
+
+async function pushToCloud(data) {
+  try {
+    await fetch(SUPA_URL + '/rest/v1/data', {
+      method: 'POST',
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': 'Bearer ' + SUPA_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'resolution=merge-duplicates'
+      },
+      body: JSON.stringify({ id: 1, value: JSON.stringify(data) })
+    });
+  } catch(e) { console.log('Push error', e); }
+}
+
+function setSyncState(s) {
+  const dot = document.getElementById('syncDot');
+  if (!dot) return;
+  dot.className = 'sync-dot' + (s === 'syncing' ? ' syncing' : s === 'error' ? ' error' : '');
+}
+
+const loadLocal = () => { try { return JSON.parse(localStorage.getItem('travelhq_v1') || '{}') } catch(e) { return {} } };
+const saveLocal = d => { localStorage.setItem('travelhq_v1', JSON.stringify(d)); };
+
+function load() {
+  if (_cache) return _cache;
+  _cache = loadLocal();
+  if (!_cache.rates) _cache.rates = { GBP: 1.95, CHF: 1.68, EUR: 1.65, SGD: 0.93 };
+  if (!_cache.transactions) _cache.transactions = [];
+  if (!_cache.customActivities) _cache.customActivities = {};
+  if (!_cache.deletedActivities) _cache.deletedActivities = {};
+  if (!_cache.dayPhotos) _cache.dayPhotos = {};
+  if (USE_CLOUD) syncFromCloud();
+  return _cache;
+}
+
+function save(data) {
+  _cache = data;
+  saveLocal(data);
+  if (USE_CLOUD) {
+    clearTimeout(syncTimeout);
+    syncTimeout = setTimeout(() => pushToCloud(data), 800);
+  }
+}
+
+// ══════════════════════════════════════════
+// ITINERARY DATA — All 30 days pre-loaded
+// ══════════════════════════════════════════
+const DESTINATIONS = [
+  {
+    id: 'london',
+    name: 'London',
+    country: 'United Kingdom',
+    dates: '2–9 Sep',
+    nights: 7,
+    accent: '#5b7fa6',
+    photo: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80',
+    budget: 5500,
+    currency: 'GBP',
+    weather: { temp: '18°C', desc: 'Mild, bring a jacket', icon: '🌤️' },
+    tips: 'Near-cashless city. Oyster cards for the Tube. Tipping ~10% appreciated but not mandatory.',
+    days: ['2026-09-02','2026-09-03','2026-09-04','2026-09-05','2026-09-06','2026-09-07','2026-09-08']
+  },
+  {
+    id: 'grindelwald',
+    name: 'Grindelwald',
+    country: 'Switzerland',
+    dates: '9–15 Sep',
+    nights: 6,
+    accent: '#4a8c7a',
+    photo: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
+    budget: 5200,
+    currency: 'CHF',
+    weather: { temp: '12°C', desc: 'Alpine cool, layers essential', icon: '🏔️' },
+    tips: 'CHF not EUR. Very card friendly. UV intense at altitude — sunscreen essential. Jungfrau Pass covers all mountain transport.',
+    days: ['2026-09-09','2026-09-10','2026-09-11','2026-09-12','2026-09-13','2026-09-14']
+  },
+  {
+    id: 'como',
+    name: 'Lake Como',
+    country: 'Italy',
+    dates: '15–16 Sep',
+    nights: 1,
+    accent: '#7a8f6e',
+    photo: 'https://images.unsplash.com/photo-1533760881669-80db4d7b341c?w=800&q=80',
+    budget: 500,
+    currency: 'EUR',
+    weather: { temp: '24°C', desc: 'Warm and pleasant', icon: '🌅' },
+    tips: 'Transit stop. Hotel near Como San Giovanni station. Early departure next morning.',
+    days: ['2026-09-15']
+  },
+  {
+    id: 'rome',
+    name: 'Rome',
+    country: 'Italy',
+    dates: '16–20 Sep',
+    nights: 4,
+    accent: '#c47a4a',
+    photo: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=80',
+    budget: 4200,
+    currency: 'EUR',
+    weather: { temp: '26°C', desc: 'Hot, plan around midday heat', icon: '☀️' },
+    tips: 'Keep €100–150 cash. Tipping ~10% for good service. Book Vatican First Entry (7am) in advance. Check out Sunday morning for Pompeii day.',
+    days: ['2026-09-16','2026-09-17','2026-09-18','2026-09-19']
+  },
+  {
+    id: 'sorrento',
+    name: 'Sorrento',
+    country: 'Italy',
+    dates: '20–22 Sep',
+    nights: 2,
+    accent: '#c4954a',
+    photo: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=800&q=80',
+    budget: 2000,
+    currency: 'EUR',
+    weather: { temp: '25°C', desc: 'Warm Mediterranean', icon: '🌊' },
+    tips: 'Stay near Marina Piccola. Caremar car ferry only for Capri — NOT the hydrofoil. Limoncello is from here.',
+    days: ['2026-09-20','2026-09-21']
+  },
+  {
+    id: 'naples',
+    name: 'Naples',
+    country: 'Italy',
+    dates: '22–23 Sep',
+    nights: 1,
+    accent: '#b85c4a',
+    photo: 'https://images.unsplash.com/photo-1555992643-a87b2ce02bca?w=800&q=80',
+    budget: 800,
+    currency: 'EUR',
+    weather: { temp: '25°C', desc: 'Warm, lively city', icon: '🍕' },
+    tips: 'Late arrival from Capri. Have cash ready (€100). Best pizza in the world — Sorbillo or Da Michele. Pre-arrange 7am taxi to airport.',
+    days: ['2026-09-22']
+  },
+  {
+    id: 'athens',
+    name: 'Athens',
+    country: 'Greece',
+    dates: '23–26 Sep',
+    nights: 3,
+    accent: '#7a9bb5',
+    photo: 'https://images.unsplash.com/photo-1555993539-1732b0258235?w=800&q=80',
+    budget: 2500,
+    currency: 'EUR',
+    weather: { temp: '28°C', desc: 'Hot — Acropolis at 8am sharp', icon: '🏛️' },
+    tips: '€50–100 cash handy. 10% tipping kind but discretionary. Acropolis opens 8am — go early, it\'s ferociously hot by noon.',
+    days: ['2026-09-23','2026-09-24','2026-09-25','2026-09-26']
+  },
+  {
+    id: 'singapore',
+    name: 'Singapore',
+    country: 'Singapore',
+    dates: '27–30 Sep',
+    nights: 3,
+    accent: '#5a9e7a',
+    photo: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800&q=80',
+    budget: 3000,
+    currency: 'SGD',
+    weather: { temp: '31°C', desc: 'Hot and humid year-round', icon: '🌴' },
+    tips: 'Very card friendly. Service charge usually included. MRT is excellent. Arrive very late on first night — late hotel check-in.',
+    days: ['2026-09-27','2026-09-28','2026-09-29','2026-09-30']
+  }
+];
+
+const DAY_DATA = {
+  '2026-09-02': {
+    label: 'Wed 2 Sep', title: 'Brisbane → London', destId: 'london',
+    photo: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80',
+    warnings: ['Check in Brisbane International by 21:55 Tue 1 Sep', 'Emirates GKK5PW — 30kg checked + 7kg cabin per person'],
+    activities: [
+      { id:'d01a1', type:'flight', name:'EK431 Brisbane → Dubai', time:'01:55', duration:495, note:'Terminal BNE. 30kg checked bags. Dubai layover 80 min, same terminal.', flightNum:'EK431', from:'BNE', to:'DXB', fromTime:'01:55', toTime:'10:05', ref:'GKK5PW', mapsUrl:'', webUrl:'https://www.flightradar24.com/EK431' },
+      { id:'d01a2', type:'flight', name:'EK031 Dubai → London', time:'11:25', duration:420, note:'Terminal 3. Arrive LHR T3 at 16:10 local time.', flightNum:'EK031', from:'DXB', to:'LHR', fromTime:'11:25', toTime:'16:10', ref:'GKK5PW', mapsUrl:'', webUrl:'https://www.flightradar24.com/EK031' },
+      { id:'d01a3', type:'transit', name:'Heathrow Express to Paddington', time:'16:30', duration:15, note:'~£25/adult, kids cheaper. Or taxi £60–80. Oyster cards at airport.', mapsUrl:'https://maps.apple.com/?daddr=London+Paddington+Station&dirflg=r' },
+      { id:'d01a4', type:'hotel', name:'Check in — Chelsea Cloisters', time:'17:30', duration:30, note:'Sloane Avenue, Chelsea SW3 3DW. Conf: 6355022434 · PIN 6151. Check-in 15:00–midnight.', address:'Sloane Avenue, Chelsea, London SW3 3DW', mapsUrl:'https://maps.apple.com/?daddr=Chelsea+Cloisters+London', webUrl:'https://www.chelseacloisters.co.uk' },
+      { id:'d01a5', type:'food', name:'Easy dinner, early night', time:'19:00', duration:60, note:'Jet lag flying west is significant. Low key is the right call — the girls will be exhausted.' }
+    ]
+  },
+  '2026-09-03': {
+    label: 'Thu 3 Sep', title: 'Tower of London', destId: 'london',
+    photo: 'https://images.unsplash.com/photo-1486299267070-83823f5448dd?w=800&q=80',
+    warnings: [],
+    activities: [
+      { id:'d02a1', type:'activity', name:'Tower of London + Tower Bridge', time:'09:00', duration:180, note:'Pre-book at hrp.org.uk. One of the best castle complexes in Europe.', mapsUrl:'https://maps.apple.com/?daddr=Tower+of+London', webUrl:'https://www.hrp.org.uk/tower-of-london/' },
+      { id:'d02a2', type:'transit', name:'Walk to Borough Market', time:'12:00', duration:20, note:'~20 min walk south across London Bridge.', mapsUrl:'https://maps.apple.com/?daddr=Borough+Market+London&dirflg=w' },
+      { id:'d02a3', type:'food', name:'Borough Market lunch', time:'12:30', duration:75, note:'One of the world\'s great food markets. Arrive hungry, eat from multiple stalls.', mapsUrl:'https://maps.apple.com/?daddr=Borough+Market+London', webUrl:'https://boroughmarket.org.uk' },
+      { id:'d02a4', type:'transit', name:'Walk South Bank', time:'14:00', duration:20, note:'Tate Modern, Millennium Bridge, Bankside.', mapsUrl:'https://maps.apple.com/?daddr=Tate+Modern+London&dirflg=w' },
+      { id:'d02a5', type:'activity', name:'South Bank — Tate Modern + Millennium Bridge', time:'14:30', duration:120, note:'Tate Modern is free. Millennium Bridge for the St Paul\'s view.', mapsUrl:'https://maps.apple.com/?daddr=Tate+Modern+London', webUrl:'https://www.tate.org.uk/visit/tate-modern' }
+    ]
+  },
+  '2026-09-04': {
+    label: 'Fri 4 Sep', title: 'British Museum + West End', destId: 'london',
+    photo: 'https://images.unsplash.com/photo-1569585723035-0e9e39dfa90b?w=800&q=80',
+    warnings: [],
+    activities: [
+      { id:'d03a1', type:'activity', name:'British Museum', time:'09:00', duration:210, note:'Free entry. Allow a full morning — the Egypt and Rome galleries will captivate both girls.', mapsUrl:'https://maps.apple.com/?daddr=British+Museum+London', webUrl:'https://www.britishmuseum.org' },
+      { id:'d03a2', type:'transit', name:'Walk to Covent Garden', time:'12:30', duration:15, note:'~15 min walk east.', mapsUrl:'https://maps.apple.com/?daddr=Covent+Garden+London&dirflg=w' },
+      { id:'d03a3', type:'food', name:'Covent Garden lunch', time:'13:00', duration:90, note:'Street performers, good restaurants. Lively and fun for the girls.', mapsUrl:'https://maps.apple.com/?daddr=Covent+Garden+London', webUrl:'https://www.coventgarden.london' },
+      { id:'d03a4', type:'activity', name:'West End Show — Evening', time:'19:30', duration:150, note:'Lion King at the Lyceum is spectacular for this age group. Also: Mamma Mia, Les Misérables. Book in advance at venue box office.', mapsUrl:'https://maps.apple.com/?daddr=Lyceum+Theatre+London', webUrl:'https://www.lwtheatres.co.uk/theatres/lyceum/' }
+    ]
+  },
+  '2026-09-05': {
+    label: 'Sat 5 Sep', title: 'Westminster', destId: 'london',
+    photo: 'https://images.unsplash.com/photo-1520986606214-8b456906c813?w=800&q=80',
+    warnings: [],
+    activities: [
+      { id:'d04a1', type:'activity', name:'Buckingham Palace — Changing of the Guard', time:'10:30', duration:60, note:'Free. Check schedule at royal.uk. Arrive 20 min early for a good view.', mapsUrl:'https://maps.apple.com/?daddr=Buckingham+Palace+London', webUrl:'https://www.royal.uk/visit-the-royal-palaces' },
+      { id:'d04a2', type:'transit', name:'Walk to Westminster Abbey', time:'11:30', duration:10, note:'5 min walk.', mapsUrl:'https://maps.apple.com/?daddr=Westminster+Abbey&dirflg=w' },
+      { id:'d04a3', type:'activity', name:'Westminster Abbey', time:'12:00', duration:120, note:'Book at westminster-abbey.org. Gothic masterpiece — coronation church, royal tombs, Poets\' Corner.', mapsUrl:'https://maps.apple.com/?daddr=Westminster+Abbey', webUrl:'https://www.westminster-abbey.org' },
+      { id:'d04a4', type:'food', name:'Lunch near Westminster', time:'14:00', duration:60, note:'Many options around Parliament Square and Embankment.' },
+      { id:'d04a5', type:'activity', name:'London Eye at Dusk', time:'18:30', duration:45, note:'Pre-book for the best views at golden hour. Worth it once.', mapsUrl:'https://maps.apple.com/?daddr=London+Eye', webUrl:'https://www.londoneye.com' }
+    ]
+  },
+  '2026-09-06': {
+    label: 'Sun 6 Sep', title: 'Natural History Museum', destId: 'london',
+    photo: 'https://images.unsplash.com/photo-1579033461380-adb47c3eb938?w=800&q=80',
+    warnings: [],
+    activities: [
+      { id:'d05a1', type:'activity', name:'Natural History Museum', time:'10:00', duration:210, note:'Free. Blue whale skeleton, dinosaur gallery, earthquake simulator. Both girls will love it. One of the best museums in the world.', mapsUrl:'https://maps.apple.com/?daddr=Natural+History+Museum+London', webUrl:'https://www.nhm.ac.uk' },
+      { id:'d05a2', type:'activity', name:'Hyde Park + Kensington Gardens walk', time:'14:00', duration:120, note:'The Serpentine Gallery (free) and Italian Gardens. Rent bikes or just wander.', mapsUrl:'https://maps.apple.com/?daddr=Hyde+Park+London' },
+      { id:'d05a3', type:'food', name:'Dinner in Notting Hill', time:'19:00', duration:90, note:'Colourful neighbourhood, great restaurants. Portobello Road area.', mapsUrl:'https://maps.apple.com/?daddr=Notting+Hill+London', webUrl:'https://maps.google.com/?q=restaurants+notting+hill+london' }
+    ]
+  },
+  '2026-09-07': {
+    label: 'Mon 7 Sep', title: 'Greenwich by Thames Clipper', destId: 'london',
+    photo: 'https://images.unsplash.com/photo-1551524163-b3a8e3b70be9?w=800&q=80',
+    warnings: [],
+    activities: [
+      { id:'d06a1', type:'transit', name:'Thames Clipper to Greenwich', time:'09:30', duration:50, note:'Depart from Embankment or Waterloo Pier. A fun way to see the city from the river.', mapsUrl:'https://maps.apple.com/?daddr=Greenwich+Pier+London&dirflg=r', webUrl:'https://www.thamesclippers.com' },
+      { id:'d06a2', type:'activity', name:'Cutty Sark', time:'10:30', duration:60, note:'The last surviving Victorian tea clipper ship. Kids love it.', mapsUrl:'https://maps.apple.com/?daddr=Cutty+Sark+Greenwich', webUrl:'https://www.rmg.co.uk/cutty-sark' },
+      { id:'d06a3', type:'activity', name:'Royal Observatory + Meridian Line', time:'12:00', duration:90, note:'Stand on the Prime Meridian — one foot in each hemisphere. Great views over London.', mapsUrl:'https://maps.apple.com/?daddr=Royal+Observatory+Greenwich', webUrl:'https://www.rmg.co.uk/royal-observatory' },
+      { id:'d06a4', type:'food', name:'Lunch in Greenwich', time:'13:30', duration:60, note:'Greenwich Market for street food, or sit-down restaurants nearby.' },
+      { id:'d06a5', type:'transit', name:'Thames Clipper back to central London', time:'15:00', duration:50, note:'Return journey is equally scenic.', mapsUrl:'https://maps.apple.com/?daddr=Embankment+Pier+London&dirflg=r' }
+    ]
+  },
+  '2026-09-08': {
+    label: 'Tue 8 Sep', title: 'Last London Day', destId: 'london',
+    photo: 'https://images.unsplash.com/photo-1512895122863-7b5a3f5d7f0c?w=800&q=80',
+    warnings: ['EARLY NIGHT — taxi departs 05:00am tomorrow for LHR', 'Pre-book taxi from Chelsea Cloisters tonight — do not leave to morning'],
+    activities: [
+      { id:'d07a1', type:'activity', name:'Oxford Street or King\'s Road shopping', time:'10:00', duration:180, note:'Any missed sights, Borough Market revisit, or shopping. Keep it relaxed.', mapsUrl:'https://maps.apple.com/?daddr=Oxford+Street+London' },
+      { id:'d07a2', type:'food', name:'Final London dinner — early', time:'17:30', duration:90, note:'Eat early. Early night is essential. Taxi at 5am tomorrow for LX317.' },
+      { id:'d07a3', type:'activity', name:'Pack + Taxi booking check', time:'20:00', duration:30, note:'Confirm taxi booked for 05:00am. All 3 bags ready. Check in for LX317 online if possible.' }
+    ]
+  },
+  '2026-09-09': {
+    label: 'Wed 9 Sep', title: 'London → Grindelwald', destId: 'grindelwald',
+    photo: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
+    warnings: ['Taxi departs 05:00am — do not be late', 'Must be at LHR by 06:30am (Swiss Air closes check-in 2 hrs before)', 'KEY COLLECTION: GRIWA RENT AG, Dorfstrasse 118, Grindelwald — open 2pm–5pm ONLY'],
+    activities: [
+      { id:'d08a1', type:'transit', name:'Taxi — Chelsea Cloisters to LHR', time:'05:00', duration:45, note:'Pre-booked. Leave by 05:00–05:15am. Must arrive LHR by 06:30am.', mapsUrl:'https://maps.apple.com/?daddr=London+Heathrow+Airport' },
+      { id:'d08a2', type:'flight', name:'LX317 London → Zurich', time:'08:40', duration:120, note:'Swiss Air. Check-in closes 2 hrs before — be at airport by 06:30. 3 × 23kg bags.', flightNum:'LX317', from:'LHR', to:'ZRH', fromTime:'08:40', toTime:'11:45', ref:'AU$669.52', mapsUrl:'', webUrl:'https://www.flightradar24.com/LX317' },
+      { id:'d08a3', type:'transit', name:'ZRH Airport → Grindelwald by train', time:'12:30', duration:195, note:'Zurich Flughafen → Bern → Interlaken Ost → Grindelwald. ~3 hrs. Saver Day Pass covers all adults + kids.', mapsUrl:'https://maps.apple.com/?daddr=Grindelwald+Switzerland&dirflg=r', webUrl:'https://www.sbb.ch' },
+      { id:'d08a4', type:'hotel', name:'Key Collection — GRIWA RENT AG', time:'14:00', duration:30, note:'Dorfstrasse 118, CH-3818 Grindelwald. OPEN 2:00pm–5:00pm ONLY. Do NOT go to apartment first. Get here before 5pm.', address:'Dorfstrasse 118, 3818 Grindelwald, Switzerland', mapsUrl:'https://maps.apple.com/?daddr=Dorfstrasse+118+Grindelwald+Switzerland', webUrl:'https://www.griwarent.ch' },
+      { id:'d08a5', type:'hotel', name:'Apartment Schönegg — Check In', time:'14:30', duration:30, note:'Obere Gletscherstrasse 85, 3818 Grindelwald. Res. 479895. PAID IN FULL. The Eiger fills the end of the valley.', address:'Obere Gletscherstrasse 85, 3818 Grindelwald', mapsUrl:'https://maps.apple.com/?daddr=Obere+Gletscherstrasse+85+Grindelwald' },
+      { id:'d08a6', type:'food', name:'Village dinner', time:'19:00', duration:90, note:'Grindelwald village restaurants. CHF 80–150 for a family dinner. Early night after a big travel day.' }
+    ]
+  },
+  '2026-09-10': {
+    label: 'Thu 10 Sep', title: 'First Cliff Walk + Pfingstegg', destId: 'grindelwald',
+    photo: 'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=800&q=80',
+    warnings: [],
+    activities: [
+      { id:'d09a1', type:'transit', name:'Walk to Firstbahn Gondola Station', time:'08:20', duration:10, note:'10 min walk from village. Jungfrau Pass covers the gondola.', mapsUrl:'https://maps.apple.com/?daddr=Firstbahn+Grindelwald&dirflg=w' },
+      { id:'d09a2', type:'activity', name:'First Gondola — up to 2,168m', time:'08:30', duration:30, note:'Three stages: Bort → Schreckfeld → First. Wetterhorn and Eiger fill the sky. Covered by Jungfrau Pass.', mapsUrl:'https://maps.apple.com/?daddr=Grindelwald+First+Mountain+Station', webUrl:'https://www.jungfrau.ch/en-gb/grindelwald-first/' },
+      { id:'d09a3', type:'activity', name:'First Cliff Walk', time:'09:00', duration:75, note:'Hanging walkways bolted into the cliff face. Genuinely dramatic. Early = better light and fewer crowds. Coffee at the top. Jungfrau Pass Day 1 of 5.', mapsUrl:'https://maps.apple.com/?daddr=Grindelwald+First+Cliff+Walk', webUrl:'https://www.jungfrau.ch/en-gb/grindelwald-first/cliff-walk/' },
+      { id:'d09a4', type:'transit', name:'Gondola down + walk/taxi to Pfingstegg', time:'11:00', duration:30, note:'Gondola down, then short walk or taxi to Pfingstegg cable car station.', mapsUrl:'https://maps.apple.com/?daddr=Pfingstegg+Grindelwald' },
+      { id:'d09a5', type:'food', name:'Lunch — Bergrestaurant Pfingstegg', time:'12:00', duration:75, note:'Scenic lunch with gorge views. CHF 80–120 family. Take the cable car up.', mapsUrl:'https://maps.apple.com/?daddr=Bergrestaurant+Pfingstegg', webUrl:'https://www.pfingstegg.ch' },
+      { id:'d09a6', type:'activity', name:'Toboggan + Fly-Line Zipline', time:'13:30', duration:90, note:'Toboggan runs great for both ages. Fly-Line zipline if operating. Low-walking, high fun.', mapsUrl:'https://maps.apple.com/?daddr=Pfingstegg+Grindelwald', webUrl:'https://www.pfingstegg.ch' }
+    ]
+  },
+  '2026-09-11': {
+    label: 'Fri 11 Sep', title: 'Lauterbrunnen + Trümmelbach + Mürren', destId: 'grindelwald',
+    photo: 'https://images.unsplash.com/photo-1531307119710-accdb402f6f1?w=800&q=80',
+    warnings: ['Most logistically complex day — start early'],
+    activities: [
+      { id:'d10a1', type:'transit', name:'Train: Grindelwald → Lauterbrunnen', time:'08:00', duration:40, note:'Via Zweilütschinen. Covered by Jungfrau Pass.', mapsUrl:'https://maps.apple.com/?daddr=Lauterbrunnen+Switzerland&dirflg=r', webUrl:'https://www.sbb.ch' },
+      { id:'d10a2', type:'activity', name:'Lauterbrunnen Valley + Staubbach Falls', time:'08:45', duration:45, note:'300m waterfall drops off the valley wall. Often creates rainbows in morning light. Easy flat walk.', mapsUrl:'https://maps.apple.com/?daddr=Staubbach+Falls+Lauterbrunnen', webUrl:'https://www.myswitzerland.com/en/destinations/lauterbrunnen' },
+      { id:'d10a3', type:'transit', name:'Bus to Trümmelbach Falls', time:'09:30', duration:15, note:'Short bus ride from Lauterbrunnen. Covered by Jungfrau Pass.', mapsUrl:'https://maps.apple.com/?daddr=Trümmelbach+Falls+Lauterbrunnen&dirflg=r' },
+      { id:'d10a4', type:'activity', name:'Trümmelbach Falls', time:'10:00', duration:90, note:'Glacial meltwater from the Jungfrau thunders through tunnels inside the mountain. Dark, loud, spectacular. One of the best Alpine experiences. Works in any weather. Covered by Jungfrau Pass.', mapsUrl:'https://maps.apple.com/?daddr=Trümmelbach+Falls', webUrl:'https://www.truemmelbach.ch' },
+      { id:'d10a5', type:'food', name:'Lunch — Airtime Café, Lauterbrunnen', time:'12:00', duration:60, note:'Good relaxed lunch. Or simple bakery. CHF 70–120 family.', mapsUrl:'https://maps.apple.com/?daddr=Lauterbrunnen+Switzerland' },
+      { id:'d10a6', type:'transit', name:'Cable car to Grütschalp → train to Mürren', time:'13:30', duration:40, note:'Cable car from Lauterbrunnen, then mountain railway to Mürren. ~40 min total. Covered by Jungfrau Pass.', mapsUrl:'https://maps.apple.com/?daddr=Mürren+Switzerland&dirflg=r' },
+      { id:'d10a7', type:'activity', name:'Mürren — Car-free Alpine village', time:'14:30', duration:120, note:'Perched above the valley, huge mountain backdrop. No major hike needed — the views are right there. Very Swiss. Gimmelwald 10 min cable car below if time allows.', mapsUrl:'https://maps.apple.com/?daddr=Mürren+Switzerland', webUrl:'https://www.mymuerren.ch' }
+    ]
+  },
+  '2026-09-12': {
+    label: 'Sat 12 Sep', title: 'Männlichen + Royal Walk', destId: 'grindelwald',
+    photo: 'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=800&q=80',
+    warnings: [],
+    activities: [
+      { id:'d11a1', type:'transit', name:'Walk to Grindelwald Grund station', time:'08:45', duration:10, note:'10 min downhill walk from village.', mapsUrl:'https://maps.apple.com/?daddr=Grindelwald+Grund+Station&dirflg=w' },
+      { id:'d11a2', type:'activity', name:'Männlichen Gondola', time:'09:00', duration:10, note:'10-min gondola to Männlichen (2,229m). Eiger, Mönch, Jungfrau side by side — one of the great mountain views in Europe. Covered by Jungfrau Pass.', mapsUrl:'https://maps.apple.com/?daddr=Männlichen+Switzerland', webUrl:'https://www.maennlichen.ch' },
+      { id:'d11a3', type:'activity', name:'Royal Walk — Männlichen to Kleine Scheidegg', time:'09:15', duration:65, note:'The signature ridge walk. ~1 hour, mostly flat, easy for both girls at any pace. Eiger north face directly in front the whole way. The highlight of Switzerland on a clear day.', mapsUrl:'https://maps.apple.com/?daddr=Kleine+Scheidegg+Switzerland' },
+      { id:'d11a4', type:'food', name:'Lunch — Kleine Scheidegg', time:'10:30', duration:75, note:'Multiple cafés. Bergrestaurant Kleine Scheidegg recommended. The Eiger looms directly above. CHF 80–130.', mapsUrl:'https://maps.apple.com/?daddr=Kleine+Scheidegg+Switzerland', webUrl:'https://www.scheidegg.ch' },
+      { id:'d11a5', type:'activity', name:'Eigergletscher (optional)', time:'12:30', duration:60, note:'Jungfrau railway from Kleine Scheidegg up to Eigergletscher (2,320m). Jungfrau Pass covers this far. Glacier views through station window. Worth the stop.', mapsUrl:'https://maps.apple.com/?daddr=Eigergletscher+Station', webUrl:'https://www.jungfrau.ch' },
+      { id:'d11a6', type:'transit', name:'Train back to Grindelwald Grund', time:'14:00', duration:30, note:'Kleine Scheidegg → Grindelwald Grund. Covered by Jungfrau Pass.', mapsUrl:'https://maps.apple.com/?daddr=Grindelwald+Switzerland&dirflg=r' }
+    ]
+  },
+  '2026-09-13': {
+    label: 'Sun 13 Sep', title: 'Wengen — Slow Mountain Day', destId: 'grindelwald',
+    photo: 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?w=800&q=80',
+    warnings: [],
+    activities: [
+      { id:'d12a1', type:'transit', name:'Train: Grindelwald → Wengen', time:'09:30', duration:60, note:'Via Lauterbrunnen. ~1 hour total. Jungfrau Pass covers.', mapsUrl:'https://maps.apple.com/?daddr=Wengen+Switzerland&dirflg=r' },
+      { id:'d12a2', type:'activity', name:'Wengen village wander', time:'10:30', duration:120, note:'Car-free village on a sunny terrace above Lauterbrunnen Valley. Wander the main street, cafés, views of the Jungfrau massif from a different angle. Slower pace.', mapsUrl:'https://maps.apple.com/?daddr=Wengen+Switzerland', webUrl:'https://www.wengen.swiss' },
+      { id:'d12a3', type:'food', name:'Lunch in Wengen', time:'12:30', duration:75, note:'Several mid-range mountain restaurants. CHF 80–130. Take your time.', mapsUrl:'https://maps.apple.com/?daddr=Wengen+Switzerland' },
+      { id:'d12a4', type:'transit', name:'Return train to Grindelwald', time:'15:00', duration:60, note:'Via Lauterbrunnen. Home by mid-afternoon.', mapsUrl:'https://maps.apple.com/?daddr=Grindelwald+Switzerland&dirflg=r' },
+      { id:'d12a5', type:'free', name:'Afternoon rest + apartment time', time:'16:30', duration:120, note:'Good day to process photos, repack lightly, and recharge before the long train day tomorrow.' }
+    ]
+  },
+  '2026-09-14': {
+    label: 'Mon 14 Sep', title: 'Easy Last Alpine Day', destId: 'grindelwald',
+    photo: 'https://images.unsplash.com/photo-1498503403619-e39e4ff390fe?w=800&q=80',
+    warnings: ['Pack tonight — long train day to Como tomorrow'],
+    activities: [
+      { id:'d13a1', type:'activity', name:'Bachalpsee Lake Walk (optional)', time:'08:30', duration:180, note:'First gondola up, then 30–40 min gentle walk to Bachalpsee — a perfect alpine lake reflecting the Eiger. Easy flat path, any pace. Back by gondola. 3–4 hrs total. Jungfrau Pass Day 5 of 5.', mapsUrl:'https://maps.apple.com/?daddr=Bachalpsee+Grindelwald', webUrl:'https://www.jungfrau.ch' },
+      { id:'d13a2', type:'activity', name:'Village walk + Swiss souvenirs', time:'13:00', duration:90, note:'Grindelwald village shops. Swiss chocolate for home. Enjoy the last views of the Eiger.' },
+      { id:'d13a3', type:'food', name:'Final Grindelwald dinner', time:'18:30', duration:105, note:'Make it a good one. CHF 120–200 family. Last Swiss mountain meal.', mapsUrl:'https://maps.apple.com/?daddr=Grindelwald+Switzerland' },
+      { id:'d13a4', type:'activity', name:'Pack for tomorrow', time:'21:00', duration:45, note:'Full pack tonight. Long travel day tomorrow. Target departure 9:30–10am. Train picnic recommended — food on Swiss trains is expensive.' }
+    ]
+  },
+  '2026-09-15': {
+    label: 'Tue 15 Sep', title: 'Grindelwald → Lake Como', destId: 'como',
+    photo: 'https://images.unsplash.com/photo-1533760881669-80db4d7b341c?w=800&q=80',
+    warnings: ['Long train day — ~5–6 hours door to door', 'Pack a train picnic — food on Swiss trains is expensive'],
+    activities: [
+      { id:'d14a1', type:'hotel', name:'Check out — Apartment Schönegg', time:'09:00', duration:30, note:'Leave keys at GRIWA RENT AG or as instructed at check-in. Morning checkout.', mapsUrl:'https://maps.apple.com/?daddr=Dorfstrasse+118+Grindelwald' },
+      { id:'d14a2', type:'transit', name:'Train: Grindelwald → Como San Giovanni', time:'09:30', duration:360, note:'Route: Grindelwald → Interlaken Ost → Bern → Lucerne → Bellinzona → Lugano → Chiasso → Como San Giovanni. Saver Day Pass covers all Swiss portions. Buy local ticket ~AU$4 at Chiasso for Como leg.', mapsUrl:'https://maps.apple.com/?daddr=Como+San+Giovanni+Station&dirflg=r', webUrl:'https://www.sbb.ch' },
+      { id:'d14a3', type:'hotel', name:'Check in — Como hotel', time:'15:30', duration:30, note:'Hotel near Como San Giovanni station. Walk from station.', mapsUrl:'https://maps.apple.com/?daddr=Como+San+Giovanni+Station' },
+      { id:'d14a4', type:'activity', name:'Lakefront walk + gelato', time:'16:30', duration:75, note:'10-min walk to the lakefront. An hour along the promenade. Como is beautiful but this is a transit stop — absorb what you can.', mapsUrl:'https://maps.apple.com/?daddr=Como+Lakefront+Italy' },
+      { id:'d14a5', type:'food', name:'Dinner in Como', time:'19:30', duration:90, note:'Simple lakeside dinner. First evening in Italy. Relax.', mapsUrl:'https://maps.apple.com/?daddr=Como+Italy' }
+    ]
+  },
+  '2026-09-16': {
+    label: 'Wed 16 Sep', title: 'Como → Rome', destId: 'rome',
+    photo: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=80',
+    warnings: ['Check out by 9:00am — train to catch'],
+    activities: [
+      { id:'d15a1', type:'hotel', name:'Check out — Como hotel', time:'08:45', duration:15, note:'Early checkout. Walk to Como San Giovanni station.', mapsUrl:'https://maps.apple.com/?daddr=Como+San+Giovanni+Station' },
+      { id:'d15a2', type:'transit', name:'Train: Como → Milan Centrale', time:'09:15', duration:40, note:'~40 min regional train. ~€5 per person.', mapsUrl:'https://maps.apple.com/?daddr=Milano+Centrale+Station&dirflg=r', webUrl:'https://www.trenitalia.com' },
+      { id:'d15a3', type:'transit', name:'Frecciarossa: Milan → Roma Termini', time:'10:30', duration:180, note:'High-speed Frecciarossa. ~2.5–3 hrs. Book at trenitalia.com — prices rise fast. Family ~AU$200.', mapsUrl:'https://maps.apple.com/?daddr=Roma+Termini&dirflg=r', webUrl:'https://www.trenitalia.com' },
+      { id:'d15a4', type:'hotel', name:'Check in — Rome hotel', time:'15:30', duration:30, note:'Centro Storico or Trastevere. Walking distance to Vatican and Colosseum. Check-in from ~3pm.', mapsUrl:'https://maps.apple.com/?daddr=Rome+Italy' },
+      { id:'d15a5', type:'activity', name:'Trastevere evening walk', time:'17:30', duration:90, note:'Cobblestone lanes, ivy-covered buildings, the most atmospheric neighbourhood in Rome.', mapsUrl:'https://maps.apple.com/?daddr=Trastevere+Rome' },
+      { id:'d15a6', type:'food', name:'First Rome dinner — Trastevere', time:'19:30', duration:105, note:'Cacio e pepe, carbonara, coda alla vaccinara. Order the classics here. This is what you\'ve been building toward.', mapsUrl:'https://maps.apple.com/?daddr=Trastevere+Rome', webUrl:'https://maps.google.com/?q=best+restaurants+trastevere+rome' }
+    ]
+  },
+  '2026-09-17': {
+    label: 'Thu 17 Sep', title: 'Vatican Full Day', destId: 'rome',
+    photo: 'https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=800&q=80',
+    warnings: ['Vatican First Entry 7am — must have pre-booked timed ticket', 'Without a ticket queues are 2–3 hours even in September'],
+    activities: [
+      { id:'d16a1', type:'transit', name:'Walk or taxi to Vatican', time:'06:45', duration:20, note:'Aim to be at the entrance by 7:00am. First Entry is 7am.', mapsUrl:'https://maps.apple.com/?daddr=Vatican+Museums+Rome&dirflg=w' },
+      { id:'d16a2', type:'activity', name:'Vatican Museums + Sistine Chapel', time:'07:00', duration:180, note:'First Entry at 7am. Pre-booked at museivaticani.va. The Sistine Chapel ceiling — stand still, look up, give it 10 minutes. Worth every euro.', mapsUrl:'https://maps.apple.com/?daddr=Vatican+Museums+Rome', webUrl:'https://www.museivaticani.va' },
+      { id:'d16a3', type:'activity', name:'St Peter\'s Basilica + Square', time:'10:30', duration:90, note:'Free entry to the basilica. Michelangelo\'s Pietà, the dome, the scale. Queue for the dome climb is worth it (separate ticket). Piazza is breathtaking.', mapsUrl:'https://maps.apple.com/?daddr=St+Peters+Basilica+Rome', webUrl:'https://www.vatican.va' },
+      { id:'d16a4', type:'food', name:'Lunch near Vatican', time:'12:30', duration:75, note:'Many options in Prati neighbourhood (north of Vatican). Better quality and fewer tourist traps than immediately outside.' },
+      { id:'d16a5', type:'activity', name:'Castel Sant\'Angelo', time:'14:30', duration:90, note:'Former mausoleum turned fortress, connected to Vatican by a secret passage. Stunning views from the top. ~€15/adult.', mapsUrl:'https://maps.apple.com/?daddr=Castel+Sant\'Angelo+Rome', webUrl:'https://www.castelsantangelo.beniculturali.it' }
+    ]
+  },
+  '2026-09-18': {
+    label: 'Fri 18 Sep', title: 'Colosseum + Forum + Pantheon', destId: 'rome',
+    photo: 'https://images.unsplash.com/photo-1548345680-f5475ea5df84?w=800&q=80',
+    warnings: ['Arrive at Colosseum opening — 9am. Heat peaks by midday'],
+    activities: [
+      { id:'d17a1', type:'transit', name:'Walk/metro to Colosseum', time:'08:40', duration:20, note:'Metro B to Colosseo stop. Or taxi. Pre-booked tickets at coopculture.it essential — same-day often unavailable.', mapsUrl:'https://maps.apple.com/?daddr=Colosseum+Rome&dirflg=r' },
+      { id:'d17a2', type:'activity', name:'Colosseum', time:'09:00', duration:90, note:'Combined ticket covers Colosseum + Forum + Palatine Hill. 50,000-seat arena. The scale is staggering. Pre-booked at coopculture.it.', mapsUrl:'https://maps.apple.com/?daddr=Colosseum+Rome', webUrl:'https://www.coopculture.it' },
+      { id:'d17a3', type:'activity', name:'Roman Forum + Palatine Hill', time:'10:30', duration:150, note:'As impressive as the Colosseum, far less crowded. The Forum is the heart of ancient Rome. Palatine Hill has the best views. Allow 2.5 hrs.', mapsUrl:'https://maps.apple.com/?daddr=Roman+Forum+Rome', webUrl:'https://www.coopculture.it' },
+      { id:'d17a4', type:'food', name:'Lunch near Pantheon', time:'13:30', duration:75, note:'Head toward the historic centre. Many good trattorias around Campo de\' Fiori and Piazza Navona.' },
+      { id:'d17a5', type:'activity', name:'Pantheon', time:'15:30', duration:60, note:'2,000-year-old concrete dome, completely intact. Book entry at panteondroma.it (~€5/person). Breathtaking interior. Give it more time than you think you need.', mapsUrl:'https://maps.apple.com/?daddr=Pantheon+Rome', webUrl:'https://www.panteondroma.it' },
+      { id:'d17a6', type:'activity', name:'Piazza Navona', time:'17:00', duration:60, note:'Bernini\'s Fountain of the Four Rivers. Gelato and people-watching. One of the great squares in Europe.', mapsUrl:'https://maps.apple.com/?daddr=Piazza+Navona+Rome' }
+    ]
+  },
+  '2026-09-19': {
+    label: 'Sat 19 Sep', title: 'Catacombs + Free Afternoon', destId: 'rome',
+    photo: 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&q=80',
+    warnings: ['Pack bags tonight — early departure tomorrow for Pompeii/Sorrento'],
+    activities: [
+      { id:'d18a1', type:'transit', name:'Taxi to Appian Way', time:'09:00', duration:20, note:'Catacombs are ~5km south of the centre. Taxi recommended.', mapsUrl:'https://maps.apple.com/?daddr=Via+Appia+Antica+Rome' },
+      { id:'d18a2', type:'activity', name:'Catacombs + Appian Way', time:'09:30', duration:120, note:'San Callisto or San Sebastiano — book in advance, tours leave regularly. Underground Christian burial chambers with original frescoes. Eerie and fascinating — the girls will be riveted.', mapsUrl:'https://maps.apple.com/?daddr=Catacombe+di+San+Callisto+Rome', webUrl:'https://www.catacombe.org' },
+      { id:'d18a3', type:'food', name:'Lunch — Ostia Antica optional', time:'12:00', duration:75, note:'Either head to Ostia Antica (Rome\'s ancient port city, free entry, remarkable ruins, less crowded than anything in Rome) or spend the afternoon revisiting favourites.' },
+      { id:'d18a4', type:'free', name:'Free afternoon — revisit, shop, or rest', time:'14:00', duration:180, note:'Leather goods, ceramics. Campo de\' Fiori market. Trevi Fountain revisit. Or Ostia Antica day trip (30 min by train from Termini, free entry).', mapsUrl:'https://maps.apple.com/?daddr=Campo+de+Fiori+Rome' },
+      { id:'d18a5', type:'activity', name:'Pack bags for 8am departure', time:'20:30', duration:45, note:'All bags ready tonight. Leave Rome hotel by 8:00am tomorrow with ALL luggage. Long exciting travel day ahead.' }
+    ]
+  },
+  '2026-09-20': {
+    label: 'Sun 20 Sep', title: 'Rome → Pompeii → Sorrento', destId: 'sorrento',
+    photo: 'https://images.unsplash.com/photo-1559650656-5d1d361ad10e?w=800&q=80',
+    warnings: ['Leave Rome hotel with ALL bags by 8:00am', 'Circumvesuviana: keep bags in front, watch for pickpockets', 'Pre-booked Pompeii timed entry at pompeiitickets.com required'],
+    activities: [
+      { id:'d19a1', type:'hotel', name:'Check out — Rome hotel', time:'08:00', duration:0, note:'Leave with all bags by 8:00am. Walk or taxi to Roma Termini.', mapsUrl:'https://maps.apple.com/?daddr=Roma+Termini' },
+      { id:'d19a2', type:'transit', name:'Frecciarossa: Roma Termini → Napoli Centrale', time:'08:15', duration:70, note:'~8:00–8:30am service. Book at trenitalia.com. ~1hr 10min. This train is popular on Sundays — book early.', mapsUrl:'https://maps.apple.com/?daddr=Napoli+Centrale&dirflg=r', webUrl:'https://www.trenitalia.com' },
+      { id:'d19a3', type:'transit', name:'Circumvesuviana: Naples → Pompeii Scavi', time:'09:45', duration:35, note:'Platforms in basement of Napoli Centrale (Piazza Garibaldi exit). Buy Naples→Sorrento ticket ~€6.40/person. 35 min.', mapsUrl:'https://maps.apple.com/?daddr=Pompeii+Scavi+Station&dirflg=r' },
+      { id:'d19a4', type:'activity', name:'Pompeii', time:'10:30', duration:240, note:'Pre-booked timed entry at pompeiitickets.com. Budget 3–4 hours minimum. Forum, House of the Vettii, Lupanare, bakeries, and the plaster casts — one of the most moving ancient sites in the world.', mapsUrl:'https://maps.apple.com/?daddr=Pompeii+Archaeological+Park', webUrl:'https://pompeiitickets.com' },
+      { id:'d19a5', type:'transit', name:'Circumvesuviana: Pompeii → Sorrento', time:'14:30', duration:35, note:'Same line, same ticket. ~35 min to Sorrento. Keep bags close.', mapsUrl:'https://maps.apple.com/?daddr=Sorrento+Train+Station&dirflg=r' },
+      { id:'d19a6', type:'hotel', name:'Check in — Sorrento hotel', time:'15:30', duration:30, note:'Near Marina Piccola. Important: hotel must be close to Marina Piccola — that\'s where the Caremar car ferry departs Tuesday morning.', mapsUrl:'https://maps.apple.com/?daddr=Sorrento+Italy' },
+      { id:'d19a7', type:'activity', name:'Piazza Tasso evening', time:'17:30', duration:60, note:'Sorrento\'s main square — lively and beautiful at dusk. Views across the Bay of Naples.', mapsUrl:'https://maps.apple.com/?daddr=Piazza+Tasso+Sorrento' },
+      { id:'d19a8', type:'food', name:'Dinner in Sorrento', time:'19:30', duration:90, note:'Excellent seafood and pasta. Try the local limoncello — Sorrento is its heartland.', mapsUrl:'https://maps.apple.com/?daddr=Sorrento+Italy', webUrl:'https://maps.google.com/?q=best+restaurants+sorrento+italy' }
+    ]
+  },
+  '2026-09-21': {
+    label: 'Mon 21 Sep', title: 'Amalfi Coast by Ferry', destId: 'sorrento',
+    photo: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=800&q=80',
+    warnings: ['Pre-booked NLG ferry (nlg.it) — family ~AU$250', 'Early night essential — tomorrow is Capri + Naples day'],
+    activities: [
+      { id:'d20a1', type:'transit', name:'Walk to Sorrento ferry terminal', time:'08:45', duration:15, note:'Marina Piccola. NLG ferry departure.', mapsUrl:'https://maps.apple.com/?daddr=Sorrento+Marina+Piccola&dirflg=w' },
+      { id:'d20a2', type:'ferry', name:'NLG Ferry: Sorrento → Positano', time:'09:00', duration:40, note:'Pre-booked at nlg.it. The ferry view looking up at the cliffs and villages is better than driving. Family ~AU$250 for the 3-leg trip.', mapsUrl:'https://maps.apple.com/?daddr=Positano+Italy', webUrl:'https://www.nlg.it' },
+      { id:'d20a3', type:'activity', name:'Positano — lunch + explore', time:'10:00', duration:150, note:'Iconic pastel-coloured buildings cascading down the hillside. Wander the lanes, buy a ceramic bowl, eat seafood. Genuinely beautiful.', mapsUrl:'https://maps.apple.com/?daddr=Positano+Italy', webUrl:'https://maps.google.com/?q=best+restaurants+positano' },
+      { id:'d20a4', type:'ferry', name:'NLG Ferry: Positano → Amalfi', time:'12:30', duration:30, note:'Continue along the coast.', mapsUrl:'https://maps.apple.com/?daddr=Amalfi+Italy', webUrl:'https://www.nlg.it' },
+      { id:'d20a5', type:'activity', name:'Amalfi town', time:'13:00', duration:120, note:'Duomo di Sant\'Andrea (striped facade cathedral) is impressive. Lanes selling ceramics and limoncello. Compact and easy to walk.', mapsUrl:'https://maps.apple.com/?daddr=Amalfi+Cathedral+Italy' },
+      { id:'d20a6', type:'ferry', name:'NLG Ferry: Amalfi → Sorrento', time:'15:30', duration:60, note:'Return ferry. Afternoon light on the cliffs is beautiful.', mapsUrl:'https://maps.apple.com/?daddr=Sorrento+Marina+Piccola', webUrl:'https://www.nlg.it' },
+      { id:'d20a7', type:'food', name:'Final Sorrento dinner — early', time:'18:30', duration:90, note:'Early dinner. Modest night — tomorrow is the most logistically complex day of the trip. Capri day with all luggage.' }
+    ]
+  },
+  '2026-09-22': {
+    label: 'Tue 22 Sep', title: 'Capri Day → Naples', destId: 'naples',
+    photo: 'https://images.unsplash.com/photo-1633321088355-ef2ca1b52fb7?w=800&q=80',
+    warnings: [
+      'CAREMAR CAR FERRY ONLY from Sorrento Marina Piccola — NOT the hydrofoil. Hydrofoils refuse large bags.',
+      'Radical Storage pre-booked at radicalstorage.com — Marina Grande, Capri. Open 7am–7pm. Collect bags by 6:30pm.',
+      'Pre-arrange Naples hotel taxi TONIGHT (7:00am Wed) via hotel front desk'
+    ],
+    activities: [
+      { id:'d21a1', type:'hotel', name:'Check out — Sorrento hotel', time:'08:00', duration:0, note:'Check out with ALL 3 bags. Walk to Marina Piccola.', mapsUrl:'https://maps.apple.com/?daddr=Sorrento+Marina+Piccola' },
+      { id:'d21a2', type:'ferry', name:'Caremar Car Ferry: Sorrento → Capri', time:'08:30', duration:50, note:'CAR FERRY ONLY. Hydrofoils refuse oversized bags. Pre-booked at caremar.it. Depart Marina Piccola. Arrive Capri Marina Grande.', mapsUrl:'https://maps.apple.com/?daddr=Capri+Marina+Grande', webUrl:'https://www.caremar.it' },
+      { id:'d21a3', type:'activity', name:'Radical Storage — drop bags', time:'09:30', duration:15, note:'3 min walk from ferry terminal. Pre-booked at radicalstorage.com. €5/bag = €15 (~AU$25). Collect by 6:30pm. Open until 7pm.', mapsUrl:'https://maps.apple.com/?daddr=Radical+Storage+Capri', webUrl:'https://www.radicalstorage.com' },
+      { id:'d21a4', type:'activity', name:'Blue Grotto (optional — go early)', time:'09:45', duration:90, note:'Go early — boats queue by 11am. Small rowboat from entrance. The blue phosphorescent light is extraordinary. Check conditions — waves >0.5m close it. Worth attempting but have a backup plan.', mapsUrl:'https://maps.apple.com/?daddr=Blue+Grotto+Capri', webUrl:'https://maps.google.com/?q=blue+grotto+capri' },
+      { id:'d21a5', type:'transit', name:'Funicular: Marina Grande → Capri town', time:'11:30', duration:5, note:'5-min funicular ride. The Piazzetta at the top is tiny, beautiful and absurdly expensive for coffee.', mapsUrl:'https://maps.apple.com/?daddr=Capri+Town+Italy' },
+      { id:'d21a6', type:'activity', name:'Capri town + Gardens of Augustus', time:'11:45', duration:90, note:'Via Krupp and Gardens of Augustus for exceptional views down to the Faraglioni rock stacks. The Piazzetta — worth one coffee for the atmosphere.', mapsUrl:'https://maps.apple.com/?daddr=Gardens+of+Augustus+Capri' },
+      { id:'d21a7', type:'transit', name:'Bus to Anacapri', time:'13:15', duration:15, note:'Short bus from Capri town.', mapsUrl:'https://maps.apple.com/?daddr=Anacapri+Italy&dirflg=r' },
+      { id:'d21a8', type:'food', name:'Lunch in Anacapri', time:'13:30', duration:75, note:'Capri is the most expensive place on the trip. Budget €80–120 family for sit-down lunch.', mapsUrl:'https://maps.apple.com/?daddr=Anacapri+Italy' },
+      { id:'d21a9', type:'activity', name:'Monte Solaro Chairlift', time:'15:00', duration:60, note:'Open-air chairlift to 589m — 360° views of the Tyrrhenian Sea, Bay of Naples, and Vesuvius on a clear day. The ride itself is magical. ~30 min each way.', mapsUrl:'https://maps.apple.com/?daddr=Monte+Solaro+Anacapri', webUrl:'https://www.capriseggiovia.it' },
+      { id:'d21a10', type:'activity', name:'Collect bags from Radical Storage', time:'18:00', duration:15, note:'Marina Grande. Must collect by 6:30pm. Walk from funicular bottom station.', mapsUrl:'https://maps.apple.com/?daddr=Radical+Storage+Capri', webUrl:'https://www.radicalstorage.com' },
+      { id:'d21a11', type:'ferry', name:'Capri → Naples Molo Beverello', time:'18:30', duration:50, note:'Fast ferry ~50 min. Aim for 6–7pm departure. Several operators — check nlg.it or buy at port. Less critical to pre-book this leg.', mapsUrl:'https://maps.apple.com/?daddr=Naples+Molo+Beverello', webUrl:'https://www.nlg.it' },
+      { id:'d21a12', type:'transit', name:'Taxi: Molo Beverello → Naples hotel', time:'19:30', duration:15, note:'Fixed area tariff ~€20–25 (~AU$40). ~15 min.', mapsUrl:'https://maps.apple.com/?daddr=Naples+Historic+Centre' },
+      { id:'d21a13', type:'hotel', name:'Check in — Naples hotel', time:'19:45', duration:30, note:'Late check-in. Confirm in advance. Near Spaccanapoli and historic centre. TONIGHT: pre-arrange 7am taxi to airport (ask front desk now).', mapsUrl:'https://maps.apple.com/?daddr=Naples+Italy' },
+      { id:'d21a14', type:'activity', name:'Spaccanapoli evening walk', time:'20:30', duration:30, note:'The long straight street cutting through the historic centre has extraordinary evening energy.', mapsUrl:'https://maps.apple.com/?daddr=Spaccanapoli+Naples' },
+      { id:'d21a15', type:'food', name:'Pizza — Sorbillo or Da Michele', time:'21:00', duration:75, note:'Naples is where pizza was invented. It\'s in a different category to everywhere else. Sorbillo (Via dei Tribunali 32), Da Michele (Via Cesare Sersale 1). Arrive by 7:30pm or queue. Worth every minute of the wait.', mapsUrl:'https://maps.apple.com/?daddr=Sorbillo+Pizza+Naples', webUrl:'https://www.sorbillo.it' }
+    ]
+  },
+  '2026-09-23': {
+    label: 'Wed 23 Sep', title: 'Fly Naples → Athens', destId: 'athens',
+    photo: 'https://images.unsplash.com/photo-1555993539-1732b0258235?w=800&q=80',
+    warnings: ['Leave hotel 7:00am SHARP', 'Bag drop closes 08:35 — non-negotiable', 'Taxi pre-arranged last night — confirm departure time'],
+    activities: [
+      { id:'d22a1', type:'transit', name:'Taxi: Hotel → Naples Airport', time:'07:00', duration:20, note:'Pre-arranged last night. Fixed tariff ~€25–30 / AU$40–50. Airport ~4–6km, ~15–20 min.', mapsUrl:'https://maps.apple.com/?daddr=Naples+Capodichino+Airport' },
+      { id:'d22a2', type:'flight', name:'EJU4165 Naples → Athens', time:'09:15', duration:105, note:'EasyJet. Ref: KCPV1H7. Bag drop opens 06:45, closes 08:35 — must be checked in by 08:35. Seats: Rick 9A · Nina 8A · Abby 9B · Olivia 8B.', flightNum:'EJU4165', from:'NAP', to:'ATH', fromTime:'09:15', toTime:'12:00', ref:'KCPV1H7', mapsUrl:'', webUrl:'https://www.flightradar24.com/EJU4165' },
+      { id:'d22a3', type:'transit', name:'Metro Line 3: Airport → City Centre', time:'12:15', duration:40, note:'Direct from airport. ~40 min. ~€9/person. Or taxi ~€40.', mapsUrl:'https://maps.apple.com/?daddr=Syntagma+Square+Athens&dirflg=r' },
+      { id:'d22a4', type:'hotel', name:'Check in — Athens hotel', time:'14:00', duration:30, note:'Plaka or Monastiraki area. Walking distance to Acropolis. Check-in from ~2pm.', mapsUrl:'https://maps.apple.com/?daddr=Plaka+Athens' },
+      { id:'d22a5', type:'activity', name:'Plaka neighbourhood walk', time:'15:30', duration:120, note:'The oldest neighbourhood in Athens. Narrow lanes, outdoor tavernas, cats on walls, ruins visible from every corner. Perfect orientation for the next two days.', mapsUrl:'https://maps.apple.com/?daddr=Plaka+Athens' },
+      { id:'d22a6', type:'food', name:'First Greek dinner', time:'19:00', duration:105, note:'Start with tzatziki, dolmades, and fresh bread. Plaka or Monastiraki. A good first Greek meal sets the tone beautifully.', mapsUrl:'https://maps.apple.com/?daddr=Monastiraki+Athens', webUrl:'https://maps.google.com/?q=best+restaurants+plaka+athens' }
+    ]
+  },
+  '2026-09-24': {
+    label: 'Thu 24 Sep', title: 'Acropolis Day', destId: 'athens',
+    photo: 'https://images.unsplash.com/photo-1555993539-1732b0258235?w=800&q=80',
+    warnings: ['Arrive at Acropolis at 8:00am SHARP — crowded by 10am, ferociously hot by noon', 'Pre-booked combination ticket at etickets.tap.gr required'],
+    activities: [
+      { id:'d23a1', type:'transit', name:'Walk to Acropolis entrance', time:'07:45', duration:15, note:'Propylaea entrance. Combination ticket from etickets.tap.gr covers Acropolis + 6 other sites.', mapsUrl:'https://maps.apple.com/?daddr=Acropolis+Athens&dirflg=w' },
+      { id:'d23a2', type:'activity', name:'Acropolis — Parthenon + Erechtheion', time:'08:00', duration:150, note:'Propylaea, Parthenon (438 BC), Erechtheion with Caryatid porch, Temple of Athena Nike. Views over Athens remarkable. Go early — site is magical before the crowds.', mapsUrl:'https://maps.apple.com/?daddr=Parthenon+Acropolis+Athens', webUrl:'https://etickets.tap.gr' },
+      { id:'d23a3', type:'activity', name:'Acropolis Museum', time:'11:00', duration:120, note:'Air-conditioned, world-class. The actual Caryatid statues (4 of 6). Top floor Parthenon frieze directly facing the Acropolis is genuinely moving. Lunch at the museum café has one of the best views in Athens.', mapsUrl:'https://maps.apple.com/?daddr=Acropolis+Museum+Athens', webUrl:'https://www.theacropolismuseum.gr' },
+      { id:'d23a4', type:'food', name:'Lunch — Acropolis Museum café', time:'12:30', duration:60, note:'Best museum café view in Athens. Worth eating here.', mapsUrl:'https://maps.apple.com/?daddr=Acropolis+Museum+Athens' },
+      { id:'d23a5', type:'activity', name:'Monastiraki flea market browse', time:'15:30', duration:90, note:'Afternoon browse. Antiques, souvenirs, street food. Great atmosphere.', mapsUrl:'https://maps.apple.com/?daddr=Monastiraki+Flea+Market+Athens' },
+      { id:'d23a6', type:'food', name:'Dinner in Plaka', time:'19:30', duration:105, note:'Moussaka, lamb kleftiko, grilled octopus. Try the house wine (carafe). Plaka or Monastiraki.', mapsUrl:'https://maps.apple.com/?daddr=Plaka+Athens', webUrl:'https://maps.google.com/?q=best+restaurants+plaka+athens' }
+    ]
+  },
+  '2026-09-25': {
+    label: 'Fri 25 Sep', title: 'Cape Sounion Day Trip', destId: 'athens',
+    photo: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+    warnings: [],
+    activities: [
+      { id:'d24a1', type:'transit', name:'Private driver to Cape Sounion', time:'09:00', duration:90, note:'~AU$100–150 return. ~1.5 hrs each way. Private driver recommended over KTEL bus.', mapsUrl:'https://maps.apple.com/?daddr=Cape+Sounion+Greece' },
+      { id:'d24a2', type:'activity', name:'Temple of Poseidon — Cape Sounion', time:'10:30', duration:150, note:'Clifftop temple above a 60m drop into the Aegean. One of the most dramatically sited ancient monuments in the world. Lord Byron\'s name carved into a column (1810) — still visible. 2–3 hours at the site.', mapsUrl:'https://maps.apple.com/?daddr=Temple+of+Poseidon+Sounion', webUrl:'https://maps.google.com/?q=temple+poseidon+cape+sounion' },
+      { id:'d24a3', type:'food', name:'Lunch at Cape Sounion taverna', time:'13:00', duration:75, note:'Taverna at the base. Fresh seafood with Aegean views. Swim at the beach below if the girls want.', mapsUrl:'https://maps.apple.com/?daddr=Cape+Sounion+Beach+Greece' },
+      { id:'d24a4', type:'transit', name:'Return drive to Athens', time:'15:00', duration:90, note:'Return with the same driver. Arrive mid-afternoon.', mapsUrl:'https://maps.apple.com/?daddr=Athens+Greece' },
+      { id:'d24a5', type:'activity', name:'Anafiotika neighbourhood', time:'17:00', duration:75, note:'Tiny white island-style houses built into the Acropolis hill. Quiet, almost Cycladic in atmosphere. A hidden neighbourhood.', mapsUrl:'https://maps.apple.com/?daddr=Anafiotika+Athens' },
+      { id:'d24a6', type:'food', name:'Final Greek dinner', time:'20:00', duration:105, note:'Make it a good one. Psaras in Plaka (excellent fish), or Strofi (Acropolis views from the terrace).', mapsUrl:'https://maps.apple.com/?daddr=Strofi+Restaurant+Athens', webUrl:'https://maps.google.com/?q=Psaras+restaurant+plaka+athens' }
+    ]
+  },
+  '2026-09-26': {
+    label: 'Sat 26 Sep', title: 'Free Day + Fly Out', destId: 'athens',
+    photo: 'https://images.unsplash.com/photo-1563694983011-6f4d90358083?w=800&q=80',
+    warnings: ['EK104 check-in opens 20:10 — head to airport by 19:30', 'Check out this morning — arrange luggage storage with hotel'],
+    activities: [
+      { id:'d25a1', type:'hotel', name:'Check out — Athens hotel', time:'10:00', duration:0, note:'Check out in the morning. Arrange luggage storage with hotel (most offer this free). Long free day before 23:10 departure.', mapsUrl:'https://maps.apple.com/?daddr=Athens+Greece' },
+      { id:'d25a2', type:'activity', name:'Monastiraki flea market', time:'10:30', duration:120, note:'Best on Saturday morning — genuinely excellent for antiques, souvenirs, street food.', mapsUrl:'https://maps.apple.com/?daddr=Monastiraki+Flea+Market+Athens' },
+      { id:'d25a3', type:'food', name:'Final Greek lunch', time:'13:00', duration:90, note:'Last Greek meal. Final pastry from a zacharoplasteio (Greek patisserie) — baklava, galaktoboureko.', mapsUrl:'https://maps.apple.com/?daddr=Monastiraki+Athens' },
+      { id:'d25a4', type:'free', name:'Afternoon — slow and easy', time:'15:00', duration:180, note:'Last afternoon in Europe. Café below the Acropolis, Syntagma Square changing of the guard (every hour on the hour), or just sit and absorb. Buffer time for packing.' },
+      { id:'d25a5', type:'transit', name:'Taxi to Athens Airport', time:'19:30', duration:45, note:'Head to airport by 19:30. EK104 check-in opens 20:10. Departs 23:10.', mapsUrl:'https://maps.apple.com/?daddr=Athens+International+Airport' },
+      { id:'d25a6', type:'flight', name:'EK104 Athens → Dubai', time:'23:10', duration:230, note:'Emirates. Check-in opens 20:10. Departs 23:10. Arrives Dubai 27 Sep 04:40.', flightNum:'EK104', from:'ATH', to:'DXB', fromTime:'23:10', toTime:'04:40+1', ref:'GKK5PW', mapsUrl:'', webUrl:'https://www.flightradar24.com/EK104' }
+    ]
+  },
+  '2026-09-27': {
+    label: 'Sun 27 Sep', title: 'Dubai → Singapore', destId: 'singapore',
+    photo: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800&q=80',
+    warnings: ['Late arrival Singapore 21:45 — pre-arranged hotel late check-in'],
+    activities: [
+      { id:'d26a1', type:'activity', name:'Dubai DXB T3 Transit', time:'04:40', duration:315, note:'Arrive Dubai 04:40. Same terminal — no re-check. ~6 hours in transit. Explore Terminal 3, have breakfast. Find a lounge if you have access.', mapsUrl:'https://maps.apple.com/?daddr=Dubai+International+Airport' },
+      { id:'d26a2', type:'flight', name:'EK352 Dubai → Singapore', time:'10:00', duration:420, note:'Emirates. Departs 10:00. Arrives Singapore Changi T1 at 21:45 local time.', flightNum:'EK352', from:'DXB', to:'SIN', fromTime:'10:00', toTime:'21:45', ref:'GKK5PW', mapsUrl:'', webUrl:'https://www.flightradar24.com/EK352' },
+      { id:'d26a3', type:'activity', name:'Changi Jewel — waterfall visit', time:'22:00', duration:30, note:'The Jewel indoor waterfall cascade is a 10-min walk from T1. Worth a visit even at this hour. An extraordinary structure.', mapsUrl:'https://maps.apple.com/?daddr=Jewel+Changi+Airport+Singapore', webUrl:'https://www.jewelchangiairport.com' },
+      { id:'d26a4', type:'hotel', name:'Check in — Singapore hotel', time:'22:30', duration:30, note:'Very late arrival. Hotel late check-in pre-arranged. Don\'t push it — late dinner or room service.', mapsUrl:'https://maps.apple.com/?daddr=Marina+Bay+Sands+Singapore' }
+    ]
+  },
+  '2026-09-28': {
+    label: 'Mon 28 Sep', title: 'Singapore — Gardens by the Bay', destId: 'singapore',
+    photo: 'https://images.unsplash.com/photo-1571587289339-cb7da24bc293?w=800&q=80',
+    warnings: [],
+    activities: [
+      { id:'d27a1', type:'free', name:'Slow morning — sleep in', time:'08:00', duration:180, note:'After a month of early mornings, Singapore is a beautiful ending. Sleep in. Proper breakfast at the hotel.', mapsUrl:'https://maps.apple.com/?daddr=Singapore' },
+      { id:'d27a2', type:'transit', name:'MRT or taxi to Gardens by the Bay', time:'15:00', duration:20, note:'MRT to Bayfront, 5 min walk. Singapore\'s MRT is excellent.', mapsUrl:'https://maps.apple.com/?daddr=Gardens+by+the+Bay+Singapore&dirflg=r', webUrl:'https://www.gardensbythebay.com.sg' },
+      { id:'d27a3', type:'activity', name:'Gardens by the Bay — Supertree Grove', time:'15:30', duration:120, note:'Free to walk around the waterfront. Cloud Forest conservatory is spectacular (pre-book). The Supertree light show at 7:45pm and 8:45pm is genuinely magical — don\'t miss it.', mapsUrl:'https://maps.apple.com/?daddr=Gardens+by+the+Bay+Singapore', webUrl:'https://www.gardensbythebay.com.sg' },
+      { id:'d27a4', type:'activity', name:'Supertree light show', time:'19:45', duration:30, note:'Free, runs at 7:45pm and 8:45pm. One of the most memorable things in Singapore. Both girls will love it.', mapsUrl:'https://maps.apple.com/?daddr=Supertree+Grove+Singapore' },
+      { id:'d27a5', type:'food', name:'Dinner near Marina Bay', time:'20:30', duration:90, note:'The Marina Bay area has excellent options at all price points.', mapsUrl:'https://maps.apple.com/?daddr=Marina+Bay+Singapore', webUrl:'https://maps.google.com/?q=best+restaurants+marina+bay+singapore' }
+    ]
+  },
+  '2026-09-29': {
+    label: 'Tue 29 Sep', title: 'Sentosa + Universal Studios', destId: 'singapore',
+    photo: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80',
+    warnings: [],
+    activities: [
+      { id:'d28a1', type:'transit', name:'Cable car to Sentosa from VivoCity', time:'09:30', duration:20, note:'The cable car ride is fun. Departs from VivoCity mall. Pre-book Universal Studios.', mapsUrl:'https://maps.apple.com/?daddr=Sentosa+Island+Singapore&dirflg=r', webUrl:'https://www.sentosa.com.sg' },
+      { id:'d28a2', type:'activity', name:'Universal Studios Singapore', time:'10:00', duration:360, note:'The right call for this family. Olivia and Abby will love it. Book in advance. Full day.', mapsUrl:'https://maps.apple.com/?daddr=Universal+Studios+Singapore', webUrl:'https://www.rwsentosa.com/en/attractions/universal-studios-singapore' },
+      { id:'d28a3', type:'food', name:'Hawker Centre dinner — Maxwell or Lau Pa Sat', time:'19:30', duration:90, note:'Proper introduction to Singaporean food. Chicken rice, char kway teow, laksa, satay, chilli crab. Order from multiple stalls. The chilli crab is messy and extraordinary.', mapsUrl:'https://maps.apple.com/?daddr=Maxwell+Food+Centre+Singapore', webUrl:'https://maps.google.com/?q=Maxwell+Food+Centre+Singapore' }
+    ]
+  },
+  '2026-09-30': {
+    label: 'Wed 30 Sep', title: 'Singapore Zoo + Fly Home', destId: 'singapore',
+    photo: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800&q=80',
+    warnings: ['Check in at Changi T1 by 17:30', 'Arrive Changi early — explore the Jewel properly before departure'],
+    activities: [
+      { id:'d29a1', type:'activity', name:'Singapore Zoo', time:'09:00', duration:240, note:'One of the best in the world. Open-concept, animals in near-natural habitats. Both girls will love it. Morning is best — animals are active. Pre-book.', mapsUrl:'https://maps.apple.com/?daddr=Singapore+Zoo', webUrl:'https://www.mandai.com/en/singapore-zoo.html' },
+      { id:'d29a2', type:'food', name:'Last Singapore hawker lunch', time:'13:00', duration:60, note:'One final hawker centre meal. Singapore food will be missed.', mapsUrl:'https://maps.apple.com/?daddr=Singapore' },
+      { id:'d29a3', type:'activity', name:'Orchard Road — final shopping', time:'14:30', duration:90, note:'Last shopping run if needed. Singapore is excellent for duty-free electronics, fashion, and gifts.', mapsUrl:'https://maps.apple.com/?daddr=Orchard+Road+Singapore' },
+      { id:'d29a4', type:'transit', name:'Taxi to Changi Terminal 1', time:'16:30', duration:45, note:'Allow plenty of time. Check in by 17:30. Arrive early to explore the Jewel.', mapsUrl:'https://maps.apple.com/?daddr=Singapore+Changi+Airport+Terminal+1' },
+      { id:'d29a5', type:'activity', name:'Jewel Changi — Rain Vortex', time:'17:00', duration:60, note:'The indoor waterfall and mall is a proper attraction. The Rain Vortex is the world\'s tallest indoor waterfall. A spectacular way to end the trip.', mapsUrl:'https://maps.apple.com/?daddr=Jewel+Changi+Airport+Singapore', webUrl:'https://www.jewelchangiairport.com' },
+      { id:'d29a6', type:'flight', name:'EK5052 / QF0052 Singapore → Brisbane', time:'20:30', duration:480, note:'Emirates / Qantas codeshare. Check in by 17:30. Departs 20:30. Arrives Brisbane 01 Oct 06:00. Home.', flightNum:'EK5052', from:'SIN', to:'BNE', fromTime:'20:30', toTime:'06:00+1', ref:'GKK5PW', mapsUrl:'', webUrl:'https://www.flightradar24.com/EK5052' }
+    ]
+  }
+};
+
+// ══════════════════════════════════════════
+// STATE MANAGEMENT
+// ══════════════════════════════════════════
+let currentDest = null;
+let currentDayKey = null;
+let currentNavScreen = 'trip';
+let prevDayScreen = null; // 'daylist' or 'today'
+let editMode = false;
+let editingActivityId = null;
+let editingDayKey = null;
+let txSelectedCat = 'dining';
+let txSelectedMethod = 'card';
+let actSelectedType = 'activity';
+let budgetView = 'summary'; // 'summary' or 'destination'
+
+const TX_CATS = {
+  dining:      { icon: '🍽️', label: 'Dining',       color: '#c47a4a' },
+  experiences: { icon: '🎭', label: 'Experiences',  color: '#4a8c7a' },
+  transport:   { icon: '🚕', label: 'Transport',    color: '#7a9bb5' },
+  shopping:    { icon: '🛍️', label: 'Shopping',     color: '#c4954a' },
+  essentials:  { icon: '💊', label: 'Essentials',   color: '#5b7fa6' },
+  misc:        { icon: '📌', label: 'Other',         color: '#8a8a9a' }
+};
+
+// ══════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════
+function navTo(screen) {
+  // Hide all screens
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+  if (screen === 'trip') {
+    document.getElementById('screen-trip').classList.add('active');
+    document.getElementById('nav-trip').classList.add('active');
+    currentNavScreen = 'trip';
+  } else if (screen === 'today') {
+    // Navigate to today's day
+    const today = getTodayKey();
+    const todayDayData = DAY_DATA[today];
+    if (todayDayData) {
+      prevDayScreen = 'today';
+      showDayView(today);
+    } else {
+      // Show closest day (trip hasn't started or ended)
+      const firstDay = '2026-09-02';
+      prevDayScreen = 'today';
+      showDayView(firstDay);
+    }
+    document.getElementById('nav-today').classList.add('active');
+    currentNavScreen = 'today';
+  } else if (screen === 'budget') {
+    document.getElementById('screen-budget').classList.add('active');
+    document.getElementById('nav-budget').classList.add('active');
+    currentNavScreen = 'budget';
+    renderBudget();
+  } else if (screen === 'info') {
+    document.getElementById('screen-info').classList.add('active');
+    document.getElementById('nav-info').classList.add('active');
+    currentNavScreen = 'info';
+    renderInfo();
+  }
+}
+
+function getTodayKey() {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,'0');
+  const day = String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+
+// ══════════════════════════════════════════
+// TRIP SCREEN — Destinations
+// ══════════════════════════════════════════
+function renderDestinations() {
+  const today = getTodayKey();
+  const container = document.getElementById('trip-destinations');
+  container.innerHTML = DESTINATIONS.map(dest => {
+    const isActive = dest.days.includes(today);
+    const isPast = dest.days[dest.days.length-1] < today;
+    const statusClass = isActive ? 'current' : isPast ? 'completed' : 'upcoming';
+    const statusLabel = isActive ? 'You Are Here' : isPast ? 'Completed' : 'Upcoming';
+    return `
+      <div class="dest-card" onclick="showDayList('${dest.id}')">
+        <div class="dest-hero" style="background-image:url('${dest.photo}')">
+          <div class="dest-hero-content">
+            <div class="dest-name">${dest.name}</div>
+            <div class="dest-dates">${dest.country} · ${dest.dates}</div>
+          </div>
+        </div>
+        <div class="dest-meta">
+          <div class="dest-nights">${dest.nights} night${dest.nights!==1?'s':''}</div>
+          <div style="font-size:12px;color:var(--text-muted)">${dest.currency}</div>
+          <div class="dest-status ${statusClass}">${statusLabel}</div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function showDestinations() {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-trip').classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('nav-trip').classList.add('active');
+  currentNavScreen = 'trip';
+}
+
+function showDayList(destId) {
+  currentDest = DESTINATIONS.find(d => d.id === destId);
+  if (!currentDest) return;
+
+  document.getElementById('daylist-title').textContent = currentDest.name;
+  document.getElementById('daylist-subtitle').textContent = `${currentDest.country} · ${currentDest.dates} · ${currentDest.nights} nights`;
+
+  const today = getTodayKey();
+  const listEl = document.getElementById('daylist-days');
+  listEl.innerHTML = currentDest.days.map((dayKey, i) => {
+    const day = DAY_DATA[dayKey];
+    if (!day) return '';
+    const isToday = dayKey === today;
+    const firstAct = getActivitiesForDay(dayKey)[0];
+    const preview = firstAct ? firstAct.name : 'Travel day';
+    return `
+      <div class="day-row" onclick="showDayViewFromList('${dayKey}')">
+        <div class="day-num">DAY ${getDayNumber(dayKey)}</div>
+        <div style="flex:1">
+          <div class="day-row-date">${day.label} — ${day.title}</div>
+          <div class="day-row-preview">${preview}</div>
+        </div>
+        ${isToday ? '<div class="day-today-dot"></div>' : ''}
+        <svg class="day-row-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+      </div>`;
+  }).join('');
+
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-daylist').classList.add('active');
+}
+
+function getDayNumber(dayKey) {
+  const start = new Date('2026-09-02');
+  const d = new Date(dayKey);
+  return Math.round((d - start) / 86400000) + 1;
+}
+
+function showDayViewFromList(dayKey) {
+  prevDayScreen = 'daylist';
+  showDayView(dayKey);
+}
+
+function goBackFromDay() {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  if (prevDayScreen === 'daylist' && currentDest) {
+    document.getElementById('screen-daylist').classList.add('active');
+    document.getElementById('nav-trip').classList.add('active');
+    currentNavScreen = 'trip';
+  } else {
+    document.getElementById('screen-trip').classList.add('active');
+    document.getElementById('nav-trip').classList.add('active');
+    currentNavScreen = 'trip';
+  }
+}
+
+// ══════════════════════════════════════════
+// DAY VIEW
+// ══════════════════════════════════════════
+function showDayView(dayKey) {
+  currentDayKey = dayKey;
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-day').classList.add('active');
+  document.getElementById('dayBackLabel').textContent = prevDayScreen === 'daylist' && currentDest ? currentDest.name : 'Trip';
+  renderDayView(dayKey);
+}
+
+function getActivitiesForDay(dayKey) {
+  const state = load();
+  const baseActivities = (DAY_DATA[dayKey]?.activities || []).filter(a => {
+    const deleted = state.deletedActivities || {};
+    return !deleted[dayKey] || !deleted[dayKey].includes(a.id);
+  });
+  const custom = (state.customActivities || {})[dayKey] || [];
+  const all = [...baseActivities, ...custom];
+  all.sort((a, b) => {
+    const ta = a.time || '00:00';
+    const tb = b.time || '00:00';
+    return ta.localeCompare(tb);
+  });
+  return all;
+}
+
+function renderDayView(dayKey) {
+  const day = DAY_DATA[dayKey];
+  if (!day) return;
+  const dest = DESTINATIONS.find(d => d.id === day.destId);
+  const state = load();
+  const activities = getActivitiesForDay(dayKey);
+  const today = getTodayKey();
+  const isToday = dayKey === today;
+
+  let html = `
+    <div class="day-view-header">
+      <div class="day-view-dest" style="color:${dest?.accent || 'var(--accent)'}">${dest?.name?.toUpperCase() || ''} · DAY ${getDayNumber(dayKey)}</div>
+      <div class="day-view-title">${day.title}</div>
+      <div class="day-view-subtitle">${day.label}${isToday ? ' · <span style="color:var(--green);font-weight:600">Today</span>' : ''}</div>
+    </div>`;
+
+  // Hero photo
+  const userPhoto = (state.dayPhotos || {})[dayKey];
+  const heroSrc = userPhoto || day.photo;
+  html += `
+    <div class="day-view-hero">
+      <img src="${heroSrc}" alt="${day.title}" onerror="this.style.display='none'">
+      <div class="day-photo-btn" onclick="changeHeroPhoto('${dayKey}')">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        Change Photo
+      </div>
+    </div>`;
+
+  // Weather widget
+  if (dest?.weather) {
+    html += `
+      <div class="weather-widget">
+        <div class="weather-icon">${dest.weather.icon}</div>
+        <div class="weather-info">
+          <div class="weather-temp">${dest.weather.temp}</div>
+          <div class="weather-desc">${dest.weather.desc}</div>
+          <div class="weather-location">${dest.name}, ${dest.country}</div>
+        </div>
+      </div>`;
+  }
+
+  // Warning cards
+  if (day.warnings && day.warnings.length > 0) {
+    html += `
+      <div class="warning-card">
+        <div class="warning-title">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Important
+        </div>
+        ${day.warnings.map(w => `<div class="warning-item">· ${w}</div>`).join('')}
+      </div>`;
+  }
+
+  // Journal link
+  const journalUrl = `applemessages://new?body=Journal+entry+for+${encodeURIComponent(day.label)}`;
+  html += `
+    <div class="journal-link-card" onclick="openJournal('${dayKey}')">
+      <div class="journal-icon">📓</div>
+      <div class="journal-link-info">
+        <div class="journal-link-title">Open Apple Journal</div>
+        <div class="journal-link-sub">Record memories from ${day.label}</div>
+      </div>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+    </div>`;
+
+  // Activities
+  html += `<div class="activities-section"><div class="section-label">Schedule</div>`;
+
+  activities.forEach((act, i) => {
+    if (act.type === 'transit') {
+      html += renderTransitCard(act, dayKey);
+    } else if (act.type === 'flight') {
+      html += renderFlightCard(act);
+    } else if (act.type === 'hotel') {
+      html += renderHotelCard(act, dayKey);
+    } else {
+      html += renderActivityCard(act, dayKey, dest);
+    }
+  });
+
+  // Add activity button
+  html += `
+    <button class="section-add-btn" onclick="openAddActivity('${dayKey}')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Add Activity
+    </button>
+  </div>`;
+
+  // Today's spend
+  const todayTxs = (state.transactions || []).filter(t => t.date === dayKey);
+  if (todayTxs.length > 0) {
+    const todayTotal = todayTxs.reduce((s, t) => s + t.aud, 0);
+    html += `
+      <div style="margin:16px 16px 0">
+        <div class="section-label">Today's Spending</div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer" onclick="navTo('budget')">
+          <div>
+            <div style="font-size:13px;color:var(--text-secondary)">${todayTxs.length} transaction${todayTxs.length!==1?'s':''}</div>
+            <div style="font-size:20px;font-weight:600;color:var(--text-primary);margin-top:2px">AU$${todayTotal.toFixed(2)}</div>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </div>`;
+  } else {
+    html += `
+      <div style="margin:16px 16px 0">
+        <div class="section-label">Spending</div>
+        <button class="section-add-btn" onclick="openTxModal('${dayKey}')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Log an Expense
+        </button>
+      </div>`;
+  }
+
+  document.getElementById('dayViewContent').innerHTML = html;
+}
+
+function renderActivityCard(act, dayKey, dest) {
+  const typeLabels = { activity:'Attraction', food:'Dining', ferry:'Ferry', free:'Free Time', transit:'Transit', hotel:'Hotel', flight:'Flight' };
+  const typeBadges = { activity:'badge-activity', food:'badge-food', ferry:'badge-ferry', free:'badge-free', transit:'badge-transit', hotel:'badge-hotel', flight:'badge-flight' };
+  const durationText = act.duration ? formatDuration(act.duration) : '';
+  const thumb = act.photo || getDefaultThumb(act);
+
+  let links = '';
+  if (act.mapsUrl) {
+    links += `<div class="activity-link-btn" onclick="event.stopPropagation();openUrl('${act.mapsUrl}')"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Maps</div>`;
+  }
+  if (act.webUrl) {
+    links += `<div class="activity-link-btn" onclick="event.stopPropagation();openUrl('${act.webUrl}')"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Website</div>`;
+  }
+
+  const thumbBg = thumb ? `background-image:url('${thumb}');` : '';
+  const accentColor = dest?.accent || 'var(--accent)';
+
+  return `
+    <div class="activity-card" onclick="editActivity('${dayKey}','${act.id}')">
+      <div class="activity-card-inner">
+        <div class="activity-thumb" style="${thumbBg}background-color:${accentColor}22"></div>
+        <div class="activity-content">
+          <div class="activity-time-row">
+            ${act.time ? `<div class="activity-time">${formatTime(act.time)}</div>` : ''}
+            ${durationText ? `<div class="activity-duration">${durationText}</div>` : ''}
+            <div class="activity-type-badge ${typeBadges[act.type] || 'badge-activity'}">${typeLabels[act.type] || act.type}</div>
+          </div>
+          <div class="activity-name">${act.name}</div>
+          ${act.note ? `<div class="activity-note">${act.note}</div>` : ''}
+          ${links ? `<div class="activity-links">${links}</div>` : ''}
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderTransitCard(act, dayKey) {
+  const icons = { transit:'🚶', ferry:'⛴️', flight:'✈️' };
+  const icon = icons[act.type] || '🚌';
+  const mapsHandler = act.mapsUrl ? `openUrl('${act.mapsUrl}')` : '';
+  return `
+    <div class="transit-card" onclick="${mapsHandler || `editActivity('${dayKey}','${act.id}')`}">
+      <div class="transit-icon">${icon}</div>
+      <div class="transit-info">
+        <div class="transit-name">${act.name}</div>
+        <div class="transit-detail">${act.note || ''}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+        ${act.time ? `<div class="transit-time">${formatTime(act.time)}</div>` : ''}
+        ${act.duration ? `<div style="font-size:10px;color:var(--text-muted)">${formatDuration(act.duration)}</div>` : ''}
+        ${act.mapsUrl ? `<div class="transit-map-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open</div>` : ''}
+      </div>
+    </div>`;
+}
+
+function renderFlightCard(act) {
+  return `
+    <div class="flight-card">
+      <div class="flight-header">
+        <div style="flex:1">
+          <div class="flight-airline">${act.flightNum?.startsWith('EK') ? 'Emirates' : act.flightNum?.startsWith('LX') ? 'Swiss Air' : act.flightNum?.startsWith('EJU') ? 'EasyJet' : act.flightNum?.startsWith('EK5') ? 'Emirates / Qantas' : 'Flight'}</div>
+          <a class="flight-number" href="${act.webUrl || '#'}" onclick="event.preventDefault();openUrl('${act.webUrl || ''}')" style="text-decoration:none;color:var(--text-primary)">
+            <span style="color:var(--accent)">${act.flightNum || ''}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+        ${act.ref ? `<div class="flight-ref-btn" onclick="copyText('${act.ref}','Booking ref copied')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>${act.ref}</div>` : ''}
+      </div>
+      <div class="flight-route">
+        <div class="flight-city">
+          <div class="flight-city-code">${act.from || ''}</div>
+          <div class="flight-city-name">${getCityName(act.from)}</div>
+          <div class="flight-city-time">${act.fromTime || act.time || ''}</div>
+        </div>
+        <div class="flight-arrow">
+          <div class="flight-arrow-line"></div>
+          <div class="flight-duration">${act.duration ? formatDuration(act.duration) : ''}</div>
+        </div>
+        <div class="flight-city" style="text-align:right">
+          <div class="flight-city-code">${act.to || ''}</div>
+          <div class="flight-city-name">${getCityName(act.to)}</div>
+          <div class="flight-city-time">${act.toTime || ''}</div>
+        </div>
+      </div>
+      <div class="flight-footer">
+        <div class="flight-ref-btn" onclick="openUrl('${act.webUrl || ''}')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Track on Flightradar24
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderHotelCard(act, dayKey) {
+  return `
+    <div class="hotel-card">
+      <div class="hotel-inner">
+        <div class="hotel-label">${act.name.includes('Check out') ? 'Check Out' : 'Check In'}</div>
+        <div class="hotel-name">${act.name.replace(/Check in — |Check out — /i,'')}</div>
+        ${act.address ? `<div class="hotel-address">${act.address}</div>` : ''}
+        <div class="hotel-footer">
+          ${act.mapsUrl ? `<div class="hotel-btn" onclick="openUrl('${act.mapsUrl}')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Directions</div>` : ''}
+          ${act.webUrl ? `<div class="hotel-btn" onclick="openUrl('${act.webUrl}')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Website</div>` : ''}
+        </div>
+        ${act.note ? `<div style="font-size:12px;color:var(--text-secondary);margin-top:8px;line-height:1.5">${act.note}</div>` : ''}
+      </div>
+    </div>`;
+}
+
+function getDefaultThumb(act) {
+  const thumbs = {
+    'Vatican Museums': 'https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=200&q=70',
+    'Colosseum': 'https://images.unsplash.com/photo-1548345680-f5475ea5df84?w=200&q=70',
+    'Acropolis': 'https://images.unsplash.com/photo-1555993539-1732b0258235?w=200&q=70',
+    'Tower of London': 'https://images.unsplash.com/photo-1486299267070-83823f5448dd?w=200&q=70',
+    'First Cliff Walk': 'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=200&q=70',
+    'Pompeii': 'https://images.unsplash.com/photo-1559650656-5d1d361ad10e?w=200&q=70',
+    'Capri': 'https://images.unsplash.com/photo-1633321088355-ef2ca1b52fb7?w=200&q=70',
+    'Pantheon': 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=200&q=70',
+    'Universal Studios': 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=200&q=70',
+    'Singapore Zoo': 'https://images.unsplash.com/photo-1571587289339-cb7da24bc293?w=200&q=70',
+    'Trümmelbach Falls': 'https://images.unsplash.com/photo-1531307119710-accdb402f6f1?w=200&q=70',
+    'Männlichen': 'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=200&q=70',
+    'Cape Sounion': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&q=70',
+    'British Museum': 'https://images.unsplash.com/photo-1569585723035-0e9e39dfa90b?w=200&q=70',
+    'Natural History Museum': 'https://images.unsplash.com/photo-1579033461380-adb47c3eb938?w=200&q=70',
+    'Gardens by the Bay': 'https://images.unsplash.com/photo-1571587289339-cb7da24bc293?w=200&q=70',
+  };
+  for (const key in thumbs) {
+    if (act.name && act.name.includes(key)) return thumbs[key];
+  }
+  return null;
+}
+
+// ══════════════════════════════════════════
+// ACTIVITY EDITING
+// ══════════════════════════════════════════
+function openAddActivity(dayKey) {
+  editingActivityId = null;
+  editingDayKey = dayKey;
+  document.getElementById('actModalTitle').textContent = 'Add Activity';
+  document.getElementById('actName').value = '';
+  document.getElementById('actTime').value = '';
+  document.getElementById('actDuration').value = '';
+  document.getElementById('actNote').value = '';
+  document.getElementById('actMapsUrl').value = '';
+  document.getElementById('actWebUrl').value = '';
+  document.getElementById('actDeleteBtn').style.display = 'none';
+  selectActType(document.querySelector('[data-type="activity"]'));
+  document.getElementById('activityModal').classList.add('open');
+}
+
+function editActivity(dayKey, actId) {
+  const acts = getActivitiesForDay(dayKey);
+  const act = acts.find(a => a.id === actId);
+  if (!act) return;
+  editingActivityId = actId;
+  editingDayKey = dayKey;
+  document.getElementById('actModalTitle').textContent = 'Edit Activity';
+  document.getElementById('actName').value = act.name || '';
+  document.getElementById('actTime').value = act.time || '';
+  document.getElementById('actDuration').value = act.duration || '';
+  document.getElementById('actNote').value = act.note || '';
+  document.getElementById('actMapsUrl').value = act.mapsUrl || '';
+  document.getElementById('actWebUrl').value = act.webUrl || '';
+  // Select type pill
+  document.querySelectorAll('#actTypePills .type-pill').forEach(p => {
+    p.classList.toggle('selected', p.dataset.type === act.type);
+  });
+  actSelectedType = act.type || 'activity';
+  document.getElementById('actDeleteBtn').style.display = 'block';
+  document.getElementById('activityModal').classList.add('open');
+}
+
+function closeActivityModal() {
+  document.getElementById('activityModal').classList.remove('open');
+}
+
+function selectActType(el) {
+  document.querySelectorAll('#actTypePills .type-pill').forEach(p => p.classList.remove('selected'));
+  el.classList.add('selected');
+  actSelectedType = el.dataset.type;
+}
+
+function submitActivity() {
+  const name = document.getElementById('actName').value.trim();
+  if (!name) return;
+  const state = load();
+  const newAct = {
+    id: editingActivityId || ('custom_' + Date.now()),
+    type: actSelectedType,
+    name,
+    time: document.getElementById('actTime').value,
+    duration: parseInt(document.getElementById('actDuration').value) || null,
+    note: document.getElementById('actNote').value.trim(),
+    mapsUrl: document.getElementById('actMapsUrl').value.trim(),
+    webUrl: document.getElementById('actWebUrl').value.trim()
+  };
+
+  if (editingActivityId) {
+    // Check if it's a base activity
+    const base = DAY_DATA[editingDayKey]?.activities || [];
+    const isBase = base.some(a => a.id === editingActivityId);
+    if (isBase) {
+      // We can't edit base activities directly, mark as deleted and add as custom
+      if (!state.deletedActivities) state.deletedActivities = {};
+      if (!state.deletedActivities[editingDayKey]) state.deletedActivities[editingDayKey] = [];
+      state.deletedActivities[editingDayKey].push(editingActivityId);
+    } else {
+      // Remove old custom
+      if (state.customActivities && state.customActivities[editingDayKey]) {
+        state.customActivities[editingDayKey] = state.customActivities[editingDayKey].filter(a => a.id !== editingActivityId);
+      }
+    }
+  }
+
+  if (!state.customActivities) state.customActivities = {};
+  if (!state.customActivities[editingDayKey]) state.customActivities[editingDayKey] = [];
+  state.customActivities[editingDayKey].push(newAct);
+  save(state);
+  closeActivityModal();
+  renderDayView(editingDayKey);
+}
+
+function deleteActivity() {
+  if (!editingActivityId || !editingDayKey) return;
+  const state = load();
+  const base = DAY_DATA[editingDayKey]?.activities || [];
+  const isBase = base.some(a => a.id === editingActivityId);
+  if (isBase) {
+    if (!state.deletedActivities) state.deletedActivities = {};
+    if (!state.deletedActivities[editingDayKey]) state.deletedActivities[editingDayKey] = [];
+    if (!state.deletedActivities[editingDayKey].includes(editingActivityId)) {
+      state.deletedActivities[editingDayKey].push(editingActivityId);
+    }
+  } else {
+    if (state.customActivities && state.customActivities[editingDayKey]) {
+      state.customActivities[editingDayKey] = state.customActivities[editingDayKey].filter(a => a.id !== editingActivityId);
+    }
+  }
+  save(state);
+  closeActivityModal();
+  renderDayView(editingDayKey);
+}
+
+// ══════════════════════════════════════════
+// BUDGET SCREEN
+// ══════════════════════════════════════════
+function renderBudget() {
+  const state = load();
+  const txs = state.transactions || [];
+  const TRIP_BUDGET = 29000; // On-trip spending budget (total minus pre-paid)
+
+  // Total spent in AUD
+  const totalSpent = txs.reduce((s, t) => s + t.aud, 0);
+  const pct = Math.min((totalSpent / TRIP_BUDGET) * 100, 100);
+  const remaining = TRIP_BUDGET - totalSpent;
+  const fillClass = pct > 90 ? 'over' : pct > 70 ? 'warn' : '';
+
+  // Category totals
+  const catTotals = {};
+  Object.keys(TX_CATS).forEach(k => { catTotals[k] = 0; });
+  txs.forEach(t => { catTotals[t.category] = (catTotals[t.category] || 0) + t.aud; });
+
+  let html = `
+    <div class="budget-overview anim anim-1">
+      <div class="budget-total-label">Total Spent</div>
+      <div class="budget-total-amount">AU$${totalSpent.toLocaleString('en-AU',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
+      <div class="budget-total-aud">of AU$${TRIP_BUDGET.toLocaleString()} on-trip budget</div>
+      <div class="budget-progress-track">
+        <div class="budget-progress-fill ${fillClass}" style="width:${pct}%"></div>
+      </div>
+      <div class="budget-meta">
+        <div>AU$${Math.abs(remaining).toLocaleString('en-AU',{minimumFractionDigits:0})} ${remaining >= 0 ? 'remaining' : 'over budget'}</div>
+        <div class="budget-remaining ${fillClass}">${pct.toFixed(0)}% used</div>
+      </div>
+    </div>`;
+
+  // Donut chart
+  if (totalSpent > 0) {
+    html += renderDonut(catTotals, totalSpent);
+  }
+
+  // Category grid
+  html += `<div class="budget-cats anim anim-2">`;
+  Object.entries(TX_CATS).forEach(([k, cat]) => {
+    const amt = catTotals[k] || 0;
+    html += `
+      <div class="budget-cat">
+        <div class="budget-cat-icon">${cat.icon}</div>
+        <div class="budget-cat-name">${cat.label}</div>
+        <div class="budget-cat-amount">AU$${amt.toFixed(0)}</div>
+        <div class="budget-cat-sub">${txs.filter(t=>t.category===k).length} transactions</div>
+      </div>`;
+  });
+  html += '</div>';
+
+  // Currency converter
+  html += `
+    <div class="converter-card anim anim-2">
+      <div class="converter-title">Quick Currency Converter</div>
+      <div class="converter-row">
+        <input class="converter-input" id="convAmount" type="number" inputmode="decimal" placeholder="0.00" oninput="updateConverter()">
+        <select class="form-input" id="convCurrency" style="flex:0;width:90px" onchange="updateConverter()">
+          <option value="GBP">GBP</option>
+          <option value="CHF">CHF</option>
+          <option value="EUR">EUR</option>
+          <option value="SGD">SGD</option>
+        </select>
+        <div class="converter-result" id="convResult">AU$—</div>
+      </div>
+    </div>`;
+
+  // Rates card
+  const rates = state.rates || { GBP: 1.95, CHF: 1.68, EUR: 1.65, SGD: 0.93 };
+  html += `
+    <div class="rates-section anim anim-3">
+      <div class="rates-card">
+        <div class="rates-title">
+          Exchange Rates
+          <div class="rates-edit-btn" onclick="openRatesModal()">Update Rates</div>
+        </div>
+        ${[['GBP','🇬🇧','British Pound'],['CHF','🇨🇭','Swiss Franc'],['EUR','🇪🇺','Euro'],['SGD','🇸🇬','Singapore Dollar']].map(([code,flag,name]) => `
+        <div class="rate-row">
+          <div class="rate-flag">${flag}</div>
+          <div class="rate-currency">${code}</div>
+          <div class="rate-value">1 ${code} = AU$${(rates[code]||1).toFixed(4)}</div>
+          <div class="rate-aud">e.g. 100 ${code} = AU$${(100*(rates[code]||1)).toFixed(0)}</div>
+        </div>`).join('')}
+      </div>
+    </div>`;
+
+  // Destination budgets
+  html += `<div class="dest-budgets anim anim-3">
+    <div class="section-label" style="padding:0 0 8px">By Destination</div>`;
+  DESTINATIONS.forEach(dest => {
+    const destTxs = txs.filter(t => dest.days.includes(t.date));
+    const destSpent = destTxs.reduce((s,t) => s+t.aud, 0);
+    const destBudget = dest.budget;
+    const destPct = Math.min((destSpent/destBudget)*100, 100);
+    const destFill = destPct > 90 ? 'over' : destPct > 70 ? 'warn' : '';
+    html += `
+      <div class="dest-budget-card">
+        <div class="dest-budget-header">
+          <div class="dest-budget-name">${dest.name}</div>
+          <div class="dest-budget-dates">${dest.dates}</div>
+        </div>
+        <div class="dest-budget-bar"><div class="dest-budget-fill ${destFill}" style="width:${destPct}%"></div></div>
+        <div class="dest-budget-meta">
+          <div><span class="dest-budget-spent">AU$${destSpent.toFixed(0)}</span> spent</div>
+          <div>of AU$${destBudget.toLocaleString()} est.</div>
+        </div>
+      </div>`;
+  });
+  html += '</div>';
+
+  // Transaction list
+  html += `<div class="transactions-section anim anim-4">
+    <div class="section-label">All Transactions</div>`;
+
+  if (txs.length === 0) {
+    html += `<div class="empty-state"><div class="empty-state-icon">💰</div><div class="empty-state-title">No transactions yet</div><div class="empty-state-sub">Tap + to log your first expense</div></div>`;
+  } else {
+    // Group by date
+    const byDate = {};
+    txs.forEach(t => {
+      if (!byDate[t.date]) byDate[t.date] = [];
+      byDate[t.date].push(t);
+    });
+    Object.keys(byDate).sort((a,b) => b.localeCompare(a)).forEach(date => {
+      const day = DAY_DATA[date];
+      const dayLabel = day ? day.label : date;
+      const dayTotal = byDate[date].reduce((s,t) => s+t.aud, 0);
+      html += `<div class="tx-day-group"><div class="tx-day-label">${dayLabel} · AU$${dayTotal.toFixed(2)}</div>`;
+      byDate[date].forEach(t => {
+        const cat = TX_CATS[t.category] || TX_CATS.misc;
+        html += `
+          <div class="tx-item">
+            <div class="tx-icon">${cat.icon}</div>
+            <div class="tx-info">
+              <div class="tx-name">${t.note || cat.label}</div>
+              <div class="tx-meta">${cat.label} · ${t.date}</div>
+            </div>
+            <div class="tx-amount">
+              <div class="tx-local">${t.currency !== 'AUD' ? t.currency + ' ' + t.amount.toFixed(2) : 'AU$' + t.amount.toFixed(2)}</div>
+              ${t.currency !== 'AUD' ? `<div class="tx-aud">AU$${t.aud.toFixed(2)}</div>` : ''}
+              <div class="tx-payment ${t.method}">${t.method}</div>
+            </div>
+          </div>`;
+      });
+      html += '</div>';
+    });
+  }
+  html += '</div>';
+
+  document.getElementById('budgetContent').innerHTML = html;
+
+  // FAB
+  let fab = document.getElementById('txFab');
+  if (!fab) {
+    fab = document.createElement('div');
+    fab.id = 'txFab';
+    fab.className = 'fab';
+    fab.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>';
+    fab.onclick = () => openTxModal(null);
+    document.body.appendChild(fab);
+  }
+  fab.style.display = document.getElementById('screen-budget').classList.contains('active') ? 'flex' : 'none';
+}
+
+function renderDonut(catTotals, total) {
+  const colors = { dining:'#c47a4a', experiences:'#4a8c7a', transport:'#7a9bb5', shopping:'#c4954a', essentials:'#5b7fa6', misc:'#8a8a9a' };
+  const r = 44, cx = 54, cy = 54;
+  const circ = 2 * Math.PI * r;
+  let offset = 0;
+  let paths = '';
+  const legend = [];
+  Object.entries(TX_CATS).forEach(([k, cat]) => {
+    const amt = catTotals[k] || 0;
+    if (amt <= 0) return;
+    const frac = amt / total;
+    const dash = frac * circ;
+    paths += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${colors[k]}" stroke-width="16" stroke-dasharray="${dash} ${circ-dash}" stroke-dashoffset="${-offset}" style="transform:rotate(-90deg);transform-origin:${cx}px ${cy}px"/>`;
+    offset += dash;
+    legend.push({ icon: cat.icon, label: cat.label, val: 'AU$' + amt.toFixed(0), color: colors[k] });
+  });
+
+  return `
+    <div class="donut-wrap">
+      <svg class="donut-svg" width="108" height="108" viewBox="0 0 108 108">
+        <circle cx="54" cy="54" r="44" fill="none" stroke="var(--surface-high)" stroke-width="16"/>
+        ${paths}
+      </svg>
+      <div class="donut-legend">
+        ${legend.map(l => `<div class="donut-legend-item"><div class="donut-dot" style="background:${l.color}"></div><div class="donut-legend-label">${l.icon} ${l.label}</div><div class="donut-legend-val">${l.val}</div></div>`).join('')}
+      </div>
+    </div>`;
+}
+
+function updateConverter() {
+  const amount = parseFloat(document.getElementById('convAmount')?.value) || 0;
+  const currency = document.getElementById('convCurrency')?.value || 'EUR';
+  const rates = (load().rates) || { GBP: 1.95, CHF: 1.68, EUR: 1.65, SGD: 0.93 };
+  const rate = rates[currency] || 1;
+  const aud = amount * rate;
+  const el = document.getElementById('convResult');
+  if (el) el.textContent = amount > 0 ? `AU$${aud.toFixed(2)}` : 'AU$—';
+}
+
+// ══════════════════════════════════════════
+// TRANSACTION MODAL
+// ══════════════════════════════════════════
+let txModalDayKey = null;
+
+function openTxModal(dayKey) {
+  txModalDayKey = dayKey || getTodayKey();
+  document.getElementById('txModal').classList.add('open');
+  // Pre-set currency based on destination
+  const dest = DESTINATIONS.find(d => d.days.includes(txModalDayKey));
+  if (dest) {
+    document.getElementById('txCurrency').value = dest.currency;
+  }
+  document.getElementById('txAmount').value = '';
+  document.getElementById('txNote').value = '';
+  document.getElementById('txAudPreview').textContent = '';
+  // Reset pills
+  document.querySelectorAll('#txCatPills .type-pill').forEach(p => {
+    p.classList.toggle('selected', p.dataset.cat === 'dining');
+  });
+  txSelectedCat = 'dining';
+  txSelectedMethod = 'card';
+  document.getElementById('pillCard').classList.add('selected');
+  document.getElementById('pillCash').classList.remove('selected');
+  // Live preview
+  document.getElementById('txAmount').oninput = updateTxPreview;
+  document.getElementById('txCurrency').onchange = updateTxPreview;
+}
+
+function updateTxPreview() {
+  const amt = parseFloat(document.getElementById('txAmount').value) || 0;
+  const cur = document.getElementById('txCurrency').value;
+  const rates = (load().rates) || { GBP: 1.95, CHF: 1.68, EUR: 1.65, SGD: 0.93 };
+  if (cur === 'AUD') {
+    document.getElementById('txAudPreview').textContent = amt > 0 ? `= AU$${amt.toFixed(2)}` : '';
+  } else {
+    const aud = amt * (rates[cur] || 1);
+    document.getElementById('txAudPreview').textContent = amt > 0 ? `= AU$${aud.toFixed(2)} at current rate (1 ${cur} = AU$${(rates[cur]||1).toFixed(4)})` : '';
+  }
+}
+
+function closeTxModal() { document.getElementById('txModal').classList.remove('open'); }
+
+function selectTxCat(el) {
+  document.querySelectorAll('#txCatPills .type-pill').forEach(p => p.classList.remove('selected'));
+  el.classList.add('selected');
+  txSelectedCat = el.dataset.cat;
+}
+
+function selectMethod(m) {
+  txSelectedMethod = m;
+  document.getElementById('pillCard').classList.toggle('selected', m === 'card');
+  document.getElementById('pillCash').classList.toggle('selected', m === 'cash');
+}
+
+function submitTransaction() {
+  const amount = parseFloat(document.getElementById('txAmount').value);
+  if (!amount || amount <= 0) return;
+  const currency = document.getElementById('txCurrency').value;
+  const note = document.getElementById('txNote').value.trim();
+  const state = load();
+  const rates = state.rates || { GBP: 1.95, CHF: 1.68, EUR: 1.65, SGD: 0.93 };
+  // Use the rate stored AT THE TIME of transaction
+  const rateUsed = currency === 'AUD' ? 1 : (rates[currency] || 1);
+  const aud = amount * rateUsed;
+  const tx = {
+    id: Date.now().toString(),
+    date: txModalDayKey || getTodayKey(),
+    category: txSelectedCat,
+    currency,
+    amount,
+    rateUsed,
+    aud,
+    method: txSelectedMethod,
+    note,
+    createdAt: new Date().toISOString()
+  };
+  if (!state.transactions) state.transactions = [];
+  state.transactions.push(tx);
+  save(state);
+  closeTxModal();
+  if (currentNavScreen === 'budget') renderBudget();
+  if (currentDayKey) renderDayView(currentDayKey);
+  showToast(note ? `${note} · AU$${aud.toFixed(2)}` : `Added AU$${aud.toFixed(2)}`);
+}
+
+// ══════════════════════════════════════════
+// RATES MODAL
+// ══════════════════════════════════════════
+function openRatesModal() {
+  const state = load();
+  const rates = state.rates || { GBP: 1.95, CHF: 1.68, EUR: 1.65, SGD: 0.93 };
+  const pairs = [['GBP','🇬🇧','British Pound'],['CHF','🇨🇭','Swiss Franc'],['EUR','🇪🇺','Euro'],['SGD','🇸🇬','Singapore Dollar']];
+  document.getElementById('ratesFormContent').innerHTML = pairs.map(([code,flag,name]) => `
+    <div class="form-group">
+      <label class="form-label">${flag} ${name} (${code}) — 1 ${code} = AU$</label>
+      <input class="form-input" id="rate_${code}" type="number" step="0.0001" value="${(rates[code]||1).toFixed(4)}" inputmode="decimal">
+    </div>`).join('');
+  document.getElementById('ratesModal').classList.add('open');
+}
+
+function closeRatesModal() { document.getElementById('ratesModal').classList.remove('open'); }
+
+function saveRates() {
+  const state = load();
+  const newRates = {
+    GBP: parseFloat(document.getElementById('rate_GBP').value) || 1.95,
+    CHF: parseFloat(document.getElementById('rate_CHF').value) || 1.68,
+    EUR: parseFloat(document.getElementById('rate_EUR').value) || 1.65,
+    SGD: parseFloat(document.getElementById('rate_SGD').value) || 0.93,
+  };
+  state.rates = newRates;
+  state.ratesUpdatedAt = new Date().toISOString();
+  // NOTE: Previous transactions keep their rateUsed — we do NOT recalculate them
+  save(state);
+  closeRatesModal();
+  if (currentNavScreen === 'budget') renderBudget();
+  showToast('Exchange rates updated');
+}
+
+// ══════════════════════════════════════════
+// INFO SCREEN
+// ══════════════════════════════════════════
+function renderInfo() {
+  let html = '';
+
+  html += `<div class="info-section-label">Booking References</div>
+    <div class="info-section">
+      <div class="info-card">
+        <div class="info-row"><div class="info-row-label">Emirates (all legs)</div><div class="info-row-value copyable" onclick="copyText('GKK5PW','Emirates ref copied')">GKK5PW <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div></div>
+        <div class="info-row"><div class="info-row-label">EasyJet NAP→ATH</div><div class="info-row-value copyable" onclick="copyText('KCPV1H7','EasyJet ref copied')">KCPV1H7 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div></div>
+        <div class="info-row"><div class="info-row-label">Chelsea Cloisters</div><div class="info-row-value copyable" onclick="copyText('6355022434','Hotel ref copied')">6355022434 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div></div>
+        <div class="info-row"><div class="info-row-label">Apartment Schönegg</div><div class="info-row-value copyable" onclick="copyText('479895','Grindelwald ref copied')">479895 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div></div>
+        <div class="info-row"><div class="info-row-label">Chelsea Cloisters PIN</div><div class="info-row-value copyable" onclick="copyText('6151','PIN copied')">6151 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div></div>
+      </div>
+    </div>`;
+
+  html += `<div class="info-section-label">Flight Schedule</div>
+    <div class="info-section">
+      <div class="info-card">
+        ${[
+          ['EK431','BNE→DXB','Wed 2 Sep · 01:55 → 10:05','https://www.flightradar24.com/EK431'],
+          ['EK031','DXB→LHR','Wed 2 Sep · 11:25 → 16:10','https://www.flightradar24.com/EK031'],
+          ['LX317','LHR→ZRH','Wed 9 Sep · 08:40 → 11:45','https://www.flightradar24.com/LX317'],
+          ['EJU4165','NAP→ATH','Wed 23 Sep · 09:15 → 12:00','https://www.flightradar24.com/EJU4165'],
+          ['EK104','ATH→DXB','Sat 26 Sep · 23:10 → 04:40','https://www.flightradar24.com/EK104'],
+          ['EK352','DXB→SIN','Sun 27 Sep · 10:00 → 21:45','https://www.flightradar24.com/EK352'],
+          ['EK5052','SIN→BNE','Wed 30 Sep · 20:30 → 06:00','https://www.flightradar24.com/EK5052'],
+        ].map(([num,route,time,url]) => `
+          <div class="info-row">
+            <div>
+              <div class="info-row-value copyable" style="font-size:15px" onclick="openUrl('${url}')">${num} <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></div>
+              <div class="info-row-label" style="font-size:12px;margin-top:2px">${route} · ${time}</div>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+
+  html += `
+    <div class="emergency-card">
+      <div class="emergency-title">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Emergency Contacts
+      </div>
+      <div class="emergency-row"><div class="emergency-label">UK Emergency</div><div class="emergency-value">999</div></div>
+      <div class="emergency-row"><div class="emergency-label">EU Emergency</div><div class="emergency-value">112</div></div>
+      <div class="emergency-row"><div class="emergency-label">Singapore Emergency</div><div class="emergency-value">995 / 999</div></div>
+      <div class="emergency-row"><div class="emergency-label">Australian Embassy UK</div><div class="emergency-value">+44 20 7379 4334</div></div>
+      <div class="emergency-row"><div class="emergency-label">Australian Embassy Italy</div><div class="emergency-value">+39 06 852721</div></div>
+      <div class="emergency-row"><div class="emergency-label">Australian Embassy Greece</div><div class="emergency-value">+30 210 870 4000</div></div>
+      <div class="emergency-row"><div class="emergency-label">Macquarie Card Emergency</div><div class="emergency-value">+61 2 8232 3333</div></div>
+    </div>`;
+
+  html += `<div class="info-section-label">Trip Details</div>
+    <div class="info-section">
+      <div class="info-card">
+        <div class="info-row"><div class="info-row-label">Family</div><div class="info-row-value">Rick, Nina, Abby (13), Olivia (10)</div></div>
+        <div class="info-row"><div class="info-row-label">Dates</div><div class="info-row-value">2 Sep – 1 Oct 2026</div></div>
+        <div class="info-row"><div class="info-row-label">Total Budget</div><div class="info-row-value">AU$45,000–50,000</div></div>
+        <div class="info-row"><div class="info-row-label">Baggage</div><div class="info-row-value">3 × 23kg checked bags</div></div>
+        <div class="info-row"><div class="info-row-label">Cards</div><div class="info-row-value">Macquarie Platinum (card) + Macquarie Debit (ATM)</div></div>
+        <div class="info-row"><div class="info-row-label">eSIM</div><div class="info-row-value">Airalo — Europe + Singapore</div></div>
+      </div>
+    </div>`;
+
+  html += `<div class="info-section-label">Key Reminders</div>
+    <div class="info-section">
+      <div class="info-card">
+        <div class="info-row"><div class="info-row-label" style="flex:1">Switzerland uses CHF — not Euros</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">Caremar CAR FERRY only for Capri — hydrofoils refuse large bags</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">Grindelwald keys: GRIWA RENT AG, 2–5pm on Wed 9 Sep only</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">Vatican: First Entry 7am — must pre-book, queues 2–3hrs without ticket</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">Circumvesuviana (Naples→Pompeii): keep bags in front — pickpockets</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">Naples pre-arrange 7am taxi night before (hotel front desk)</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">EasyJet bag drop closes 08:35 — leave Naples hotel by 7am sharp</div></div>
+      </div>
+    </div>`;
+
+  document.getElementById('infoContent').innerHTML = html;
+}
+
+// ══════════════════════════════════════════
+// UTILITY FUNCTIONS
+// ══════════════════════════════════════════
+function formatTime(t) {
+  if (!t) return '';
+  const [h, m] = t.split(':').map(Number);
+  const ampm = h >= 12 ? 'pm' : 'am';
+  const h12 = h % 12 || 12;
+  return `${h12}:${String(m).padStart(2,'0')} ${ampm}`;
+}
+
+function formatDuration(mins) {
+  if (!mins) return '';
+  const h = Math.floor(mins / 60);
+  const m = mins % 60;
+  if (h > 0 && m > 0) return `${h}h ${m}m`;
+  if (h > 0) return `${h}h`;
+  return `${m}m`;
+}
+
+function getCityName(code) {
+  const names = { BNE:'Brisbane', DXB:'Dubai', LHR:'London', ZRH:'Zurich', NAP:'Naples', ATH:'Athens', SIN:'Singapore' };
+  return names[code] || code || '';
+}
+
+function openUrl(url) {
+  if (!url) return;
+  window.open(url, '_blank', 'noopener');
+}
+
+function openJournal(dayKey) {
+  // Deep link to Apple Journal — opens Journal app with today's date
+  window.location.href = 'applejournaling://';
+}
+
+function changeHeroPhoto(dayKey) {
+  // Open file picker to replace hero photo
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.onchange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      // Compress before storing
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const maxW = 800;
+        const scale = Math.min(1, maxW / img.width);
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.80);
+        const state = load();
+        if (!state.dayPhotos) state.dayPhotos = {};
+        state.dayPhotos[dayKey] = dataUrl;
+        save(state);
+        renderDayView(dayKey);
+      };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  };
+  input.click();
+}
+
+function copyText(text, msg) {
+  navigator.clipboard.writeText(text).then(() => {
+    showToast(msg || 'Copied!');
+  }).catch(() => {
+    // Fallback
+    const el = document.createElement('textarea');
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    showToast(msg || 'Copied!');
+  });
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('copiedToast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+function refreshCurrentView() {
+  if (currentNavScreen === 'budget') renderBudget();
+  if (currentNavScreen === 'info') renderInfo();
+  if (currentDayKey && document.getElementById('screen-day').classList.contains('active')) {
+    renderDayView(currentDayKey);
+  }
+  if (currentNavScreen === 'trip') renderDestinations();
+}
+
+// FAB visibility management
+function manageFab() {
+  const fab = document.getElementById('txFab');
+  if (fab) {
+    fab.style.display = document.getElementById('screen-budget').classList.contains('active') ? 'flex' : 'none';
+  }
+}
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  load();
+  renderDestinations();
+
+  // Periodic sync every 30 seconds when app is visible
+  setInterval(() => {
+    if (document.visibilityState === 'visible' && USE_CLOUD) {
+      syncFromCloud();
+    }
+  }, 30000);
+
+  // Manage FAB visibility on screen transitions
+  const observer = new MutationObserver(() => manageFab());
+  document.querySelectorAll('.screen').forEach(s => {
+    observer.observe(s, { attributes: true, attributeFilter: ['class'] });
+  });
+});
+
+// Handle back gesture on iOS
+window.addEventListener('popstate', () => {
+  if (document.getElementById('screen-day').classList.contains('active')) {
+    goBackFromDay();
+  } else if (document.getElementById('screen-daylist').classList.contains('active')) {
+    showDestinations();
+  }
+});
+
+// Close modals on overlay tap
+document.getElementById('txModal').addEventListener('click', function(e) {
+  if (e.target === this) closeTxModal();
+});
+document.getElementById('activityModal').addEventListener('click', function(e) {
+  if (e.target === this) closeActivityModal();
+});
+document.getElementById('ratesModal').addEventListener('click', function(e) {
+  if (e.target === this) closeRatesModal();
+});
+</script>
+</body>
+</html>
