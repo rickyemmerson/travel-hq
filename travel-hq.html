@@ -85,7 +85,8 @@ body{height:100%;font-family:'Inter',sans-serif;background:#0a0a0f;color:#f0f0f5
   backdrop-filter:blur(40px) saturate(180%);
   -webkit-backdrop-filter:blur(40px) saturate(180%);
   border-top:1px solid var(--border);
-  display:flex;align-items:flex-start;padding-top:8px;
+  display:flex;align-items:center;
+  padding-bottom:var(--safe-bottom);
   z-index:500
 }
 .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:4px 0;cursor:pointer;transition:opacity .15s}
@@ -1463,7 +1464,7 @@ function renderDestinations() {
       html += `
         <div style="margin:0 0 4px;padding:9px 14px;border-radius:12px;border:1px dashed rgba(255,255,255,0.15);display:flex;align-items:center;gap:10px;cursor:pointer;transition:background .15s" onclick="showDayViewFromList('${conn.dayKey}')" onmouseover="this.style.background='rgba(255,255,255,0.04)'" onmouseout="this.style.background=''">
           <span style="font-size:15px">${conn.icon}</span>
-          <span style="font-size:13px;font-weight:600;color:rgba(240,240,245,0.55)">${conn.label}</span>
+          <span style="font-size:13px;font-weight:600;color:var(--text-secondary)">${conn.label}</span>
           <svg style="margin-left:auto;stroke:rgba(240,240,245,0.3)" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
         </div>`;
     }
@@ -1995,7 +1996,11 @@ function deleteActivity() {
 function renderBudget() {
   const state = load();
   const txs = state.transactions || [];
-  const TRIP_BUDGET = 29000; // On-trip spending budget (total minus pre-paid)
+
+  // Total budget = sum of all destination budgets (default or user-edited)
+  const TRIP_BUDGET = DESTINATIONS.reduce((sum, dest) => {
+    return sum + ((state.customDestBudgets && state.customDestBudgets[dest.id]) || dest.budget);
+  }, 0);
 
   // Total spent in AUD
   const totalSpent = txs.reduce((s, t) => s + t.aud, 0);
@@ -2316,7 +2321,7 @@ function saveDestBudget() {
   state.customDestBudgets[editingDestId] = val;
   save(state);
   closeDestBudgetModal();
-  renderBudgetScreen();
+  renderBudget();
   showToast('Budget updated');
 }
 
