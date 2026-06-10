@@ -14,7 +14,7 @@
 /* ─── RESET & BASE ─── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{height:100%;font-size:16px}
-body{height:100%;font-family:'Inter',sans-serif;background:#0a0a0f;color:#f0f0f5;overflow:hidden;position:fixed;width:100%;-webkit-font-smoothing:antialiased}
+body{height:100%;font-family:'Inter',sans-serif;background:#0a0a0f;color:#f0f0f5;overflow:hidden;position:fixed;width:100%;-webkit-font-smoothing:antialiased;padding-top:env(safe-area-inset-top,0px)}
 
 /* ─── CSS VARIABLES ─── */
 :root{
@@ -98,10 +98,11 @@ body{height:100%;font-family:'Inter',sans-serif;background:#0a0a0f;color:#f0f0f5
 .nav-svg{stroke:var(--text-muted);transition:stroke .2s}
 
 /* ─── SCREEN HEADER ─── */
-.screen-header{padding:56px 20px 20px;position:sticky;top:0;z-index:10;background:var(--bg)}
+.screen-header{padding:20px 20px 16px;position:sticky;top:0;z-index:10;background:var(--bg)}
 @supports(backdrop-filter:blur(1px)){
-  .screen-header{background:transparent;backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%)}
+  .screen-header{background:rgba(10,10,15,0.86);backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%)}
 }
+@media(prefers-color-scheme:light){.screen-header{background:rgba(242,242,247,0.90)!important}}
 .screen-title{font-size:28px;font-weight:700;letter-spacing:-.5px;color:var(--text-primary)}
 .screen-subtitle{font-size:13px;color:var(--text-secondary);margin-top:3px;font-weight:400}
 
@@ -127,7 +128,8 @@ body{height:100%;font-family:'Inter',sans-serif;background:#0a0a0f;color:#f0f0f5
 .dest-status.traveling{background:rgba(100,130,180,0.15);color:#5b7fa6}
 
 /* ─── DAY LIST (inside destination) ─── */
-.back-btn{display:flex;align-items:center;gap:6px;padding:14px 16px 0;cursor:pointer;color:var(--accent);font-size:14px;font-weight:500}
+.back-btn{display:flex;align-items:center;gap:6px;padding:14px 16px 0;cursor:pointer;color:var(--accent);font-size:14px;font-weight:500;position:sticky;top:0;z-index:21;background:rgba(10,10,15,0.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+@media(prefers-color-scheme:light){.back-btn{background:rgba(242,242,247,0.92)!important}}
 .back-btn svg{stroke:var(--accent)}
 .days-list{padding:0 16px;display:flex;flex-direction:column;gap:8px;margin-top:12px}
 .day-row{
@@ -144,7 +146,7 @@ body{height:100%;font-family:'Inter',sans-serif;background:#0a0a0f;color:#f0f0f5
 .day-today-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
 
 /* ─── DAY VIEW ─── */
-.day-view-header{padding:56px 20px 0}
+.day-view-header{padding:10px 20px 0}
 .day-view-dest{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
 .day-view-title{font-size:26px;font-weight:700;letter-spacing:-.4px;color:var(--text-primary)}
 .day-view-subtitle{font-size:13px;color:var(--text-secondary);margin-top:4px}
@@ -383,9 +385,11 @@ select.form-input{-webkit-appearance:none;background-image:url("data:image/svg+x
 /* CONVERTER */
 .converter-card{margin:0 16px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px}
 .converter-title{font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:12px}
-.converter-row{display:flex;gap:10px;align-items:center}
-.converter-input{flex:1;background:var(--surface-raised);border:1px solid var(--border-bright);border-radius:var(--radius-sm);padding:10px 12px;font-size:16px;font-weight:600;color:var(--text-primary);font-family:inherit;outline:none}
-.converter-result{font-size:18px;font-weight:700;color:var(--accent);min-width:120px;text-align:right}
+.converter-row{display:flex;gap:8px;align-items:center}
+.converter-input{flex:1;min-width:0;background:var(--surface-raised);border:1px solid var(--border-bright);border-radius:var(--radius-sm);padding:10px 12px;font-size:16px;font-weight:600;color:var(--text-primary);font-family:inherit;outline:none}
+.converter-input:focus{border-color:var(--accent)}
+.converter-select{width:78px;flex-shrink:0;background:var(--surface-raised);border:1px solid var(--border-bright);border-radius:var(--radius-sm);padding:10px 10px;font-size:14px;font-weight:600;color:var(--text-primary);font-family:inherit;outline:none;-webkit-appearance:none}
+.converter-result{font-size:17px;font-weight:700;color:var(--accent);flex-shrink:0;white-space:nowrap;padding-left:4px}
 
 /* DEST BUDGET CARDS */
 .dest-budgets{padding:0 16px;margin-bottom:16px}
@@ -708,11 +712,27 @@ select.form-input{-webkit-appearance:none;background-image:url("data:image/svg+x
     <div class="form-row">
       <div class="form-group">
         <label class="form-label">Start Time</label>
-        <input class="form-input" id="actTime" type="time">
+        <select class="form-input" id="actTime" style="-webkit-appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22rgba(200,200,220,0.4)%22 stroke-width=%222%22%3E%3Cpath d=%22M6 9l6 6 6-6%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 10px center">
+          <option value="">No time</option>
+        </select>
       </div>
       <div class="form-group">
-        <label class="form-label">Duration (mins)</label>
-        <input class="form-input" id="actDuration" type="number" inputmode="numeric" placeholder="120">
+        <label class="form-label">Duration</label>
+        <select class="form-input" id="actDuration" style="-webkit-appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22rgba(200,200,220,0.4)%22 stroke-width=%222%22%3E%3Cpath d=%22M6 9l6 6 6-6%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 10px center">
+          <option value="">—</option>
+          <option value="15">15 min</option>
+          <option value="30">30 min</option>
+          <option value="45">45 min</option>
+          <option value="60">1 hour</option>
+          <option value="90">1.5 hours</option>
+          <option value="120">2 hours</option>
+          <option value="150">2.5 hours</option>
+          <option value="180">3 hours</option>
+          <option value="240">4 hours</option>
+          <option value="300">5 hours</option>
+          <option value="360">6 hours</option>
+          <option value="480">8 hours</option>
+        </select>
       </div>
     </div>
     <div class="form-group">
@@ -746,6 +766,24 @@ select.form-input{-webkit-appearance:none;background-image:url("data:image/svg+x
     <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;line-height:1.5">Update rates as you travel. Previous transactions keep their original converted values — only new transactions use the updated rate.</p>
     <div id="ratesFormContent"></div>
     <button class="form-submit" onclick="saveRates()">Save Rates</button>
+  </div>
+</div>
+
+<!-- DEST BUDGET EDIT MODAL -->
+<div class="modal-overlay" id="destBudgetModal">
+  <div class="modal-sheet">
+    <div class="modal-title">
+      <span id="destBudgetModalTitle">Edit Budget</span>
+      <div class="modal-close" onclick="closeDestBudgetModal()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;line-height:1.5">Set on-ground spending target for this destination (AUD). Excludes flights and pre-paid accommodation.</p>
+    <div class="form-group">
+      <label class="form-label">Budget (AU$)</label>
+      <input class="form-input" id="destBudgetInput" type="number" inputmode="decimal" placeholder="0">
+    </div>
+    <button class="form-submit" onclick="saveDestBudget()">Save Budget</button>
   </div>
 </div>
 
@@ -843,7 +881,7 @@ const DESTINATIONS = [
     nights: 7,
     accent: '#5b7fa6',
     photo: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80',
-    budget: 5500,
+    budget: 5330,
     currency: 'GBP',
     weather: { temp: '18°C', desc: 'Mild, bring a jacket', icon: '🌤️' },
     tips: 'Near-cashless city. Oyster cards for the Tube. Tipping ~10% appreciated but not mandatory.',
@@ -857,7 +895,7 @@ const DESTINATIONS = [
     nights: 6,
     accent: '#4a8c7a',
     photo: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
-    budget: 5200,
+    budget: 3121,
     currency: 'CHF',
     weather: { temp: '12°C', desc: 'Alpine cool, layers essential', icon: '🏔️' },
     tips: 'CHF not EUR. Very card friendly. UV intense at altitude — sunscreen essential. Jungfrau Pass covers all mountain transport.',
@@ -871,7 +909,7 @@ const DESTINATIONS = [
     nights: 1,
     accent: '#7a8f6e',
     photo: 'https://images.unsplash.com/photo-1533760881669-80db4d7b341c?w=800&q=80',
-    budget: 500,
+    budget: 272,
     currency: 'EUR',
     weather: { temp: '24°C', desc: 'Warm and pleasant', icon: '🌅' },
     tips: 'Transit stop. Hotel near Como San Giovanni station. Early departure next morning.',
@@ -885,7 +923,7 @@ const DESTINATIONS = [
     nights: 4,
     accent: '#c47a4a',
     photo: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=80',
-    budget: 4200,
+    budget: 1826,
     currency: 'EUR',
     weather: { temp: '26°C', desc: 'Hot, plan around midday heat', icon: '☀️' },
     tips: 'Keep €100–150 cash. Tipping ~10% for good service. Book Vatican First Entry (7am) in advance. Check out Sunday morning for Pompeii day.',
@@ -899,7 +937,7 @@ const DESTINATIONS = [
     nights: 2,
     accent: '#c4954a',
     photo: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=800&q=80',
-    budget: 2000,
+    budget: 1244,
     currency: 'EUR',
     weather: { temp: '25°C', desc: 'Warm Mediterranean', icon: '🌊' },
     tips: 'Stay near Marina Piccola. Caremar car ferry only for Capri — NOT the hydrofoil. Limoncello is from here.',
@@ -913,7 +951,7 @@ const DESTINATIONS = [
     nights: 1,
     accent: '#b85c4a',
     photo: 'https://images.unsplash.com/photo-1555992643-a87b2ce02bca?w=800&q=80',
-    budget: 800,
+    budget: 572,
     currency: 'EUR',
     weather: { temp: '25°C', desc: 'Warm, lively city', icon: '🍕' },
     tips: 'Late arrival from Capri. Have cash ready (€100). Best pizza in the world — Sorbillo or Da Michele. Pre-arrange 7am taxi to airport.',
@@ -927,7 +965,7 @@ const DESTINATIONS = [
     nights: 3,
     accent: '#7a9bb5',
     photo: 'https://images.unsplash.com/photo-1555993539-1732b0258235?w=800&q=80',
-    budget: 2500,
+    budget: 1770,
     currency: 'EUR',
     weather: { temp: '28°C', desc: 'Hot — Acropolis at 8am sharp', icon: '🏛️' },
     tips: '€50–100 cash handy. 10% tipping kind but discretionary. Acropolis opens 8am — go early, it\'s ferociously hot by noon.',
@@ -941,7 +979,7 @@ const DESTINATIONS = [
     nights: 3,
     accent: '#5a9e7a',
     photo: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800&q=80',
-    budget: 3000,
+    budget: 1256,
     currency: 'SGD',
     weather: { temp: '31°C', desc: 'Hot and humid year-round', icon: '🌴' },
     tips: 'Very card friendly. Service charge usually included. MRT is excellent. Arrive very late on first night — late hotel check-in.',
@@ -1400,12 +1438,37 @@ function getTodayKey() {
 function renderDestinations() {
   const today = getTodayKey();
   const container = document.getElementById('trip-destinations');
-  container.innerHTML = DESTINATIONS.map(dest => {
+
+  // Transit connector definitions (day cards that sit between destinations)
+  const TRANSIT_CONNECTORS = {
+    'grindelwald': { dayKey:'2026-09-09', label:'London → Grindelwald', icon:'✈️' },
+    'como':        { dayKey:'2026-09-15', label:'Grindelwald → Lake Como', icon:'🚄' },
+    'rome':        { dayKey:'2026-09-16', label:'Como → Rome', icon:'🚄' },
+    'sorrento':    { dayKey:'2026-09-20', label:'Rome → Pompeii → Sorrento', icon:'🚄' },
+    'naples':      { dayKey:'2026-09-22', label:'Sorrento → Capri → Naples', icon:'⛴️' },
+    'athens':      { dayKey:'2026-09-23', label:'Naples → Athens', icon:'✈️' },
+    'singapore':   { dayKey:'2026-09-26', label:'Athens → Singapore', icon:'✈️' },
+  };
+
+  let html = '';
+  DESTINATIONS.forEach(dest => {
     const isActive = dest.days.includes(today);
     const isPast = dest.days[dest.days.length-1] < today;
     const statusClass = isActive ? 'current' : isPast ? 'completed' : 'upcoming';
     const statusLabel = isActive ? 'You Are Here' : isPast ? 'Completed' : 'Upcoming';
-    return `
+
+    // Add transit connector card before this destination if one exists
+    const conn = TRANSIT_CONNECTORS[dest.id];
+    if (conn) {
+      html += `
+        <div style="margin:0 0 4px;padding:9px 14px;border-radius:12px;border:1px dashed rgba(255,255,255,0.15);display:flex;align-items:center;gap:10px;cursor:pointer;transition:background .15s" onclick="showDayViewFromList('${conn.dayKey}')" onmouseover="this.style.background='rgba(255,255,255,0.04)'" onmouseout="this.style.background=''">
+          <span style="font-size:15px">${conn.icon}</span>
+          <span style="font-size:13px;font-weight:600;color:rgba(240,240,245,0.55)">${conn.label}</span>
+          <svg style="margin-left:auto;stroke:rgba(240,240,245,0.3)" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+        </div>`;
+    }
+
+    html += `
       <div class="dest-card" onclick="showDayList('${dest.id}')">
         <div class="dest-hero" style="background-image:url('${dest.photo}')">
           <div class="dest-hero-content">
@@ -1413,13 +1476,14 @@ function renderDestinations() {
             <div class="dest-dates">${dest.country} · ${dest.dates}</div>
           </div>
         </div>
-        <div class="dest-meta">
+        <div class="dest-meta" style="border-top:2px solid ${dest.accent}">
           <div class="dest-nights">${dest.nights} night${dest.nights!==1?'s':''}</div>
           <div style="font-size:12px;color:var(--text-muted)">${dest.currency}</div>
           <div class="dest-status ${statusClass}">${statusLabel}</div>
         </div>
       </div>`;
-  }).join('');
+  });
+  container.innerHTML = html;
 }
 
 function showDestinations() {
@@ -1472,6 +1536,11 @@ function showDayViewFromList(dayKey) {
   showDayView(dayKey);
 }
 
+function showDayViewFromNav(dayKey) {
+  // Keep same prevDayScreen context when navigating prev/next
+  showDayView(dayKey);
+}
+
 function goBackFromDay() {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   if (prevDayScreen === 'daylist' && currentDest) {
@@ -1521,12 +1590,31 @@ function renderDayView(dayKey) {
   const today = getTodayKey();
   const isToday = dayKey === today;
 
+  // Prev/next day
+  const allDays = Object.keys(DAY_DATA).sort();
+  const idx = allDays.indexOf(dayKey);
+  const prevKey = idx > 0 ? allDays[idx-1] : null;
+  const nextKey = idx < allDays.length-1 ? allDays[idx+1] : null;
+
   let html = `
     <div class="day-view-header">
       <div class="day-view-dest" style="color:${dest?.accent || 'var(--accent)'}">${dest?.name?.toUpperCase() || ''} · DAY ${getDayNumber(dayKey)}</div>
       <div class="day-view-title">${day.title}</div>
       <div class="day-view-subtitle">${day.label}${isToday ? ' · <span style="color:var(--green);font-weight:600">Today</span>' : ''}</div>
     </div>`;
+
+  // Prev/Next nav row
+  html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px 0">
+    <div onclick="${prevKey ? `showDayViewFromNav('${prevKey}')` : ''}" style="display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--accent);padding:6px 12px;border-radius:20px;background:rgba(196,122,74,.10);border:1px solid rgba(196,122,74,.2);cursor:pointer;opacity:${prevKey?1:.3};pointer-events:${prevKey?'auto':'none'}">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+      ${prevKey ? DAY_DATA[prevKey].label.split(' ').slice(0,2).join(' ') : ''}
+    </div>
+    <div style="font-size:11px;font-weight:600;color:var(--text-muted)">Day ${getDayNumber(dayKey)} of 29</div>
+    <div onclick="${nextKey ? `showDayViewFromNav('${nextKey}')` : ''}" style="display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--accent);padding:6px 12px;border-radius:20px;background:rgba(196,122,74,.10);border:1px solid rgba(196,122,74,.2);cursor:pointer;opacity:${nextKey?1:.3};pointer-events:${nextKey?'auto':'none'}">
+      ${nextKey ? DAY_DATA[nextKey].label.split(' ').slice(0,2).join(' ') : ''}
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+    </div>
+  </div>`;
 
   // Hero photo
   const userPhoto = (state.dayPhotos || {})[dayKey];
@@ -1540,16 +1628,18 @@ function renderDayView(dayKey) {
       </div>
     </div>`;
 
-  // Weather widget
+  // Weather widget — tappable to open Weather app
   if (dest?.weather) {
+    const weatherLoc = encodeURIComponent(`${dest.name}, ${dest.country}`);
     html += `
-      <div class="weather-widget">
+      <div class="weather-widget" onclick="window.location.href='weather://current?location=${weatherLoc}'" style="cursor:pointer">
         <div class="weather-icon">${dest.weather.icon}</div>
         <div class="weather-info">
           <div class="weather-temp">${dest.weather.temp}</div>
           <div class="weather-desc">${dest.weather.desc}</div>
           <div class="weather-location">${dest.name}, ${dest.country}</div>
         </div>
+        <div style="font-size:11px;font-weight:600;color:var(--accent);display:flex;align-items:center;gap:3px;flex-shrink:0">Open <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></div>
       </div>`;
   }
 
@@ -1566,7 +1656,6 @@ function renderDayView(dayKey) {
   }
 
   // Journal link
-  const journalUrl = `applemessages://new?body=Journal+entry+for+${encodeURIComponent(day.label)}`;
   html += `
     <div class="journal-link-card" onclick="openJournal('${dayKey}')">
       <div class="journal-icon">📓</div>
@@ -1684,15 +1773,24 @@ function renderTransitCard(act, dayKey) {
 }
 
 function renderFlightCard(act) {
+  const fn = act.flightNum || '';
+  const isEmirates = fn.startsWith('EK');
+  const isSwiss = fn.startsWith('LX');
+  const isEasyJet = fn.startsWith('EJU') || fn.startsWith('U2');
+  const isQantas = fn.startsWith('QF') || fn === 'EK5052';
+  const airlineName = isEmirates ? 'Emirates' : isSwiss ? 'Swiss Air' : isEasyJet ? 'EasyJet' : isQantas ? 'Emirates / Qantas' : 'Flight';
+  const appUrl = isEmirates ? 'emirates://' : isSwiss ? 'swiss://' : isEasyJet ? 'easyjet://' : isQantas ? 'qantas://' : null;
+  const appWebUrl = isEmirates ? 'https://www.emirates.com' : isSwiss ? 'https://www.swiss.com' : isEasyJet ? 'https://www.easyjet.com' : isQantas ? 'https://www.qantas.com' : '';
+  const headerGrad = isEmirates ? 'linear-gradient(135deg,rgba(212,30,45,.13),transparent)' : isSwiss ? 'linear-gradient(135deg,rgba(220,30,40,.10),transparent)' : isEasyJet ? 'linear-gradient(135deg,rgba(255,102,0,.10),transparent)' : isQantas ? 'linear-gradient(135deg,rgba(230,0,30,.10),transparent)' : 'none';
+
   return `
     <div class="flight-card">
-      <div class="flight-header">
+      <div class="flight-header" style="background:${headerGrad}">
         <div style="flex:1">
-          <div class="flight-airline">${act.flightNum?.startsWith('EK') ? 'Emirates' : act.flightNum?.startsWith('LX') ? 'Swiss Air' : act.flightNum?.startsWith('EJU') ? 'EasyJet' : act.flightNum?.startsWith('EK5') ? 'Emirates / Qantas' : 'Flight'}</div>
-          <a class="flight-number" href="${act.webUrl || '#'}" onclick="event.preventDefault();openUrl('${act.webUrl || ''}')" style="text-decoration:none;color:var(--text-primary)">
-            <span style="color:var(--accent)">${act.flightNum || ''}</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </a>
+          <div class="flight-airline">${airlineName}</div>
+          <div class="flight-number">
+            <span style="color:var(--accent)">${fn}</span>
+          </div>
         </div>
         ${act.ref ? `<div class="flight-ref-btn" onclick="copyText('${act.ref}','Booking ref copied')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>${act.ref}</div>` : ''}
       </div>
@@ -1712,11 +1810,14 @@ function renderFlightCard(act) {
           <div class="flight-city-time">${act.toTime || ''}</div>
         </div>
       </div>
-      <div class="flight-footer">
-        <div class="flight-ref-btn" onclick="openUrl('${act.webUrl || ''}')">
+      <div class="flight-footer" style="display:flex;flex-wrap:wrap;gap:6px">
+        <div class="flight-ref-btn" onclick="openUrl('${act.webUrl || 'https://www.flightradar24.com'}')">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           Track on Flightradar24
         </div>
+        ${appUrl ? `<div class="flight-ref-btn" onclick="(function(){var a=document.createElement('a');a.href='${appUrl}';a.click();setTimeout(function(){window.open('${appWebUrl}','_blank')},1500)})()">
+          Open ${airlineName} App
+        </div>` : ''}
       </div>
     </div>`;
 }
@@ -1765,12 +1866,27 @@ function getDefaultThumb(act) {
 // ══════════════════════════════════════════
 // ACTIVITY EDITING
 // ══════════════════════════════════════════
+function buildTimeOptions(selectedVal) {
+  let opts = '<option value="">No time</option>';
+  for (let h = 0; h < 24; h++) {
+    for (let m = 0; m < 60; m += 5) {
+      const hh = String(h).padStart(2,'0'), mm = String(m).padStart(2,'0');
+      const val = `${hh}:${mm}`;
+      const ampm = h >= 12 ? 'pm' : 'am';
+      const h12 = h % 12 || 12;
+      const label = `${h12}:${mm} ${ampm}`;
+      opts += `<option value="${val}"${val === selectedVal ? ' selected' : ''}>${label}</option>`;
+    }
+  }
+  return opts;
+}
+
 function openAddActivity(dayKey) {
   editingActivityId = null;
   editingDayKey = dayKey;
   document.getElementById('actModalTitle').textContent = 'Add Activity';
   document.getElementById('actName').value = '';
-  document.getElementById('actTime').value = '';
+  document.getElementById('actTime').innerHTML = buildTimeOptions('');
   document.getElementById('actDuration').value = '';
   document.getElementById('actNote').value = '';
   document.getElementById('actMapsUrl').value = '';
@@ -1788,7 +1904,7 @@ function editActivity(dayKey, actId) {
   editingDayKey = dayKey;
   document.getElementById('actModalTitle').textContent = 'Edit Activity';
   document.getElementById('actName').value = act.name || '';
-  document.getElementById('actTime').value = act.time || '';
+  document.getElementById('actTime').innerHTML = buildTimeOptions(act.time || '');
   document.getElementById('actDuration').value = act.duration || '';
   document.getElementById('actNote').value = act.note || '';
   document.getElementById('actMapsUrl').value = act.mapsUrl || '';
@@ -1931,7 +2047,7 @@ function renderBudget() {
       <div class="converter-title">Quick Currency Converter</div>
       <div class="converter-row">
         <input class="converter-input" id="convAmount" type="number" inputmode="decimal" placeholder="0.00" oninput="updateConverter()">
-        <select class="form-input" id="convCurrency" style="flex:0;width:90px" onchange="updateConverter()">
+        <select class="converter-select" id="convCurrency" onchange="updateConverter()">
           <option value="GBP">GBP</option>
           <option value="CHF">CHF</option>
           <option value="EUR">EUR</option>
@@ -1962,18 +2078,21 @@ function renderBudget() {
 
   // Destination budgets
   html += `<div class="dest-budgets anim anim-3">
-    <div class="section-label" style="padding:0 0 8px">By Destination</div>`;
+    <div class="section-label" style="padding:0 0 8px">By Destination <span style="font-size:10px;color:var(--text-muted);font-weight:400">(tap to edit budget)</span></div>`;
   DESTINATIONS.forEach(dest => {
     const destTxs = txs.filter(t => dest.days.includes(t.date));
     const destSpent = destTxs.reduce((s,t) => s+t.aud, 0);
-    const destBudget = dest.budget;
+    const destBudget = (state.customDestBudgets && state.customDestBudgets[dest.id]) || dest.budget;
     const destPct = Math.min((destSpent/destBudget)*100, 100);
     const destFill = destPct > 90 ? 'over' : destPct > 70 ? 'warn' : '';
     html += `
-      <div class="dest-budget-card">
+      <div class="dest-budget-card" onclick="openEditDestBudget('${dest.id}','${dest.name}',${destBudget})" style="cursor:pointer">
         <div class="dest-budget-header">
-          <div class="dest-budget-name">${dest.name}</div>
-          <div class="dest-budget-dates">${dest.dates}</div>
+          <div class="dest-budget-name" style="color:${dest.accent}">${dest.name}</div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div class="dest-budget-dates">${dest.dates}</div>
+            <div style="font-size:10px;font-weight:700;color:var(--accent)">Edit</div>
+          </div>
         </div>
         <div class="dest-budget-bar"><div class="dest-budget-fill ${destFill}" style="width:${destPct}%"></div></div>
         <div class="dest-budget-meta">
@@ -2179,6 +2298,46 @@ function openRatesModal() {
 }
 
 function closeRatesModal() { document.getElementById('ratesModal').classList.remove('open'); }
+
+// ── DEST BUDGET EDIT ──
+let editingDestId = null;
+function openEditDestBudget(destId, destName, currentBudget) {
+  editingDestId = destId;
+  document.getElementById('destBudgetModalTitle').textContent = destName + ' Budget';
+  document.getElementById('destBudgetInput').value = currentBudget;
+  document.getElementById('destBudgetModal').classList.add('open');
+}
+function closeDestBudgetModal() { document.getElementById('destBudgetModal').classList.remove('open'); }
+function saveDestBudget() {
+  const val = parseFloat(document.getElementById('destBudgetInput').value);
+  if (!val || val <= 0) return;
+  const state = load();
+  if (!state.customDestBudgets) state.customDestBudgets = {};
+  state.customDestBudgets[editingDestId] = val;
+  save(state);
+  closeDestBudgetModal();
+  renderBudgetScreen();
+  showToast('Budget updated');
+}
+
+// ── SWIPE BETWEEN DAYS ──
+let swipeStartX = 0, swipeStartY = 0;
+document.addEventListener('touchstart', e => {
+  swipeStartX = e.touches[0].clientX;
+  swipeStartY = e.touches[0].clientY;
+}, { passive: true });
+document.addEventListener('touchend', e => {
+  if (!document.getElementById('screen-day').classList.contains('active')) return;
+  if (document.querySelector('.modal-overlay.open')) return;
+  const dx = e.changedTouches[0].clientX - swipeStartX;
+  const dy = Math.abs(e.changedTouches[0].clientY - swipeStartY);
+  if (Math.abs(dx) > 55 && dy < 50) {
+    const allDays = Object.keys(DAY_DATA).sort();
+    const idx = allDays.indexOf(currentDayKey);
+    if (dx < 0 && idx < allDays.length - 1) showDayViewFromNav(allDays[idx + 1]);
+    if (dx > 0 && idx > 0) showDayViewFromNav(allDays[idx - 1]);
+  }
+}, { passive: true });
 
 function saveRates() {
   const state = load();
@@ -2424,6 +2583,9 @@ document.getElementById('activityModal').addEventListener('click', function(e) {
 });
 document.getElementById('ratesModal').addEventListener('click', function(e) {
   if (e.target === this) closeRatesModal();
+});
+document.getElementById('destBudgetModal').addEventListener('click', function(e) {
+  if (e.target === this) closeDestBudgetModal();
 });
 </script>
 </body>
