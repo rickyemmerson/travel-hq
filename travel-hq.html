@@ -27,7 +27,7 @@ body{height:100%;font-family:'Inter',sans-serif;background:#0a0a0f;color:#f0f0f5
   --text-primary:#f0f0f5;
   --text-secondary:rgba(240,240,245,0.60);
   --text-muted:rgba(240,240,245,0.38);
-  --nav-h:68px;
+  --nav-h:50px;
   --safe-bottom:env(safe-area-inset-bottom,0px);
   --accent-london:#5b7fa6;
   --accent-grindelwald:#4a8c7a;
@@ -63,7 +63,6 @@ body{height:100%;font-family:'Inter',sans-serif;background:#0a0a0f;color:#f0f0f5
   body{background:#f2f2f7}
   .bg-scene{display:none}
   .nav-bar{background:rgba(242,242,247,0.88)!important;border-top:1px solid rgba(0,0,0,0.10)!important}
-  .nav-bar::after{background:rgba(242,242,247,0.88)!important}
 }
 
 /* ─── BACKGROUND SCENE ─── */
@@ -80,25 +79,15 @@ body{height:100%;font-family:'Inter',sans-serif;background:#0a0a0f;color:#f0f0f5
 
 /* ─── NAV BAR ─── */
 .nav-bar{
-  position:fixed;
-  bottom:env(safe-area-inset-bottom,0px);
-  left:0;right:0;
-  height:var(--nav-h);
+  position:fixed;bottom:0;left:0;right:0;
+  height:calc(var(--nav-h) + var(--safe-bottom));
   background:rgba(10,10,15,0.92);
   backdrop-filter:blur(40px) saturate(180%);
   -webkit-backdrop-filter:blur(40px) saturate(180%);
   border-top:1px solid var(--border);
-  display:flex;align-items:center;
+  display:flex;align-items:flex-start;padding-top:8px;
+  overflow:hidden;
   z-index:500
-}
-/* Fill the gap between nav bar and very bottom of screen */
-.nav-bar::after{
-  content:'';
-  position:fixed;
-  bottom:0;left:0;right:0;
-  height:env(safe-area-inset-bottom,0px);
-  background:rgba(10,10,15,0.92);
-  z-index:499
 }
 .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:4px 0;cursor:pointer;transition:opacity .15s}
 .nav-item:active{opacity:.6}
