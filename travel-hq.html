@@ -884,7 +884,7 @@ const DESTINATIONS = [
     nights: 7,
     accent: '#5b7fa6',
     photo: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80',
-    budget: 5330,
+    budget: 5980,
     currency: 'GBP',
     weather: { temp: '18°C', desc: 'Mild, bring a jacket', icon: '🌤️' },
     tips: 'Near-cashless city. Oyster cards for the Tube. Tipping ~10% appreciated but not mandatory.',
@@ -997,86 +997,107 @@ const DAY_DATA = {
     warnings: ['Check in Brisbane International by 21:55 Tue 1 Sep', 'Emirates GKK5PW — 30kg checked + 7kg cabin per person'],
     activities: [
       { id:'d01a1', type:'flight', name:'EK431 Brisbane → Dubai', time:'01:55', duration:495, note:'Terminal BNE. 30kg checked bags. Dubai layover 80 min, same terminal.', flightNum:'EK431', from:'BNE', to:'DXB', fromTime:'01:55', toTime:'10:05', ref:'GKK5PW', mapsUrl:'', webUrl:'https://www.flightradar24.com/EK431' },
-      { id:'d01a2', type:'flight', name:'EK031 Dubai → London', time:'11:25', duration:420, note:'Terminal 3. Arrive LHR T3 at 16:10 local time.', flightNum:'EK031', from:'DXB', to:'LHR', fromTime:'11:25', toTime:'16:10', ref:'GKK5PW', mapsUrl:'', webUrl:'https://www.flightradar24.com/EK031' },
-      { id:'d01a3', type:'transit', name:'Heathrow Express to Paddington', time:'16:30', duration:15, note:'~£25/adult, kids cheaper. Or taxi £60–80. Oyster cards at airport.', mapsUrl:'https://maps.apple.com/?daddr=London+Paddington+Station&dirflg=r' },
-      { id:'d01a4', type:'hotel', name:'Check in — Chelsea Cloisters', time:'17:30', duration:30, note:'Sloane Avenue, Chelsea SW3 3DW. Conf: 6355022434 · PIN 6151. Check-in 15:00–midnight.', address:'Sloane Avenue, Chelsea, London SW3 3DW', mapsUrl:'https://maps.apple.com/?daddr=Chelsea+Cloisters+London', webUrl:'https://www.chelseacloisters.co.uk' },
-      { id:'d01a5', type:'food', name:'Easy dinner, early night', time:'19:00', duration:60, note:'Jet lag flying west is significant. Low key is the right call — the girls will be exhausted.' }
+      { id:'d01a2', type:'flight', name:'EK031 Dubai → London', time:'11:25', duration:420, note:'Arrive LHR Terminal 3 at 16:10. Baggage: 30kg checked + 7kg cabin per person.', flightNum:'EK031', from:'DXB', to:'LHR', fromTime:'11:25', toTime:'16:10', ref:'GKK5PW', mapsUrl:'', webUrl:'https://www.flightradar24.com/EK031' },
+      { id:'d01a3', type:'transit', name:'Piccadilly Line → South Kensington', time:'16:40', duration:50, note:'Piccadilly Line direct from Heathrow T2/T3 → South Kensington (~50 min). Walk or short taxi to Chelsea Cloisters. If delayed or exhausted, take a direct taxi/Uber from airport (~£60–80).', mapsUrl:'https://maps.apple.com/?daddr=South+Kensington+Station+London&dirflg=r' },
+      { id:'d01a4', type:'hotel', name:'Check in — Chelsea Cloisters', time:'17:45', duration:30, note:'Sloane Avenue, Chelsea SW3 3DW. Conf: 6355022434 · PIN 6151. Check-in 15:00–midnight.', address:'Sloane Avenue, Chelsea, London SW3 3DW', mapsUrl:'https://maps.apple.com/?daddr=Chelsea+Cloisters+London', webUrl:'https://www.chelseacloisters.co.uk' },
+      { id:'d01a5', type:'activity', name:'Supermarket shop', time:'18:30', duration:45, note:'Breakfast supplies, milk, juice, yoghurt, cereal, fruit, muesli bars, sandwich supplies, snacks for the week. Sainsbury\'s or Tesco nearby on King\'s Road.' },
+      { id:'d01a6', type:'food', name:'Simple local dinner', time:'19:30', duration:60, note:'Sloane Square / South Kensington / King\'s Road area only — nothing further. Back by 9:30pm. Jet lag flying west is significant.', mapsUrl:'https://maps.apple.com/?daddr=Sloane+Square+London', webUrl:'https://maps.google.com/?q=restaurants+sloane+square+london' }
     ]
   },
   '2026-09-03': {
-    label: 'Thu 3 Sep', title: 'Tower of London', destId: 'london',
-    photo: 'https://images.unsplash.com/photo-1486299267070-83823f5448dd?w=800&q=80',
-    warnings: [],
-    activities: [
-      { id:'d02a1', type:'activity', name:'Tower of London + Tower Bridge', time:'09:00', duration:180, note:'Pre-book at hrp.org.uk. One of the best castle complexes in Europe.', mapsUrl:'https://maps.apple.com/?daddr=Tower+of+London', webUrl:'https://www.hrp.org.uk/tower-of-london/' },
-      { id:'d02a2', type:'transit', name:'Walk to Borough Market', time:'12:00', duration:20, note:'~20 min walk south across London Bridge.', mapsUrl:'https://maps.apple.com/?daddr=Borough+Market+London&dirflg=w' },
-      { id:'d02a3', type:'food', name:'Borough Market lunch', time:'12:30', duration:75, note:'One of the world\'s great food markets. Arrive hungry, eat from multiple stalls.', mapsUrl:'https://maps.apple.com/?daddr=Borough+Market+London', webUrl:'https://boroughmarket.org.uk' },
-      { id:'d02a4', type:'transit', name:'Walk South Bank', time:'14:00', duration:20, note:'Tate Modern, Millennium Bridge, Bankside.', mapsUrl:'https://maps.apple.com/?daddr=Tate+Modern+London&dirflg=w' },
-      { id:'d02a5', type:'activity', name:'South Bank — Tate Modern + Millennium Bridge', time:'14:30', duration:120, note:'Tate Modern is free. Millennium Bridge for the St Paul\'s view.', mapsUrl:'https://maps.apple.com/?daddr=Tate+Modern+London', webUrl:'https://www.tate.org.uk/visit/tate-modern' }
-    ]
-  },
-  '2026-09-04': {
-    label: 'Fri 4 Sep', title: 'British Museum + West End', destId: 'london',
-    photo: 'https://images.unsplash.com/photo-1569585723035-0e9e39dfa90b?w=800&q=80',
-    warnings: [],
-    activities: [
-      { id:'d03a1', type:'activity', name:'British Museum', time:'09:00', duration:210, note:'Free entry. Allow a full morning — the Egypt and Rome galleries will captivate both girls.', mapsUrl:'https://maps.apple.com/?daddr=British+Museum+London', webUrl:'https://www.britishmuseum.org' },
-      { id:'d03a2', type:'transit', name:'Walk to Covent Garden', time:'12:30', duration:15, note:'~15 min walk east.', mapsUrl:'https://maps.apple.com/?daddr=Covent+Garden+London&dirflg=w' },
-      { id:'d03a3', type:'food', name:'Covent Garden lunch', time:'13:00', duration:90, note:'Street performers, good restaurants. Lively and fun for the girls.', mapsUrl:'https://maps.apple.com/?daddr=Covent+Garden+London', webUrl:'https://www.coventgarden.london' },
-      { id:'d03a4', type:'activity', name:'West End Show — Evening', time:'19:30', duration:150, note:'Lion King at the Lyceum is spectacular for this age group. Also: Mamma Mia, Les Misérables. Book in advance at venue box office.', mapsUrl:'https://maps.apple.com/?daddr=Lyceum+Theatre+London', webUrl:'https://www.lwtheatres.co.uk/theatres/lyceum/' }
-    ]
-  },
-  '2026-09-05': {
-    label: 'Sat 5 Sep', title: 'Westminster', destId: 'london',
-    photo: 'https://images.unsplash.com/photo-1520986606214-8b456906c813?w=800&q=80',
-    warnings: [],
-    activities: [
-      { id:'d04a1', type:'activity', name:'Buckingham Palace — Changing of the Guard', time:'10:30', duration:60, note:'Free. Check schedule at royal.uk. Arrive 20 min early for a good view.', mapsUrl:'https://maps.apple.com/?daddr=Buckingham+Palace+London', webUrl:'https://www.royal.uk/visit-the-royal-palaces' },
-      { id:'d04a2', type:'transit', name:'Walk to Westminster Abbey', time:'11:30', duration:10, note:'5 min walk.', mapsUrl:'https://maps.apple.com/?daddr=Westminster+Abbey&dirflg=w' },
-      { id:'d04a3', type:'activity', name:'Westminster Abbey', time:'12:00', duration:120, note:'Book at westminster-abbey.org. Gothic masterpiece — coronation church, royal tombs, Poets\' Corner.', mapsUrl:'https://maps.apple.com/?daddr=Westminster+Abbey', webUrl:'https://www.westminster-abbey.org' },
-      { id:'d04a4', type:'food', name:'Lunch near Westminster', time:'14:00', duration:60, note:'Many options around Parliament Square and Embankment.' },
-      { id:'d04a5', type:'activity', name:'London Eye at Dusk', time:'18:30', duration:45, note:'Pre-book for the best views at golden hour. Worth it once.', mapsUrl:'https://maps.apple.com/?daddr=London+Eye', webUrl:'https://www.londoneye.com' }
-    ]
-  },
-  '2026-09-06': {
-    label: 'Sun 6 Sep', title: 'Natural History Museum', destId: 'london',
+    label: 'Thu 3 Sep', title: 'NHM + Harrods + Regent Street + Carnaby', destId: 'london',
     photo: 'https://images.unsplash.com/photo-1579033461380-adb47c3eb938?w=800&q=80',
     warnings: [],
     activities: [
-      { id:'d05a1', type:'activity', name:'Natural History Museum', time:'10:00', duration:210, note:'Free. Blue whale skeleton, dinosaur gallery, earthquake simulator. Both girls will love it. One of the best museums in the world.', mapsUrl:'https://maps.apple.com/?daddr=Natural+History+Museum+London', webUrl:'https://www.nhm.ac.uk' },
-      { id:'d05a2', type:'activity', name:'Hyde Park + Kensington Gardens walk', time:'14:00', duration:120, note:'The Serpentine Gallery (free) and Italian Gardens. Rent bikes or just wander.', mapsUrl:'https://maps.apple.com/?daddr=Hyde+Park+London' },
-      { id:'d05a3', type:'food', name:'Dinner in Notting Hill', time:'19:00', duration:90, note:'Colourful neighbourhood, great restaurants. Portobello Road area.', mapsUrl:'https://maps.apple.com/?daddr=Notting+Hill+London', webUrl:'https://maps.google.com/?q=restaurants+notting+hill+london' }
+      { id:'d02a1', type:'activity', name:'Natural History Museum — targeted 75 min', time:'10:00', duration:75, note:'Free. Targeted visit only — do NOT attempt the whole museum. Hit: Hintze Hall blue whale, Dinosaur gallery, Earth Hall volcanoes, one gallery chosen by the girls. Walk from Chelsea Cloisters (~12 min).', mapsUrl:'https://maps.apple.com/?daddr=Natural+History+Museum+London', webUrl:'https://www.nhm.ac.uk' },
+      { id:'d02a2', type:'transit', name:'Walk to Harrods', time:'11:20', duration:20, note:'~15 min walk through Knightsbridge.', mapsUrl:'https://maps.apple.com/?daddr=Harrods+London&dirflg=w' },
+      { id:'d02a3', type:'activity', name:'Harrods — brief look', time:'11:45', duration:45, note:'Experience, not a shopping trip. Food Halls, exterior, toy/souvenir areas. ~45 min maximum.', mapsUrl:'https://maps.apple.com/?daddr=Harrods+Knightsbridge+London', webUrl:'https://www.harrods.com' },
+      { id:'d02a4', type:'food', name:'Lunch — Knightsbridge / Brompton Road', time:'12:30', duration:45, note:'Quick lunch near Harrods before heading into the West End.', mapsUrl:'https://maps.apple.com/?daddr=Brompton+Road+London', webUrl:'https://maps.google.com/?q=restaurants+knightsbridge+london' },
+      { id:'d02a5', type:'transit', name:'Bus 22 → Oxford Circus (double-decker)', time:'13:30', duration:30, note:'Red double-decker experience. Hop on Bus 22 from Knightsbridge/Sloane Street toward Oxford Circus. Sit upstairs at the front.', mapsUrl:'https://maps.apple.com/?daddr=Oxford+Circus+London&dirflg=r' },
+      { id:'d02a6', type:'activity', name:'Regent Street + Carnaby Street + Liberty London', time:'14:00', duration:90, note:'Regent Street for the big London retail scene. Carnaby Street and Liberty London have much better character — better wandering. Liberty is worth 20 min inside even if not buying.', mapsUrl:'https://maps.apple.com/?daddr=Carnaby+Street+London', webUrl:'https://www.libertylondon.com' },
+      { id:'d02a7', type:'activity', name:'Piccadilly Circus', time:'15:45', duration:45, note:'See it, absorb the energy, don\'t linger. Classic London moment.', mapsUrl:'https://maps.apple.com/?daddr=Piccadilly+Circus+London' },
+      { id:'d02a8', type:'food', name:'Dinner — Soho / Covent Garden / Kingly Court', time:'18:30', duration:90, note:'Japanese, Thai, or casual family restaurant. Kingly Court (off Carnaby) has good choices across multiple levels.', mapsUrl:'https://maps.apple.com/?daddr=Kingly+Court+London', webUrl:'https://maps.google.com/?q=restaurants+soho+london' }
+    ]
+  },
+  '2026-09-04': {
+    label: 'Fri 4 Sep', title: 'Royal London — Guard, Palace, Abbey, Big Ben', destId: 'london',
+    photo: 'https://images.unsplash.com/photo-1520986606214-8b456906c813?w=800&q=80',
+    warnings: ['BIG DAY — Fixed bookings: Palace State Rooms 11:30am, Westminster Abbey ~3:00pm', 'Changing of the Guard — confirm Friday schedule at royal.uk before departure', 'Do NOT fight for front-row palace gates position — Victoria Memorial viewpoint is better'],
+    activities: [
+      { id:'d03a1', type:'transit', name:'Bus 11 → Victoria / Buckingham Palace area', time:'09:00', duration:30, note:'Bus 11 toward Victoria, or taxi. Arrive by 9:45am to position for the Guard.', mapsUrl:'https://maps.apple.com/?daddr=Buckingham+Palace+London&dirflg=r' },
+      { id:'d03a2', type:'activity', name:'Changing of the Guard', time:'10:30', duration:45, note:'Victoria Memorial viewpoint — best angle without the crowds at the palace gates. Watch Wellington Barracks movement. Friday is a Guard-change day. Confirm schedule at royal.uk closer to date.', mapsUrl:'https://maps.apple.com/?daddr=Buckingham+Palace+London', webUrl:'https://www.royal.uk/changing-guard' },
+      { id:'d03a3', type:'activity', name:'Buckingham Palace State Rooms', time:'11:30', duration:120, note:'Pre-booked at rct.uk. Allow 2 hours including entry, rooms, exit through garden, shop/café. ~£32 adult, ~£18 child (2026 est.).', mapsUrl:'https://maps.apple.com/?daddr=Buckingham+Palace+London', webUrl:'https://www.rct.uk/visit/the-state-rooms-buckingham-palace' },
+      { id:'d03a4', type:'food', name:'Lunch — Victoria Street / Whitehall area', time:'13:30', duration:45, note:'Keep it light — afternoon still has Abbey and Westminster sights. Many options near Victoria Street and Buckingham Gate.', mapsUrl:'https://maps.apple.com/?daddr=Victoria+Street+London', webUrl:'https://maps.google.com/?q=restaurants+victoria+london' },
+      { id:'d03a5', type:'activity', name:'Trafalgar Square', time:'14:30', duration:20, note:'Make this deliberate — Nelson\'s Column, fountains, National Gallery exterior. Don\'t just walk through.', mapsUrl:'https://maps.apple.com/?daddr=Trafalgar+Square+London' },
+      { id:'d03a6', type:'activity', name:'Westminster Abbey', time:'15:00', duration:75, note:'Pre-booked at westminster-abbey.org. 75 min minimum. Nave, Coronation Chair, Poets\' Corner, royal memorials. Don\'t rush — this is one of the great Gothic buildings in the world.', mapsUrl:'https://maps.apple.com/?daddr=Westminster+Abbey+London', webUrl:'https://www.westminster-abbey.org' },
+      { id:'d03a7', type:'activity', name:'Big Ben + Parliament Square + K2 Phone Box', time:'16:15', duration:45, note:'Houses of Parliament exterior, Westminster Bridge views, Parliament Square. K2 telephone box on Parliament Street or Great George Street — Nina\'s photo stop.', mapsUrl:'https://maps.apple.com/?daddr=Houses+of+Parliament+London' },
+      { id:'d03a8', type:'food', name:'Dinner — South Bank / Waterloo', time:'18:00', duration:90, note:'Don\'t trek back to Chelsea. The Cut / Lower Marsh (Waterloo), South Bank near Royal Festival Hall, Gabriel\'s Wharf. British pub, Japanese, or casual family restaurant.', mapsUrl:'https://maps.apple.com/?daddr=South+Bank+London', webUrl:'https://maps.google.com/?q=restaurants+south+bank+london' }
+    ]
+  },
+  '2026-09-05': {
+    label: 'Sat 5 Sep', title: 'Tower + Borough Market + Sky Garden + Leadenhall', destId: 'london',
+    photo: 'https://images.unsplash.com/photo-1486299267070-83823f5448dd?w=800&q=80',
+    warnings: ['BIG DAY — Fixed bookings: Tower of London 9:30am, Sky Garden 4:00pm', 'Sky Garden tickets are FREE but must be pre-booked at skygarden.london — slots go fast', 'Sky Garden free tickets release ~3 weeks before (mid-August) — set a calendar reminder'],
+    activities: [
+      { id:'d04a1', type:'transit', name:'Tube → Tower Hill', time:'08:45', duration:30, note:'Circle/District line from South Kensington → Tower Hill. ~30 min.', mapsUrl:'https://maps.apple.com/?daddr=Tower+Hill+Station+London&dirflg=r' },
+      { id:'d04a2', type:'activity', name:'Tower of London', time:'09:30', duration:150, note:'Pre-booked at hrp.org.uk. Priority order: Crown Jewels first (queues build fast) → Yeoman Warder tour (genuinely entertaining) → White Tower → fortress walls and ravens.', mapsUrl:'https://maps.apple.com/?daddr=Tower+of+London', webUrl:'https://www.hrp.org.uk/tower-of-london/' },
+      { id:'d04a3', type:'transit', name:'Walk across Tower Bridge → Borough Market', time:'12:05', duration:25, note:'Walk across Tower Bridge to the south side (exterior crossing only, no Exhibition needed). Continue west along Bankside to Borough Market.', mapsUrl:'https://maps.apple.com/?daddr=Borough+Market+London&dirflg=w' },
+      { id:'d04a4', type:'food', name:'Borough Market lunch', time:'12:45', duration:90, note:'Saturday lunchtime — busy but brilliant. Everyone picks from different stalls. Bring £40–50 cash as backup (some stalls cash-only). Eat slowly.', mapsUrl:'https://maps.apple.com/?daddr=Borough+Market+London', webUrl:'https://boroughmarket.org.uk' },
+      { id:'d04a5', type:'activity', name:'Millennium Bridge + St Paul\'s exterior', time:'14:15', duration:30, note:'Walk west toward Millennium Bridge / Bankside. Cross the bridge — great river view, iconic London moment. St Paul\'s Cathedral exterior.', mapsUrl:'https://maps.apple.com/?daddr=Millennium+Bridge+London', webUrl:'https://www.stpauls.co.uk' },
+      { id:'d04a6', type:'transit', name:'Taxi → Sky Garden', time:'14:50', duration:15, note:'Take a taxi from St Paul\'s (~£8–10) rather than walking. Saves 20 min and meaningful energy at this point in the day.', mapsUrl:'https://maps.apple.com/?daddr=20+Fenchurch+Street+London' },
+      { id:'d04a7', type:'activity', name:'Sky Garden', time:'16:00', duration:60, note:'Free with pre-booked slot at skygarden.london. Rooftop views across London from 20 Fenchurch Street. One of the best free views in the city.', mapsUrl:'https://maps.apple.com/?daddr=Sky+Garden+London', webUrl:'https://skygarden.london' },
+      { id:'d04a8', type:'activity', name:'Leadenhall Market', time:'17:05', duration:30, note:'5 min walk from Sky Garden. Beautiful Victorian iron and glass arcade. On Saturday the market stalls are closed but the building and atmosphere are the point. The Lamb Tavern pub inside is open.', mapsUrl:'https://maps.apple.com/?daddr=Leadenhall+Market+London', webUrl:'https://www.leadenhallmarket.co.uk' },
+      { id:'d04a9', type:'food', name:'Dinner — City / Bank / Monument area', time:'18:00', duration:90, note:'Old City pub feel. The Counting House (Cornhill), The Crosse Keys (Gracechurch St), or The Hung Drawn & Quartered (Tower Hill). Return to Chelsea by Tube or taxi.', mapsUrl:'https://maps.apple.com/?daddr=Bank+Station+London', webUrl:'https://maps.google.com/?q=pub+dinner+bank+london' }
+    ]
+  },
+  '2026-09-06': {
+    label: 'Sun 6 Sep', title: 'HTB Church + Wicked Matinee', destId: 'london',
+    photo: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+    warnings: ['Wicked matinee at 2:30pm — pre-booked at apollovictoriatheatre.co.uk', 'Intentionally light day — not a sightseeing day'],
+    activities: [
+      { id:'d05a1', type:'transit', name:'Walk to HTB Brompton Road', time:'08:50', duration:10, note:'~10 min walk from Chelsea Cloisters. HTB Brompton Road is the nearest Holy Trinity Brompton venue.', mapsUrl:'https://maps.apple.com/?daddr=HTB+Brompton+Road+London&dirflg=w' },
+      { id:'d05a2', type:'activity', name:'HTB Brompton Road — Family Service', time:'09:30', duration:75, note:'9:30am family service preferred — fits cleanly before the matinee. Confirm service times at htb.org closer to date.', mapsUrl:'https://maps.apple.com/?daddr=Holy+Trinity+Brompton+London', webUrl:'https://www.htb.org' },
+      { id:'d05a3', type:'food', name:'Lunch — South Kensington / Knightsbridge', time:'11:00', duration:75, note:'Keep easy and not too slow. ~75 min max — need to be at the theatre by 1:00pm.', mapsUrl:'https://maps.apple.com/?daddr=South+Kensington+London', webUrl:'https://maps.google.com/?q=restaurants+south+kensington+london' },
+      { id:'d05a4', type:'transit', name:'District Line → Victoria Station', time:'12:15', duration:15, note:'South Kensington → Victoria. ~10 min. Apollo Victoria Theatre is right at Victoria station.', mapsUrl:'https://maps.apple.com/?daddr=Apollo+Victoria+Theatre+London&dirflg=r' },
+      { id:'d05a5', type:'activity', name:'Wicked — Apollo Victoria Theatre', time:'14:30', duration:165, note:'Pre-booked at apollovictoriatheatre.co.uk. Arrive by 1:00pm — theatre buffer for coffee, toilets, settling in. Show: 2:30–5:15pm approx.', mapsUrl:'https://maps.apple.com/?daddr=Apollo+Victoria+Theatre+London', webUrl:'https://www.apollovictoriatheatre.co.uk' },
+      { id:'d05a6', type:'food', name:'Dinner — Victoria / Belgravia / Chelsea', time:'17:30', duration:75, note:'Simple post-show dinner. Don\'t force Chinatown — that\'s Monday. British pub, Japanese, pizza. Easy night. Back to apartment by 7:30pm.', mapsUrl:'https://maps.apple.com/?daddr=Sloane+Square+London', webUrl:'https://maps.google.com/?q=restaurants+victoria+london' }
     ]
   },
   '2026-09-07': {
-    label: 'Mon 7 Sep', title: 'Greenwich by Thames Clipper', destId: 'london',
-    photo: 'https://images.unsplash.com/photo-1551524163-b3a8e3b70be9?w=800&q=80',
-    warnings: [],
+    label: 'Mon 7 Sep', title: 'Covent Garden + Churchill War Rooms + Chinatown', destId: 'london',
+    photo: 'https://images.unsplash.com/photo-1569585723035-0e9e39dfa90b?w=800&q=80',
+    warnings: ['Churchill War Rooms: pre-booked at iwm.org.uk — 1:00–1:30pm entry'],
     activities: [
-      { id:'d06a1', type:'transit', name:'Thames Clipper to Greenwich', time:'09:30', duration:50, note:'Depart from Embankment or Waterloo Pier. A fun way to see the city from the river.', mapsUrl:'https://maps.apple.com/?daddr=Greenwich+Pier+London&dirflg=r', webUrl:'https://www.thamesclippers.com' },
-      { id:'d06a2', type:'activity', name:'Cutty Sark', time:'10:30', duration:60, note:'The last surviving Victorian tea clipper ship. Kids love it.', mapsUrl:'https://maps.apple.com/?daddr=Cutty+Sark+Greenwich', webUrl:'https://www.rmg.co.uk/cutty-sark' },
-      { id:'d06a3', type:'activity', name:'Royal Observatory + Meridian Line', time:'12:00', duration:90, note:'Stand on the Prime Meridian — one foot in each hemisphere. Great views over London.', mapsUrl:'https://maps.apple.com/?daddr=Royal+Observatory+Greenwich', webUrl:'https://www.rmg.co.uk/royal-observatory' },
-      { id:'d06a4', type:'food', name:'Lunch in Greenwich', time:'13:30', duration:60, note:'Greenwich Market for street food, or sit-down restaurants nearby.' },
-      { id:'d06a5', type:'transit', name:'Thames Clipper back to central London', time:'15:00', duration:50, note:'Return journey is equally scenic.', mapsUrl:'https://maps.apple.com/?daddr=Embankment+Pier+London&dirflg=r' }
+      { id:'d06a1', type:'activity', name:'Covent Garden + Seven Dials + Neal\'s Yard', time:'10:00', duration:90, note:'Relaxed morning start. Covent Garden Piazza street performers, Seven Dials, Neal\'s Yard. Liberty London if not already properly visited. Carnaby Street overflow.', mapsUrl:'https://maps.apple.com/?daddr=Covent+Garden+London', webUrl:'https://www.coventgarden.london' },
+      { id:'d06a2', type:'food', name:'Lunch — Seven Dials / Soho / Covent Garden', time:'12:00', duration:60, note:'Good options throughout this area. Keep it reasonably quick — Churchill War Rooms at 1:30pm.', mapsUrl:'https://maps.apple.com/?daddr=Seven+Dials+London', webUrl:'https://maps.google.com/?q=restaurants+seven+dials+london' },
+      { id:'d06a3', type:'transit', name:'Tube / taxi → Churchill War Rooms', time:'13:00', duration:20, note:'Short Tube or taxi from Covent Garden to Westminster. Clive Steps, King Charles Street.', mapsUrl:'https://maps.apple.com/?daddr=Churchill+War+Rooms+London&dirflg=r' },
+      { id:'d06a4', type:'activity', name:'Churchill War Rooms', time:'13:30', duration:120, note:'Pre-booked at iwm.org.uk. ~£34 adult, ~£17 child (confirmed April 2026). Allow 2 hours: Cabinet War Rooms, Map Room (left exactly as 1945), Churchill Museum. Underground bunker atmosphere works exceptionally well for kids — one of the best experiences in London.', mapsUrl:'https://maps.apple.com/?daddr=Churchill+War+Rooms+London', webUrl:'https://www.iwm.org.uk/visits/churchill-war-rooms' },
+      { id:'d06a5', type:'activity', name:'Soho wander', time:'15:30', duration:60, note:'Soho streets and Piccadilly if time and energy allow. No fixed agenda — just absorb it.', mapsUrl:'https://maps.apple.com/?daddr=Soho+London' },
+      { id:'d06a6', type:'food', name:'Chinatown dinner', time:'17:30', duration:90, note:'Gerrard Street (classic Chinatown), Lisle Street, Newport Court. Cantonese roast duck, dumplings, noodles. Japanese ramen alternatives in nearby Soho if preferred. Best night for this.', mapsUrl:'https://maps.apple.com/?daddr=Chinatown+London', webUrl:'https://maps.google.com/?q=chinatown+gerrard+street+london' }
     ]
   },
   '2026-09-08': {
-    label: 'Tue 8 Sep', title: 'Last London Day', destId: 'london',
-    photo: 'https://images.unsplash.com/photo-1512895122863-7b5a3f5d7f0c?w=800&q=80',
-    warnings: ['EARLY NIGHT — taxi departs 05:00am tomorrow for LHR', 'Pre-book taxi from Chelsea Cloisters tonight — do not leave to morning'],
+    label: 'Tue 8 Sep', title: 'Thames Boat to Greenwich + Early Final Night', destId: 'london',
+    photo: 'https://images.unsplash.com/photo-1551524163-b3a8e3b70be9?w=800&q=80',
+    warnings: ['EARLY NIGHT — taxi departs 04:45am tomorrow for LHR Terminal 2', 'Pre-book taxi from Chelsea Cloisters tonight — essential, do NOT leave to the morning', 'Final packing tonight — in bed by 9:30pm'],
     activities: [
-      { id:'d07a1', type:'activity', name:'Oxford Street or King\'s Road shopping', time:'10:00', duration:180, note:'Any missed sights, Borough Market revisit, or shopping. Keep it relaxed.', mapsUrl:'https://maps.apple.com/?daddr=Oxford+Street+London' },
-      { id:'d07a2', type:'food', name:'Final London dinner — early', time:'17:30', duration:90, note:'Eat early. Early night is essential. Taxi at 5am tomorrow for LX317.' },
-      { id:'d07a3', type:'activity', name:'Pack + Taxi booking check', time:'20:00', duration:30, note:'Confirm taxi booked for 05:00am. All 3 bags ready. Check in for LX317 online if possible.' }
+      { id:'d07a1', type:'activity', name:'Light packing + apartment breakfast', time:'08:00', duration:60, note:'Breakfast in apartment. Begin light packing for tomorrow\'s 4:45am departure.' },
+      { id:'d07a2', type:'transit', name:'Bus 11 → Westminster Pier', time:'09:30', duration:30, note:'Bus 11 toward Westminster Pier or London Eye Pier.', mapsUrl:'https://maps.apple.com/?daddr=Westminster+Pier+London&dirflg=r' },
+      { id:'d07a3', type:'transit', name:'Thames Clipper → Greenwich', time:'10:00', duration:60, note:'Uber Boat by Thames Clippers eastbound. See London Eye from the river, central bridges, Tower Bridge, Canary Wharf skyline from the water.', mapsUrl:'https://maps.apple.com/?daddr=Greenwich+Pier+London&dirflg=r', webUrl:'https://www.thamesclippers.com' },
+      { id:'d07a4', type:'activity', name:'Cutty Sark + Greenwich Market + village', time:'11:00', duration:150, note:'Cutty Sark exterior (striking sight, free from outside). Greenwich Market for casual lunch from stalls. Greenwich village streets. Optional: walk up to Royal Observatory viewpoint in Greenwich Park for the London skyline (free — paid Meridian courtyard is optional).', mapsUrl:'https://maps.apple.com/?daddr=Cutty+Sark+DLR+Station+London', webUrl:'https://www.rmg.co.uk/cutty-sark' },
+      { id:'d07a5', type:'transit', name:'DLR / Thames Clipper back to Chelsea', time:'13:30', duration:60, note:'DLR from Cutty Sark → Bank is faster than the return boat if wanting speed. Then Tube or taxi to Chelsea Cloisters.', mapsUrl:'https://maps.apple.com/?daddr=Chelsea+Cloisters+London&dirflg=r' },
+      { id:'d07a6', type:'activity', name:'Final packing + rest', time:'15:00', duration:120, note:'Chelsea Cloisters. Proper final packing, recheck all bags. Rest. 3 bags ready by the door.' },
+      { id:'d07a7', type:'food', name:'Early local dinner — final London meal', time:'17:30', duration:60, note:'South Kensington / Sloane Square / King\'s Road only. British pub, Japanese, Thai, simple family restaurant. Done and back by 7:30pm.', mapsUrl:'https://maps.apple.com/?daddr=Sloane+Square+London', webUrl:'https://maps.google.com/?q=restaurants+sloane+square+london' },
+      { id:'d07a8', type:'activity', name:'Book taxi + final checks', time:'20:00', duration:30, note:'Confirm taxi booked for 04:45am to Heathrow Terminal 2 (Swiss Air — NOT Terminal 3). Swiss Air check-in closes 2 hrs before 08:40 departure. All 3 bags at door. In bed by 9:30pm.' }
     ]
   },
   '2026-09-09': {
     label: 'Wed 9 Sep', title: 'London → Grindelwald', destId: 'grindelwald',
     photo: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
-    warnings: ['Taxi departs 05:00am — do not be late', 'Must be at LHR by 06:30am (Swiss Air closes check-in 2 hrs before)', 'KEY COLLECTION: GRIWA RENT AG, Dorfstrasse 118, Grindelwald — open 2pm–5pm ONLY'],
+    warnings: ['Taxi departs 04:45am SHARP — do not be late', 'LHR TERMINAL 2 for Swiss Air — NOT Terminal 3', 'Must be at LHR T2 by 06:30am (Swiss Air closes check-in 2 hrs before 08:40)', 'KEY COLLECTION: GRIWA RENT AG, Dorfstrasse 118, Grindelwald — open 2pm–5pm ONLY'],
     activities: [
-      { id:'d08a1', type:'transit', name:'Taxi — Chelsea Cloisters to LHR', time:'05:00', duration:45, note:'Pre-booked. Leave by 05:00–05:15am. Must arrive LHR by 06:30am.', mapsUrl:'https://maps.apple.com/?daddr=London+Heathrow+Airport' },
-      { id:'d08a2', type:'flight', name:'LX317 London → Zurich', time:'08:40', duration:120, note:'Swiss Air. Check-in closes 2 hrs before — be at airport by 06:30. 3 × 23kg bags.', flightNum:'LX317', from:'LHR', to:'ZRH', fromTime:'08:40', toTime:'11:45', ref:'AU$669.52', mapsUrl:'', webUrl:'https://www.flightradar24.com/LX317' },
+      { id:'d08a1', type:'transit', name:'Pre-booked taxi → LHR Terminal 2', time:'04:45', duration:50, note:'Leave Chelsea Cloisters 04:45–05:00am. Must arrive LHR Terminal 2 by 06:30am. Swiss Air — Terminal 2, NOT Terminal 3.', mapsUrl:'https://maps.apple.com/?daddr=Heathrow+Terminal+2+London' },
+      { id:'d08a2', type:'flight', name:'LX317 London → Zurich', time:'08:40', duration:120, note:'Swiss Air LX317. Terminal 2. Check-in closes 2 hrs before — be at airport by 06:30. 3 × 23kg bags.', flightNum:'LX317', from:'LHR', to:'ZRH', fromTime:'08:40', toTime:'11:45', ref:'AU$669.52', mapsUrl:'', webUrl:'https://www.flightradar24.com/LX317' },
       { id:'d08a3', type:'transit', name:'ZRH Airport → Grindelwald by train', time:'12:30', duration:195, note:'Zurich Flughafen → Bern → Interlaken Ost → Grindelwald. ~3 hrs. Saver Day Pass covers all adults + kids.', mapsUrl:'https://maps.apple.com/?daddr=Grindelwald+Switzerland&dirflg=r', webUrl:'https://www.sbb.ch' },
       { id:'d08a4', type:'hotel', name:'Key Collection — GRIWA RENT AG', time:'14:00', duration:30, note:'Dorfstrasse 118, CH-3818 Grindelwald. OPEN 2:00pm–5:00pm ONLY. Do NOT go to apartment first. Get here before 5pm.', address:'Dorfstrasse 118, 3818 Grindelwald, Switzerland', mapsUrl:'https://maps.apple.com/?daddr=Dorfstrasse+118+Grindelwald+Switzerland', webUrl:'https://www.griwarent.ch' },
       { id:'d08a5', type:'hotel', name:'Apartment Schönegg — Check In', time:'14:30', duration:30, note:'Obere Gletscherstrasse 85, 3818 Grindelwald. Res. 479895. PAID IN FULL. The Eiger fills the end of the valley.', address:'Obere Gletscherstrasse 85, 3818 Grindelwald', mapsUrl:'https://maps.apple.com/?daddr=Obere+Gletscherstrasse+85+Grindelwald' },
