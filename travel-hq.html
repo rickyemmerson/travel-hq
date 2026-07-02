@@ -912,10 +912,10 @@ const DESTINATIONS = [
     nights: 1,
     accent: '#7a8f6e',
     photo: 'https://images.unsplash.com/photo-1533760881669-80db4d7b341c?w=800&q=80',
-    budget: 272,
+    budget: 347,
     currency: 'EUR',
     weather: { temp: '24°C', desc: 'Warm and pleasant', icon: '🌅' },
-    tips: 'Transit stop. Hotel near Como San Giovanni station. Early departure next morning.',
+    tips: 'BOOKED: La Vecia Curt, Via Vitani 22 — 9 min walk from station, self check-in via OTP code emailed on arrival day. €197.98 auto-charges to card 6 Sep; ~€12 city tax paid on arrival. Free cancellation until 7 Sep.',
     days: ['2026-09-15']
   },
   {
@@ -926,7 +926,7 @@ const DESTINATIONS = [
     nights: 4,
     accent: '#c47a4a',
     photo: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=80',
-    budget: 1826,
+    budget: 2360,
     currency: 'EUR',
     weather: { temp: '26°C', desc: 'Hot, plan around midday heat', icon: '☀️' },
     tips: 'Keep €100–150 cash. Tipping ~10% for good service. Book Vatican First Entry (7am) in advance. Check out Sunday morning for Pompeii day.',
@@ -957,7 +957,7 @@ const DESTINATIONS = [
     budget: 572,
     currency: 'EUR',
     weather: { temp: '25°C', desc: 'Warm, lively city', icon: '🍕' },
-    tips: 'Arriving from Salerno by train — relaxed afternoon arrival. Optional Pompeii stop en route (bags stored at Pompei Scavi station). Best pizza in the world — Sorbillo or Da Michele. Pre-arrange 7am taxi to airport.',
+    tips: 'BOOKED: Napoli DownTown, Via Agostino Depretis 102 (Port of Naples). ~AU$252 incl. city tax — no prepayment, pay at property (~€152.45). Free breakfast included (Genius rate). Free cancellation until 7 Sep. Pre-arrange 7am taxi to airport on check-in.',
     days: ['2026-09-22']
   },
   {
@@ -971,7 +971,7 @@ const DESTINATIONS = [
     budget: 1770,
     currency: 'EUR',
     weather: { temp: '28°C', desc: 'Hot — Acropolis at 8am sharp', icon: '🏛️' },
-    tips: '€50–100 cash handy. 10% tipping kind but discretionary. Acropolis opens 8am — go early, it\'s ferociously hot by noon.',
+    tips: 'BOOKED: Acropolis Classy Apartments, Makrigianni 3 — AU$1,097 total incl. taxes. Two-Bedroom apt with balcony, Genius rate. Keys in on-site lockbox (keypad code). Free cancellation until 8 Sep. Acropolis opens 8am — go early, ferociously hot by noon.',
     days: ['2026-09-23','2026-09-24','2026-09-25','2026-09-26']
   },
   {
@@ -1022,16 +1022,16 @@ const DAY_DATA = {
   '2026-09-04': {
     label: 'Fri 4 Sep', title: 'Royal London — Guard, Palace, Abbey, Big Ben', destId: 'london',
     photo: 'https://images.unsplash.com/photo-1520986606214-8b456906c813?w=800&q=80',
-    warnings: ['BIG DAY — Fixed bookings: Palace State Rooms 11:30am, Westminster Abbey ~3:00pm', 'Changing of the Guard — confirm Friday schedule at royal.uk before departure', 'Do NOT fight for front-row palace gates position — Victoria Memorial viewpoint is better'],
+    warnings: ['BIG DAY — Fixed bookings: Palace State Rooms 11:45am (PAID), Westminster Abbey Evensong 5:00pm (free)', 'Leave the Guard march by 11:15am sharp so Palace entry isn\'t rushed', 'Westminster Abbey Evensong is FREE — confirm service running closer to date'],
     activities: [
       { id:'d03a1', type:'transit', name:'Bus 11 → Victoria / Buckingham Palace area', time:'09:00', duration:30, note:'Bus 11 toward Victoria, or taxi. Arrive by 9:45am to position for the Guard.', mapsUrl:'https://maps.apple.com/?daddr=Buckingham+Palace+London&dirflg=r' },
       { id:'d03a2', type:'activity', name:'Changing of the Guard', time:'10:30', duration:45, note:'Victoria Memorial viewpoint — best angle without the crowds at the palace gates. Watch Wellington Barracks movement. Friday is a Guard-change day. Confirm schedule at royal.uk closer to date.', mapsUrl:'https://maps.apple.com/?daddr=Buckingham+Palace+London', webUrl:'https://www.royal.uk/changing-guard' },
-      { id:'d03a3', type:'activity', name:'Buckingham Palace State Rooms', time:'11:30', duration:120, note:'Pre-booked at rct.uk. Allow 2 hours including entry, rooms, exit through garden, shop/café. ~£32 adult, ~£18 child (2026 est.).', mapsUrl:'https://maps.apple.com/?daddr=Buckingham+Palace+London', webUrl:'https://www.rct.uk/visit/the-state-rooms-buckingham-palace' },
+      { id:'d03a3', type:'activity', name:'Buckingham Palace State Rooms — 11:45am', time:'11:45', duration:120, note:'BOOKED + PAID — AU$190.84 (rct.uk). Allow full 2 hours: entry/security, State Rooms route, audio guide, garden exit, shop/café buffer. Arrive at entrance 11:30am to clear security comfortably.', mapsUrl:'https://maps.apple.com/?daddr=Buckingham+Palace+London', webUrl:'https://www.rct.uk/visit/the-state-rooms-buckingham-palace' },
       { id:'d03a4', type:'food', name:'Lunch — Victoria Street / Whitehall area', time:'13:30', duration:45, note:'Keep it light — afternoon still has Abbey and Westminster sights. Many options near Victoria Street and Buckingham Gate.', mapsUrl:'https://maps.apple.com/?daddr=Victoria+Street+London', webUrl:'https://maps.google.com/?q=restaurants+victoria+london' },
-      { id:'d03a5', type:'activity', name:'Trafalgar Square', time:'14:30', duration:20, note:'Make this deliberate — Nelson\'s Column, fountains, National Gallery exterior. Don\'t just walk through.', mapsUrl:'https://maps.apple.com/?daddr=Trafalgar+Square+London' },
-      { id:'d03a6', type:'activity', name:'Westminster Abbey', time:'15:00', duration:75, note:'Pre-booked at westminster-abbey.org. 75 min minimum. Nave, Coronation Chair, Poets\' Corner, royal memorials. Don\'t rush — this is one of the great Gothic buildings in the world.', mapsUrl:'https://maps.apple.com/?daddr=Westminster+Abbey+London', webUrl:'https://www.westminster-abbey.org' },
-      { id:'d03a7', type:'activity', name:'Big Ben + Parliament Square + K2 Phone Box', time:'16:15', duration:45, note:'Houses of Parliament exterior, Westminster Bridge views, Parliament Square. K2 telephone box on Parliament Street or Great George Street — Nina\'s photo stop.', mapsUrl:'https://maps.apple.com/?daddr=Houses+of+Parliament+London' },
-      { id:'d03a8', type:'food', name:'Dinner — South Bank / Waterloo', time:'18:00', duration:90, note:'Don\'t trek back to Chelsea. The Cut / Lower Marsh (Waterloo), South Bank near Royal Festival Hall, Gabriel\'s Wharf. British pub, Japanese, or casual family restaurant.', mapsUrl:'https://maps.apple.com/?daddr=South+Bank+London', webUrl:'https://maps.google.com/?q=restaurants+south+bank+london' }
+      { id:'d03a5', type:'activity', name:'Trafalgar Square', time:'14:00', duration:25, note:'Make this deliberate — Nelson\'s Column, fountains, National Gallery exterior. Don\'t just walk through.', mapsUrl:'https://maps.apple.com/?daddr=Trafalgar+Square+London' },
+      { id:'d03a6', type:'activity', name:'Big Ben + Parliament Square + K2 Phone Box', time:'14:30', duration:45, note:'Houses of Parliament exterior, Westminster Bridge views. K2 telephone box on Parliament Street or Great George Street — great photo stop.', mapsUrl:'https://maps.apple.com/?daddr=Houses+of+Parliament+London' },
+      { id:'d03a7', type:'activity', name:'Westminster Abbey — Evensong (5:00pm, FREE)', time:'16:15', duration:90, note:'Arrive 4:15–4:30pm to queue and clear security. Evensong service is FREE — a way to experience the Abbey as a living church, not a tourist site. ~45 min service. Note: this is not a tourist walkthrough — you won\'t see Poets\' Corner or the Coronation Chair, but the atmosphere is extraordinary. Confirm service is running closer to date at westminster-abbey.org.', mapsUrl:'https://maps.apple.com/?daddr=Westminster+Abbey+London', webUrl:'https://www.westminster-abbey.org/abbey-music/evensong' },
+      { id:'d03a8', type:'food', name:'Dinner — South Bank / Waterloo', time:'18:00', duration:90, note:'Stay this side of the river. Lower Marsh, South Bank near Royal Festival Hall, Gabriel\'s Wharf. British pub, Japanese, or casual family restaurant. Return to Chelsea by 8pm.', mapsUrl:'https://maps.apple.com/?daddr=South+Bank+London', webUrl:'https://maps.google.com/?q=restaurants+south+bank+london' }
     ]
   },
   '2026-09-05': {
@@ -1174,7 +1174,7 @@ const DAY_DATA = {
     activities: [
       { id:'d14a1', type:'hotel', name:'Check out — Apartment Schönegg', time:'09:00', duration:30, note:'Leave keys at GRIWA RENT AG or as instructed at check-in. Morning checkout.', mapsUrl:'https://maps.apple.com/?daddr=Dorfstrasse+118+Grindelwald' },
       { id:'d14a2', type:'transit', name:'Train: Grindelwald → Como San Giovanni', time:'09:30', duration:360, note:'Route: Grindelwald → Interlaken Ost → Bern → Lucerne → Bellinzona → Lugano → Chiasso → Como San Giovanni. Saver Day Pass covers all Swiss portions. Buy local ticket ~AU$4 at Chiasso for Como leg.', mapsUrl:'https://maps.apple.com/?daddr=Como+San+Giovanni+Station&dirflg=r', webUrl:'https://www.sbb.ch' },
-      { id:'d14a3', type:'hotel', name:'Check in — Como hotel', time:'15:30', duration:30, note:'Hotel near Como San Giovanni station. Walk from station.', mapsUrl:'https://maps.apple.com/?daddr=Como+San+Giovanni+Station' },
+      { id:'d14a3', type:'hotel', name:'Check in — La Vecia Curt', time:'15:30', duration:30, note:'Via Vitani 22 — 9-min walk from Como San Giovanni station. Self check-in via OTP code emailed on arrival day (need mobile data on arrival). €197.98 auto-charges to card 6 Sep; ~€12 city tax paid on arrival. Free cancellation until 7 Sep.', address:'Via Vitani 22, Como, Italy', mapsUrl:'https://maps.apple.com/?daddr=Via+Vitani+22+Como+Italy' },
       { id:'d14a4', type:'activity', name:'Lakefront walk + gelato', time:'16:30', duration:75, note:'10-min walk to the lakefront. An hour along the promenade. Como is beautiful but this is a transit stop — absorb what you can.', mapsUrl:'https://maps.apple.com/?daddr=Como+Lakefront+Italy' },
       { id:'d14a5', type:'food', name:'Dinner in Como', time:'19:30', duration:90, note:'Simple lakeside dinner. First evening in Italy. Relax.', mapsUrl:'https://maps.apple.com/?daddr=Como+Italy' }
     ]
@@ -1184,24 +1184,24 @@ const DAY_DATA = {
     photo: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=80',
     warnings: ['Check out by 9:00am — train to catch'],
     activities: [
-      { id:'d15a1', type:'hotel', name:'Check out — Como hotel', time:'08:45', duration:15, note:'Early checkout. Walk to Como San Giovanni station.', mapsUrl:'https://maps.apple.com/?daddr=Como+San+Giovanni+Station' },
+      { id:'d15a1', type:'hotel', name:'Check out — La Vecia Curt', time:'08:45', duration:15, note:'Via Vitani 22. Early checkout — walk to Como San Giovanni station (~9 min).', mapsUrl:'https://maps.apple.com/?daddr=Como+San+Giovanni+Station' },
       { id:'d15a2', type:'transit', name:'Train: Como → Milan Centrale', time:'09:15', duration:40, note:'~40 min regional train. ~€5 per person.', mapsUrl:'https://maps.apple.com/?daddr=Milano+Centrale+Station&dirflg=r', webUrl:'https://www.trenitalia.com' },
       { id:'d15a3', type:'transit', name:'Frecciarossa: Milan → Roma Termini', time:'10:30', duration:180, note:'High-speed Frecciarossa. ~2.5–3 hrs. Book at trenitalia.com — prices rise fast. Family ~AU$200.', mapsUrl:'https://maps.apple.com/?daddr=Roma+Termini&dirflg=r', webUrl:'https://www.trenitalia.com' },
-      { id:'d15a4', type:'hotel', name:'Check in — Rome hotel', time:'15:30', duration:30, note:'Centro Storico or Trastevere. Walking distance to Vatican and Colosseum. Check-in from ~3pm.', mapsUrl:'https://maps.apple.com/?daddr=Rome+Italy' },
+      { id:'d15a4', type:'hotel', name:'Check in — Navona Loft apartment', time:'15:30', duration:30, note:'Via dell\'Orso 80, Rome. Res. #31402392 (RentalIn Rome). €850 total — €290 deposit PAID, €560 balance + €150 damage deposit due on arrival (check payment instructions with host). Check-in from ~3pm.', address:'Via dell\'Orso 80, Rome, Italy', mapsUrl:'https://maps.apple.com/?daddr=Via+dell+Orso+80+Rome+Italy' },
       { id:'d15a5', type:'activity', name:'Trastevere evening walk', time:'17:30', duration:90, note:'Cobblestone lanes, ivy-covered buildings, the most atmospheric neighbourhood in Rome.', mapsUrl:'https://maps.apple.com/?daddr=Trastevere+Rome' },
       { id:'d15a6', type:'food', name:'First Rome dinner — Trastevere', time:'19:30', duration:105, note:'Cacio e pepe, carbonara, coda alla vaccinara. Order the classics here. This is what you\'ve been building toward.', mapsUrl:'https://maps.apple.com/?daddr=Trastevere+Rome', webUrl:'https://maps.google.com/?q=best+restaurants+trastevere+rome' }
     ]
   },
   '2026-09-17': {
-    label: 'Thu 17 Sep', title: 'Vatican Full Day', destId: 'rome',
+    label: 'Thu 17 Sep', title: 'Vatican — St Peter\'s Morning + Museums 4pm', destId: 'rome',
     photo: 'https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=800&q=80',
-    warnings: ['Vatican First Entry 7am — must have pre-booked timed ticket', 'Without a ticket queues are 2–3 hours even in September'],
+    warnings: ['Vatican Museums: 4:00pm entry BOOKED — AU$131.03 PAID', 'Move with purpose inside — ~2 hrs before closing at 6pm', 'St Peter\'s Basilica is free and separate — do this in the morning'],
     activities: [
-      { id:'d16a1', type:'transit', name:'Walk or taxi to Vatican', time:'06:45', duration:20, note:'Aim to be at the entrance by 7:00am. First Entry is 7am.', mapsUrl:'https://maps.apple.com/?daddr=Vatican+Museums+Rome&dirflg=w' },
-      { id:'d16a2', type:'activity', name:'Vatican Museums + Sistine Chapel', time:'07:00', duration:180, note:'First Entry at 7am. Pre-booked at museivaticani.va. The Sistine Chapel ceiling — stand still, look up, give it 10 minutes. Worth every euro.', mapsUrl:'https://maps.apple.com/?daddr=Vatican+Museums+Rome', webUrl:'https://www.museivaticani.va' },
-      { id:'d16a3', type:'activity', name:'St Peter\'s Basilica + Square', time:'10:30', duration:90, note:'Free entry to the basilica. Michelangelo\'s Pietà, the dome, the scale. Queue for the dome climb is worth it (separate ticket). Piazza is breathtaking.', mapsUrl:'https://maps.apple.com/?daddr=St+Peters+Basilica+Rome', webUrl:'https://www.vatican.va' },
-      { id:'d16a4', type:'food', name:'Lunch near Vatican', time:'12:30', duration:75, note:'Many options in Prati neighbourhood (north of Vatican). Better quality and fewer tourist traps than immediately outside.' },
-      { id:'d16a5', type:'activity', name:'Castel Sant\'Angelo', time:'14:30', duration:90, note:'Former mausoleum turned fortress, connected to Vatican by a secret passage. Stunning views from the top. ~€15/adult.', mapsUrl:'https://maps.apple.com/?daddr=Castel+Sant\'Angelo+Rome', webUrl:'https://www.castelsantangelo.beniculturali.it' }
+      { id:'d16a1', type:'transit', name:'Walk to St Peter\'s Square', time:'08:30', duration:20, note:'Free entry to St Peter\'s Basilica — no ticket needed. Arrive ~8:30–9:00am when it opens and before the crowds build.', mapsUrl:'https://maps.apple.com/?daddr=St+Peters+Basilica+Rome&dirflg=w' },
+      { id:'d16a2', type:'activity', name:'St Peter\'s Basilica + Square', time:'09:00', duration:105, note:'Free entry. Michelangelo\'s Pietà, the dome (separate ticket to climb), the baldachin, the crypt of popes. The scale of the basilica is staggering. St Peter\'s Square is extraordinary from the colonnades. Allow 1.5–2 hours.', mapsUrl:'https://maps.apple.com/?daddr=St+Peters+Basilica+Rome', webUrl:'https://www.vatican.va' },
+      { id:'d16a3', type:'food', name:'Lunch — Prati neighbourhood', time:'11:30', duration:75, note:'Prati (north of Vatican) is the local neighbourhood — better quality and far fewer tourist traps than streets immediately outside Vatican City. Good cafés, restaurants, bakeries.', mapsUrl:'https://maps.apple.com/?daddr=Prati+Rome', webUrl:'https://maps.google.com/?q=restaurants+prati+rome' },
+      { id:'d16a4', type:'activity', name:'Castel Sant\'Angelo', time:'13:30', duration:90, note:'Former mausoleum turned fortress, linked to Vatican by the Passetto di Borgo (secret passage). Stunning views over Rome from the top. ~€15/adult. Fill the gap before the 4pm Museums entry.', mapsUrl:'https://maps.apple.com/?daddr=Castel+Sant+Angelo+Rome', webUrl:'https://www.castelsantangelo.beniculturali.it' },
+      { id:'d16a5', type:'activity', name:'Vatican Museums + Sistine Chapel — 4pm entry', time:'16:00', duration:120, note:'4:00pm entry BOOKED and PAID (AU$131.03). Last-entry slot — Museums close at 6pm, giving roughly 2 hours. Move with purpose: prioritise Sistine Chapel + Raphael Rooms + Gallery of Maps. Crowds at last entry are far thinner than morning. Sistine ceiling: stand still, look up, give it 10 minutes.', mapsUrl:'https://maps.apple.com/?daddr=Vatican+Museums+Rome', webUrl:'https://www.museivaticani.va' }
     ]
   },
   '2026-09-18': {
@@ -1252,7 +1252,7 @@ const DAY_DATA = {
       { id:'d20a2', type:'ferry', name:'Travelmar Ferry: Salerno → Maiori', time:'09:00', duration:35, note:'Book ahead at travelmar.it — ~30–40 min. The ferry view of the Amalfi coastline is spectacular. Family ~AU$150 return estimated.', mapsUrl:'https://maps.apple.com/?daddr=Maiori+Italy', webUrl:'https://www.travelmar.it' },
       { id:'d20a3', type:'activity', name:'Maiori — beach and town explore', time:'09:45', duration:60, note:'Maiori has the largest beach on the Amalfi Coast. Quieter and more relaxed than Amalfi or Positano. Good gelato, pleasant waterfront.', mapsUrl:'https://maps.apple.com/?daddr=Maiori+Amalfi+Coast+Italy' },
       { id:'d20a4', type:'activity', name:'Sentiero dei Limoni — Maiori to Minori', time:'11:00', duration:60, note:'The Path of the Lemons — a gentle 45-min walk between Maiori and Minori through lemon groves and terraced hillsides above the sea. Well-signposted, manageable for both girls. One of the most beautiful short walks on the Amalfi Coast.', mapsUrl:'https://maps.apple.com/?daddr=Minori+Italy', webUrl:'https://maps.google.com/?q=sentiero+dei+limoni+maiori+minori' },
-      { id:'d20a5', type:'food', name:'Lunch in Minori', time:'12:15', duration:90, note:'Minori is famous for its pastry — try the sfogliatella and ricotta-based sweets. Good seafood and pasta restaurants on the waterfront.', mapsUrl:'https://maps.apple.com/?daddr=Minori+Italy', webUrl:'https://maps.google.com/?q=restaurants+minori+amalfi+coast' },
+      { id:'d20a5', type:'food', name:'Lunch in Minori + Villa Romana', time:'12:15', duration:90, note:'Minori is famous for pastry — try a delizia al limone (lemon cream sponge) from a local pasticceria. Good seafood and pasta on the seafront. After lunch: Villa Romana (free entry) — a well-preserved ancient Roman villa with mosaic floors, right in the town centre. Worth 20 min.', mapsUrl:'https://maps.apple.com/?daddr=Minori+Italy', webUrl:'https://maps.google.com/?q=restaurants+minori+amalfi+coast' },
       { id:'d20a6', type:'activity', name:'Amalfi town (optional extension)', time:'14:00', duration:90, note:'If time and energy allow, take the ferry or bus on to Amalfi town (~15 min). Duomo di Sant\'Andrea, ceramics, limoncello lanes. Optional — not essential if the walk was enough.', mapsUrl:'https://maps.apple.com/?daddr=Amalfi+Cathedral+Italy', webUrl:'https://maps.google.com/?q=amalfi+town+italy' },
       { id:'d20a7', type:'ferry', name:'Travelmar Ferry: return to Salerno', time:'15:30', duration:35, note:'Return ferry to Salerno. Afternoon light on the coastline.', mapsUrl:'https://maps.apple.com/?daddr=Porto+di+Salerno', webUrl:'https://www.travelmar.it' },
       { id:'d20a8', type:'food', name:'Relaxed dinner in Salerno', time:'19:00', duration:90, note:'Easy evening. Good night\'s sleep — tomorrow is the Naples travel day.', mapsUrl:'https://maps.apple.com/?daddr=Salerno+Italy' }
@@ -1268,7 +1268,7 @@ const DAY_DATA = {
       { id:'d21a3', type:'activity', name:'Pompeii (optional — weather + energy dependent)', time:'11:30', duration:180, note:'If stopping: deposito bagagli at Pompei Scavi station, or Radical Storage / Bounce literally at the entrance (~€5/bag). 2–3 hrs at the site. Forum, House of the Vettii, plaster casts. One of the most moving ancient sites in the world. Skip if tired — Naples itself is worth the afternoon.', mapsUrl:'https://maps.apple.com/?daddr=Pompeii+Archaeological+Park', webUrl:'https://pompeiitickets.com' },
       { id:'d21a4', type:'hotel', name:'Check in — Naples hotel', time:'14:00', duration:30, note:'Near historic centre (Spaccanapoli). Relaxed afternoon arrival. Ensure late check-in is possible if Pompeii stop runs long.', mapsUrl:'https://maps.apple.com/?daddr=Naples+Historic+Centre' },
       { id:'d21a5', type:'activity', name:'Spaccanapoli evening walk', time:'17:00', duration:75, note:'The long straight street that cuts through the historic centre has extraordinary evening energy. UNESCO World Heritage historic centre — unlike anything else in Italy.', mapsUrl:'https://maps.apple.com/?daddr=Spaccanapoli+Naples' },
-      { id:'d21a6', type:'food', name:'Pizza — Sorbillo or Da Michele', time:'19:30', duration:90, note:'Naples is where pizza was invented and it is in a completely different category to everywhere else. Sorbillo: Via dei Tribunali 32. Da Michele: Via Cesare Sersale 1. Di Matteo: Via dei Tribunali 94. All within 5 min walk of each other. Arrive by 7:30pm or queue — worth it.', mapsUrl:'https://maps.apple.com/?daddr=Sorbillo+Pizza+Naples', webUrl:'https://www.sorbillo.it' },
+      { id:'d21a6', type:'food', name:'Dinner — simple trattoria near hotel', time:'19:30', duration:75, note:'Rather than the famous queue-and-wait pizzerias, find a solid low-key trattoria near the hotel — good pasta and pizza, no drama, no queuing. Ask the hotel for a nearby recommendation on check-in. Short stroll afterwards if keen, then early night.', mapsUrl:'https://maps.apple.com/?daddr=Naples+Historic+Centre', webUrl:'https://maps.google.com/?q=trattoria+naples+centro+storico' },
       { id:'d21a7', type:'activity', name:'Pre-arrange airport taxi (tonight)', time:'21:00', duration:15, note:'Ask hotel front desk to arrange 7:00am taxi to Naples Capodichino Airport for tomorrow morning. Do NOT leave this to the morning.', mapsUrl:'https://maps.apple.com/?daddr=Naples+Capodichino+Airport' }
     ]
   },
@@ -2402,9 +2402,16 @@ function renderInfo() {
       <div class="info-card">
         <div class="info-row"><div class="info-row-label">Emirates (all legs)</div><div class="info-row-value copyable" onclick="copyText('GKK5PW','Emirates ref copied')">GKK5PW <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div></div>
         <div class="info-row"><div class="info-row-label">EasyJet NAP→ATH</div><div class="info-row-value copyable" onclick="copyText('KCPV1H7','EasyJet ref copied')">KCPV1H7 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div></div>
-        <div class="info-row"><div class="info-row-label">Chelsea Cloisters</div><div class="info-row-value copyable" onclick="copyText('6355022434','Hotel ref copied')">6355022434 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div></div>
-        <div class="info-row"><div class="info-row-label">Apartment Schönegg</div><div class="info-row-value copyable" onclick="copyText('479895','Grindelwald ref copied')">479895 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div></div>
+        <div class="info-row"><div class="info-row-label">Chelsea Cloisters London</div><div class="info-row-value copyable" onclick="copyText('6355022434','Hotel ref copied')">6355022434 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div></div>
         <div class="info-row"><div class="info-row-label">Chelsea Cloisters PIN</div><div class="info-row-value copyable" onclick="copyText('6151','PIN copied')">6151 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div></div>
+        <div class="info-row"><div class="info-row-label">Apartment Schönegg (Grindelwald)</div><div class="info-row-value copyable" onclick="copyText('479895','Grindelwald ref copied')">479895 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div></div>
+        <div class="info-row"><div class="info-row-label">Navona Loft Rome (RentalIn)</div><div class="info-row-value copyable" onclick="copyText('31402392','Rome ref copied')">#31402392 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div></div>
+        <div class="info-row"><div class="info-row-label">Wicked (Apollo Victoria)</div><div class="info-row-value">AU$450.72 paid ✓</div></div>
+        <div class="info-row"><div class="info-row-label">Buckingham Palace State Rooms</div><div class="info-row-value">AU$190.84 paid ✓ · 11:45am</div></div>
+        <div class="info-row"><div class="info-row-label">Vatican Museums 4pm entry</div><div class="info-row-value">AU$131.03 paid ✓</div></div>
+        <div class="info-row"><div class="info-row-label">Napoli DownTown (Naples)</div><div class="info-row-value">Pay at property ~€152.45</div></div>
+        <div class="info-row"><div class="info-row-label">Acropolis Classy Apts (Athens)</div><div class="info-row-value">AU$1,097 · Keypad lockbox</div></div>
+        <div class="info-row"><div class="info-row-label">Salerno — La casa dei ricordi</div><div class="info-row-value">Pay later · ~AU$462</div></div>
       </div>
     </div>`;
 
@@ -2459,14 +2466,16 @@ function renderInfo() {
   html += `<div class="info-section-label">Key Reminders</div>
     <div class="info-section">
       <div class="info-card">
-        <div class="info-row"><div class="info-row-label" style="flex:1">Rome apartment: Navona Loft, Via dell'Orso 80 — €560 balance + €150 damage dep. due on arrival</div></div>
-        <div class="info-row"><div class="info-row-label" style="flex:1">Salerno apartment: La casa dei ricordi, 1 Via Dalmazia — Booking.com, pay closer to date (~AU$462)</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">Rome Navona Loft: €560 balance + €150 damage deposit due on arrival (cash or card — check host instructions)</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">Salerno La casa dei ricordi: pay via Booking.com closer to date (~AU$462). Check-in window 12:00–16:00</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">Como La Vecia Curt: self check-in via OTP code emailed on arrival — need mobile data. €197.98 auto-charges 6 Sep</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">Vatican: 4:00pm entry BOOKED (AU$131.03 paid) — move with purpose, closes 6pm. St Peter's Basilica in the morning (free)</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">Westminster Abbey Evensong: FREE, 5:00pm Fri 4 Sep — confirm service running closer to date</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">Switzerland uses CHF — not Euros</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">Grindelwald keys: GRIWA RENT AG, Dorfstrasse 118 — collect 2–5pm Wed 9 Sep only</div></div>
-        <div class="info-row"><div class="info-row-label" style="flex:1">Vatican: First Entry 7am — must pre-book, queues 2–3hrs without ticket</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">Naples: pre-arrange 7am taxi night before (hotel front desk)</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">EasyJet bag drop closes 08:35 — leave Naples hotel by 7am sharp</div></div>
-        <div class="info-row"><div class="info-row-label" style="flex:1">Day 22 Pompeii (optional): bags stored at Pompei Scavi station ~€5/bag</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">Day 22 Pompeii (optional): bags stored at Pompei Scavi station ~€5/bag — pre-book at radicalstorage.com</div></div>
       </div>
     </div>`;
 
