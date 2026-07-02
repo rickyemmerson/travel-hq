@@ -1691,8 +1691,8 @@ function renderDayView(dayKey) {
     <div class="journal-link-card" onclick="openJournal('${dayKey}')">
       <div class="journal-icon">📓</div>
       <div class="journal-link-info">
-        <div class="journal-link-title">Open Apple Journal</div>
-        <div class="journal-link-sub">Record memories from ${day.label}</div>
+        <div class="journal-link-title">Add to Apple Journal</div>
+        <div class="journal-link-sub">Opens share sheet → tap "Add to Journal"</div>
       </div>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
     </div>`;
@@ -2513,8 +2513,17 @@ function openUrl(url) {
 }
 
 function openJournal(dayKey) {
-  // Deep link to Apple Journal — opens Journal app with today's date
-  window.location.href = 'applejournaling://';
+  const day = DAY_DATA[dayKey];
+  const title = day ? `${day.label} — ${day.title}` : 'Travel Journal Entry';
+  const text = day ? `Day ${getDayNumber(dayKey)} · ${day.label}\n${day.title}\n\nEurope & Singapore Trip 2026` : 'Europe & Singapore Trip 2026';
+  // Web Share API triggers the native iOS share sheet which includes
+  // "Add to Journal" as a system extension — the correct way to do this
+  if (navigator.share) {
+    navigator.share({ title: title, text: text }).catch(() => {});
+  } else {
+    // Fallback: copy day info to clipboard so user can paste into Journal
+    copyText(text, 'Day info copied — paste into Journal');
+  }
 }
 
 function changeHeroPhoto(dayKey) {
