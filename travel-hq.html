@@ -934,16 +934,16 @@ const DESTINATIONS = [
   },
   {
     id: 'sorrento',
-    name: 'Sorrento',
+    name: 'Salerno',
     country: 'Italy',
     dates: '20–22 Sep',
     nights: 2,
     accent: '#c4954a',
-    photo: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=800&q=80',
-    budget: 1244,
+    photo: 'https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?w=800&q=80',
+    budget: 1100,
     currency: 'EUR',
     weather: { temp: '25°C', desc: 'Warm Mediterranean', icon: '🌊' },
-    tips: 'Stay near Marina Piccola. Caremar car ferry only for Capri — NOT the hydrofoil. Limoncello is from here.',
+    tips: 'Apartment: La casa dei ricordi, 1 Via Dalmazia. Check-in 12:00–16:00. Lungomare Trieste seafront promenade is a 5 min walk. Mon: Travelmar ferry to Maiori + Path of the Lemons walk.',
     days: ['2026-09-20','2026-09-21']
   },
   {
@@ -957,7 +957,7 @@ const DESTINATIONS = [
     budget: 572,
     currency: 'EUR',
     weather: { temp: '25°C', desc: 'Warm, lively city', icon: '🍕' },
-    tips: 'Late arrival from Capri. Have cash ready (€100). Best pizza in the world — Sorbillo or Da Michele. Pre-arrange 7am taxi to airport.',
+    tips: 'Arriving from Salerno by train — relaxed afternoon arrival. Optional Pompeii stop en route (bags stored at Pompei Scavi station). Best pizza in the world — Sorbillo or Da Michele. Pre-arrange 7am taxi to airport.',
     days: ['2026-09-22']
   },
   {
@@ -1220,7 +1220,7 @@ const DAY_DATA = {
   '2026-09-19': {
     label: 'Sat 19 Sep', title: 'Catacombs + Free Afternoon', destId: 'rome',
     photo: 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&q=80',
-    warnings: ['Pack bags tonight — early departure tomorrow for Pompeii/Sorrento'],
+    warnings: ['Pack bags tonight — early departure tomorrow for Salerno'],
     activities: [
       { id:'d18a1', type:'transit', name:'Taxi to Appian Way', time:'09:00', duration:20, note:'Catacombs are ~5km south of the centre. Taxi recommended.', mapsUrl:'https://maps.apple.com/?daddr=Via+Appia+Antica+Rome' },
       { id:'d18a2', type:'activity', name:'Catacombs + Appian Way', time:'09:30', duration:120, note:'San Callisto or San Sebastiano — book in advance, tours leave regularly. Underground Christian burial chambers with original frescoes. Eerie and fascinating — the girls will be riveted.', mapsUrl:'https://maps.apple.com/?daddr=Catacombe+di+San+Callisto+Rome', webUrl:'https://www.catacombe.org' },
@@ -1230,58 +1230,46 @@ const DAY_DATA = {
     ]
   },
   '2026-09-20': {
-    label: 'Sun 20 Sep', title: 'Rome → Pompeii → Sorrento', destId: 'sorrento',
-    photo: 'https://images.unsplash.com/photo-1559650656-5d1d361ad10e?w=800&q=80',
-    warnings: ['Leave Rome hotel with ALL bags by 8:00am', 'Circumvesuviana: keep bags in front, watch for pickpockets', 'Pre-booked Pompeii timed entry at pompeiitickets.com required'],
+    label: 'Sun 20 Sep', title: 'Rome → Salerno', destId: 'sorrento',
+    photo: 'https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?w=800&q=80',
+    warnings: ['Relaxed morning in Rome — late-morning departure (~11am)', 'Check-in window at Salerno apartment: 12:00–16:00 — call ahead if arriving early', 'Apartment: La casa dei ricordi, 1 Via Dalmazia, Salerno — Booking.com, pay later'],
     activities: [
-      { id:'d19a1', type:'hotel', name:'Check out — Rome hotel', time:'08:00', duration:0, note:'Leave with all bags by 8:00am. Walk or taxi to Roma Termini.', mapsUrl:'https://maps.apple.com/?daddr=Roma+Termini' },
-      { id:'d19a2', type:'transit', name:'Frecciarossa: Roma Termini → Napoli Centrale', time:'08:15', duration:70, note:'~8:00–8:30am service. Book at trenitalia.com. ~1hr 10min. This train is popular on Sundays — book early.', mapsUrl:'https://maps.apple.com/?daddr=Napoli+Centrale&dirflg=r', webUrl:'https://www.trenitalia.com' },
-      { id:'d19a3', type:'transit', name:'Circumvesuviana: Naples → Pompeii Scavi', time:'09:45', duration:35, note:'Platforms in basement of Napoli Centrale (Piazza Garibaldi exit). Buy Naples→Sorrento ticket ~€6.40/person. 35 min.', mapsUrl:'https://maps.apple.com/?daddr=Pompeii+Scavi+Station&dirflg=r' },
-      { id:'d19a4', type:'activity', name:'Pompeii', time:'10:30', duration:240, note:'Pre-booked timed entry at pompeiitickets.com. Budget 3–4 hours minimum. Forum, House of the Vettii, Lupanare, bakeries, and the plaster casts — one of the most moving ancient sites in the world.', mapsUrl:'https://maps.apple.com/?daddr=Pompeii+Archaeological+Park', webUrl:'https://pompeiitickets.com' },
-      { id:'d19a5', type:'transit', name:'Circumvesuviana: Pompeii → Sorrento', time:'14:30', duration:35, note:'Same line, same ticket. ~35 min to Sorrento. Keep bags close.', mapsUrl:'https://maps.apple.com/?daddr=Sorrento+Train+Station&dirflg=r' },
-      { id:'d19a6', type:'hotel', name:'Check in — Sorrento hotel', time:'15:30', duration:30, note:'Near Marina Piccola. Important: hotel must be close to Marina Piccola — that\'s where the Caremar car ferry departs Tuesday morning.', mapsUrl:'https://maps.apple.com/?daddr=Sorrento+Italy' },
-      { id:'d19a7', type:'activity', name:'Piazza Tasso evening', time:'17:30', duration:60, note:'Sorrento\'s main square — lively and beautiful at dusk. Views across the Bay of Naples.', mapsUrl:'https://maps.apple.com/?daddr=Piazza+Tasso+Sorrento' },
-      { id:'d19a8', type:'food', name:'Dinner in Sorrento', time:'19:30', duration:90, note:'Excellent seafood and pasta. Try the local limoncello — Sorrento is its heartland.', mapsUrl:'https://maps.apple.com/?daddr=Sorrento+Italy', webUrl:'https://maps.google.com/?q=best+restaurants+sorrento+italy' }
+      { id:'d19a1', type:'free', name:'Final relaxed morning in Rome', time:'08:00', duration:120, note:'Late departure today — enjoy a final morning in Rome. Apartment breakfast, last espresso, short walk. No rush.', mapsUrl:'https://maps.apple.com/?daddr=Navona+Loft+Via+dell+Orso+Rome' },
+      { id:'d19a2', type:'hotel', name:'Check out — Navona Loft apartment', time:'10:00', duration:30, note:'Via dell\'Orso 80, Rome. Res. #31402392 (RentalIn Rome). Balance €560 + €150 damage deposit paid on arrival. Take all bags to Roma Termini by taxi.', mapsUrl:'https://maps.apple.com/?daddr=Roma+Termini' },
+      { id:'d19a3', type:'transit', name:'Frecciarossa: Roma Termini → Salerno', time:'11:00', duration:165, note:'Direct Frecciarossa, late-morning departure. ~2h40–3h journey. Book at trenitalia.com — NOT yet booked. Estimated ~AU$170 family.', mapsUrl:'https://maps.apple.com/?daddr=Salerno+Train+Station&dirflg=r', webUrl:'https://www.trenitalia.com' },
+      { id:'d19a4', type:'hotel', name:'Check in — La casa dei ricordi', time:'14:30', duration:30, note:'1 Via Dalmazia, Salerno. Check-in window 12:00–16:00. Booked via Booking.com — AUD ~462 total incl. city tax, pay closer to date. Call ahead if arriving early.', address:'1 Via Dalmazia, Salerno, Italy', mapsUrl:'https://maps.apple.com/?daddr=1+Via+Dalmazia+Salerno+Italy' },
+      { id:'d19a5', type:'activity', name:'Lungomare Trieste seafront promenade', time:'16:00', duration:75, note:'Salerno\'s beautiful seafront promenade — a 5 min walk from the apartment. Easy first-afternoon orientation. Views across the Gulf of Salerno toward the Amalfi Coast.', mapsUrl:'https://maps.apple.com/?daddr=Lungomare+Trieste+Salerno' },
+      { id:'d19a6', type:'activity', name:'Via dei Mercanti — historic centre', time:'17:30', duration:60, note:'Salerno\'s main historic shopping street — medieval lanes, local shops, good energy. Very different from the tourist towns further along the coast.', mapsUrl:'https://maps.apple.com/?daddr=Via+dei+Mercanti+Salerno' },
+      { id:'d19a7', type:'food', name:'Dinner in Salerno', time:'19:30', duration:90, note:'Salerno is a real Italian city, not a tourist resort — restaurants are excellent and genuine. Seafood is outstanding.', mapsUrl:'https://maps.apple.com/?daddr=Salerno+Italy', webUrl:'https://maps.google.com/?q=best+restaurants+salerno+italy' }
     ]
   },
   '2026-09-21': {
-    label: 'Mon 21 Sep', title: 'Amalfi Coast by Ferry', destId: 'sorrento',
+    label: 'Mon 21 Sep', title: 'Maiori Ferry + Path of the Lemons', destId: 'sorrento',
     photo: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=800&q=80',
-    warnings: ['Pre-booked NLG ferry (nlg.it) — family ~AU$250', 'Early night essential — tomorrow is Capri + Naples day'],
+    warnings: ['Travelmar ferry to Maiori — book ahead at travelmar.it for September', 'Sentiero dei Limoni (Path of the Lemons) is a gentle walk Maiori → Minori — ~45 min, well-signposted'],
     activities: [
-      { id:'d20a1', type:'transit', name:'Walk to Sorrento ferry terminal', time:'08:45', duration:15, note:'Marina Piccola. NLG ferry departure.', mapsUrl:'https://maps.apple.com/?daddr=Sorrento+Marina+Piccola&dirflg=w' },
-      { id:'d20a2', type:'ferry', name:'NLG Ferry: Sorrento → Positano', time:'09:00', duration:40, note:'Pre-booked at nlg.it. The ferry view looking up at the cliffs and villages is better than driving. Family ~AU$250 for the 3-leg trip.', mapsUrl:'https://maps.apple.com/?daddr=Positano+Italy', webUrl:'https://www.nlg.it' },
-      { id:'d20a3', type:'activity', name:'Positano — lunch + explore', time:'10:00', duration:150, note:'Iconic pastel-coloured buildings cascading down the hillside. Wander the lanes, buy a ceramic bowl, eat seafood. Genuinely beautiful.', mapsUrl:'https://maps.apple.com/?daddr=Positano+Italy', webUrl:'https://maps.google.com/?q=best+restaurants+positano' },
-      { id:'d20a4', type:'ferry', name:'NLG Ferry: Positano → Amalfi', time:'12:30', duration:30, note:'Continue along the coast.', mapsUrl:'https://maps.apple.com/?daddr=Amalfi+Italy', webUrl:'https://www.nlg.it' },
-      { id:'d20a5', type:'activity', name:'Amalfi town', time:'13:00', duration:120, note:'Duomo di Sant\'Andrea (striped facade cathedral) is impressive. Lanes selling ceramics and limoncello. Compact and easy to walk.', mapsUrl:'https://maps.apple.com/?daddr=Amalfi+Cathedral+Italy' },
-      { id:'d20a6', type:'ferry', name:'NLG Ferry: Amalfi → Sorrento', time:'15:30', duration:60, note:'Return ferry. Afternoon light on the cliffs is beautiful.', mapsUrl:'https://maps.apple.com/?daddr=Sorrento+Marina+Piccola', webUrl:'https://www.nlg.it' },
-      { id:'d20a7', type:'food', name:'Final Sorrento dinner — early', time:'18:30', duration:90, note:'Early dinner. Modest night — tomorrow is the most logistically complex day of the trip. Capri day with all luggage.' }
+      { id:'d20a1', type:'transit', name:'Walk to Salerno ferry port', time:'08:45', duration:10, note:'Salerno ferry port is a short walk from the apartment. Travelmar service along the coast.', mapsUrl:'https://maps.apple.com/?daddr=Porto+di+Salerno&dirflg=w' },
+      { id:'d20a2', type:'ferry', name:'Travelmar Ferry: Salerno → Maiori', time:'09:00', duration:35, note:'Book ahead at travelmar.it — ~30–40 min. The ferry view of the Amalfi coastline is spectacular. Family ~AU$150 return estimated.', mapsUrl:'https://maps.apple.com/?daddr=Maiori+Italy', webUrl:'https://www.travelmar.it' },
+      { id:'d20a3', type:'activity', name:'Maiori — beach and town explore', time:'09:45', duration:60, note:'Maiori has the largest beach on the Amalfi Coast. Quieter and more relaxed than Amalfi or Positano. Good gelato, pleasant waterfront.', mapsUrl:'https://maps.apple.com/?daddr=Maiori+Amalfi+Coast+Italy' },
+      { id:'d20a4', type:'activity', name:'Sentiero dei Limoni — Maiori to Minori', time:'11:00', duration:60, note:'The Path of the Lemons — a gentle 45-min walk between Maiori and Minori through lemon groves and terraced hillsides above the sea. Well-signposted, manageable for both girls. One of the most beautiful short walks on the Amalfi Coast.', mapsUrl:'https://maps.apple.com/?daddr=Minori+Italy', webUrl:'https://maps.google.com/?q=sentiero+dei+limoni+maiori+minori' },
+      { id:'d20a5', type:'food', name:'Lunch in Minori', time:'12:15', duration:90, note:'Minori is famous for its pastry — try the sfogliatella and ricotta-based sweets. Good seafood and pasta restaurants on the waterfront.', mapsUrl:'https://maps.apple.com/?daddr=Minori+Italy', webUrl:'https://maps.google.com/?q=restaurants+minori+amalfi+coast' },
+      { id:'d20a6', type:'activity', name:'Amalfi town (optional extension)', time:'14:00', duration:90, note:'If time and energy allow, take the ferry or bus on to Amalfi town (~15 min). Duomo di Sant\'Andrea, ceramics, limoncello lanes. Optional — not essential if the walk was enough.', mapsUrl:'https://maps.apple.com/?daddr=Amalfi+Cathedral+Italy', webUrl:'https://maps.google.com/?q=amalfi+town+italy' },
+      { id:'d20a7', type:'ferry', name:'Travelmar Ferry: return to Salerno', time:'15:30', duration:35, note:'Return ferry to Salerno. Afternoon light on the coastline.', mapsUrl:'https://maps.apple.com/?daddr=Porto+di+Salerno', webUrl:'https://www.travelmar.it' },
+      { id:'d20a8', type:'food', name:'Relaxed dinner in Salerno', time:'19:00', duration:90, note:'Easy evening. Good night\'s sleep — tomorrow is the Naples travel day.', mapsUrl:'https://maps.apple.com/?daddr=Salerno+Italy' }
     ]
   },
   '2026-09-22': {
-    label: 'Tue 22 Sep', title: 'Capri Day → Naples', destId: 'naples',
-    photo: 'https://images.unsplash.com/photo-1633321088355-ef2ca1b52fb7?w=800&q=80',
-    warnings: [
-      'CAREMAR CAR FERRY ONLY from Sorrento Marina Piccola — NOT the hydrofoil. Hydrofoils refuse large bags.',
-      'Radical Storage pre-booked at radicalstorage.com — Marina Grande, Capri. Open 7am–7pm. Collect bags by 6:30pm.',
-      'Pre-arrange Naples hotel taxi TONIGHT (7:00am Wed) via hotel front desk'
-    ],
+    label: 'Tue 22 Sep', title: 'Salerno → Naples', destId: 'naples',
+    photo: 'https://images.unsplash.com/photo-1555992643-a87b2ce02bca?w=800&q=80',
+    warnings: ['Optional Pompeii stop en route — bags stored at Pompei Scavi station (~€5/bag)', 'Pre-arrange 7:00am taxi to airport for tomorrow morning (Wed 23) — ask hotel tonight'],
     activities: [
-      { id:'d21a1', type:'hotel', name:'Check out — Sorrento hotel', time:'08:00', duration:0, note:'Check out with ALL 3 bags. Walk to Marina Piccola.', mapsUrl:'https://maps.apple.com/?daddr=Sorrento+Marina+Piccola' },
-      { id:'d21a2', type:'ferry', name:'Caremar Car Ferry: Sorrento → Capri', time:'08:30', duration:50, note:'CAR FERRY ONLY. Hydrofoils refuse oversized bags. Pre-booked at caremar.it. Depart Marina Piccola. Arrive Capri Marina Grande.', mapsUrl:'https://maps.apple.com/?daddr=Capri+Marina+Grande', webUrl:'https://www.caremar.it' },
-      { id:'d21a3', type:'activity', name:'Radical Storage — drop bags', time:'09:30', duration:15, note:'3 min walk from ferry terminal. Pre-booked at radicalstorage.com. €5/bag = €15 (~AU$25). Collect by 6:30pm. Open until 7pm.', mapsUrl:'https://maps.apple.com/?daddr=Radical+Storage+Capri', webUrl:'https://www.radicalstorage.com' },
-      { id:'d21a4', type:'activity', name:'Blue Grotto (optional — go early)', time:'09:45', duration:90, note:'Go early — boats queue by 11am. Small rowboat from entrance. The blue phosphorescent light is extraordinary. Check conditions — waves >0.5m close it. Worth attempting but have a backup plan.', mapsUrl:'https://maps.apple.com/?daddr=Blue+Grotto+Capri', webUrl:'https://maps.google.com/?q=blue+grotto+capri' },
-      { id:'d21a5', type:'transit', name:'Funicular: Marina Grande → Capri town', time:'11:30', duration:5, note:'5-min funicular ride. The Piazzetta at the top is tiny, beautiful and absurdly expensive for coffee.', mapsUrl:'https://maps.apple.com/?daddr=Capri+Town+Italy' },
-      { id:'d21a6', type:'activity', name:'Capri town + Gardens of Augustus', time:'11:45', duration:90, note:'Via Krupp and Gardens of Augustus for exceptional views down to the Faraglioni rock stacks. The Piazzetta — worth one coffee for the atmosphere.', mapsUrl:'https://maps.apple.com/?daddr=Gardens+of+Augustus+Capri' },
-      { id:'d21a7', type:'transit', name:'Bus to Anacapri', time:'13:15', duration:15, note:'Short bus from Capri town.', mapsUrl:'https://maps.apple.com/?daddr=Anacapri+Italy&dirflg=r' },
-      { id:'d21a8', type:'food', name:'Lunch in Anacapri', time:'13:30', duration:75, note:'Capri is the most expensive place on the trip. Budget €80–120 family for sit-down lunch.', mapsUrl:'https://maps.apple.com/?daddr=Anacapri+Italy' },
-      { id:'d21a9', type:'activity', name:'Monte Solaro Chairlift', time:'15:00', duration:60, note:'Open-air chairlift to 589m — 360° views of the Tyrrhenian Sea, Bay of Naples, and Vesuvius on a clear day. The ride itself is magical. ~30 min each way.', mapsUrl:'https://maps.apple.com/?daddr=Monte+Solaro+Anacapri', webUrl:'https://www.capriseggiovia.it' },
-      { id:'d21a10', type:'activity', name:'Collect bags from Radical Storage', time:'18:00', duration:15, note:'Marina Grande. Must collect by 6:30pm. Walk from funicular bottom station.', mapsUrl:'https://maps.apple.com/?daddr=Radical+Storage+Capri', webUrl:'https://www.radicalstorage.com' },
-      { id:'d21a11', type:'ferry', name:'Capri → Naples Molo Beverello', time:'18:30', duration:50, note:'Fast ferry ~50 min. Aim for 6–7pm departure. Several operators — check nlg.it or buy at port. Less critical to pre-book this leg.', mapsUrl:'https://maps.apple.com/?daddr=Naples+Molo+Beverello', webUrl:'https://www.nlg.it' },
-      { id:'d21a12', type:'transit', name:'Taxi: Molo Beverello → Naples hotel', time:'19:30', duration:15, note:'Fixed area tariff ~€20–25 (~AU$40). ~15 min.', mapsUrl:'https://maps.apple.com/?daddr=Naples+Historic+Centre' },
-      { id:'d21a13', type:'hotel', name:'Check in — Naples hotel', time:'19:45', duration:30, note:'Late check-in. Confirm in advance. Near Spaccanapoli and historic centre. TONIGHT: pre-arrange 7am taxi to airport (ask front desk now).', mapsUrl:'https://maps.apple.com/?daddr=Naples+Italy' },
-      { id:'d21a14', type:'activity', name:'Spaccanapoli evening walk', time:'20:30', duration:30, note:'The long straight street cutting through the historic centre has extraordinary evening energy.', mapsUrl:'https://maps.apple.com/?daddr=Spaccanapoli+Naples' },
-      { id:'d21a15', type:'food', name:'Pizza — Sorbillo or Da Michele', time:'21:00', duration:75, note:'Naples is where pizza was invented. It\'s in a different category to everywhere else. Sorbillo (Via dei Tribunali 32), Da Michele (Via Cesare Sersale 1). Arrive by 7:30pm or queue. Worth every minute of the wait.', mapsUrl:'https://maps.apple.com/?daddr=Sorbillo+Pizza+Naples', webUrl:'https://www.sorbillo.it' }
+      { id:'d21a1', type:'hotel', name:'Check out — La casa dei ricordi', time:'10:00', duration:30, note:'1 Via Dalmazia, Salerno. Take all bags to Salerno train station.', mapsUrl:'https://maps.apple.com/?daddr=Salerno+Train+Station' },
+      { id:'d21a2', type:'transit', name:'Train: Salerno → (Pompei Scavi) → Napoli Centrale', time:'10:30', duration:60, note:'Short, frequent regional trains. ~35–45 min to Naples. If doing Pompeii, stop at Pompei Scavi Villa dei Misteri station — bags stored there while you visit, then continue to Naples.', mapsUrl:'https://maps.apple.com/?daddr=Napoli+Centrale&dirflg=r', webUrl:'https://www.trenitalia.com' },
+      { id:'d21a3', type:'activity', name:'Pompeii (optional — weather + energy dependent)', time:'11:30', duration:180, note:'If stopping: deposito bagagli at Pompei Scavi station, or Radical Storage / Bounce literally at the entrance (~€5/bag). 2–3 hrs at the site. Forum, House of the Vettii, plaster casts. One of the most moving ancient sites in the world. Skip if tired — Naples itself is worth the afternoon.', mapsUrl:'https://maps.apple.com/?daddr=Pompeii+Archaeological+Park', webUrl:'https://pompeiitickets.com' },
+      { id:'d21a4', type:'hotel', name:'Check in — Naples hotel', time:'14:00', duration:30, note:'Near historic centre (Spaccanapoli). Relaxed afternoon arrival. Ensure late check-in is possible if Pompeii stop runs long.', mapsUrl:'https://maps.apple.com/?daddr=Naples+Historic+Centre' },
+      { id:'d21a5', type:'activity', name:'Spaccanapoli evening walk', time:'17:00', duration:75, note:'The long straight street that cuts through the historic centre has extraordinary evening energy. UNESCO World Heritage historic centre — unlike anything else in Italy.', mapsUrl:'https://maps.apple.com/?daddr=Spaccanapoli+Naples' },
+      { id:'d21a6', type:'food', name:'Pizza — Sorbillo or Da Michele', time:'19:30', duration:90, note:'Naples is where pizza was invented and it is in a completely different category to everywhere else. Sorbillo: Via dei Tribunali 32. Da Michele: Via Cesare Sersale 1. Di Matteo: Via dei Tribunali 94. All within 5 min walk of each other. Arrive by 7:30pm or queue — worth it.', mapsUrl:'https://maps.apple.com/?daddr=Sorbillo+Pizza+Naples', webUrl:'https://www.sorbillo.it' },
+      { id:'d21a7', type:'activity', name:'Pre-arrange airport taxi (tonight)', time:'21:00', duration:15, note:'Ask hotel front desk to arrange 7:00am taxi to Naples Capodichino Airport for tomorrow morning. Do NOT leave this to the morning.', mapsUrl:'https://maps.apple.com/?daddr=Naples+Capodichino+Airport' }
     ]
   },
   '2026-09-23': {
@@ -1468,8 +1456,8 @@ function renderDestinations() {
     'grindelwald': { dayKey:'2026-09-09', label:'London → Grindelwald', icon:'✈️' },
     'como':        { dayKey:'2026-09-15', label:'Grindelwald → Lake Como', icon:'🚄' },
     'rome':        { dayKey:'2026-09-16', label:'Como → Rome', icon:'🚄' },
-    'sorrento':    { dayKey:'2026-09-20', label:'Rome → Pompeii → Sorrento', icon:'🚄' },
-    'naples':      { dayKey:'2026-09-22', label:'Sorrento → Capri → Naples', icon:'⛴️' },
+    'sorrento':    { dayKey:'2026-09-20', label:'Rome → Salerno', icon:'🚄' },
+    'naples':      { dayKey:'2026-09-22', label:'Salerno → Naples', icon:'🚄' },
     'athens':      { dayKey:'2026-09-23', label:'Naples → Athens', icon:'✈️' },
     'singapore':   { dayKey:'2026-09-26', label:'Athens → Singapore', icon:'✈️' },
   };
@@ -2471,13 +2459,14 @@ function renderInfo() {
   html += `<div class="info-section-label">Key Reminders</div>
     <div class="info-section">
       <div class="info-card">
+        <div class="info-row"><div class="info-row-label" style="flex:1">Rome apartment: Navona Loft, Via dell'Orso 80 — €560 balance + €150 damage dep. due on arrival</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">Salerno apartment: La casa dei ricordi, 1 Via Dalmazia — Booking.com, pay closer to date (~AU$462)</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">Switzerland uses CHF — not Euros</div></div>
-        <div class="info-row"><div class="info-row-label" style="flex:1">Caremar CAR FERRY only for Capri — hydrofoils refuse large bags</div></div>
-        <div class="info-row"><div class="info-row-label" style="flex:1">Grindelwald keys: GRIWA RENT AG, 2–5pm on Wed 9 Sep only</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">Grindelwald keys: GRIWA RENT AG, Dorfstrasse 118 — collect 2–5pm Wed 9 Sep only</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">Vatican: First Entry 7am — must pre-book, queues 2–3hrs without ticket</div></div>
-        <div class="info-row"><div class="info-row-label" style="flex:1">Circumvesuviana (Naples→Pompeii): keep bags in front — pickpockets</div></div>
-        <div class="info-row"><div class="info-row-label" style="flex:1">Naples pre-arrange 7am taxi night before (hotel front desk)</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">Naples: pre-arrange 7am taxi night before (hotel front desk)</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">EasyJet bag drop closes 08:35 — leave Naples hotel by 7am sharp</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">Day 22 Pompeii (optional): bags stored at Pompei Scavi station ~€5/bag</div></div>
       </div>
     </div>`;
 
