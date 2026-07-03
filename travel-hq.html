@@ -185,8 +185,8 @@ body{height:100%;font-family:'Inter',sans-serif;background:#0a0a0f;color:#f0f0f5
 .activity-card:active{transform:scale(.99);background:var(--surface-raised)}
 .activity-card-inner{display:flex;gap:0}
 .activity-thumb{
-  width:72px;flex-shrink:0;background-size:cover;background-position:center;
-  background-color:var(--surface-raised);position:relative
+  width:90px;flex-shrink:0;background-size:cover;background-position:center;
+  background-color:var(--surface-raised);position:relative;min-height:90px
 }
 .activity-content{flex:1;padding:12px 14px}
 .activity-time-row{display:flex;align-items:center;gap:8px;margin-bottom:4px}
@@ -1871,22 +1871,97 @@ function renderHotelCard(act, dayKey) {
 
 function getDefaultThumb(act) {
   const thumbs = {
-    'Vatican Museums': 'https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=200&q=70',
-    'Colosseum': 'https://images.unsplash.com/photo-1548345680-f5475ea5df84?w=200&q=70',
-    'Acropolis': 'https://images.unsplash.com/photo-1555993539-1732b0258235?w=200&q=70',
-    'Tower of London': 'https://images.unsplash.com/photo-1486299267070-83823f5448dd?w=200&q=70',
-    'First Cliff Walk': 'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=200&q=70',
-    'Pompeii': 'https://images.unsplash.com/photo-1559650656-5d1d361ad10e?w=200&q=70',
-    'Capri': 'https://images.unsplash.com/photo-1633321088355-ef2ca1b52fb7?w=200&q=70',
-    'Pantheon': 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=200&q=70',
-    'Universal Studios': 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=200&q=70',
-    'Singapore Zoo': 'https://images.unsplash.com/photo-1571587289339-cb7da24bc293?w=200&q=70',
-    'Trümmelbach Falls': 'https://images.unsplash.com/photo-1531307119710-accdb402f6f1?w=200&q=70',
-    'Männlichen': 'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=200&q=70',
-    'Cape Sounion': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&q=70',
-    'British Museum': 'https://images.unsplash.com/photo-1569585723035-0e9e39dfa90b?w=200&q=70',
-    'Natural History Museum': 'https://images.unsplash.com/photo-1579033461380-adb47c3eb938?w=200&q=70',
-    'Gardens by the Bay': 'https://images.unsplash.com/photo-1571587289339-cb7da24bc293?w=200&q=70',
+    // ── LONDON ──
+    'Natural History Museum':   'https://images.unsplash.com/photo-1579033461380-adb47c3eb938?w=300&q=75',
+    'Harrods':                  'https://images.unsplash.com/photo-1548614606-52b4451f994b?w=300&q=75',
+    'Regent Street':            'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=300&q=75',
+    'Carnaby Street':           'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=300&q=75',
+    'Liberty London':           'https://images.unsplash.com/photo-1548614606-52b4451f994b?w=300&q=75',
+    'Piccadilly Circus':        'https://images.unsplash.com/photo-1486299267070-83823f5448dd?w=300&q=75',
+    'Buckingham Palace':        'https://images.unsplash.com/photo-1520986606214-8b456906c813?w=300&q=75',
+    'Changing of the Guard':    'https://images.unsplash.com/photo-1520986606214-8b456906c813?w=300&q=75',
+    'State Rooms':              'https://images.unsplash.com/photo-1520986606214-8b456906c813?w=300&q=75',
+    'Trafalgar Square':         'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=300&q=75',
+    'Westminster Abbey':        'https://images.unsplash.com/photo-1585845328914-ac4af1b24e52?w=300&q=75',
+    'Big Ben':                  'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=300&q=75',
+    'Parliament':               'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=300&q=75',
+    'Tower of London':          'https://images.unsplash.com/photo-1486299267070-83823f5448dd?w=300&q=75',
+    'Tower Bridge':             'https://images.unsplash.com/photo-1486299267070-83823f5448dd?w=300&q=75',
+    'Borough Market':           'https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?w=300&q=75',
+    'Millennium Bridge':        'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=300&q=75',
+    'St Paul':                  'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=300&q=75',
+    'Sky Garden':               'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=300&q=75',
+    'Leadenhall Market':        'https://images.unsplash.com/photo-1548614606-52b4451f994b?w=300&q=75',
+    'HTB':                      'https://images.unsplash.com/photo-1585845328914-ac4af1b24e52?w=300&q=75',
+    'Wicked':                   'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=75',
+    'Apollo Victoria':          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=75',
+    'Covent Garden':            'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=300&q=75',
+    'Seven Dials':              'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=300&q=75',
+    'Churchill War Rooms':      'https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=300&q=75',
+    'Chinatown':                'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=300&q=75',
+    'Greenwich':                'https://images.unsplash.com/photo-1551524163-b3a8e3b70be9?w=300&q=75',
+    'Cutty Sark':               'https://images.unsplash.com/photo-1551524163-b3a8e3b70be9?w=300&q=75',
+    'Thames Clipper':           'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=300&q=75',
+    'Thames Boat':              'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=300&q=75',
+    'British Museum':           'https://images.unsplash.com/photo-1569585723035-0e9e39dfa90b?w=300&q=75',
+    // ── SWITZERLAND ──
+    'First Cliff Walk':         'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=300&q=75',
+    'First gondola':            'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=300&q=75',
+    'Pfingstegg':               'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?w=300&q=75',
+    'Toboggan':                 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?w=300&q=75',
+    'Trümmelbach Falls':        'https://images.unsplash.com/photo-1531307119710-accdb402f6f1?w=300&q=75',
+    'Lauterbrunnen':            'https://images.unsplash.com/photo-1531307119710-accdb402f6f1?w=300&q=75',
+    'Mürren':                   'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&q=75',
+    'Männlichen':               'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=300&q=75',
+    'Royal Walk':               'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=300&q=75',
+    'Kleine Scheidegg':         'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=300&q=75',
+    'Wengen':                   'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?w=300&q=75',
+    'Bachalpsee':               'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=300&q=75',
+    'Eigergletscher':           'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&q=75',
+    // ── COMO ──
+    'lakefront':                'https://images.unsplash.com/photo-1533760881669-80db4d7b341c?w=300&q=75',
+    'Lakefront':                'https://images.unsplash.com/photo-1533760881669-80db4d7b341c?w=300&q=75',
+    // ── ROME ──
+    'Vatican Museums':          'https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=300&q=75',
+    'Sistine Chapel':           'https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=300&q=75',
+    'St Peter':                 'https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=300&q=75',
+    'Colosseum':                'https://images.unsplash.com/photo-1548345680-f5475ea5df84?w=300&q=75',
+    'Roman Forum':              'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=300&q=75',
+    'Palatine':                 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=300&q=75',
+    'Pantheon':                 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=300&q=75',
+    'Piazza Navona':            'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=300&q=75',
+    'Castel Sant':              'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=300&q=75',
+    'Trastevere':               'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=300&q=75',
+    'Catacombs':                'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=300&q=75',
+    // ── SALERNO / AMALFI ──
+    'Lungomare':                'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=300&q=75',
+    'Maiori':                   'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=300&q=75',
+    'Minori':                   'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=300&q=75',
+    'Sentiero dei Limoni':      'https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?w=300&q=75',
+    'Path of the Lemons':       'https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?w=300&q=75',
+    'Amalfi':                   'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=300&q=75',
+    // ── NAPLES ──
+    'Pompeii':                  'https://images.unsplash.com/photo-1559650656-5d1d361ad10e?w=300&q=75',
+    'Spaccanapoli':             'https://images.unsplash.com/photo-1555992643-a87b2ce02bca?w=300&q=75',
+    // ── ATHENS ──
+    'Acropolis':                'https://images.unsplash.com/photo-1555993539-1732b0258235?w=300&q=75',
+    'Parthenon':                'https://images.unsplash.com/photo-1555993539-1732b0258235?w=300&q=75',
+    'Acropolis Museum':         'https://images.unsplash.com/photo-1555993539-1732b0258235?w=300&q=75',
+    'Cape Sounion':             'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=75',
+    'Temple of Poseidon':       'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=75',
+    'Monastiraki':              'https://images.unsplash.com/photo-1563694983011-6f4d90358083?w=300&q=75',
+    'Plaka':                    'https://images.unsplash.com/photo-1563694983011-6f4d90358083?w=300&q=75',
+    'Anafiotika':               'https://images.unsplash.com/photo-1563694983011-6f4d90358083?w=300&q=75',
+    // ── SINGAPORE ──
+    'Gardens by the Bay':       'https://images.unsplash.com/photo-1571587289339-cb7da24bc293?w=300&q=75',
+    'Supertree':                'https://images.unsplash.com/photo-1571587289339-cb7da24bc293?w=300&q=75',
+    'Universal Studios':        'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=300&q=75',
+    'Sentosa':                  'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=300&q=75',
+    'Singapore Zoo':            'https://images.unsplash.com/photo-1571587289339-cb7da24bc293?w=300&q=75',
+    'Hawker':                   'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=300&q=75',
+    'Maxwell':                  'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=300&q=75',
+    'Jewel Changi':             'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=300&q=75',
+    'Orchard Road':             'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=300&q=75',
   };
   for (const key in thumbs) {
     if (act.name && act.name.includes(key)) return thumbs[key];
