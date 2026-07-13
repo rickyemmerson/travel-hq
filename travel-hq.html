@@ -1020,6 +1020,7 @@ function save(data) {
 
 // ══════════════════════════════════════════
 // ITINERARY DATA — All 30 days pre-loaded
+// Synced 13 Jul 2026 from Europe_Trip_2026_Master_v9.md (including its v10–v12 route updates)
 // ══════════════════════════════════════════
 const DESTINATIONS = [
   {
@@ -1075,7 +1076,7 @@ const DESTINATIONS = [
     budget: 2360,
     currency: 'EUR',
     weather: { temp: '26°C', desc: 'Hot, plan around midday heat', icon: '☀️' },
-    tips: 'Keep €100–150 cash. Tipping ~10% for good service. Book Vatican First Entry (7am) in advance. Check out Sunday morning for Pompeii day.',
+    tips: 'Keep €100–150 cash. Navona Loft, Via dell’Orso 80, is booked for 4 nights. Vatican Museums entry is booked for 4:00pm Thu 17 Sep; visit St Peter’s Basilica that morning. Check out Sunday for a relaxed late-morning train to Salerno.',
     days: ['2026-09-16','2026-09-17','2026-09-18','2026-09-19']
   },
   {
@@ -1144,7 +1145,7 @@ const DAY_DATA = {
     activities: [
       { id:'d01a1', type:'flight', name:'EK431 Brisbane → Dubai', time:'01:55', duration:495, note:'Terminal BNE. 30kg checked bags. Dubai layover 80 min, same terminal.', flightNum:'EK431', from:'BNE', to:'DXB', fromTime:'01:55', toTime:'10:05', ref:'GKK5PW', mapsUrl:'', webUrl:'https://www.flightradar24.com/EK431' },
       { id:'d01a2', type:'flight', name:'EK031 Dubai → London', time:'11:25', duration:420, note:'Arrive LHR Terminal 3 at 16:10. Baggage: 30kg checked + 7kg cabin per person.', flightNum:'EK031', from:'DXB', to:'LHR', fromTime:'11:25', toTime:'16:10', ref:'GKK5PW', mapsUrl:'', webUrl:'https://www.flightradar24.com/EK031' },
-      { id:'d01a3', type:'transit', name:'Piccadilly Line → South Kensington', time:'16:40', duration:50, note:'Piccadilly Line direct from Heathrow T2/T3 → South Kensington (~50 min). Walk or short taxi to Chelsea Cloisters. If delayed or exhausted, take a direct taxi/Uber from airport (~£60–80).', mapsUrl:'https://maps.apple.com/?daddr=South+Kensington+Station+London&dirflg=r' },
+      { id:'d01a3', type:'transit', name:'Heathrow Express / taxi → Chelsea', time:'16:40', duration:60, note:'Latest plan: Heathrow Express to Paddington (~15 min, ~£25/adult, kids cheaper), then taxi to Chelsea Cloisters; or take a direct taxi from Heathrow (~£60–80) if everyone is exhausted. Pick up Oyster cards at the airport if needed.', mapsUrl:'https://maps.apple.com/?daddr=Chelsea+Cloisters+Sloane+Avenue+London&dirflg=r' },
       { id:'d01a4', type:'hotel', name:'Check in — Chelsea Cloisters', time:'17:45', duration:30, note:'Sloane Avenue, Chelsea SW3 3DW. Conf: 6355022434 · PIN 6151. Check-in 15:00–midnight.', address:'Sloane Avenue, Chelsea, London SW3 3DW', mapsUrl:'https://maps.apple.com/?daddr=Chelsea+Cloisters+London', webUrl:'https://www.chelseacloisters.co.uk' },
       { id:'d01a5', type:'activity', name:'Supermarket shop', time:'18:30', duration:45, note:'Breakfast supplies, milk, juice, yoghurt, cereal, fruit, muesli bars, sandwich supplies, snacks for the week. Sainsbury\'s or Tesco nearby on King\'s Road.' },
       { id:'d01a6', type:'food', name:'Simple local dinner', time:'19:30', duration:60, note:'Sloane Square / South Kensington / King\'s Road area only — nothing further. Back by 9:30pm. Jet lag flying west is significant.', mapsUrl:'https://maps.apple.com/?daddr=Sloane+Square+London', webUrl:'https://maps.google.com/?q=restaurants+sloane+square+london' }
@@ -1155,13 +1156,13 @@ const DAY_DATA = {
     photo: 'https://images.unsplash.com/photo-1579033461380-adb47c3eb938?w=800&q=80',
     warnings: [],
     activities: [
-      { id:'d02a1', type:'activity', name:'Natural History Museum — targeted 75 min', time:'10:00', duration:75, note:'Free. Targeted visit only — do NOT attempt the whole museum. Hit: Hintze Hall blue whale, Dinosaur gallery, Earth Hall volcanoes, one gallery chosen by the girls. Walk from Chelsea Cloisters (~12 min).', mapsUrl:'https://maps.apple.com/?daddr=Natural+History+Museum+London', webUrl:'https://www.nhm.ac.uk' },
+      { id:'d02a1', type:'activity', name:'Natural History Museum — targeted 90 min', time:'09:45', duration:90, note:'Free. Targeted visit only — do NOT attempt the whole museum. Hit: Hintze Hall blue whale, Dinosaur gallery, Earth Hall volcanoes, one gallery chosen by the girls. Leave the apartment about 9:15am; walk from Chelsea Cloisters (~12 min).', mapsUrl:'https://maps.apple.com/?daddr=Natural+History+Museum+London', webUrl:'https://www.nhm.ac.uk' },
       { id:'d02a2', type:'transit', name:'Walk to Harrods', time:'11:20', duration:20, note:'~15 min walk through Knightsbridge.', mapsUrl:'https://maps.apple.com/?daddr=Harrods+London&dirflg=w' },
-      { id:'d02a3', type:'activity', name:'Harrods — brief look', time:'11:45', duration:45, note:'Experience, not a shopping trip. Food Halls, exterior, toy/souvenir areas. ~45 min maximum.', mapsUrl:'https://maps.apple.com/?daddr=Harrods+Knightsbridge+London', webUrl:'https://www.harrods.com' },
-      { id:'d02a4', type:'food', name:'Lunch — Knightsbridge / Brompton Road', time:'12:30', duration:45, note:'Quick lunch near Harrods before heading into the West End.', mapsUrl:'https://maps.apple.com/?daddr=Brompton+Road+London', webUrl:'https://maps.google.com/?q=restaurants+knightsbridge+london' },
+      { id:'d02a3', type:'activity', name:'Harrods — brief look', time:'11:45', duration:60, note:'Experience, not a shopping trip. Food Halls, exterior, toy/souvenir areas. Finish about 12:45pm.', mapsUrl:'https://maps.apple.com/?daddr=Harrods+Knightsbridge+London', webUrl:'https://www.harrods.com' },
+      { id:'d02a4', type:'food', name:'Lunch — Knightsbridge / Brompton Road', time:'12:45', duration:45, note:'Quick lunch near Harrods before heading into the West End.', mapsUrl:'https://maps.apple.com/?daddr=Brompton+Road+London', webUrl:'https://maps.google.com/?q=restaurants+knightsbridge+london' },
       { id:'d02a5', type:'transit', name:'Bus 22 → Oxford Circus (double-decker)', time:'13:30', duration:30, note:'Red double-decker experience. Hop on Bus 22 from Knightsbridge/Sloane Street toward Oxford Circus. Sit upstairs at the front.', mapsUrl:'https://maps.apple.com/?daddr=Oxford+Circus+London&dirflg=r' },
       { id:'d02a6', type:'activity', name:'Regent Street + Carnaby Street + Liberty London', time:'14:00', duration:90, note:'Regent Street for the big London retail scene. Carnaby Street and Liberty London have much better character — better wandering. Liberty is worth 20 min inside even if not buying.', mapsUrl:'https://maps.apple.com/?daddr=Carnaby+Street+London', webUrl:'https://www.libertylondon.com' },
-      { id:'d02a7', type:'activity', name:'Piccadilly Circus', time:'15:45', duration:45, note:'See it, absorb the energy, don\'t linger. Classic London moment.', mapsUrl:'https://maps.apple.com/?daddr=Piccadilly+Circus+London' },
+      { id:'d02a7', type:'activity', name:'Piccadilly Circus', time:'16:15', duration:45, note:'See it, absorb the energy, don\'t linger. Classic London moment.', mapsUrl:'https://maps.apple.com/?daddr=Piccadilly+Circus+London' },
       { id:'d02a8', type:'food', name:'Dinner — Soho / Covent Garden / Kingly Court', time:'18:30', duration:90, note:'Japanese, Thai, or casual family restaurant. Kingly Court (off Carnaby) has good choices across multiple levels.', mapsUrl:'https://maps.apple.com/?daddr=Kingly+Court+London', webUrl:'https://maps.google.com/?q=restaurants+soho+london' }
     ]
   },
@@ -1170,28 +1171,28 @@ const DAY_DATA = {
     photo: 'https://images.unsplash.com/photo-1520986606214-8b456906c813?w=800&q=80',
     warnings: ['BIG DAY — Fixed bookings: Palace State Rooms 11:45am (PAID), Westminster Abbey Evensong 5:00pm (free)', 'Leave the Guard march by 11:15am sharp so Palace entry isn\'t rushed', 'Westminster Abbey Evensong is FREE — confirm service running closer to date'],
     activities: [
-      { id:'d03a1', type:'transit', name:'Bus 11 → Victoria / Buckingham Palace area', time:'09:00', duration:30, note:'Bus 11 toward Victoria, or taxi. Arrive by 9:45am to position for the Guard.', mapsUrl:'https://maps.apple.com/?daddr=Buckingham+Palace+London&dirflg=r' },
-      { id:'d03a2', type:'activity', name:'Changing of the Guard', time:'10:30', duration:45, note:'Victoria Memorial viewpoint — best angle without the crowds at the palace gates. Watch Wellington Barracks movement. Friday is a Guard-change day. Confirm schedule at royal.uk closer to date.', mapsUrl:'https://maps.apple.com/?daddr=Buckingham+Palace+London', webUrl:'https://www.royal.uk/changing-guard' },
+      { id:'d03a1', type:'transit', name:'Taxi / transit → St James’s Palace', time:'08:50', duration:30, note:'Aim to reach the St James’s Palace / Green Park area by 9:20–9:40am. Allow time for toilets, coffee and orientation.', mapsUrl:'https://maps.apple.com/?daddr=St+James+Palace+London&dirflg=r' },
+      { id:'d03a2', type:'activity', name:'St James’s Guard march → The Mall', time:'10:15', duration:60, note:'Position near St James’s Palace for the detachment forming up around 10:20–10:45am, then follow the march along The Mall toward Buckingham Palace. Do not wait at the Palace gates for the full ceremony. Peel away by 11:15am for the State Rooms entrance. Confirm the schedule at royal.uk closer to date.', mapsUrl:'https://maps.apple.com/?daddr=St+James+Palace+London', webUrl:'https://www.royal.uk/changing-guard' },
       { id:'d03a3', type:'activity', name:'Buckingham Palace State Rooms — 11:45am', time:'11:45', duration:120, note:'BOOKED + PAID — AU$190.84 (rct.uk). Allow full 2 hours: entry/security, State Rooms route, audio guide, garden exit, shop/café buffer. Arrive at entrance 11:30am to clear security comfortably.', mapsUrl:'https://maps.apple.com/?daddr=Buckingham+Palace+London', webUrl:'https://www.rct.uk/visit/the-state-rooms-buckingham-palace' },
-      { id:'d03a4', type:'food', name:'Lunch — Victoria Street / Whitehall area', time:'13:30', duration:45, note:'Keep it light — afternoon still has Abbey and Westminster sights. Many options near Victoria Street and Buckingham Gate.', mapsUrl:'https://maps.apple.com/?daddr=Victoria+Street+London', webUrl:'https://maps.google.com/?q=restaurants+victoria+london' },
-      { id:'d03a5', type:'activity', name:'Trafalgar Square', time:'14:00', duration:25, note:'Make this deliberate — Nelson\'s Column, fountains, National Gallery exterior. Don\'t just walk through.', mapsUrl:'https://maps.apple.com/?daddr=Trafalgar+Square+London' },
-      { id:'d03a6', type:'activity', name:'Big Ben + Parliament Square + K2 Phone Box', time:'14:30', duration:45, note:'Houses of Parliament exterior, Westminster Bridge views. K2 telephone box on Parliament Street or Great George Street — great photo stop.', mapsUrl:'https://maps.apple.com/?daddr=Houses+of+Parliament+London' },
+      { id:'d03a4', type:'food', name:'Lunch — Victoria / St James’s edge', time:'13:45', duration:45, note:'Keep it simple around Victoria Street, Buckingham Gate, St James’s or the Westminster edge.', mapsUrl:'https://maps.apple.com/?daddr=Victoria+Street+London', webUrl:'https://maps.google.com/?q=restaurants+victoria+london' },
+      { id:'d03a5', type:'activity', name:'Trafalgar Square', time:'14:45', duration:25, note:'Make this deliberate — Nelson\'s Column, fountains, National Gallery exterior. Don\'t just walk through.', mapsUrl:'https://maps.apple.com/?daddr=Trafalgar+Square+London' },
+      { id:'d03a6', type:'activity', name:'Big Ben + Parliament Square + K2 Phone Box', time:'15:25', duration:50, note:'Houses of Parliament exterior, Westminster Bridge views. K2 telephone box on Parliament Street or Great George Street — great photo stop.', mapsUrl:'https://maps.apple.com/?daddr=Houses+of+Parliament+London' },
       { id:'d03a7', type:'activity', name:'Westminster Abbey — Evensong (5:00pm, FREE)', time:'16:15', duration:90, note:'Arrive 4:15–4:30pm to queue and clear security. Evensong service is FREE — a way to experience the Abbey as a living church, not a tourist site. ~45 min service. Note: this is not a tourist walkthrough — you won\'t see Poets\' Corner or the Coronation Chair, but the atmosphere is extraordinary. Confirm service is running closer to date at westminster-abbey.org.', mapsUrl:'https://maps.apple.com/?daddr=Westminster+Abbey+London', webUrl:'https://www.westminster-abbey.org/abbey-music/evensong' },
-      { id:'d03a8', type:'food', name:'Dinner — South Bank / Waterloo', time:'18:00', duration:90, note:'Stay this side of the river. Lower Marsh, South Bank near Royal Festival Hall, Gabriel\'s Wharf. British pub, Japanese, or casual family restaurant. Return to Chelsea by 8pm.', mapsUrl:'https://maps.apple.com/?daddr=South+Bank+London', webUrl:'https://maps.google.com/?q=restaurants+south+bank+london' }
+      { id:'d03a8', type:'food', name:'Dinner — South Bank / Waterloo', time:'18:00', duration:90, note:'Stay this side of the river. Lower Marsh, South Bank near Royal Festival Hall, Gabriel\'s Wharf. British pub, Japanese, or casual family restaurant. Return to Chelsea about 7:00–7:30pm.', mapsUrl:'https://maps.apple.com/?daddr=South+Bank+London', webUrl:'https://maps.google.com/?q=restaurants+south+bank+london' }
     ]
   },
   '2026-09-05': {
     label: 'Sat 5 Sep', title: 'Tower + Borough Market + Sky Garden + Leadenhall', destId: 'london',
     photo: 'https://images.unsplash.com/photo-1486299267070-83823f5448dd?w=800&q=80',
-    warnings: ['BIG DAY — Fixed bookings: Tower of London 9:30am, Sky Garden 4:00pm', 'Sky Garden tickets are FREE but must be pre-booked at skygarden.london — slots go fast', 'Sky Garden free tickets release ~3 weeks before (mid-August) — set a calendar reminder'],
+    warnings: ['BIG DAY — Tower of London and Sky Garden are planned but NOT YET BOOKED', 'Book Tower of London for 9:30am at hrp.org.uk', 'Sky Garden tickets are free and release about 3 weeks ahead — set a mid-August reminder'],
     activities: [
       { id:'d04a1', type:'transit', name:'Tube → Tower Hill', time:'08:45', duration:30, note:'Circle/District line from South Kensington → Tower Hill. ~30 min.', mapsUrl:'https://maps.apple.com/?daddr=Tower+Hill+Station+London&dirflg=r' },
-      { id:'d04a2', type:'activity', name:'Tower of London', time:'09:30', duration:150, note:'Pre-booked at hrp.org.uk. Priority order: Crown Jewels first (queues build fast) → Yeoman Warder tour (genuinely entertaining) → White Tower → fortress walls and ravens.', mapsUrl:'https://maps.apple.com/?daddr=Tower+of+London', webUrl:'https://www.hrp.org.uk/tower-of-london/' },
+      { id:'d04a2', type:'activity', name:'Tower of London', time:'09:30', duration:150, note:'NOT YET BOOKED — book at hrp.org.uk. Priority order: Crown Jewels first (queues build fast) → Yeoman Warder tour → White Tower → fortress walls and ravens.', mapsUrl:'https://maps.apple.com/?daddr=Tower+of+London', webUrl:'https://www.hrp.org.uk/tower-of-london/' },
       { id:'d04a3', type:'transit', name:'Walk across Tower Bridge → Borough Market', time:'12:05', duration:25, note:'Walk across Tower Bridge to the south side (exterior crossing only, no Exhibition needed). Continue west along Bankside to Borough Market.', mapsUrl:'https://maps.apple.com/?daddr=Borough+Market+London&dirflg=w' },
       { id:'d04a4', type:'food', name:'Borough Market lunch', time:'12:45', duration:90, note:'Saturday lunchtime — busy but brilliant. Everyone picks from different stalls. Bring £40–50 cash as backup (some stalls cash-only). Eat slowly.', mapsUrl:'https://maps.apple.com/?daddr=Borough+Market+London', webUrl:'https://boroughmarket.org.uk' },
       { id:'d04a5', type:'activity', name:'Millennium Bridge + St Paul\'s exterior', time:'14:15', duration:30, note:'Walk west toward Millennium Bridge / Bankside. Cross the bridge — great river view, iconic London moment. St Paul\'s Cathedral exterior.', mapsUrl:'https://maps.apple.com/?daddr=Millennium+Bridge+London', webUrl:'https://www.stpauls.co.uk' },
       { id:'d04a6', type:'transit', name:'Taxi → Sky Garden', time:'14:50', duration:15, note:'Take a taxi from St Paul\'s (~£8–10) rather than walking. Saves 20 min and meaningful energy at this point in the day.', mapsUrl:'https://maps.apple.com/?daddr=20+Fenchurch+Street+London' },
-      { id:'d04a7', type:'activity', name:'Sky Garden', time:'16:00', duration:60, note:'Free with pre-booked slot at skygarden.london. Rooftop views across London from 20 Fenchurch Street. One of the best free views in the city.', mapsUrl:'https://maps.apple.com/?daddr=Sky+Garden+London', webUrl:'https://skygarden.london' },
+      { id:'d04a7', type:'activity', name:'Sky Garden', time:'16:00', duration:60, note:'NOT YET BOOKED — free tickets release about 3 weeks ahead at skygarden.london. Build the afternoon around the available slot if 4:00pm is unavailable.', mapsUrl:'https://maps.apple.com/?daddr=Sky+Garden+London', webUrl:'https://skygarden.london' },
       { id:'d04a8', type:'activity', name:'Leadenhall Market', time:'17:05', duration:30, note:'5 min walk from Sky Garden. Beautiful Victorian iron and glass arcade. On Saturday the market stalls are closed but the building and atmosphere are the point. The Lamb Tavern pub inside is open.', mapsUrl:'https://maps.apple.com/?daddr=Leadenhall+Market+London', webUrl:'https://www.leadenhallmarket.co.uk' },
       { id:'d04a9', type:'food', name:'Dinner — City / Bank / Monument area', time:'18:00', duration:90, note:'Old City pub feel. The Counting House (Cornhill), The Crosse Keys (Gracechurch St), or The Hung Drawn & Quartered (Tower Hill). Return to Chelsea by Tube or taxi.', mapsUrl:'https://maps.apple.com/?daddr=Bank+Station+London', webUrl:'https://maps.google.com/?q=pub+dinner+bank+london' }
     ]
@@ -1199,25 +1200,25 @@ const DAY_DATA = {
   '2026-09-06': {
     label: 'Sun 6 Sep', title: 'HTB Church + Wicked Matinee', destId: 'london',
     photo: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
-    warnings: ['Wicked matinee at 2:30pm — pre-booked at apollovictoriatheatre.co.uk', 'Intentionally light day — not a sightseeing day'],
+    warnings: ['Wicked matinee at 2:30pm — BOOKED + PAID, AU$450.72 for 4 tickets', 'Intentionally light day — not a sightseeing day'],
     activities: [
       { id:'d05a1', type:'transit', name:'Walk to HTB Brompton Road', time:'08:50', duration:10, note:'~10 min walk from Chelsea Cloisters. HTB Brompton Road is the nearest Holy Trinity Brompton venue.', mapsUrl:'https://maps.apple.com/?daddr=HTB+Brompton+Road+London&dirflg=w' },
       { id:'d05a2', type:'activity', name:'HTB Brompton Road — Family Service', time:'09:30', duration:75, note:'9:30am family service preferred — fits cleanly before the matinee. Confirm service times at htb.org closer to date.', mapsUrl:'https://maps.apple.com/?daddr=Holy+Trinity+Brompton+London', webUrl:'https://www.htb.org' },
       { id:'d05a3', type:'food', name:'Lunch — South Kensington / Knightsbridge', time:'11:00', duration:75, note:'Keep easy and not too slow. ~75 min max — need to be at the theatre by 1:00pm.', mapsUrl:'https://maps.apple.com/?daddr=South+Kensington+London', webUrl:'https://maps.google.com/?q=restaurants+south+kensington+london' },
       { id:'d05a4', type:'transit', name:'District Line → Victoria Station', time:'12:15', duration:15, note:'South Kensington → Victoria. ~10 min. Apollo Victoria Theatre is right at Victoria station.', mapsUrl:'https://maps.apple.com/?daddr=Apollo+Victoria+Theatre+London&dirflg=r' },
-      { id:'d05a5', type:'activity', name:'Wicked — Apollo Victoria Theatre', time:'14:30', duration:165, note:'Pre-booked at apollovictoriatheatre.co.uk. Arrive by 1:00pm — theatre buffer for coffee, toilets, settling in. Show: 2:30–5:15pm approx.', mapsUrl:'https://maps.apple.com/?daddr=Apollo+Victoria+Theatre+London', webUrl:'https://www.apollovictoriatheatre.co.uk' },
+      { id:'d05a5', type:'activity', name:'Wicked — Apollo Victoria Theatre', time:'14:30', duration:165, note:'BOOKED + PAID — AU$450.72 for 4 tickets. Arrive by 1:00pm for coffee, toilets and settling in. Show: 2:30–5:15pm approx.', mapsUrl:'https://maps.apple.com/?daddr=Apollo+Victoria+Theatre+London', webUrl:'https://www.apollovictoriatheatre.co.uk' },
       { id:'d05a6', type:'food', name:'Dinner — Victoria / Belgravia / Chelsea', time:'17:30', duration:75, note:'Simple post-show dinner. Don\'t force Chinatown — that\'s Monday. British pub, Japanese, pizza. Easy night. Back to apartment by 7:30pm.', mapsUrl:'https://maps.apple.com/?daddr=Sloane+Square+London', webUrl:'https://maps.google.com/?q=restaurants+victoria+london' }
     ]
   },
   '2026-09-07': {
     label: 'Mon 7 Sep', title: 'Covent Garden + Churchill War Rooms + Chinatown', destId: 'london',
     photo: 'https://images.unsplash.com/photo-1569585723035-0e9e39dfa90b?w=800&q=80',
-    warnings: ['Churchill War Rooms: pre-booked at iwm.org.uk — 1:00–1:30pm entry'],
+    warnings: ['Churchill War Rooms is NOT YET BOOKED — aim for a 1:30–2:00pm slot at iwm.org.uk'],
     activities: [
       { id:'d06a1', type:'activity', name:'Covent Garden + Seven Dials + Neal\'s Yard', time:'10:00', duration:90, note:'Relaxed morning start. Covent Garden Piazza street performers, Seven Dials, Neal\'s Yard. Liberty London if not already properly visited. Carnaby Street overflow.', mapsUrl:'https://maps.apple.com/?daddr=Covent+Garden+London', webUrl:'https://www.coventgarden.london' },
       { id:'d06a2', type:'food', name:'Lunch — Seven Dials / Soho / Covent Garden', time:'12:00', duration:60, note:'Good options throughout this area. Keep it reasonably quick — Churchill War Rooms at 1:30pm.', mapsUrl:'https://maps.apple.com/?daddr=Seven+Dials+London', webUrl:'https://maps.google.com/?q=restaurants+seven+dials+london' },
       { id:'d06a3', type:'transit', name:'Tube / taxi → Churchill War Rooms', time:'13:00', duration:20, note:'Short Tube or taxi from Covent Garden to Westminster. Clive Steps, King Charles Street.', mapsUrl:'https://maps.apple.com/?daddr=Churchill+War+Rooms+London&dirflg=r' },
-      { id:'d06a4', type:'activity', name:'Churchill War Rooms', time:'13:30', duration:120, note:'Pre-booked at iwm.org.uk. ~£34 adult, ~£17 child (confirmed April 2026). Allow 2 hours: Cabinet War Rooms, Map Room (left exactly as 1945), Churchill Museum. Underground bunker atmosphere works exceptionally well for kids — one of the best experiences in London.', mapsUrl:'https://maps.apple.com/?daddr=Churchill+War+Rooms+London', webUrl:'https://www.iwm.org.uk/visits/churchill-war-rooms' },
+      { id:'d06a4', type:'activity', name:'Churchill War Rooms', time:'13:30', duration:90, note:'NOT YET BOOKED — aim for 1:30–2:00pm at iwm.org.uk. Cabinet War Rooms, Map Room and Churchill Museum. The underground bunker atmosphere is one of London’s strongest family experiences.', mapsUrl:'https://maps.apple.com/?daddr=Churchill+War+Rooms+London', webUrl:'https://www.iwm.org.uk/visits/churchill-war-rooms' },
       { id:'d06a5', type:'activity', name:'Soho wander', time:'15:30', duration:60, note:'Soho streets and Piccadilly if time and energy allow. No fixed agenda — just absorb it.', mapsUrl:'https://maps.apple.com/?daddr=Soho+London' },
       { id:'d06a6', type:'food', name:'Chinatown dinner', time:'17:30', duration:90, note:'Gerrard Street (classic Chinatown), Lisle Street, Newport Court. Cantonese roast duck, dumplings, noodles. Japanese ramen alternatives in nearby Soho if preferred. Best night for this.', mapsUrl:'https://maps.apple.com/?daddr=Chinatown+London', webUrl:'https://maps.google.com/?q=chinatown+gerrard+street+london' }
     ]
@@ -1353,10 +1354,10 @@ const DAY_DATA = {
   '2026-09-18': {
     label: 'Fri 18 Sep', title: 'Colosseum + Forum + Pantheon', destId: 'rome',
     photo: 'https://images.unsplash.com/photo-1548345680-f5475ea5df84?w=800&q=80',
-    warnings: ['Arrive at Colosseum opening — 9am. Heat peaks by midday'],
+    warnings: ['Arrive at Colosseum opening — 9am. Heat peaks by midday', 'Colosseum + Forum + Palatine combo is NOT YET BOOKED — book at coopculture.it'],
     activities: [
-      { id:'d17a1', type:'transit', name:'Walk/metro to Colosseum', time:'08:40', duration:20, note:'Metro B to Colosseo stop. Or taxi. Pre-booked tickets at coopculture.it essential — same-day often unavailable.', mapsUrl:'https://maps.apple.com/?daddr=Colosseum+Rome&dirflg=r' },
-      { id:'d17a2', type:'activity', name:'Colosseum', time:'09:00', duration:90, note:'Combined ticket covers Colosseum + Forum + Palatine Hill. 50,000-seat arena. The scale is staggering. Pre-booked at coopculture.it.', mapsUrl:'https://maps.apple.com/?daddr=Colosseum+Rome', webUrl:'https://www.coopculture.it' },
+      { id:'d17a1', type:'transit', name:'Walk/metro to Colosseum', time:'08:40', duration:20, note:'Metro B to Colosseo stop, or taxi. Book tickets at coopculture.it in advance — same-day entry often unavailable.', mapsUrl:'https://maps.apple.com/?daddr=Colosseum+Rome&dirflg=r' },
+      { id:'d17a2', type:'activity', name:'Colosseum', time:'09:00', duration:90, note:'NOT YET BOOKED. Combined ticket covers Colosseum + Forum + Palatine Hill. Book at coopculture.it. The scale of the 50,000-seat arena is staggering.', mapsUrl:'https://maps.apple.com/?daddr=Colosseum+Rome', webUrl:'https://www.coopculture.it' },
       { id:'d17a3', type:'activity', name:'Roman Forum + Palatine Hill', time:'10:30', duration:150, note:'As impressive as the Colosseum, far less crowded. The Forum is the heart of ancient Rome. Palatine Hill has the best views. Allow 2.5 hrs.', mapsUrl:'https://maps.apple.com/?daddr=Roman+Forum+Rome', webUrl:'https://www.coopculture.it' },
       { id:'d17a4', type:'food', name:'Lunch near Pantheon', time:'13:30', duration:75, note:'Head toward the historic centre. Many good trattorias around Campo de\' Fiori and Piazza Navona.' },
       { id:'d17a5', type:'activity', name:'Pantheon', time:'15:30', duration:60, note:'2,000-year-old concrete dome, completely intact. Book entry at panteondroma.it (~€5/person). Breathtaking interior. Give it more time than you think you need.', mapsUrl:'https://maps.apple.com/?daddr=Pantheon+Rome', webUrl:'https://www.panteondroma.it' },
@@ -1366,13 +1367,13 @@ const DAY_DATA = {
   '2026-09-19': {
     label: 'Sat 19 Sep', title: 'Catacombs + Free Afternoon', destId: 'rome',
     photo: 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&q=80',
-    warnings: ['Pack bags tonight — early departure tomorrow for Salerno'],
+    warnings: ['Pack bags tonight, but tomorrow is a relaxed late-morning departure for Salerno'],
     activities: [
       { id:'d18a1', type:'transit', name:'Taxi to Appian Way', time:'09:00', duration:20, note:'Catacombs are ~5km south of the centre. Taxi recommended.', mapsUrl:'https://maps.apple.com/?daddr=Via+Appia+Antica+Rome' },
       { id:'d18a2', type:'activity', name:'Catacombs + Appian Way', time:'09:30', duration:120, note:'San Callisto or San Sebastiano — book in advance, tours leave regularly. Underground Christian burial chambers with original frescoes. Eerie and fascinating — the girls will be riveted.', mapsUrl:'https://maps.apple.com/?daddr=Catacombe+di+San+Callisto+Rome', webUrl:'https://www.catacombe.org' },
       { id:'d18a3', type:'food', name:'Lunch — Ostia Antica optional', time:'12:00', duration:75, note:'Either head to Ostia Antica (Rome\'s ancient port city, free entry, remarkable ruins, less crowded than anything in Rome) or spend the afternoon revisiting favourites.' },
       { id:'d18a4', type:'free', name:'Free afternoon — revisit, shop, or rest', time:'14:00', duration:180, note:'Leather goods, ceramics. Campo de\' Fiori market. Trevi Fountain revisit. Or Ostia Antica day trip (30 min by train from Termini, free entry).', mapsUrl:'https://maps.apple.com/?daddr=Campo+de+Fiori+Rome' },
-      { id:'d18a5', type:'activity', name:'Pack bags for 8am departure', time:'20:30', duration:45, note:'All bags ready tonight. Leave Rome hotel by 8:00am tomorrow with ALL luggage. Long exciting travel day ahead.' }
+      { id:'d18a5', type:'activity', name:'Pack bags for Salerno', time:'20:30', duration:45, note:'Have all bags ready tonight so tomorrow morning stays relaxed. Check out around 10:00am, enjoy breakfast, then take a late-morning Frecciarossa to Salerno.' }
     ]
   },
   '2026-09-20': {
@@ -1410,9 +1411,9 @@ const DAY_DATA = {
     warnings: ['Optional Pompeii stop en route — bags stored at Pompei Scavi station (~€5/bag)', 'Pre-arrange 7:00am taxi to airport for tomorrow morning (Wed 23) — ask hotel tonight'],
     activities: [
       { id:'d21a1', type:'hotel', name:'Check out — La casa dei ricordi', time:'10:00', duration:30, note:'1 Via Dalmazia, Salerno. Take all bags to Salerno train station.', mapsUrl:'https://maps.apple.com/?daddr=Salerno+Train+Station' },
-      { id:'d21a2', type:'transit', name:'Train: Salerno → (Pompei Scavi) → Napoli Centrale', time:'10:30', duration:60, note:'Short, frequent regional trains. ~35–45 min to Naples. If doing Pompeii, stop at Pompei Scavi Villa dei Misteri station — bags stored there while you visit, then continue to Naples.', mapsUrl:'https://maps.apple.com/?daddr=Napoli+Centrale&dirflg=r', webUrl:'https://www.trenitalia.com' },
-      { id:'d21a3', type:'activity', name:'Pompeii (optional — weather + energy dependent)', time:'11:30', duration:180, note:'If stopping: deposito bagagli at Pompei Scavi station, or Radical Storage / Bounce literally at the entrance (~€5/bag). 2–3 hrs at the site. Forum, House of the Vettii, plaster casts. One of the most moving ancient sites in the world. Skip if tired — Naples itself is worth the afternoon.', mapsUrl:'https://maps.apple.com/?daddr=Pompeii+Archaeological+Park', webUrl:'https://pompeiitickets.com' },
-      { id:'d21a4', type:'hotel', name:'Check in — Naples hotel', time:'14:00', duration:30, note:'Near historic centre (Spaccanapoli). Relaxed afternoon arrival. Ensure late check-in is possible if Pompeii stop runs long.', mapsUrl:'https://maps.apple.com/?daddr=Naples+Historic+Centre' },
+      { id:'d21a2', type:'transit', name:'Regional train: Salerno → Napoli Centrale', time:'10:30', duration:45, note:'Direct regional service, roughly 35–45 min. NOT YET BOOKED — frequent departures, so book closer to the date at trenitalia.com.', mapsUrl:'https://maps.apple.com/?daddr=Napoli+Centrale&dirflg=r', webUrl:'https://www.trenitalia.com' },
+      { id:'d21a3', type:'activity', name:'Pompeii (optional — weather + energy dependent)', time:'11:45', duration:240, note:'From Napoli Centrale, take the Circumvesuviana to Pompei Scavi – Villa dei Misteri (~35 min). Store all large bags at the station deposito or Radical Storage/Bounce (~€5/bag); bags over 30×30×15cm cannot enter the site. Allow 2–3 hrs inside, then return to Naples. Skip this entirely if tired.', mapsUrl:'https://maps.apple.com/?daddr=Pompei+Scavi+Villa+dei+Misteri', webUrl:'https://pompeiitickets.com' },
+      { id:'d21a4', type:'hotel', name:'Check in — Napoli DownTown', time:'16:00', duration:30, note:'Via Agostino Depretis 102, Port of Naples. Large Double Room, free breakfast, pay ~€152.45 at the property. Check-in until midnight, so an optional Pompeii stop is workable.', address:'Via Agostino Depretis 102, Naples, Italy', mapsUrl:'https://maps.apple.com/?daddr=Via+Agostino+Depretis+102+Naples+Italy' },
       { id:'d21a5', type:'activity', name:'Spaccanapoli evening walk', time:'17:00', duration:75, note:'The long straight street that cuts through the historic centre has extraordinary evening energy. UNESCO World Heritage historic centre — unlike anything else in Italy.', mapsUrl:'https://maps.apple.com/?daddr=Spaccanapoli+Naples' },
       { id:'d21a6', type:'food', name:'Dinner — simple trattoria near hotel', time:'19:30', duration:75, note:'Rather than the famous queue-and-wait pizzerias, find a solid low-key trattoria near the hotel — good pasta and pizza, no drama, no queuing. Ask the hotel for a nearby recommendation on check-in. Short stroll afterwards if keen, then early night.', mapsUrl:'https://maps.apple.com/?daddr=Naples+Historic+Centre', webUrl:'https://maps.google.com/?q=trattoria+naples+centro+storico' },
       { id:'d21a7', type:'activity', name:'Pre-arrange airport taxi (tonight)', time:'21:00', duration:15, note:'Ask hotel front desk to arrange 7:00am taxi to Naples Capodichino Airport for tomorrow morning. Do NOT leave this to the morning.', mapsUrl:'https://maps.apple.com/?daddr=Naples+Capodichino+Airport' }
@@ -1426,7 +1427,7 @@ const DAY_DATA = {
       { id:'d22a1', type:'transit', name:'Taxi: Hotel → Naples Airport', time:'07:00', duration:20, note:'Pre-arranged last night. Fixed tariff ~€25–30 / AU$40–50. Airport ~4–6km, ~15–20 min.', mapsUrl:'https://maps.apple.com/?daddr=Naples+Capodichino+Airport' },
       { id:'d22a2', type:'flight', name:'EJU4165 Naples → Athens', time:'09:15', duration:105, note:'EasyJet. Ref: KCPV1H7. Bag drop opens 06:45, closes 08:35 — must be checked in by 08:35. Seats: Rick 9A · Nina 8A · Abby 9B · Olivia 8B.', flightNum:'EJU4165', from:'NAP', to:'ATH', fromTime:'09:15', toTime:'12:00', ref:'KCPV1H7', mapsUrl:'', webUrl:'https://www.flightradar24.com/EJU4165' },
       { id:'d22a3', type:'transit', name:'Metro Line 3: Airport → City Centre', time:'12:15', duration:40, note:'Direct from airport. ~40 min. ~€9/person. Or taxi ~€40.', mapsUrl:'https://maps.apple.com/?daddr=Syntagma+Square+Athens&dirflg=r' },
-      { id:'d22a4', type:'hotel', name:'Check in — Athens hotel', time:'14:00', duration:30, note:'Plaka or Monastiraki area. Walking distance to Acropolis. Check-in from ~2pm.', mapsUrl:'https://maps.apple.com/?daddr=Plaka+Athens' },
+      { id:'d22a4', type:'hotel', name:'Check in — Acropolis Classy Apartments', time:'15:00', duration:30, note:'Makrigianni 3, Athens 117 42. Two-bedroom apartment with balcony. Keys are in an on-site lockbox using a keypad code. Booked via Booking.com; free cancellation until 8 Sep.', address:'Makrigianni 3, Athens 117 42', mapsUrl:'https://maps.apple.com/?daddr=Makrigianni+3+Athens+Greece' },
       { id:'d22a5', type:'activity', name:'Plaka neighbourhood walk', time:'15:30', duration:120, note:'The oldest neighbourhood in Athens. Narrow lanes, outdoor tavernas, cats on walls, ruins visible from every corner. Perfect orientation for the next two days.', mapsUrl:'https://maps.apple.com/?daddr=Plaka+Athens' },
       { id:'d22a6', type:'food', name:'First Greek dinner', time:'19:00', duration:105, note:'Start with tzatziki, dolmades, and fresh bread. Plaka or Monastiraki. A good first Greek meal sets the tone beautifully.', mapsUrl:'https://maps.apple.com/?daddr=Monastiraki+Athens', webUrl:'https://maps.google.com/?q=best+restaurants+plaka+athens' }
     ]
@@ -1434,7 +1435,7 @@ const DAY_DATA = {
   '2026-09-24': {
     label: 'Thu 24 Sep', title: 'Acropolis Day', destId: 'athens',
     photo: 'https://images.unsplash.com/photo-1555993539-1732b0258235?w=800&q=80',
-    warnings: ['Arrive at Acropolis at 8:00am SHARP — crowded by 10am, ferociously hot by noon', 'Pre-booked combination ticket at etickets.tap.gr required'],
+    warnings: ['Arrive at Acropolis at 8:00am SHARP — crowded by 10am, ferociously hot by noon', 'Acropolis combination ticket is NOT YET BOOKED — book ahead at etickets.tap.gr'],
     activities: [
       { id:'d23a1', type:'transit', name:'Walk to Acropolis entrance', time:'07:45', duration:15, note:'Propylaea entrance. Combination ticket from etickets.tap.gr covers Acropolis + 6 other sites.', mapsUrl:'https://maps.apple.com/?daddr=Acropolis+Athens&dirflg=w' },
       { id:'d23a2', type:'activity', name:'Acropolis — Parthenon + Erechtheion', time:'08:00', duration:150, note:'Propylaea, Parthenon (438 BC), Erechtheion with Caryatid porch, Temple of Athena Nike. Views over Athens remarkable. Go early — site is magical before the crowds.', mapsUrl:'https://maps.apple.com/?daddr=Parthenon+Acropolis+Athens', webUrl:'https://etickets.tap.gr' },
@@ -2794,10 +2795,25 @@ function renderInfo() {
       <div class="info-card">
         <div class="info-row"><div class="info-row-label">Family</div><div class="info-row-value">Rick, Nina, Abby (13), Olivia (10)</div></div>
         <div class="info-row"><div class="info-row-label">Dates</div><div class="info-row-value">2 Sep – 1 Oct 2026</div></div>
-        <div class="info-row"><div class="info-row-label">Total Budget</div><div class="info-row-value">AU$45,000–50,000</div></div>
+        <div class="info-row"><div class="info-row-label">Itinerary Source</div><div class="info-row-value">Master v9 · v12 route updates</div></div>
+        <div class="info-row"><div class="info-row-label">Total Budget</div><div class="info-row-value">AU$40,000 target</div></div>
         <div class="info-row"><div class="info-row-label">Baggage</div><div class="info-row-value">3 × 23kg checked bags</div></div>
         <div class="info-row"><div class="info-row-label">Cards</div><div class="info-row-value">Macquarie Platinum (card) + Macquarie Debit (ATM)</div></div>
         <div class="info-row"><div class="info-row-label">eSIM</div><div class="info-row-value">Airalo — Europe + Singapore</div></div>
+      </div>
+    </div>`;
+
+  html += `<div class="info-section-label">Booking Priorities</div>
+    <div class="info-section">
+      <div class="info-card">
+        <div class="info-row"><div class="info-row-label" style="flex:1">🔴 Jungfrau Travel Pass — buy before 10 Sep at jungfrau.ch</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">🔴 Como → Milan → Rome Frecciarossa — book now at trenitalia.com</div></div>
+        <div class="info-row copyable" onclick="openUrl('https://www.gov.uk/eta')"><div class="info-row-label" style="flex:1">🔴 UK ETA for all 4 passports — required for Australian travellers; tap for the official UK service</div></div>
+        <div class="info-row copyable" onclick="openUrl('https://travel-europe.europa.eu/en/etias/about-etias/what-is-etias')"><div class="info-row-label" style="flex:1">🟢 ETIAS — official launch is currently planned for the last quarter of 2026, after this trip; tap to recheck before departure</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">🔴 Confirm Macquarie Platinum travel-insurance activation</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">🟡 Singapore hotel — 3 nights, late arrival Sun 27 Sep</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">🟡 Tower of London, Churchill War Rooms, Colosseum, Acropolis and Rome Catacombs — not yet booked</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">🟡 Rome → Salerno train, Travelmar ferry and Salerno → Naples train — not yet booked</div></div>
       </div>
     </div>`;
 
@@ -2814,6 +2830,8 @@ function renderInfo() {
         <div class="info-row"><div class="info-row-label" style="flex:1">Naples: pre-arrange 7am taxi night before (hotel front desk)</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">EasyJet bag drop closes 08:35 — leave Naples hotel by 7am sharp</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">Day 22 Pompeii (optional): bags stored at Pompei Scavi station ~€5/bag — pre-book at radicalstorage.com</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">Athens apartment: arrange luggage storage for Sat 26 Sep after 11:00am checkout</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">Singapore: request late arrival instructions and late checkout when hotel is booked</div></div>
       </div>
     </div>`;
 
@@ -2886,6 +2904,7 @@ const STOP_COORDS = {
   'Liberty London':               [51.5128, -0.1402, 'Liberty London', 'Liberty', 'Liberty London, Great Marlborough Street'],
   'Piccadilly Circus':            [51.5101, -0.1341, 'Piccadilly Circus', 'Piccadilly', 'Piccadilly Circus, London'],
   'Kingly Court':                 [51.5126, -0.1395, 'Kingly Court', 'Dinner', 'Kingly Court, Carnaby, London'],
+  'St James Palace':              [51.5046, -0.1380, 'St James’s Palace', 'Guard', 'St James Palace, London'],
   'Buckingham Palace':            [51.5014, -0.1419, 'Buckingham Palace', 'Palace', 'Buckingham Palace, London'],
   'State Rooms':                  [51.5014, -0.1419, 'State Rooms', 'State Rms', 'Buckingham Palace State Rooms, London'],
   'Trafalgar Square':             [51.5080, -0.1281, 'Trafalgar Square', 'Trafalgar', 'Trafalgar Square, London'],
@@ -2985,7 +3004,7 @@ const STOP_COORDS = {
 const DAY_ROUTES = {
   '2026-09-02': { mode:'driving', stops:['Chelsea Cloisters','Local dinner'] },
   '2026-09-03': { mode:'walking', stops:['Chelsea Cloisters','Natural History Museum','Harrods','Carnaby Street','Piccadilly Circus','Kingly Court'] },
-  '2026-09-04': { mode:'walking', stops:['Chelsea Cloisters','Buckingham Palace','Trafalgar Square','Westminster Abbey','Big Ben','South Bank'] },
+  '2026-09-04': { mode:'walking', stops:['Chelsea Cloisters','St James Palace','Buckingham Palace','Trafalgar Square','Big Ben','Westminster Abbey','South Bank'] },
   '2026-09-05': { mode:'walking', stops:['Chelsea Cloisters','Tower of London','Borough Market','Millennium Bridge','Sky Garden','Leadenhall Market'] },
   '2026-09-06': { mode:'walking', stops:['Chelsea Cloisters','HTB Brompton Road','Apollo Victoria Theatre'] },
   '2026-09-07': { mode:'transit', stops:['Chelsea Cloisters','Covent Garden','Churchill War Rooms','Chinatown'] },
@@ -3003,7 +3022,7 @@ const DAY_ROUTES = {
   '2026-09-19': { mode:'walking', stops:['Navona Loft','Via Appia Antica','Catacombs of San Callisto','Campo de\' Fiori'] },
   '2026-09-20': { mode:'transit', stops:['Navona Loft','Roma Termini','Salerno Station','La casa dei ricordi','Lungomare Trieste'] },
   '2026-09-21': { mode:'transit', stops:['La casa dei ricordi','Salerno Ferry Port','Maiori','Minori','Amalfi','Salerno Ferry Port'] },
-  '2026-09-22': { mode:'transit', stops:['La casa dei ricordi','Napoli Centrale','Napoli DownTown Hotel','Spaccanapoli'] },
+  '2026-09-22': { mode:'transit', stops:['La casa dei ricordi','Napoli Centrale','Pompei Scavi Station','Napoli DownTown Hotel','Spaccanapoli'] },
   '2026-09-23': { mode:'driving', stops:['Napoli DownTown Hotel','Naples Airport','Acropolis Classy Apartments','Plaka'] },
   '2026-09-24': { mode:'walking', stops:['Acropolis Classy Apartments','Acropolis','Acropolis Museum','Monastiraki'] },
   '2026-09-25': { mode:'driving', stops:['Acropolis Classy Apartments','Cape Sounion','Anafiotika'] },
