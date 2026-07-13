@@ -253,7 +253,7 @@ body{height:100%;font-family:'Inter',sans-serif;background:#0a0a0f;color:#f0f0f5
 .day-action-ico{font-size:18px;line-height:1}
 .day-action-lbl{font-size:10px;font-weight:700;color:var(--text-secondary);letter-spacing:.3px}
 
-/* ─── SEARCH, CHECKLIST & DAILY MOVEMENT ─── */
+/* ─── SEARCH & CHECKLIST ─── */
 .header-action{border:1px solid var(--border);background:var(--surface);color:var(--text-primary);border-radius:20px;padding:7px 11px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
 .search-results{display:flex;flex-direction:column;gap:8px;max-height:55vh;overflow:auto}
 .search-result{width:100%;text-align:left;padding:11px 12px;border-radius:var(--radius-md);background:var(--surface);border:1px solid var(--border);color:var(--text-primary);font-family:inherit;cursor:pointer}
@@ -266,21 +266,7 @@ body{height:100%;font-family:'Inter',sans-serif;background:#0a0a0f;color:#f0f0f5
 .checklist-item input{width:19px;height:19px;accent-color:var(--green);flex-shrink:0;margin-top:1px}
 .checklist-copy{font-size:13px;color:var(--text-primary);line-height:1.4}
 .checklist-item.done .checklist-copy{text-decoration:line-through;color:var(--text-muted)}
-.movement-card{margin:12px 14px 0;padding:15px;border-radius:var(--radius-lg);background:var(--surface);border:1px solid var(--border)}
-.movement-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.movement-title{font-size:15px;font-weight:800;color:var(--text-primary)}
-.movement-private{font-size:10px;color:var(--green);font-weight:700;margin-top:3px}
-.movement-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}
-.movement-stat{background:var(--surface-raised);border-radius:var(--radius-sm);padding:9px;text-align:center}
-.movement-value{font-size:17px;font-weight:800;color:var(--text-primary)}
-.movement-label{font-size:9px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px;margin-top:2px}
-.movement-fields{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.movement-field label{font-size:10px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:4px}
-.movement-field input{width:100%;border:1px solid var(--border-bright);background:var(--surface-raised);color:var(--text-primary);padding:9px;border-radius:var(--radius-sm);font:inherit;font-size:14px}
-.movement-actions{display:flex;gap:8px;margin-top:10px}
-.movement-btn{flex:1;border:1px solid var(--border-bright);background:var(--surface-raised);color:var(--text-primary);padding:9px;border-radius:var(--radius-sm);font:inherit;font-size:12px;font-weight:800;cursor:pointer}
-.movement-btn.recording{background:rgba(255,69,58,.14);border-color:rgba(255,69,58,.4);color:#ff453a}
-.movement-note{font-size:10px;color:var(--text-muted);line-height:1.4;margin-top:9px}
+.secondary-action-btn{flex:1;border:1px solid var(--border-bright);background:var(--surface-raised);color:var(--text-primary);padding:9px;border-radius:var(--radius-sm);font:inherit;font-size:12px;font-weight:800;cursor:pointer}
 .late-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:13px;margin-bottom:8px}
 .late-time{font-size:11px;font-weight:800;color:var(--accent)}
 .late-name{font-size:15px;font-weight:800;color:var(--text-primary);margin-top:3px}
@@ -1057,8 +1043,6 @@ function setSyncState(s) {
 
 const loadLocal = () => { try { return JSON.parse(localStorage.getItem('travelhq_v1') || '{}') } catch(e) { return {} } };
 const saveLocal = d => { localStorage.setItem('travelhq_v1', JSON.stringify(d)); };
-const loadPrivate = () => { try { return JSON.parse(localStorage.getItem('travelhq_private_v1') || '{}') } catch(e) { return {} } };
-const savePrivate = d => { localStorage.setItem('travelhq_private_v1', JSON.stringify(d)); };
 
 function load() {
   if (_cache) return _cache;
@@ -2006,9 +1990,6 @@ function renderDayView(dayKey) {
   // ── MAP ──
   html += buildDayMap(dayKey);
 
-  // ── PRIVATE DAILY MOVEMENT ──
-  html += buildMovementPanel(dayKey);
-
   // ── SCHEDULE with time-of-day grouping ──
   html += `<div class="activities-section">`;
 
@@ -2890,7 +2871,7 @@ function openLateMode(dayKey) {
   }).slice(0,3);
   document.getElementById('lateContent').innerHTML = essential.length ? essential.map((act,i) => {
     const mapsUrl = safeUrl(act.mapsUrl);
-    return `<div class="late-card"><div class="late-time">${i === 0 ? 'NEXT · ' : ''}${escapeHtml(formatTime(act.time))}</div><div class="late-name">${escapeHtml(act.name)}</div>${act.note ? `<div class="late-note">${escapeHtml(act.note)}</div>` : ''}${mapsUrl ? `<button class="movement-btn" style="margin-top:9px" onclick="openUrl('${escapeJsString(mapsUrl)}')">Directions</button>` : ''}</div>`;
+    return `<div class="late-card"><div class="late-time">${i === 0 ? 'NEXT · ' : ''}${escapeHtml(formatTime(act.time))}</div><div class="late-name">${escapeHtml(act.name)}</div>${act.note ? `<div class="late-note">${escapeHtml(act.note)}</div>` : ''}${mapsUrl ? `<button class="secondary-action-btn" style="margin-top:9px" onclick="openUrl('${escapeJsString(mapsUrl)}')">Directions</button>` : ''}</div>`;
   }).join('') : '<div class="empty-state"><div class="empty-state-title">No timed commitments left</div><div class="empty-state-sub">The rest of the day can stay flexible.</div></div>';
   document.getElementById('lateModal').classList.add('open');
 }
@@ -3222,137 +3203,6 @@ const DAY_ROUTES = {
 };
 
 let _leafletMaps = {}; // cache map instances by dayKey
-let _trackLayers = {};
-let gpsWatchId = null;
-let trackingDayKey = null;
-let gpsWakeLock = null;
-
-function movementId(dayKey) { return dayKey.replace(/-/g, ''); }
-
-function getDayWellness(dayKey) {
-  const privateData = loadPrivate();
-  privateData.wellness = privateData.wellness || {};
-  return privateData.wellness[dayKey] || { steps:'', activeCalories:'', track:[] };
-}
-
-function trackDistanceKm(points) {
-  let total = 0;
-  for (let i = 1; i < points.length; i++) total += haversineKm(points[i-1][0], points[i-1][1], points[i][0], points[i][1]);
-  return total;
-}
-
-function haversineKm(lat1, lon1, lat2, lon2) {
-  const rad = n => n * Math.PI / 180;
-  const dLat = rad(lat2-lat1), dLon = rad(lon2-lon1);
-  const a = Math.sin(dLat/2) ** 2 + Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLon/2) ** 2;
-  return 6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-}
-
-function buildMovementPanel(dayKey) {
-  const wellness = getDayWellness(dayKey);
-  const points = wellness.track || [];
-  const distance = trackDistanceKm(points);
-  const durationMs = points.length > 1 ? points[points.length-1][2] - points[0][2] : 0;
-  const hours = Math.floor(durationMs / 3600000);
-  const mins = Math.floor((durationMs % 3600000) / 60000);
-  const duration = hours ? `${hours}h ${mins}m` : `${mins}m`;
-  const isRecording = gpsWatchId !== null && trackingDayKey === dayKey;
-  const id = movementId(dayKey);
-  return `<section class="movement-card" id="movement_${id}">
-    <div class="movement-head"><div><div class="movement-title">Daily Movement</div><div class="movement-private">🔒 Private on this device</div></div><div style="font-size:20px">${isRecording ? '🔴' : '🚶'}</div></div>
-    <div class="movement-stats">
-      <div class="movement-stat"><div class="movement-value">${distance.toFixed(2)}</div><div class="movement-label">GPS km</div></div>
-      <div class="movement-stat"><div class="movement-value">${duration}</div><div class="movement-label">Tracked</div></div>
-      <div class="movement-stat"><div class="movement-value">${points.length}</div><div class="movement-label">GPS points</div></div>
-    </div>
-    <div class="movement-fields">
-      <div class="movement-field"><label for="steps_${id}">Apple Watch steps</label><input id="steps_${id}" type="number" inputmode="numeric" min="0" placeholder="e.g. 18420" value="${escapeHtml(wellness.steps)}" onchange="saveWellnessMetric('${dayKey}','steps',this.value)"></div>
-      <div class="movement-field"><label for="cal_${id}">Active calories (kcal)</label><input id="cal_${id}" type="number" inputmode="numeric" min="0" placeholder="e.g. 720" value="${escapeHtml(wellness.activeCalories)}" onchange="saveWellnessMetric('${dayKey}','activeCalories',this.value)"></div>
-    </div>
-    <div class="movement-actions">
-      <button class="movement-btn${isRecording ? ' recording' : ''}" onclick="${isRecording ? 'stopGpsTracking()' : `startGpsTracking('${dayKey}')`}">${isRecording ? 'Stop GPS' : 'Start GPS Track'}</button>
-      ${points.length ? `<button class="movement-btn" onclick="clearGpsTrack('${dayKey}')">Clear Track</button>` : ''}
-    </div>
-    <div class="movement-note">Keep Travel HQ open while tracking. GPS and health totals never sync to Supabase. Copy steps and active energy from Apple Fitness or Health at the end of the day.</div>
-  </section>`;
-}
-
-function saveWellnessMetric(dayKey, field, value) {
-  const privateData = loadPrivate();
-  privateData.wellness = privateData.wellness || {};
-  const wellness = privateData.wellness[dayKey] || { steps:'', activeCalories:'', track:[] };
-  wellness[field] = value === '' ? '' : Math.max(0, Math.round(Number(value) || 0));
-  privateData.wellness[dayKey] = wellness;
-  savePrivate(privateData);
-}
-
-async function requestGpsWakeLock() {
-  try { if ('wakeLock' in navigator) gpsWakeLock = await navigator.wakeLock.request('screen'); } catch(e) {}
-}
-
-function startGpsTracking(dayKey) {
-  if (!navigator.geolocation) { showToast('GPS is not available in this browser'); return; }
-  if (gpsWatchId !== null) stopGpsTracking();
-  trackingDayKey = dayKey;
-  requestGpsWakeLock();
-  gpsWatchId = navigator.geolocation.watchPosition(position => {
-    if (trackingDayKey !== dayKey || position.coords.accuracy > 150) return;
-    const privateData = loadPrivate();
-    privateData.wellness = privateData.wellness || {};
-    const wellness = privateData.wellness[dayKey] || { steps:'', activeCalories:'', track:[] };
-    wellness.track = wellness.track || [];
-    const point = [Number(position.coords.latitude.toFixed(6)), Number(position.coords.longitude.toFixed(6)), position.timestamp, Math.round(position.coords.accuracy)];
-    const last = wellness.track[wellness.track.length-1];
-    if (!last || haversineKm(last[0], last[1], point[0], point[1]) >= 0.01 || point[2] - last[2] >= 30000) wellness.track.push(point);
-    privateData.wellness[dayKey] = wellness;
-    savePrivate(privateData);
-    refreshMovementPanel(dayKey);
-    drawRecordedTrack(dayKey);
-  }, error => {
-    stopGpsTracking();
-    showToast(error.code === 1 ? 'Location permission was not granted' : 'GPS signal unavailable');
-  }, { enableHighAccuracy:true, maximumAge:5000, timeout:20000 });
-  refreshMovementPanel(dayKey);
-  showToast('GPS tracking started · keep the app open');
-}
-
-function stopGpsTracking() {
-  const dayKey = trackingDayKey;
-  if (gpsWatchId !== null) navigator.geolocation.clearWatch(gpsWatchId);
-  gpsWatchId = null;
-  trackingDayKey = null;
-  if (gpsWakeLock) gpsWakeLock.release().catch(() => {});
-  gpsWakeLock = null;
-  if (dayKey) refreshMovementPanel(dayKey);
-}
-
-function clearGpsTrack(dayKey) {
-  if (!confirm('Clear the recorded GPS track for this day?')) return;
-  if (trackingDayKey === dayKey) stopGpsTracking();
-  const privateData = loadPrivate();
-  privateData.wellness = privateData.wellness || {};
-  const wellness = privateData.wellness[dayKey] || { steps:'', activeCalories:'', track:[] };
-  wellness.track = [];
-  privateData.wellness[dayKey] = wellness;
-  savePrivate(privateData);
-  if (_trackLayers[dayKey] && _leafletMaps[dayKey]) _leafletMaps[dayKey].removeLayer(_trackLayers[dayKey]);
-  delete _trackLayers[dayKey];
-  refreshMovementPanel(dayKey);
-}
-
-function refreshMovementPanel(dayKey) {
-  const el = document.getElementById(`movement_${movementId(dayKey)}`);
-  if (el) el.outerHTML = buildMovementPanel(dayKey);
-}
-
-function drawRecordedTrack(dayKey) {
-  const map = _leafletMaps[dayKey];
-  if (!map || typeof L === 'undefined') return;
-  const points = getDayWellness(dayKey).track || [];
-  if (_trackLayers[dayKey]) map.removeLayer(_trackLayers[dayKey]);
-  if (points.length < 2) return;
-  _trackLayers[dayKey] = L.polyline(points.map(p => [p[0],p[1]]), { color:'#34c759', weight:5, opacity:.9 }).addTo(map);
-}
 
 function buildDayMap(dayKey) {
   const route = DAY_ROUTES[dayKey];
@@ -3385,7 +3235,6 @@ function initDayMap(dayKey) {
   if (_leafletMaps[dayKey]) {
     _leafletMaps[dayKey].remove();
     delete _leafletMaps[dayKey];
-    delete _trackLayers[dayKey];
   }
 
   // Calculate bounds
@@ -3419,7 +3268,6 @@ function initDayMap(dayKey) {
   });
 
   map.fitBounds(bounds, { padding:[16,16] });
-  drawRecordedTrack(dayKey);
 }
 
 function openStopDirections(dayKey, stopIndex) {
