@@ -169,11 +169,15 @@ body{height:100%;font-family:'Inter',sans-serif;background:#0a0a0f;color:#f0f0f5
 .day-map-stops{
   margin:6px 14px 0;display:flex;gap:5px;flex-wrap:wrap;padding:4px 0
 }
+.day-map-helper{margin:3px 14px 0;font-size:11px;color:var(--text-muted)}
 .day-map-stop-pill{
   font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;
   background:var(--surface);border:1px solid var(--border);
-  color:var(--text-secondary);display:flex;align-items:center;gap:4px
+  color:var(--text-secondary);display:flex;align-items:center;gap:4px;
+  cursor:pointer;font-family:inherit
 }
+.day-map-stop-pill:hover{border-color:var(--accent);color:var(--text-primary)}
+.day-map-stop-pill:active{transform:scale(.97)}
 .dms-num{
   width:15px;height:15px;border-radius:50%;
   background:var(--accent);color:#fff;
@@ -3023,8 +3027,12 @@ function buildDayMap(dayKey) {
       <div id="${mapId}" class="day-map-el"></div>
     </div>
     ${buildGoogleMapsBtn(dayKey, route, stops)}
+    <div class="day-map-helper">Tap a numbered stop for directions from your current location.</div>
     <div class="day-map-stops">
-      ${stops.map((s,i) => `<div class="day-map-stop-pill"><span class="dms-num">${i+1}</span>${s[2].split('(')[0].trim()}</div>`).join('')}
+      ${stops.map((s,i) => {
+        const label = s[2].split('(')[0].trim();
+        return `<button class="day-map-stop-pill" onclick="openStopDirections('${dayKey}',${i})" aria-label="Directions from current location to ${escapeHtml(label)}" title="Directions from your current location"><span class="dms-num">${i+1}</span>${escapeHtml(label)}</button>`;
+      }).join('')}
     </div>`;
 }
 
@@ -3061,12 +3069,25 @@ function initDayMap(dayKey) {
       html: `<div style="width:26px;height:26px;border-radius:50%;background:${color};border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:800">${i+1}</div>`,
       iconSize:[26,26], iconAnchor:[13,13]
     });
-    L.marker([stop[0], stop[1]], { icon })
+    L.marker([stop[0], stop[1]], { icon, title:`Directions to ${stop[3]}`, keyboard:true })
       .bindTooltip(stop[3], { permanent:false, direction:'top', className:'', offset:[0,-14] })
+      .on('click', () => openStopDirections(dayKey, i))
       .addTo(map);
   });
 
   map.fitBounds(bounds, { padding:[16,16] });
+}
+
+function openStopDirections(dayKey, stopIndex) {
+  const route = DAY_ROUTES[dayKey];
+  if (!route) return;
+  const stops = route.stops.map(key => STOP_COORDS[key]).filter(Boolean);
+  const stop = stops[stopIndex];
+  if (!stop) return;
+  const allowedModes = ['walking','transit','driving','bicycling'];
+  const mode = allowedModes.includes(route.mode) ? route.mode : 'walking';
+  const destination = encodeURIComponent(stop[4] || stop[2]);
+  openUrl(`https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=${mode}`);
 }
 
 function buildGoogleMapsBtn(dayKey, route, stops) {
