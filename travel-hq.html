@@ -33,7 +33,9 @@ body{height:100%;font-family:'Inter',sans-serif;background:#0a0a0f;color:#f0f0f5
   --text-secondary:rgba(240,240,245,0.60);
   --text-muted:rgba(240,240,245,0.38);
   --nav-h:50px;
-  --safe-bottom:env(safe-area-inset-bottom,0px);
+  /* iOS normally reports 34px for the Home-indicator area. Cap it so an
+     oversized standalone-web-app inset cannot create a large empty footer. */
+  --safe-bottom:min(env(safe-area-inset-bottom,0px), 34px);
   --accent-london:#5b7fa6;
   --accent-grindelwald:#4a8c7a;
   --accent-como:#7a8f6e;
