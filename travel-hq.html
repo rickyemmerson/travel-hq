@@ -182,51 +182,119 @@ body{height:100%;font-family:'Inter',sans-serif;background:#0a0a0f;color:#f0f0f5
 .day-view-dest{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
 .day-view-title{font-size:26px;font-weight:700;letter-spacing:-.4px;color:var(--text-primary)}
 .day-view-subtitle{font-size:13px;color:var(--text-secondary);margin-top:4px}
-.day-view-hero{margin:16px;border-radius:var(--radius-lg);overflow:hidden;height:180px;position:relative}
-.day-view-hero img{width:100%;height:100%;object-fit:cover}
+.day-view-hero{
+  margin:0;border-radius:0;overflow:hidden;
+  height:260px;position:relative
+}
+.day-view-hero img{width:100%;height:100%;object-fit:cover;display:block}
+.day-view-hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom, rgba(0,0,0,0.08) 30%, rgba(0,0,0,0.72) 100%)
+}
+.day-view-hero-content{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:20px 18px 16px
+}
+.day-view-dest-tag{
+  font-size:10px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;
+  color:rgba(255,255,255,0.75);margin-bottom:5px
+}
+.day-view-title-hero{
+  font-size:24px;font-weight:700;letter-spacing:-.4px;
+  color:#fff;line-height:1.2;text-shadow:0 1px 8px rgba(0,0,0,0.4)
+}
+.day-view-subtitle-hero{
+  font-size:12px;color:rgba(255,255,255,0.75);margin-top:4px;
+  display:flex;align-items:center;gap:8px
+}
 .day-photo-btn{
-  position:absolute;bottom:10px;right:10px;
-  background:rgba(0,0,0,0.5);backdrop-filter:blur(10px);
+  position:absolute;top:12px;right:12px;
+  background:rgba(0,0,0,0.45);backdrop-filter:blur(10px);
   border:1px solid rgba(255,255,255,0.2);
   color:#fff;font-size:11px;font-weight:600;
-  padding:6px 12px;border-radius:20px;cursor:pointer;
+  padding:5px 11px;border-radius:20px;cursor:pointer;
   display:flex;align-items:center;gap:5px
 }
 
+/* ─── DAY NAV STRIP (prev/next) ─── */
+.day-nav-strip{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px 0
+}
+.day-nav-pill{
+  display:flex;align-items:center;gap:4px;
+  font-size:12px;font-weight:600;color:var(--accent);
+  padding:6px 12px;border-radius:20px;
+  background:rgba(196,122,74,.10);border:1px solid rgba(196,122,74,.2);
+  cursor:pointer;transition:background .15s
+}
+.day-nav-pill:active{background:rgba(196,122,74,.20)}
+.day-nav-pill.disabled{opacity:.3;pointer-events:none}
+.day-nav-center{font-size:11px;font-weight:600;color:var(--text-muted)}
+
+/* ─── ACTIONS BAR ─── */
+.day-actions-bar{
+  display:flex;gap:8px;
+  margin:12px 14px 0
+}
+.day-action-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;
+  padding:10px 8px;border-radius:var(--radius-md);
+  background:var(--surface);border:1px solid var(--border);
+  cursor:pointer;transition:background .15s;font-family:inherit
+}
+.day-action-btn:active{background:var(--surface-raised)}
+.day-action-ico{font-size:18px;line-height:1}
+.day-action-lbl{font-size:10px;font-weight:700;color:var(--text-secondary);letter-spacing:.3px}
+
 /* ─── WARNING CARD ─── */
 .warning-card{
-  margin:0 16px 12px;
+  margin:10px 14px 0;
   background:rgba(255,159,10,0.10);
   border:1px solid rgba(255,159,10,0.30);
-  border-radius:var(--radius-md);padding:14px 16px;
+  border-radius:var(--radius-md);padding:12px 14px;
 }
-.warning-title{font-size:12px;font-weight:700;color:#ff9f0a;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:6px}
-.warning-item{font-size:13px;color:var(--text-primary);line-height:1.5;padding:3px 0}
+.warning-title{font-size:11px;font-weight:800;color:#ff9f0a;letter-spacing:.6px;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.warning-item{font-size:12px;color:var(--text-primary);line-height:1.55;padding:2px 0}
 
 /* ─── ACTIVITY CARDS ─── */
-.activities-section{padding:0 16px}
+.activities-section{padding:0 14px}
+.time-group-label{
+  font-size:10px;font-weight:800;letter-spacing:.9px;text-transform:uppercase;
+  color:var(--text-muted);padding:14px 0 6px;
+  display:flex;align-items:center;gap:8px
+}
+.time-group-label::after{
+  content:'';flex:1;height:1px;background:var(--border)
+}
 .section-label{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text-muted);padding:16px 0 8px}
 .activity-card{
   background:var(--surface);border:1px solid var(--border);
   border-radius:var(--radius-md);margin-bottom:8px;overflow:hidden;
-  cursor:pointer;transition:background .15s,transform .1s
+  cursor:pointer;transition:background .15s,transform .1s;
+  border-left:3px solid transparent
 }
 .activity-card:active{transform:scale(.99);background:var(--surface-raised)}
+.act-type-activity{border-left-color:#3d8a72}
+.act-type-food{border-left-color:#c47a4a}
+.act-type-ferry{border-left-color:#5b7fa6}
+.act-type-free{border-left-color:#7a9bb5}
+.act-type-hotel{border-left-color:#c4953a}
 .activity-card-inner{display:flex;gap:0}
 .activity-thumb{
-  width:90px;flex-shrink:0;background-size:cover;background-position:center;
-  background-color:var(--surface-raised);position:relative;min-height:90px
+  width:88px;flex-shrink:0;background-size:cover;background-position:center;
+  background-color:var(--surface-raised);position:relative;min-height:88px
 }
-.activity-content{flex:1;padding:12px 14px}
-.activity-time-row{display:flex;align-items:center;gap:8px;margin-bottom:4px}
-.activity-time{font-size:11px;font-weight:700;color:var(--text-muted);letter-spacing:.3px}
-.activity-duration{font-size:11px;color:var(--text-muted);background:var(--surface-raised);padding:2px 7px;border-radius:10px}
-.activity-type-badge{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:2px 7px;border-radius:10px;margin-left:auto}
-.activity-name{font-size:15px;font-weight:600;color:var(--text-primary);line-height:1.3}
-.activity-note{font-size:12px;color:var(--text-secondary);margin-top:4px;line-height:1.5}
+.activity-content{flex:1;padding:11px 13px}
+.activity-time-row{display:flex;align-items:center;gap:7px;margin-bottom:3px}
+.activity-time{font-size:11px;font-weight:800;color:var(--text-muted);letter-spacing:.3px}
+.activity-duration{font-size:10px;color:var(--text-muted);background:var(--surface-raised);padding:1px 6px;border-radius:8px}
+.activity-type-badge{font-size:9px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;padding:2px 6px;border-radius:8px;margin-left:auto}
+.activity-name{font-size:14px;font-weight:600;color:var(--text-primary);line-height:1.3}
+.activity-note{font-size:11px;color:var(--text-secondary);margin-top:3px;line-height:1.5}
 .activity-links{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
 .activity-link-btn{
-  font-size:11px;font-weight:600;padding:5px 10px;
+  font-size:11px;font-weight:600;padding:4px 10px;
   border-radius:20px;border:1px solid var(--border-bright);
   color:var(--text-primary);background:var(--surface-raised);
   display:flex;align-items:center;gap:4px;cursor:pointer;
@@ -1650,136 +1718,118 @@ function renderDayView(dayKey) {
   const today = getTodayKey();
   const isToday = dayKey === today;
 
-  // Prev/next day
   const allDays = Object.keys(DAY_DATA).sort();
   const idx = allDays.indexOf(dayKey);
   const prevKey = idx > 0 ? allDays[idx-1] : null;
   const nextKey = idx < allDays.length-1 ? allDays[idx+1] : null;
+  const accentColor = dest?.accent || 'var(--accent)';
 
+  // ── HERO with overlaid title ──
+  const userPhoto = (state.dayPhotos || {})[dayKey];
+  const heroSrc = userPhoto || day.photo;
   let html = `
-    <div class="day-view-header">
-      <div class="day-view-dest" style="color:${dest?.accent || 'var(--accent)'}">${dest?.name?.toUpperCase() || ''} · DAY ${getDayNumber(dayKey)}</div>
-      <div class="day-view-title">${day.title}</div>
-      <div class="day-view-subtitle">${day.label}${isToday ? ' · <span style="color:var(--green);font-weight:600">Today</span>' : ''}</div>
+    <div class="day-view-hero">
+      <img src="${heroSrc}" alt="${day.title}" onerror="this.style.display='none'">
+      <div class="day-view-hero-overlay"></div>
+      <div class="day-photo-btn" onclick="changeHeroPhoto('${dayKey}')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        Photo
+      </div>
+      <div class="day-view-hero-content">
+        <div class="day-view-dest-tag" style="color:${accentColor}">${dest?.name?.toUpperCase() || ''} · DAY ${getDayNumber(dayKey)}</div>
+        <div class="day-view-title-hero">${day.title}</div>
+        <div class="day-view-subtitle-hero">
+          ${day.label}${isToday ? ' · <span style="color:#34c759;font-weight:700">Today</span>' : ''}
+        </div>
+      </div>
     </div>`;
 
-  // Prev/Next nav row
-  html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px 0">
-    <div onclick="${prevKey ? `showDayViewFromNav('${prevKey}')` : ''}" style="display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--accent);padding:6px 12px;border-radius:20px;background:rgba(196,122,74,.10);border:1px solid rgba(196,122,74,.2);cursor:pointer;opacity:${prevKey?1:.3};pointer-events:${prevKey?'auto':'none'}">
+  // ── PREV / NEXT NAV ──
+  html += `<div class="day-nav-strip">
+    <div class="day-nav-pill${prevKey?'':' disabled'}" onclick="${prevKey?`showDayViewFromNav('${prevKey}')`:'' }">
       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
-      ${prevKey ? DAY_DATA[prevKey].label.split(' ').slice(0,2).join(' ') : ''}
+      ${prevKey ? DAY_DATA[prevKey].label.split(' ').slice(0,2).join(' ') : '—'}
     </div>
-    <div style="font-size:11px;font-weight:600;color:var(--text-muted)">Day ${getDayNumber(dayKey)} of 29</div>
-    <div onclick="${nextKey ? `showDayViewFromNav('${nextKey}')` : ''}" style="display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--accent);padding:6px 12px;border-radius:20px;background:rgba(196,122,74,.10);border:1px solid rgba(196,122,74,.2);cursor:pointer;opacity:${nextKey?1:.3};pointer-events:${nextKey?'auto':'none'}">
-      ${nextKey ? DAY_DATA[nextKey].label.split(' ').slice(0,2).join(' ') : ''}
+    <div class="day-nav-center">Day ${getDayNumber(dayKey)} of 29</div>
+    <div class="day-nav-pill${nextKey?'':' disabled'}" onclick="${nextKey?`showDayViewFromNav('${nextKey}')`:'' }">
+      ${nextKey ? DAY_DATA[nextKey].label.split(' ').slice(0,2).join(' ') : '—'}
       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
     </div>
   </div>`;
 
-  // Hero photo
-  const userPhoto = (state.dayPhotos || {})[dayKey];
-  const heroSrc = userPhoto || day.photo;
-  html += `
-    <div class="day-view-hero">
-      <img src="${heroSrc}" alt="${day.title}" onerror="this.style.display='none'">
-      <div class="day-photo-btn" onclick="changeHeroPhoto('${dayKey}')">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        Change Photo
-      </div>
-    </div>`;
-
-  // Weather widget — tappable to open Weather app
-  if (dest?.weather) {
-    const weatherLoc = encodeURIComponent(`${dest.name}, ${dest.country}`);
-    html += `
-      <div class="weather-widget" onclick="window.location.href='weather://current?location=${weatherLoc}'" style="cursor:pointer">
-        <div class="weather-icon">${dest.weather.icon}</div>
-        <div class="weather-info">
-          <div class="weather-temp">${dest.weather.temp}</div>
-          <div class="weather-desc">${dest.weather.desc}</div>
-          <div class="weather-location">${dest.name}, ${dest.country}</div>
-        </div>
-        <div style="font-size:11px;font-weight:600;color:var(--accent);display:flex;align-items:center;gap:3px;flex-shrink:0">Open <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></div>
-      </div>`;
-  }
-
-  // Warning cards
-  if (day.warnings && day.warnings.length > 0) {
-    html += `
-      <div class="warning-card">
-        <div class="warning-title">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          Important
-        </div>
-        ${day.warnings.map(w => `<div class="warning-item">· ${w}</div>`).join('')}
-      </div>`;
-  }
-
-  // Day map + Google Maps route button
-  html += buildDayMap(dayKey);
-
-  // Journal link
-  html += `
-    <div class="journal-link-card" onclick="openJournal('${dayKey}')">
-      <div class="journal-icon">📓</div>
-      <div class="journal-link-info">
-        <div class="journal-link-title">Add to Apple Journal</div>
-        <div class="journal-link-sub">Opens share sheet → tap "Add to Journal"</div>
-      </div>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-    </div>`;
-
-  // Activities
-  html += `<div class="activities-section"><div class="section-label">Schedule</div>`;
-
-  activities.forEach((act, i) => {
-    if (act.type === 'transit') {
-      html += renderTransitCard(act, dayKey);
-    } else if (act.type === 'flight') {
-      html += renderFlightCard(act);
-    } else if (act.type === 'hotel') {
-      html += renderHotelCard(act, dayKey);
-    } else {
-      html += renderActivityCard(act, dayKey, dest);
-    }
-  });
-
-  // Add activity button
-  html += `
-    <button class="section-add-btn" onclick="openAddActivity('${dayKey}')">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      Add Activity
+  // ── ACTIONS BAR (Journal · Expense · Weather) ──
+  const todayTxs = (state.transactions || []).filter(t => t.date === dayKey);
+  const todayTotal = todayTxs.reduce((s,t) => s+t.aud, 0);
+  const expenseLabel = todayTxs.length > 0 ? `AU$${todayTotal.toFixed(0)} logged` : 'Log Expense';
+  const weatherLoc = encodeURIComponent(`${dest?.name || ''}, ${dest?.country || ''}`);
+  html += `<div class="day-actions-bar">
+    <button class="day-action-btn" onclick="openJournal('${dayKey}')">
+      <span class="day-action-ico">📓</span>
+      <span class="day-action-lbl">Journal</span>
+    </button>
+    <button class="day-action-btn" onclick="openTxModal('${dayKey}')">
+      <span class="day-action-ico">${todayTxs.length > 0 ? '💰' : '💳'}</span>
+      <span class="day-action-lbl">${expenseLabel}</span>
+    </button>
+    <button class="day-action-btn" onclick="window.location.href='weather://current?location=${weatherLoc}'">
+      <span class="day-action-ico">${dest?.weather?.icon || '🌤️'}</span>
+      <span class="day-action-lbl">${dest?.weather?.temp || 'Weather'}</span>
     </button>
   </div>`;
 
-  // Today's spend
-  const todayTxs = (state.transactions || []).filter(t => t.date === dayKey);
-  if (todayTxs.length > 0) {
-    const todayTotal = todayTxs.reduce((s, t) => s + t.aud, 0);
-    html += `
-      <div style="margin:16px 16px 0">
-        <div class="section-label">Today's Spending</div>
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer" onclick="navTo('budget')">
-          <div>
-            <div style="font-size:13px;color:var(--text-secondary)">${todayTxs.length} transaction${todayTxs.length!==1?'s':''}</div>
-            <div style="font-size:20px;font-weight:600;color:var(--text-primary);margin-top:2px">AU$${todayTotal.toFixed(2)}</div>
-          </div>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </div>`;
-  } else {
-    html += `
-      <div style="margin:16px 16px 0">
-        <div class="section-label">Spending</div>
-        <button class="section-add-btn" onclick="openTxModal('${dayKey}')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Log an Expense
-        </button>
-      </div>`;
+  // ── WARNINGS ──
+  if (day.warnings && day.warnings.length > 0) {
+    html += `<div class="warning-card">
+      <div class="warning-title">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Important
+      </div>
+      ${day.warnings.map(w => `<div class="warning-item">· ${w}</div>`).join('')}
+    </div>`;
   }
 
+  // ── MAP ──
+  html += buildDayMap(dayKey);
+
+  // ── SCHEDULE with time-of-day grouping ──
+  html += `<div class="activities-section">`;
+
+  // Group activities by Morning / Afternoon / Evening
+  const groups = { Morning:[], Afternoon:[], Evening:[], Anytime:[] };
+  activities.forEach(act => {
+    const h = act.time ? parseInt(act.time.split(':')[0]) : -1;
+    if (h < 0) groups.Anytime.push(act);
+    else if (h < 12) groups.Morning.push(act);
+    else if (h < 17) groups.Afternoon.push(act);
+    else groups.Evening.push(act);
+  });
+
+  // If only one group has items, skip grouping labels and render flat
+  const filledGroups = Object.entries(groups).filter(([,acts]) => acts.length > 0);
+  const useGrouping = filledGroups.length > 1 && !['Anytime'].every(g => filledGroups.map(f=>f[0]).includes(g));
+
+  filledGroups.forEach(([groupName, acts]) => {
+    if (useGrouping && groupName !== 'Anytime') {
+      const icons = { Morning:'🌅', Afternoon:'☀️', Evening:'🌙' };
+      html += `<div class="time-group-label">${icons[groupName] || ''} ${groupName}</div>`;
+    } else if (!useGrouping && filledGroups[0][0] === groupName) {
+      html += `<div class="section-label">Schedule</div>`;
+    }
+    acts.forEach(act => {
+      if (act.type === 'transit') html += renderTransitCard(act, dayKey);
+      else if (act.type === 'flight') html += renderFlightCard(act);
+      else if (act.type === 'hotel') html += renderHotelCard(act, dayKey);
+      else html += renderActivityCard(act, dayKey, dest);
+    });
+  });
+
+  // Add activity button
+  html += `<button class="section-add-btn" onclick="openAddActivity('${dayKey}')">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    Add Activity
+  </button></div>`;
+
   document.getElementById('dayViewContent').innerHTML = html;
-  // Initialise Leaflet map after DOM is ready
   setTimeout(() => initDayMap(dayKey), 50);
 }
 
@@ -1800,8 +1850,10 @@ function renderActivityCard(act, dayKey, dest) {
   const thumbBg = thumb ? `background-image:url('${thumb}');` : '';
   const accentColor = dest?.accent || 'var(--accent)';
 
+  const typeAccent = { activity:'act-type-activity', food:'act-type-food', ferry:'act-type-ferry', free:'act-type-free', hotel:'act-type-hotel' };
+
   return `
-    <div class="activity-card" onclick="editActivity('${dayKey}','${act.id}')">
+    <div class="activity-card ${typeAccent[act.type] || ''}" onclick="editActivity('${dayKey}','${act.id}')">
       <div class="activity-card-inner">
         <div class="activity-thumb" style="${thumbBg}background-color:${accentColor}22"></div>
         <div class="activity-content">
@@ -2629,123 +2681,109 @@ function openUrl(url) {
 // [lat, lng, label, shortLabel]
 const STOP_COORDS = {
   // ── LONDON base ──
-  'Chelsea Cloisters':            [51.4912, -0.1705, 'Chelsea Cloisters (Base)', 'Hotel'],
-  // Day 2 stops
-  'South Kensington Station':     [51.4941, -0.1742, 'South Kensington Station', 'Station'],
-  'Local dinner':                 [51.4921, -0.1563, 'Sloane Square', 'Dinner'],
-  // Day 3 — NHM + Harrods + Regent/Carnaby
-  'Natural History Museum':       [51.4967, -0.1764, 'Natural History Museum', 'NHM'],
-  'Harrods':                      [51.4994, -0.1632, 'Harrods', 'Harrods'],
-  'Regent Street':                [51.5098, -0.1363, 'Regent Street', 'Regent St'],
-  'Carnaby Street':               [51.5130, -0.1392, 'Carnaby Street', 'Carnaby'],
-  'Liberty London':               [51.5128, -0.1402, 'Liberty London', 'Liberty'],
-  'Piccadilly Circus':            [51.5101, -0.1341, 'Piccadilly Circus', 'Piccadilly'],
-  'Kingly Court':                 [51.5126, -0.1395, 'Kingly Court', 'Dinner'],
-  // Day 4 — Royal London
-  'Buckingham Palace':            [51.5014, -0.1419, 'Buckingham Palace', 'Palace'],
-  'State Rooms':                  [51.5014, -0.1419, 'State Rooms', 'State Rms'],
-  'Trafalgar Square':             [51.5080, -0.1281, 'Trafalgar Square', 'Trafalgar'],
-  'Westminster Abbey':            [51.4994, -0.1273, 'Westminster Abbey', 'Abbey'],
-  'Houses of Parliament':         [51.4995, -0.1248, 'Houses of Parliament', 'Parliament'],
-  'Big Ben':                      [51.5007, -0.1246, 'Big Ben', 'Big Ben'],
-  'South Bank':                   [51.5055, -0.1143, 'South Bank', 'Dinner'],
-  // Day 5 — Tower + Borough + Sky Garden
-  'Tower of London':              [51.5081, -0.0759, 'Tower of London', 'Tower'],
-  'Tower Bridge':                 [51.5055, -0.0754, 'Tower Bridge', 'Twr Bridge'],
-  'Borough Market':               [51.5055, -0.0910, 'Borough Market', 'Borough Mkt'],
-  'Millennium Bridge':            [51.5097, -0.0987, 'Millennium Bridge', 'Millennium'],
-  'Sky Garden':                   [51.5113, -0.0832, 'Sky Garden', 'Sky Garden'],
-  'Leadenhall Market':            [51.5133, -0.0830, 'Leadenhall Market', 'Leadenhall'],
-  // Day 6 — HTB + Wicked
-  'HTB Brompton Road':            [51.4943, -0.1739, 'HTB Brompton Road', 'HTB'],
-  'Apollo Victoria Theatre':      [51.4956, -0.1414, 'Wicked — Apollo Victoria', 'Wicked'],
-  // Day 7 — Covent Garden + Churchill
-  'Covent Garden':                [51.5117, -0.1240, 'Covent Garden', 'Covent Gdn'],
-  'Seven Dials':                  [51.5133, -0.1272, 'Seven Dials', 'Seven Dials'],
-  'Churchill War Rooms':          [51.5022, -0.1298, 'Churchill War Rooms', 'Churchill'],
-  'Soho':                         [51.5137, -0.1347, 'Soho', 'Soho'],
-  'Chinatown':                    [51.5116, -0.1314, 'Chinatown', 'Chinatown'],
-  // Day 8 — Greenwich
-  'Westminster Pier':             [51.5014, -0.1222, 'Westminster Pier', 'Pier'],
-  'Greenwich Pier':               [51.4834, -0.0098, 'Greenwich Pier', 'Greenwich'],
-  'Cutty Sark':                   [51.4831, -0.0094, 'Cutty Sark', 'Cutty Sark'],
-  'Greenwich Market':             [51.4818, -0.0098, 'Greenwich Market', 'Mkt/Lunch'],
-
-  // ── ZURICH / GRINDELWALD ──
-  'Zurich Airport':               [47.4502,  8.5620, 'Zurich Airport', 'ZRH'],
-  'Grindelwald village':          [46.6245,  8.0412, 'Grindelwald', 'Village'],
-  'Grindelwald First':            [46.6494,  8.0539, 'Grindelwald First', 'First'],
-  'Pfingstegg':                   [46.6203,  8.0492, 'Pfingstegg', 'Pfingstegg'],
-  'Lauterbrunnen':                [46.5938,  7.9088, 'Lauterbrunnen', 'Lauterbrunnen'],
-  'Trümmelbach Falls':            [46.5964,  7.9212, 'Trümmelbach Falls', 'Trümmelbach'],
-  'Mürren':                       [46.5591,  7.8926, 'Mürren', 'Mürren'],
-  'Männlichen':                   [46.6139,  7.9447, 'Männlichen', 'Männlichen'],
-  'Kleine Scheidegg':             [46.5852,  7.9604, 'Kleine Scheidegg', 'Scheidegg'],
-  'Wengen':                       [46.6083,  7.9227, 'Wengen', 'Wengen'],
-  'Bachalpsee':                   [46.6582,  8.0538, 'Bachalpsee Lake', 'Bachalpsee'],
-
+  'Chelsea Cloisters':            [51.4912, -0.1705, 'Chelsea Cloisters (Base)', 'Hotel', 'Chelsea Cloisters, Sloane Avenue, London'],
+  'South Kensington Station':     [51.4941, -0.1742, 'South Kensington Station', 'Station', 'South Kensington Station, London'],
+  'Local dinner':                 [51.4921, -0.1563, 'Sloane Square', 'Dinner', 'Sloane Square, London'],
+  'Natural History Museum':       [51.4967, -0.1764, 'Natural History Museum', 'NHM', 'Natural History Museum, London'],
+  'Harrods':                      [51.4994, -0.1632, 'Harrods', 'Harrods', 'Harrods, Brompton Road, London'],
+  'Regent Street':                [51.5098, -0.1363, 'Regent Street', 'Regent St', 'Regent Street, London'],
+  'Carnaby Street':               [51.5130, -0.1392, 'Carnaby Street', 'Carnaby', 'Carnaby Street, London'],
+  'Liberty London':               [51.5128, -0.1402, 'Liberty London', 'Liberty', 'Liberty London, Great Marlborough Street'],
+  'Piccadilly Circus':            [51.5101, -0.1341, 'Piccadilly Circus', 'Piccadilly', 'Piccadilly Circus, London'],
+  'Kingly Court':                 [51.5126, -0.1395, 'Kingly Court', 'Dinner', 'Kingly Court, Carnaby, London'],
+  'Buckingham Palace':            [51.5014, -0.1419, 'Buckingham Palace', 'Palace', 'Buckingham Palace, London'],
+  'State Rooms':                  [51.5014, -0.1419, 'State Rooms', 'State Rms', 'Buckingham Palace State Rooms, London'],
+  'Trafalgar Square':             [51.5080, -0.1281, 'Trafalgar Square', 'Trafalgar', 'Trafalgar Square, London'],
+  'Westminster Abbey':            [51.4994, -0.1273, 'Westminster Abbey', 'Abbey', 'Westminster Abbey, London'],
+  'Houses of Parliament':         [51.4995, -0.1248, 'Houses of Parliament', 'Parliament', 'Houses of Parliament, Westminster, London'],
+  'Big Ben':                      [51.5007, -0.1246, 'Big Ben', 'Big Ben', 'Big Ben, Westminster Bridge Road, London'],
+  'South Bank':                   [51.5055, -0.1143, 'South Bank', 'Dinner', 'South Bank, London'],
+  'Tower of London':              [51.5081, -0.0759, 'Tower of London', 'Tower', 'Tower of London, Tower Hill, London'],
+  'Tower Bridge':                 [51.5055, -0.0754, 'Tower Bridge', 'Twr Bridge', 'Tower Bridge, London'],
+  'Borough Market':               [51.5055, -0.0910, 'Borough Market', 'Borough Mkt', 'Borough Market, London Bridge, London'],
+  'Millennium Bridge':            [51.5097, -0.0987, 'Millennium Bridge', 'Millennium', 'Millennium Bridge, London'],
+  'Sky Garden':                   [51.5113, -0.0832, 'Sky Garden', 'Sky Garden', 'Sky Garden, 20 Fenchurch Street, London'],
+  'Leadenhall Market':            [51.5133, -0.0830, 'Leadenhall Market', 'Leadenhall', 'Leadenhall Market, London'],
+  'HTB Brompton Road':            [51.4943, -0.1739, 'HTB Brompton Road', 'HTB', 'Holy Trinity Brompton, Brompton Road, London'],
+  'Apollo Victoria Theatre':      [51.4956, -0.1414, 'Wicked — Apollo Victoria', 'Wicked', 'Apollo Victoria Theatre, Victoria, London'],
+  'Covent Garden':                [51.5117, -0.1240, 'Covent Garden', 'Covent Gdn', 'Covent Garden, London'],
+  'Seven Dials':                  [51.5133, -0.1272, 'Seven Dials', 'Seven Dials', 'Seven Dials, London'],
+  'Churchill War Rooms':          [51.5022, -0.1298, 'Churchill War Rooms', 'Churchill', 'Churchill War Rooms, King Charles Street, London'],
+  'Soho':                         [51.5137, -0.1347, 'Soho', 'Soho', 'Soho, London'],
+  'Chinatown':                    [51.5116, -0.1314, 'Chinatown', 'Chinatown', 'Chinatown, Gerrard Street, London'],
+  'Westminster Pier':             [51.5014, -0.1222, 'Westminster Pier', 'Pier', 'Westminster Millennium Pier, London'],
+  'Greenwich Pier':               [51.4834, -0.0098, 'Greenwich Pier', 'Greenwich', 'Greenwich Pier, London'],
+  'Cutty Sark':                   [51.4831, -0.0094, 'Cutty Sark', 'Cutty Sark', 'Cutty Sark, Greenwich, London'],
+  'Greenwich Market':             [51.4818, -0.0098, 'Greenwich Market', 'Mkt/Lunch', 'Greenwich Market, London'],
+  // ── GRINDELWALD ──
+  'Zurich Airport':               [47.4502,  8.5620, 'Zurich Airport', 'ZRH', 'Zurich Airport, Switzerland'],
+  'Grindelwald village':          [46.6245,  8.0412, 'Grindelwald', 'Village', 'Grindelwald, Switzerland'],
+  'Grindelwald First':            [46.6494,  8.0539, 'Grindelwald First', 'First', 'Grindelwald First, Switzerland'],
+  'Pfingstegg':                   [46.6203,  8.0492, 'Pfingstegg', 'Pfingstegg', 'Pfingstegg, Grindelwald, Switzerland'],
+  'Lauterbrunnen':                [46.5938,  7.9088, 'Lauterbrunnen', 'Lauterbrunnen', 'Lauterbrunnen, Switzerland'],
+  'Trümmelbach Falls':            [46.5964,  7.9212, 'Trümmelbach Falls', 'Trümmelbach', 'Trümmelbach Falls, Lauterbrunnen, Switzerland'],
+  'Mürren':                       [46.5591,  7.8926, 'Mürren', 'Mürren', 'Mürren, Switzerland'],
+  'Männlichen':                   [46.6139,  7.9447, 'Männlichen', 'Männlichen', 'Männlichen, Switzerland'],
+  'Kleine Scheidegg':             [46.5852,  7.9604, 'Kleine Scheidegg', 'Scheidegg', 'Kleine Scheidegg, Switzerland'],
+  'Wengen':                       [46.6083,  7.9227, 'Wengen', 'Wengen', 'Wengen, Switzerland'],
+  'Bachalpsee':                   [46.6582,  8.0538, 'Bachalpsee Lake', 'Bachalpsee', 'Bachalpsee, Grindelwald, Switzerland'],
   // ── COMO ──
-  'Como San Giovanni Station':    [45.8028,  9.0846, 'Como San Giovanni', 'Station'],
-  'La Vecia Curt':                [45.8074,  9.0865, 'La Vecia Curt (Hotel)', 'Hotel'],
-  'Como lakefront':               [45.8071,  9.0833, 'Como Lakefront', 'Lakefront'],
-  'Via dei Mercanti Como':        [45.8081,  9.0856, 'Via dei Mercanti', 'Mercanti'],
-
+  'Como San Giovanni Station':    [45.8028,  9.0846, 'Como San Giovanni', 'Station', 'Como San Giovanni Railway Station, Italy'],
+  'La Vecia Curt':                [45.8074,  9.0865, 'La Vecia Curt (Hotel)', 'Hotel', 'Via Vitani 22, Como, Italy'],
+  'Como lakefront':               [45.8071,  9.0833, 'Como Lakefront', 'Lakefront', 'Como Lakefront, Piazza Cavour, Como, Italy'],
+  'Via dei Mercanti Como':        [45.8081,  9.0856, 'Via dei Mercanti', 'Mercanti', 'Via dei Mercanti, Como, Italy'],
   // ── ROME ──
-  'Roma Termini':                 [41.9009, 12.5007, 'Roma Termini', 'Termini'],
-  'Navona Loft':                  [41.8988, 12.4723, 'Navona Loft (Apt)', 'Home'],
-  'Trastevere':                   [41.8897, 12.4697, 'Trastevere', 'Trastevere'],
-  'St Peter\'s Basilica':         [41.9022, 12.4539, 'St Peter\'s Basilica', 'St Peter\'s'],
-  'Vatican Museums':              [41.9065, 12.4536, 'Vatican Museums', 'Vatican'],
-  'Castel Sant\'Angelo':          [41.9031, 12.4663, 'Castel Sant\'Angelo', 'Castel'],
-  'Prati':                        [41.9063, 12.4656, 'Prati (Lunch)', 'Lunch'],
-  'Colosseum':                    [41.8902, 12.4922, 'Colosseum', 'Colosseum'],
-  'Roman Forum':                  [41.8925, 12.4853, 'Roman Forum', 'Forum'],
-  'Pantheon':                     [41.8986, 12.4769, 'Pantheon', 'Pantheon'],
-  'Piazza Navona':                [41.8992, 12.4731, 'Piazza Navona', 'Navona'],
-  'Catacombs of San Callisto':    [41.8597, 12.5142, 'Catacombs of San Callisto', 'Catacombs'],
-  'Via Appia Antica':             [41.8597, 12.5142, 'Via Appia Antica', 'Appia'],
-  'Campo de\' Fiori':             [41.8956, 12.4722, 'Campo de\' Fiori', 'Campo'],
-
+  'Roma Termini':                 [41.9009, 12.5007, 'Roma Termini', 'Termini', 'Roma Termini Station, Rome, Italy'],
+  'Navona Loft':                  [41.8988, 12.4723, 'Navona Loft (Apt)', 'Home', 'Via dell Orso 80, Rome, Italy'],
+  'Trastevere':                   [41.8897, 12.4697, 'Trastevere', 'Trastevere', 'Trastevere, Rome, Italy'],
+  'St Peter\'s Basilica':         [41.9022, 12.4539, 'St Peter\'s Basilica', 'St Peter\'s', 'St Peters Basilica, Vatican City'],
+  'Vatican Museums':              [41.9065, 12.4536, 'Vatican Museums', 'Vatican', 'Vatican Museums, Vatican City'],
+  'Castel Sant\'Angelo':          [41.9031, 12.4663, 'Castel Sant\'Angelo', 'Castel', 'Castel Sant Angelo, Rome, Italy'],
+  'Prati':                        [41.9063, 12.4656, 'Prati (Lunch)', 'Lunch', 'Prati, Rome, Italy'],
+  'Colosseum':                    [41.8902, 12.4922, 'Colosseum', 'Colosseum', 'Colosseum, Piazza del Colosseo, Rome, Italy'],
+  'Roman Forum':                  [41.8925, 12.4853, 'Roman Forum', 'Forum', 'Roman Forum, Via Sacra, Rome, Italy'],
+  'Pantheon':                     [41.8986, 12.4769, 'Pantheon', 'Pantheon', 'Pantheon, Piazza della Rotonda, Rome, Italy'],
+  'Piazza Navona':                [41.8992, 12.4731, 'Piazza Navona', 'Navona', 'Piazza Navona, Rome, Italy'],
+  'Catacombs of San Callisto':    [41.8597, 12.5142, 'Catacombs of San Callisto', 'Catacombs', 'Catacombs of San Callisto, Via Appia Antica, Rome, Italy'],
+  'Via Appia Antica':             [41.8597, 12.5142, 'Via Appia Antica', 'Appia', 'Via Appia Antica, Rome, Italy'],
+  'Campo de\' Fiori':             [41.8956, 12.4722, 'Campo de\' Fiori', 'Campo', 'Campo de Fiori, Rome, Italy'],
   // ── SALERNO ──
-  'Salerno Station':              [40.6752, 14.7803, 'Salerno Station', 'Station'],
-  'La casa dei ricordi':          [40.6773, 14.7723, 'La casa dei ricordi (Apt)', 'Home'],
-  'Lungomare Trieste':            [40.6756, 14.7698, 'Lungomare Trieste', 'Promenade'],
-  'Via dei Mercanti Salerno':     [40.6801, 14.7639, 'Via dei Mercanti', 'Old Town'],
-  'Salerno Ferry Port':           [40.6726, 14.7617, 'Salerno Ferry Port', 'Ferry'],
-  'Maiori':                       [40.6333, 14.6392, 'Maiori', 'Maiori'],
-  'Minori':                       [40.6427, 14.6516, 'Minori', 'Minori'],
-  'Amalfi':                       [40.6340, 14.6027, 'Amalfi', 'Amalfi'],
-
+  'Salerno Station':              [40.6752, 14.7803, 'Salerno Station', 'Station', 'Salerno Railway Station, Italy'],
+  'La casa dei ricordi':          [40.6773, 14.7723, 'La casa dei ricordi (Apt)', 'Home', 'Via Dalmazia 1, Salerno, Italy'],
+  'Lungomare Trieste':            [40.6756, 14.7698, 'Lungomare Trieste', 'Promenade', 'Lungomare Trieste, Salerno, Italy'],
+  'Via dei Mercanti Salerno':     [40.6801, 14.7639, 'Via dei Mercanti', 'Old Town', 'Via dei Mercanti, Salerno, Italy'],
+  'Salerno Ferry Port':           [40.6726, 14.7617, 'Salerno Ferry Port', 'Ferry', 'Porto di Salerno, Italy'],
+  'Maiori':                       [40.6333, 14.6392, 'Maiori', 'Maiori', 'Maiori, Amalfi Coast, Italy'],
+  'Minori':                       [40.6427, 14.6516, 'Minori', 'Minori', 'Minori, Amalfi Coast, Italy'],
+  'Amalfi':                       [40.6340, 14.6027, 'Amalfi', 'Amalfi', 'Amalfi, Amalfi Coast, Italy'],
   // ── NAPLES ──
-  'Pompei Scavi Station':         [40.7511, 14.4911, 'Pompei Scavi', 'Pompeii'],
-  'Napoli Centrale':              [40.8534, 14.2706, 'Napoli Centrale', 'Station'],
-  'Napoli DownTown Hotel':        [40.8450, 14.2524, 'Napoli DownTown (Hotel)', 'Hotel'],
-  'Spaccanapoli':                 [40.8497, 14.2608, 'Spaccanapoli', 'Spaccanapoli'],
-  'Naples Airport':               [40.8860, 14.2908, 'Naples Airport (NAP)', 'Airport'],
-
+  'Pompei Scavi Station':         [40.7511, 14.4911, 'Pompei Scavi', 'Pompeii', 'Pompei Scavi Villa dei Misteri Station, Italy'],
+  'Napoli Centrale':              [40.8534, 14.2706, 'Napoli Centrale', 'Station', 'Napoli Centrale Station, Naples, Italy'],
+  'Napoli DownTown Hotel':        [40.8450, 14.2524, 'Napoli DownTown (Hotel)', 'Hotel', 'Via Agostino Depretis 102, Naples, Italy'],
+  'Spaccanapoli':                 [40.8497, 14.2608, 'Spaccanapoli', 'Spaccanapoli', 'Spaccanapoli, Naples, Italy'],
+  'Naples Airport':               [40.8860, 14.2908, 'Naples Airport (NAP)', 'Airport', 'Naples Capodichino Airport, Italy'],
   // ── ATHENS ──
-  'Athens Airport':               [37.9364, 23.9445, 'Athens Airport', 'Airport'],
-  'Acropolis Classy Apartments':  [37.9678, 23.7290, 'Acropolis Classy Apts', 'Home'],
-  'Acropolis':                    [37.9715, 23.7267, 'Acropolis', 'Acropolis'],
-  'Acropolis Museum':             [37.9683, 23.7286, 'Acropolis Museum', 'Museum'],
-  'Monastiraki':                  [37.9754, 23.7243, 'Monastiraki', 'Monastiraki'],
-  'Plaka':                        [37.9728, 23.7306, 'Plaka', 'Plaka'],
-  'Cape Sounion':                 [37.6516, 24.0168, 'Temple of Poseidon — Cape Sounion', 'Sounion'],
-  'Anafiotika':                   [37.9727, 23.7283, 'Anafiotika', 'Anafiotika'],
-  'Athens Airport Depart':        [37.9364, 23.9445, 'Athens Airport — EK104', 'Airport'],
-
+  'Athens Airport':               [37.9364, 23.9445, 'Athens Airport', 'Airport', 'Athens International Airport Eleftherios Venizelos, Greece'],
+  'Acropolis Classy Apartments':  [37.9678, 23.7290, 'Acropolis Classy Apts', 'Home', 'Makrigianni 3, Athens, Greece'],
+  'Acropolis':                    [37.9715, 23.7267, 'Acropolis', 'Acropolis', 'Acropolis of Athens, Greece'],
+  'Acropolis Museum':             [37.9683, 23.7286, 'Acropolis Museum', 'Museum', 'Acropolis Museum, Athens, Greece'],
+  'Monastiraki':                  [37.9754, 23.7243, 'Monastiraki', 'Monastiraki', 'Monastiraki Square, Athens, Greece'],
+  'Plaka':                        [37.9728, 23.7306, 'Plaka', 'Plaka', 'Plaka, Athens, Greece'],
+  'Cape Sounion':                 [37.6516, 24.0168, 'Temple of Poseidon — Cape Sounion', 'Sounion', 'Temple of Poseidon, Cape Sounion, Greece'],
+  'Anafiotika':                   [37.9727, 23.7283, 'Anafiotika', 'Anafiotika', 'Anafiotika, Athens, Greece'],
+  'Athens Airport Depart':        [37.9364, 23.9445, 'Athens Airport — EK104', 'Airport', 'Athens International Airport Eleftherios Venizelos, Greece'],
   // ── SINGAPORE ──
-  'Changi Airport':               [1.3644, 103.9915, 'Changi Airport (SIN)', 'Airport'],
-  'Marina Bay Sands':             [1.2834, 103.8607, 'Hotel (Marina Bay area)', 'Hotel'],
-  'Gardens by the Bay':           [1.2816, 103.8636, 'Gardens by the Bay', 'Gardens'],
-  'Supertree Grove':              [1.2816, 103.8636, 'Supertree Grove', 'Supertrees'],
-  'Sentosa Island':               [1.2494, 103.8303, 'Sentosa Island', 'Sentosa'],
-  'Universal Studios Singapore':  [1.2540, 103.8238, 'Universal Studios', 'USS'],
-  'VivoCity':                     [1.2644, 103.8226, 'VivoCity', 'VivoCity'],
-  'Maxwell Food Centre':          [1.2800, 103.8450, 'Maxwell Food Centre', 'Hawker'],
-  'Singapore Zoo':                [1.4043, 103.7930, 'Singapore Zoo', 'Zoo'],
-  'Orchard Road':                 [1.3048, 103.8318, 'Orchard Road', 'Orchard'],
-  'Jewel Changi':                 [1.3596, 103.9890, 'Jewel Changi', 'Jewel'],
+  'Changi Airport':               [1.3644, 103.9915, 'Changi Airport (SIN)', 'Airport', 'Singapore Changi Airport, Singapore'],
+  'Marina Bay Sands':             [1.2834, 103.8607, 'Hotel (Marina Bay area)', 'Hotel', 'Marina Bay Sands, Singapore'],
+  'Gardens by the Bay':           [1.2816, 103.8636, 'Gardens by the Bay', 'Gardens', 'Gardens by the Bay, Singapore'],
+  'Supertree Grove':              [1.2816, 103.8636, 'Supertree Grove', 'Supertrees', 'Supertree Grove, Gardens by the Bay, Singapore'],
+  'Sentosa Island':               [1.2494, 103.8303, 'Sentosa Island', 'Sentosa', 'Sentosa Island, Singapore'],
+  'Universal Studios Singapore':  [1.2540, 103.8238, 'Universal Studios', 'USS', 'Universal Studios Singapore, Sentosa'],
+  'VivoCity':                     [1.2644, 103.8226, 'VivoCity', 'VivoCity', 'VivoCity, HarbourFront, Singapore'],
+  'Maxwell Food Centre':          [1.2800, 103.8450, 'Maxwell Food Centre', 'Hawker', 'Maxwell Food Centre, Tanjong Pagar, Singapore'],
+  'Singapore Zoo':                [1.4043, 103.7930, 'Singapore Zoo', 'Zoo', 'Singapore Zoo, Mandai, Singapore'],
+  'Orchard Road':                 [1.3048, 103.8318, 'Orchard Road', 'Orchard', 'Orchard Road, Singapore'],
+  'Jewel Changi':                 [1.3596, 103.9890, 'Jewel Changi', 'Jewel', 'Jewel Changi Airport, Singapore'],
 };
 
 // Map each day to an ordered list of stop keys + Google Maps travel mode
@@ -2842,10 +2880,12 @@ function initDayMap(dayKey) {
 
 function buildGoogleMapsBtn(dayKey, route, stops) {
   if (stops.length < 2) return '';
-  const enc = s => encodeURIComponent(`${s[0]},${s[1]}`);
-  const origin = enc(stops[0]);
-  const dest = enc(stops[stops.length-1]);
-  const wps = stops.slice(1,-1).map(enc).join('|');
+  // Use the 5th element (gmaps name) for readable Google Maps labels
+  // Falls back to the full label (index 2) if no gmaps name defined
+  const name = s => encodeURIComponent(s[4] || s[2]);
+  const origin = name(stops[0]);
+  const dest = name(stops[stops.length-1]);
+  const wps = stops.slice(1,-1).map(name).join('|');
   const mode = route.mode || 'walking';
   let url = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${dest}&travelmode=${mode}`;
   if (wps) url += `&waypoints=${wps}`;
