@@ -1,0 +1,9 @@
+{
+  "name": "Travel HQ",
+  "short_name": "Travel HQ",
+  "description": "Europe and Singapore itinerary, bookings and spending tracker",
+  "start_url": "./travel-hq.html",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#0a0a0f"
+}
