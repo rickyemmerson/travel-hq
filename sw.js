@@ -1,4 +1,4 @@
-const CACHE_NAME = 'travel-hq-v4';
+const CACHE_NAME = 'travel-hq-v5';
 const APP_SHELL = ['./travel-hq.html', './manifest.webmanifest'];
 const OPTIONAL_ASSETS = [
   'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css',

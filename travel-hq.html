@@ -343,8 +343,8 @@ body{height:100%;font-family:'Inter',sans-serif;background:#0a0a0f;color:#f0f0f5
 .transit-name{font-size:13px;font-weight:600;color:var(--text-primary)}
 .transit-detail{font-size:11px;color:var(--text-secondary);margin-top:2px}
 .transit-time{font-size:11px;font-weight:700;color:var(--text-muted)}
-.transit-map-btn{font-size:11px;font-weight:600;color:var(--accent);display:flex;align-items:center;gap:3px}
-.transit-route-btn{font-size:10px;font-weight:700;color:var(--text-secondary);border:1px solid var(--border-bright);border-radius:12px;padding:3px 7px;cursor:pointer}
+.transit-map-btn{font-size:11px;font-weight:700;color:var(--accent);display:flex;align-items:center;gap:4px;min-height:36px;padding:8px 10px;border:1px solid rgba(10,132,255,.24);border-radius:12px;background:rgba(10,132,255,.08)}
+.transit-route-btn{font-size:11px;font-weight:700;color:var(--text-primary);border:1px solid var(--border-bright);border-radius:12px;min-height:36px;padding:8px 10px;display:flex;align-items:center;cursor:pointer;background:var(--surface-raised)}
 .transit-route-btn:active{background:var(--surface-raised)}
 
 /* FLIGHT CARD */
@@ -650,7 +650,7 @@ select.form-input{-webkit-appearance:none;background-image:url("data:image/svg+x
 .today-wrap{padding:0 16px 24px}
 .today-status-card{position:relative;overflow:hidden;border:1px solid var(--border-bright);border-radius:var(--radius-lg);padding:20px;background:linear-gradient(145deg,rgba(74,140,122,.2),rgba(91,127,166,.1))}
 .today-eyebrow{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--green);margin-bottom:6px}
-.today-heading{font-size:24px;font-weight:750;line-height:1.15}
+.today-heading{font-size:24px;font-weight:750;line-height:1.15;color:var(--text-primary)}
 .today-copy{font-size:13px;color:var(--text-secondary);line-height:1.5;margin-top:7px}
 .today-primary{margin-top:14px;width:100%;min-height:46px;border:0;border-radius:var(--radius-md);background:var(--accent);color:#fff;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer}
 .today-section{margin-top:18px}
@@ -658,9 +658,37 @@ select.form-input{-webkit-appearance:none;background-image:url("data:image/svg+x
 .today-agenda-item{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:12px;margin-bottom:8px;cursor:pointer}
 .today-agenda-item.next{border-color:rgba(52,199,89,.5);background:rgba(52,199,89,.08)}
 .today-agenda-time{width:54px;flex-shrink:0;font-size:12px;font-weight:800;color:var(--accent)}
-.today-agenda-name{font-size:14px;font-weight:650}
+.today-agenda-name{font-size:14px;font-weight:650;color:var(--text-primary)}
 .today-agenda-note{font-size:11px;color:var(--text-secondary);line-height:1.4;margin-top:3px}
-.today-alert{padding:12px 14px;border-radius:var(--radius-md);background:rgba(255,159,10,.1);border:1px solid rgba(255,159,10,.3);font-size:12px;line-height:1.5}
+.today-alert{padding:12px 14px;border-radius:var(--radius-md);background:rgba(255,159,10,.1);border:1px solid rgba(255,159,10,.3);font-size:12px;line-height:1.5;color:var(--text-primary);font-weight:550}
+.info-disclosure{margin:0 16px 10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.info-disclosure summary{min-height:58px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;list-style:none;color:var(--text-primary)}
+.info-disclosure summary::-webkit-details-marker{display:none}
+.info-disclosure-title{display:block;font-size:15px;font-weight:700}
+.info-disclosure-subtitle{display:block;font-size:12px;color:var(--text-secondary);margin-top:2px}
+.info-disclosure summary::after{content:'⌄';font-size:19px;color:var(--text-muted);transition:transform .18s ease}
+.info-disclosure[open] summary::after{transform:rotate(180deg)}
+.info-disclosure-body{border-top:1px solid var(--border)}
+.info-disclosure .info-card{border:0;border-radius:0;margin:0}
+.info-disclosure .info-row{min-width:0}
+.info-disclosure .info-row-label{padding-right:12px}
+.info-disclosure .info-row-value{min-width:0;text-align:right;justify-content:flex-end;overflow-wrap:anywhere}
+.dest-card-compact{display:flex;min-height:102px;cursor:pointer;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:12px}
+.dest-card-compact:active{transform:scale(.99)}
+.dest-compact-thumb{width:112px;flex-shrink:0;background-size:cover;background-position:center;position:relative}
+.dest-compact-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,.05),rgba(0,0,0,.45))}
+.dest-compact-body{min-width:0;flex:1;padding:13px 14px;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.dest-compact-name{font-size:16px;font-weight:750;color:var(--text-primary)}
+.dest-compact-dates{font-size:12px;color:var(--text-secondary)}
+.dest-compact-meta{display:flex;align-items:center;gap:8px;margin-top:5px;font-size:11px;color:var(--text-muted)}
+.dest-compact-status{margin-left:auto;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted)}
+@media (prefers-color-scheme:light){
+  .today-status-card{background:linear-gradient(145deg,rgba(74,140,122,.18),rgba(91,127,166,.12));border-color:rgba(28,28,30,.16)}
+  .today-agenda-item{background:rgba(255,255,255,.94);border-color:rgba(28,28,30,.13)}
+  .today-agenda-item.next{background:rgba(52,199,89,.12);border-color:rgba(52,199,89,.55)}
+  .today-section-title{color:rgba(28,28,30,.62)}
+  .today-agenda-note,.today-copy{color:rgba(28,28,30,.72)}
+}
 .tx-item{cursor:pointer}
 .tx-item:focus-visible,.day-action-btn:focus-visible,.today-primary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 @media (min-width:700px){#app{max-width:520px;margin:0 auto;border-left:1px solid var(--border);border-right:1px solid var(--border)}.nav-bar{max-width:520px;left:50%;transform:translateX(-50%)}}
@@ -1031,7 +1059,7 @@ function setSyncState(s) {
   const label = document.getElementById('syncLabel');
   if (!dot) return;
   dot.className = 'sync-dot' + (s === 'syncing' ? ' syncing' : s === 'error' ? ' error' : '');
-  if (label) label.textContent = !USE_CLOUD ? 'Local test mode' : s === 'syncing' ? 'Saving…' : s === 'error' ? 'Sync failed' : 'Saved';
+  if (label) label.textContent = !USE_CLOUD ? 'Saved on this device' : s === 'syncing' ? 'Saving…' : s === 'error' ? 'Sync failed' : 'Saved';
 }
 
 const loadLocal = () => { try { return JSON.parse(localStorage.getItem('travelhq_v1') || '{}') } catch(e) { return {} } };
@@ -1099,7 +1127,7 @@ const DESTINATIONS = [
     dates: '15–16 Sep',
     nights: 1,
     accent: '#7a8f6e',
-    photo: 'https://images.unsplash.com/photo-1533760881669-80db4d7b341c?w=800&q=80',
+    photo: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?w=800&q=80',
     budget: 347,
     currency: 'EUR',
     weather: { temp: '24°C', desc: 'Warm and pleasant', icon: '🌅' },
@@ -1740,7 +1768,10 @@ function renderDestinations() {
   };
 
   let html = '';
-  DESTINATIONS.forEach(dest => {
+  const activeIndex = DESTINATIONS.findIndex(dest => dest.days.includes(today));
+  const focusIndex = activeIndex >= 0 ? activeIndex : DESTINATIONS.findIndex(dest => dest.days[dest.days.length - 1] >= today);
+  const featuredIndexes = new Set([Math.max(0, focusIndex), Math.min(DESTINATIONS.length - 1, Math.max(0, focusIndex) + 1)]);
+  DESTINATIONS.forEach((dest, index) => {
     const isActive = dest.days.includes(today);
     const isPast = dest.days[dest.days.length-1] < today;
     const statusClass = isActive ? 'current' : isPast ? 'completed' : 'upcoming';
@@ -1776,7 +1807,8 @@ function renderDestinations() {
         </div>`;
     }
 
-    html += `
+    if (featuredIndexes.has(index)) {
+      html += `
       <div class="dest-card" onclick="showDayList('${dest.id}')">
         <div class="dest-hero" style="background-image:url('${dest.photo}')">
           <div class="dest-hero-content">
@@ -1790,6 +1822,17 @@ function renderDestinations() {
           <div class="dest-status ${statusClass}">${statusLabel}</div>
         </div>
       </div>`;
+    } else {
+      html += `
+        <div class="dest-card-compact" onclick="showDayList('${dest.id}')">
+          <div class="dest-compact-thumb" style="background-image:url('${dest.photo}')"></div>
+          <div class="dest-compact-body" style="border-left:3px solid ${dest.accent}">
+            <div class="dest-compact-name">${dest.name}</div>
+            <div class="dest-compact-dates">${dest.country} · ${dest.dates}</div>
+            <div class="dest-compact-meta"><span>${dest.nights} night${dest.nights!==1?'s':''}</span><span>${dest.currency}</span><span class="dest-compact-status">${statusLabel}</span></div>
+          </div>
+        </div>`;
+    }
   });
   container.innerHTML = html;
 }
@@ -2078,7 +2121,7 @@ function renderTransitCard(act, dayKey) {
         ${act.time ? `<div class="transit-time">${formatTime(act.time)}</div>` : ''}
         ${act.duration ? `<div style="font-size:10px;color:var(--text-muted)">${formatDuration(act.duration)}</div>` : ''}
         ${routeUrl ? `<div class="transit-route-btn" onclick="event.stopPropagation();openUrl('${escapeJsString(routeUrl)}')">View route</div>` : ''}
-        ${mapsUrl ? `<div class="transit-map-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open</div>` : ''}
+        ${mapsUrl ? `<div class="transit-map-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Directions</div>` : ''}
       </div>
     </div>`;
 }
@@ -3003,6 +3046,80 @@ function renderInfo() {
     </div>`;
 
   document.getElementById('infoContent').innerHTML = html;
+}
+
+// A compact, field-friendly version of the Info screen. The older renderer is
+// intentionally left above as a record of the original data layout.
+function renderInfo() {
+  const row = (label, value, action = '') => `<div class="info-row"><div class="info-row-label">${label}</div><div class="info-row-value${action ? ' copyable' : ''}" ${action}>${value}</div></div>`;
+  const note = text => `<div class="info-row"><div class="info-row-label" style="flex:1">${text}</div></div>`;
+  const group = (title, subtitle, body, open = false) => `<details class="info-disclosure"${open ? ' open' : ''}><summary><span><span class="info-disclosure-title">${title}</span><span class="info-disclosure-subtitle">${subtitle}</span></span></summary><div class="info-disclosure-body"><div class="info-card">${body}</div></div></details>`;
+
+  const stays = [
+    row('Chelsea Cloisters · London', '6355022434 · PIN 6151', `onclick="copyText('6355022434','London stay reference copied')"`),
+    row('Apartment Schönegg · Grindelwald', '479895', `onclick="copyText('479895','Grindelwald stay reference copied')"`),
+    row('La Vecia Curt · Lake Como', '5345617271 · PIN 6771', `onclick="copyText('5345617271','Como stay reference copied')"`),
+    row('Navona Loft · Rome', '#31402392', `onclick="copyText('31402392','Rome stay reference copied')"`),
+    row('Napoli DownTown · Naples', '6167950968 · PIN 8062', `onclick="copyText('6167950968','Naples stay reference copied')"`),
+    row('Acropolis Classy · Athens', '5595734882 · PIN 6146', `onclick="copyText('5595734882','Athens stay reference copied')"`),
+    row('Dao by Dorsett · Singapore', '6163239415 · PIN 4076', `onclick="copyText('6163239415','Singapore stay reference copied')"`),
+    note('Grindelwald keys: GRIWA RENT AG, Dorfstrasse 118 — collect 2–5pm on Wed 9 Sep only.')
+  ].join('');
+
+  const flights = [
+    row('Emirates · all legs', 'GKK5PW', `onclick="copyText('GKK5PW','Emirates reference copied')"`),
+    row('EasyJet NAP → ATH', 'KCPV1H7', `onclick="copyText('KCPV1H7','EasyJet reference copied')"`),
+    ['EK431','BNE → DXB','Wed 2 Sep · 01:55 → 10:05'],
+    ['EK031','DXB → LHR','Wed 2 Sep · 11:25 → 16:10'],
+    ['LX317','LHR → ZRH','Wed 9 Sep · 08:40 → 11:45'],
+    ['EJU4165','NAP → ATH','Wed 23 Sep · 09:15 → 12:00'],
+    ['EK104','ATH → DXB','Sat 26 Sep · 23:10 → 04:40'],
+    ['EK352','DXB → SIN','Sun 27 Sep · 10:00 → 21:45'],
+    ['EK5052','SIN → BNE','Wed 30 Sep · 20:30 → 06:00']
+  ].map(item => Array.isArray(item) ? row(`${item[0]} · ${item[1]}`, item[2]) : item).join('');
+
+  const payments = [
+    row('Wicked + Buckingham Palace', 'Paid ✓'),
+    row('Vatican Museums · 4pm entry', 'Paid ✓'),
+    row('La Vecia Curt · Lake Como', '€197.98 on 6 Sep + €12 city tax'),
+    row('Navona Loft · Rome', '€560 balance + €150 deposit on arrival'),
+    row('Salerno · La casa dei ricordi', 'Pay later · ~AU$462'),
+    row('Napoli DownTown · Naples', '€141.45 + €11 city tax'),
+    row('Acropolis Classy · Athens', '€664.80 auto-charge'),
+    row('Dao by Dorsett · Singapore', 'Paid ✓ · SGD 300 hold')
+  ].join('');
+
+  const essentials = [
+    row('Trip dates', '2 Sep – 1 Oct 2026'),
+    row('Family', 'Rick, Nina, Abby, Olivia'),
+    row('Baggage', '3 × 23kg checked bags'),
+    row('Cards', 'Macquarie Platinum + Debit'),
+    row('eSIM', 'Airalo · Europe + Singapore'),
+    row('UK emergency', '999'), row('EU emergency', '112'), row('Singapore emergency', '995 / 999'),
+    row('Australian Embassy · UK', '+44 20 7379 4334'),
+    row('Australian Embassy · Italy', '+39 06 852721'),
+    row('Australian Embassy · Greece', '+30 210 870 4000'),
+    row('Macquarie card emergency', '+61 2 8232 3333')
+  ].join('');
+
+  const beforeYouGo = [
+    note('🔴 Buy the Jungfrau Travel Pass before 10 Sep at jungfrau.ch.'),
+    note('✅ Italian rail is booked: Como → Milan → Rome and Rome → Salerno.'),
+    `<div class="info-row copyable" onclick="openUrl('https://www.gov.uk/eta')"><div class="info-row-label" style="flex:1">🔴 UK ETA for all four passports — tap for the official service.</div></div>`,
+    note('🔴 Confirm Macquarie Platinum travel-insurance activation.'),
+    note('🟡 Message Dao by Dorsett about the late Singapore arrival.'),
+    note('🟡 Tower of London, Churchill War Rooms, Colosseum, Acropolis and Rome Catacombs are not yet booked.'),
+    note('🟡 Travelmar ferry is still to book; buy the Salerno → Naples train in Italy.')
+  ].join('');
+
+  document.getElementById('infoContent').innerHTML = [
+    group('Stays & check-in details', 'Addresses, references and access codes', stays, true),
+    group('Flights & rail references', 'Booking codes and flight times', flights),
+    group('Payments due', 'Balances, auto-charges and city taxes', payments),
+    group('Emergency contacts & essentials', 'Trip basics and important numbers', essentials),
+    group('Trip checklist', 'Your personal preparation list', buildChecklistHtml()),
+    group('Before you go', 'Open travel tasks and reminders', beforeYouGo)
+  ].join('');
 }
 
 // ══════════════════════════════════════════
