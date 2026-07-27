@@ -1070,7 +1070,7 @@ function save(data) {
 
 // ══════════════════════════════════════════
 // ITINERARY DATA — All 30 days pre-loaded
-// Synced 13 Jul 2026 from Europe_Trip_2026_Master_v9.md (including its v10–v12 route updates)
+// Synced 27 Jul 2026 from Europe_Trip_2026_Master_v10.md
 // ══════════════════════════════════════════
 const DESTINATIONS = [
   {
@@ -1112,7 +1112,7 @@ const DESTINATIONS = [
     budget: 347,
     currency: 'EUR',
     weather: { temp: '24°C', desc: 'Warm and pleasant', icon: '🌅' },
-    tips: 'BOOKED: La Vecia Curt, Via Vitani 22 — 9 min walk from station, self check-in via OTP code emailed on arrival day. €197.98 auto-charges to card 6 Sep; ~€12 city tax paid on arrival. Free cancellation until 7 Sep.',
+    tips: 'CONFIRMED: La Vecia Curt, Via Vitani 22 — door-code self check-in, no host meeting. €197.98 auto-charges 6 Sep + €12 city tax on arrival. Check in 15:00–23:30; out by 10:00. Ref 5345617271 · PIN 6771.',
     days: ['2026-09-15']
   },
   {
@@ -1126,7 +1126,7 @@ const DESTINATIONS = [
     budget: 2360,
     currency: 'EUR',
     weather: { temp: '26°C', desc: 'Hot, plan around midday heat', icon: '☀️' },
-    tips: 'Keep €100–150 cash. Navona Loft, Via dell’Orso 80, is booked for 4 nights. Vatican Museums entry is booked for 4:00pm Thu 17 Sep; visit St Peter’s Basilica that morning. Check out Sunday for a relaxed late-morning train to Salerno.',
+    tips: 'Keep €100–150 cash. Navona Loft, Via dell’Orso 80, is booked for 4 nights. Vatican Museums entry is booked for 4:00pm Thu 17 Sep; visit St Peter’s Basilica that morning. Sun 20 Sep: booked 2:00pm Frecciarossa to Salerno.',
     days: ['2026-09-16','2026-09-17','2026-09-18','2026-09-19']
   },
   {
@@ -1140,7 +1140,7 @@ const DESTINATIONS = [
     budget: 1100,
     currency: 'EUR',
     weather: { temp: '25°C', desc: 'Warm Mediterranean', icon: '🌊' },
-    tips: 'Apartment: La casa dei ricordi, 1 Via Dalmazia. Check-in 12:00–16:00. Lungomare Trieste seafront promenade is a 5 min walk. Mon: Travelmar ferry to Maiori + Path of the Lemons walk.',
+    tips: 'Apartment: La casa dei ricordi, 1 Via Dalmazia. Check-in 12:00–16:00. Your booked train arrives 4:06pm, so message the host about an expected 4:15–4:30pm arrival. Lungomare Trieste is a 5 min walk.',
     days: ['2026-09-20','2026-09-21']
   },
   {
@@ -1154,7 +1154,7 @@ const DESTINATIONS = [
     budget: 572,
     currency: 'EUR',
     weather: { temp: '25°C', desc: 'Warm, lively city', icon: '🍕' },
-    tips: 'BOOKED: Napoli DownTown, Via Agostino Depretis 102 (Port of Naples). ~AU$252 incl. city tax — no prepayment, pay at property (~€152.45). Free breakfast included (Genius rate). Free cancellation until 7 Sep. Pre-arrange 7am taxi to airport on check-in.',
+    tips: 'CONFIRMED: Napoli DownTown, Via Agostino Depretis 102. €141.45 + €11 city tax on arrival; breakfast included. Check in 08:00–00:00; out 10:00–10:30. Ref 6167950968 · PIN 8062. Confirm the requested 7am airport taxi and early breakfast the evening before.',
     days: ['2026-09-22']
   },
   {
@@ -1168,7 +1168,7 @@ const DESTINATIONS = [
     budget: 1770,
     currency: 'EUR',
     weather: { temp: '28°C', desc: 'Hot — Acropolis at 8am sharp', icon: '🏛️' },
-    tips: 'BOOKED: Acropolis Classy Apartments, Makrigianni 3 — AU$1,097 total incl. taxes. Two-Bedroom apt with balcony, Genius rate. Keys in on-site lockbox (keypad code). Free cancellation until 8 Sep. Acropolis opens 8am — go early, ferociously hot by noon.',
+    tips: 'CONFIRMED: Acropolis Classy Apartments, Makrigianni 3 — €664.80 charged automatically. Two-bedroom apartment; keys in on-site lockbox. Check in from 15:00; out by 11:00. Ref 5595734882 · PIN 6146. Acropolis opens 8am — go early.',
     days: ['2026-09-23','2026-09-24','2026-09-25','2026-09-26']
   },
   {
@@ -1182,7 +1182,7 @@ const DESTINATIONS = [
     budget: 1256,
     currency: 'SGD',
     weather: { temp: '31°C', desc: 'Hot and humid year-round', icon: '🌴' },
-    tips: 'Very card friendly. Service charge usually included. MRT is excellent. Arrive very late on first night — late hotel check-in.',
+    tips: 'CONFIRMED & PAID: Dao by Dorsett AMTD Singapore, 6 Shenton Way, Marina Bay. Two-bedroom Executive Suite with breakfast; S$1,967.68 paid in full. Ref 6163239415 · PIN 4076. Message the hotel about your ~23:00 arrival; bring photo ID and credit card for the SGD 300 damage-deposit hold.',
     days: ['2026-09-27','2026-09-28','2026-09-29','2026-09-30']
   }
 ];
@@ -1371,7 +1371,7 @@ const DAY_DATA = {
     activities: [
       { id:'d14a1', type:'hotel', name:'Check out — Apartment Schönegg', time:'09:00', duration:30, note:'Leave keys at GRIWA RENT AG or as instructed at check-in. Morning checkout.', mapsUrl:'https://maps.apple.com/?daddr=Dorfstrasse+118+Grindelwald' },
       { id:'d14a2', type:'transit', name:'Train: Grindelwald → Como San Giovanni', time:'09:30', duration:360, note:'Route: Grindelwald → Interlaken Ost → Bern → Lucerne → Bellinzona → Lugano → Chiasso → Como San Giovanni. Saver Day Pass covers all Swiss portions. Buy local ticket ~AU$4 at Chiasso for Como leg.', mapsUrl:'https://maps.apple.com/?daddr=Como+San+Giovanni+Station&dirflg=r', webUrl:'https://www.sbb.ch' },
-      { id:'d14a3', type:'hotel', name:'Check in — La Vecia Curt', time:'15:30', duration:30, note:'Via Vitani 22 — 9-min walk from Como San Giovanni station. Self check-in via OTP code emailed on arrival day (need mobile data on arrival). €197.98 auto-charges to card 6 Sep; ~€12 city tax paid on arrival. Free cancellation until 7 Sep.', address:'Via Vitani 22, Como, Italy', mapsUrl:'https://maps.apple.com/?daddr=Via+Vitani+22+Como+Italy' },
+      { id:'d14a3', type:'hotel', name:'Check in — La Vecia Curt', time:'15:30', duration:30, note:'Via Vitani 22 — 9-min walk from Como San Giovanni station. Door-code self check-in; no host meeting needed. €197.98 auto-charges to card 6 Sep; €12 city tax is paid on arrival. Free cancellation until 7 Sep.', address:'Via Vitani 22, Como, Italy', mapsUrl:'https://maps.apple.com/?daddr=Via+Vitani+22+Como+Italy' },
       { id:'d14a4', type:'activity', name:'Lakefront walk + gelato', time:'16:30', duration:75, note:'10-min walk to the lakefront. An hour along the promenade. Como is beautiful but this is a transit stop — absorb what you can.', mapsUrl:'https://maps.apple.com/?daddr=Como+Lakefront+Italy' },
       { id:'d14a5', type:'food', name:'Dinner in Como', time:'19:30', duration:90, note:'Simple lakeside dinner. First evening in Italy. Relax.', mapsUrl:'https://maps.apple.com/?daddr=Como+Italy' }
     ]
@@ -1379,12 +1379,12 @@ const DAY_DATA = {
   '2026-09-16': {
     label: 'Wed 16 Sep', title: 'Como → Rome', destId: 'rome',
     photo: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=80',
-    warnings: ['Check out by 9:00am — train to catch'],
+    warnings: ['Booked rail: Como 10:36 → Milan 11:17; Frecciarossa Milan 11:58 → Rome 15:10', '40-minute Milan connection — keep bags easy to move'],
     activities: [
-      { id:'d15a1', type:'hotel', name:'Check out — La Vecia Curt', time:'08:45', duration:15, note:'Via Vitani 22. Early checkout — walk to Como San Giovanni station (~9 min).', mapsUrl:'https://maps.apple.com/?daddr=Como+San+Giovanni+Station' },
-      { id:'d15a2', type:'transit', name:'Train: Como → Milan Centrale', time:'09:15', duration:40, note:'~40 min regional train. ~€5 per person.', mapsUrl:'https://maps.apple.com/?daddr=Milano+Centrale+Station&dirflg=r', webUrl:'https://www.trenitalia.com' },
-      { id:'d15a3', type:'transit', name:'Frecciarossa: Milan → Roma Termini', time:'10:30', duration:180, note:'High-speed Frecciarossa. ~2.5–3 hrs. Book at trenitalia.com — prices rise fast. Family ~AU$200.', mapsUrl:'https://maps.apple.com/?daddr=Roma+Termini&dirflg=r', webUrl:'https://www.trenitalia.com' },
-      { id:'d15a4', type:'hotel', name:'Check in — Navona Loft apartment', time:'15:30', duration:30, note:'Via dell\'Orso 80, Rome. Res. #31402392 (RentalIn Rome). €850 total — €290 deposit PAID, €560 balance + €150 damage deposit due on arrival (check payment instructions with host). Check-in from ~3pm.', address:'Via dell\'Orso 80, Rome, Italy', mapsUrl:'https://maps.apple.com/?daddr=Via+dell+Orso+80+Rome+Italy' },
+      { id:'d15a1', type:'hotel', name:'Check out — La Vecia Curt', time:'09:30', duration:15, note:'Via Vitani 22. Check out by 10:00; walk to Como San Giovanni (~9 min).', mapsUrl:'https://maps.apple.com/?daddr=Como+San+Giovanni+Station' },
+      { id:'d15a2', type:'transit', name:'Booked Trenord: Como → Milan Centrale', time:'10:36', duration:41, note:'Booked regional service. Departs Como S. Giovanni 10:36; arrives Milano Centrale 11:17. €15.60 total for 4.', mapsUrl:'https://maps.apple.com/?daddr=Milano+Centrale+Station&dirflg=r', webUrl:'https://www.trenitalia.com' },
+      { id:'d15a3', type:'transit', name:'Booked Frecciarossa: Milan → Roma Termini', time:'11:58', duration:192, note:'Booked high-speed service. Departs Milano Centrale 11:58; arrives Roma Termini 15:10. €95.00 family fare. The 40-minute connection is workable but not generous.', mapsUrl:'https://maps.apple.com/?daddr=Roma+Termini&dirflg=r', webUrl:'https://www.trenitalia.com' },
+      { id:'d15a4', type:'hotel', name:'Check in — Navona Loft apartment', time:'15:45', duration:30, note:'Via dell\'Orso 80, Rome. Res. #31402392 (RentalIn Rome). €850 total — €290 deposit PAID, €560 balance + €150 damage deposit due on arrival (check payment instructions with host).', address:'Via dell\'Orso 80, Rome, Italy', mapsUrl:'https://maps.apple.com/?daddr=Via+dell+Orso+80+Rome+Italy' },
       { id:'d15a5', type:'activity', name:'Trastevere evening walk', time:'17:30', duration:90, note:'Cobblestone lanes, ivy-covered buildings, the most atmospheric neighbourhood in Rome.', mapsUrl:'https://maps.apple.com/?daddr=Trastevere+Rome' },
       { id:'d15a6', type:'food', name:'First Rome dinner — Trastevere', time:'19:30', duration:105, note:'Cacio e pepe, carbonara, coda alla vaccinara. Order the classics here. This is what you\'ve been building toward.', mapsUrl:'https://maps.apple.com/?daddr=Trastevere+Rome', webUrl:'https://maps.google.com/?q=best+restaurants+trastevere+rome' }
     ]
@@ -1417,26 +1417,26 @@ const DAY_DATA = {
   '2026-09-19': {
     label: 'Sat 19 Sep', title: 'Catacombs + Free Afternoon', destId: 'rome',
     photo: 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&q=80',
-    warnings: ['Pack bags tonight, but tomorrow is a relaxed late-morning departure for Salerno'],
+    warnings: ['Pack bags tonight. Tomorrow\'s booked Frecciarossa leaves Roma Termini at 2:00pm.'],
     activities: [
       { id:'d18a1', type:'transit', name:'Taxi to Appian Way', time:'09:00', duration:20, note:'Catacombs are ~5km south of the centre. Taxi recommended.', mapsUrl:'https://maps.apple.com/?daddr=Via+Appia+Antica+Rome' },
       { id:'d18a2', type:'activity', name:'Catacombs + Appian Way', time:'09:30', duration:120, note:'San Callisto or San Sebastiano — book in advance, tours leave regularly. Underground Christian burial chambers with original frescoes. Eerie and fascinating — the girls will be riveted.', mapsUrl:'https://maps.apple.com/?daddr=Catacombe+di+San+Callisto+Rome', webUrl:'https://www.catacombe.org' },
       { id:'d18a3', type:'food', name:'Lunch — Ostia Antica optional', time:'12:00', duration:75, note:'Either head to Ostia Antica (Rome\'s ancient port city, free entry, remarkable ruins, less crowded than anything in Rome) or spend the afternoon revisiting favourites.' },
       { id:'d18a4', type:'free', name:'Free afternoon — revisit, shop, or rest', time:'14:00', duration:180, note:'Leather goods, ceramics. Campo de\' Fiori market. Trevi Fountain revisit. Or Ostia Antica day trip (30 min by train from Termini, free entry).', mapsUrl:'https://maps.apple.com/?daddr=Campo+de+Fiori+Rome' },
-      { id:'d18a5', type:'activity', name:'Pack bags for Salerno', time:'20:30', duration:45, note:'Have all bags ready tonight so tomorrow morning stays relaxed. Check out around 10:00am, enjoy breakfast, then take a late-morning Frecciarossa to Salerno.' }
+      { id:'d18a5', type:'activity', name:'Pack bags for Salerno', time:'20:30', duration:45, note:'Have all bags ready tonight so tomorrow morning stays relaxed. Check out around 10:00am, enjoy breakfast, then take the booked 2:00pm Frecciarossa to Salerno.' }
     ]
   },
   '2026-09-20': {
     label: 'Sun 20 Sep', title: 'Rome → Salerno', destId: 'sorrento',
     photo: 'https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?w=800&q=80',
-    warnings: ['Relaxed morning in Rome — late-morning departure (~11am)', 'Check-in window at Salerno apartment: 12:00–16:00 — call ahead if arriving early', 'Apartment: La casa dei ricordi, 1 Via Dalmazia, Salerno — Booking.com, pay later'],
+    warnings: ['Booked Frecciarossa: Roma Termini 14:00 → Salerno 16:06', 'Message the Salerno host: you will arrive around 16:15–16:30, just after the 16:00 check-in window', 'Apartment: La casa dei ricordi, 1 Via Dalmazia, Salerno — pay later'],
     activities: [
       { id:'d19a1', type:'free', name:'Final relaxed morning in Rome', time:'08:00', duration:120, note:'Late departure today — enjoy a final morning in Rome. Apartment breakfast, last espresso, short walk. No rush.', mapsUrl:'https://maps.apple.com/?daddr=Navona+Loft+Via+dell+Orso+Rome' },
       { id:'d19a2', type:'hotel', name:'Check out — Navona Loft apartment', time:'10:00', duration:30, note:'Via dell\'Orso 80, Rome. Res. #31402392 (RentalIn Rome). Balance €560 + €150 damage deposit paid on arrival. Take all bags to Roma Termini by taxi.', mapsUrl:'https://maps.apple.com/?daddr=Roma+Termini' },
-      { id:'d19a3', type:'transit', name:'Frecciarossa: Roma Termini → Salerno', time:'11:00', duration:165, note:'Direct Frecciarossa, late-morning departure. ~2h40–3h journey. Book at trenitalia.com — NOT yet booked. Estimated ~AU$170 family.', mapsUrl:'https://maps.apple.com/?daddr=Salerno+Train+Station&dirflg=r', webUrl:'https://www.trenitalia.com' },
-      { id:'d19a4', type:'hotel', name:'Check in — La casa dei ricordi', time:'14:30', duration:30, note:'1 Via Dalmazia, Salerno. Check-in window 12:00–16:00. Booked via Booking.com — AUD ~462 total incl. city tax, pay closer to date. Call ahead if arriving early.', address:'1 Via Dalmazia, Salerno, Italy', mapsUrl:'https://maps.apple.com/?daddr=1+Via+Dalmazia+Salerno+Italy' },
-      { id:'d19a5', type:'activity', name:'Lungomare Trieste seafront promenade', time:'16:00', duration:75, note:'Salerno\'s beautiful seafront promenade — a 5 min walk from the apartment. Easy first-afternoon orientation. Views across the Gulf of Salerno toward the Amalfi Coast.', mapsUrl:'https://maps.apple.com/?daddr=Lungomare+Trieste+Salerno' },
-      { id:'d19a6', type:'activity', name:'Via dei Mercanti — historic centre', time:'17:30', duration:60, note:'Salerno\'s main historic shopping street — medieval lanes, local shops, good energy. Very different from the tourist towns further along the coast.', mapsUrl:'https://maps.apple.com/?daddr=Via+dei+Mercanti+Salerno' },
+      { id:'d19a3', type:'transit', name:'Booked Frecciarossa: Roma Termini → Salerno', time:'14:00', duration:126, note:'Booked direct Frecciarossa. Departs 14:00; arrives 16:06. €69.00 family ticket.', mapsUrl:'https://maps.apple.com/?daddr=Salerno+Train+Station&dirflg=r', webUrl:'https://www.trenitalia.com' },
+      { id:'d19a4', type:'hotel', name:'Check in — La casa dei ricordi', time:'16:20', duration:30, note:'1 Via Dalmazia, Salerno. Check-in window ends 16:00; message the host in advance to confirm this expected 16:15–16:30 arrival. Booked via Booking.com — AUD ~462 total incl. city tax, pay closer to date.', address:'1 Via Dalmazia, Salerno, Italy', mapsUrl:'https://maps.apple.com/?daddr=1+Via+Dalmazia+Salerno+Italy' },
+      { id:'d19a5', type:'activity', name:'Lungomare Trieste seafront promenade', time:'17:15', duration:75, note:'Salerno\'s beautiful seafront promenade — a 5 min walk from the apartment. Easy first-afternoon orientation. Views across the Gulf of Salerno toward the Amalfi Coast.', mapsUrl:'https://maps.apple.com/?daddr=Lungomare+Trieste+Salerno' },
+      { id:'d19a6', type:'activity', name:'Via dei Mercanti — historic centre', time:'18:45', duration:45, note:'Salerno\'s main historic shopping street — medieval lanes, local shops, good energy. Very different from the tourist towns further along the coast.', mapsUrl:'https://maps.apple.com/?daddr=Via+dei+Mercanti+Salerno' },
       { id:'d19a7', type:'food', name:'Dinner in Salerno', time:'19:30', duration:90, note:'Salerno is a real Italian city, not a tourist resort — restaurants are excellent and genuine. Seafood is outstanding.', mapsUrl:'https://maps.apple.com/?daddr=Salerno+Italy', webUrl:'https://maps.google.com/?q=best+restaurants+salerno+italy' }
     ]
   },
@@ -1524,12 +1524,12 @@ const DAY_DATA = {
   '2026-09-27': {
     label: 'Sun 27 Sep', title: 'Dubai → Singapore', destId: 'singapore',
     photo: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800&q=80',
-    warnings: ['Late arrival Singapore 21:45 — pre-arranged hotel late check-in'],
+    warnings: ['Late arrival Singapore 21:45 — message Dao by Dorsett in advance about your ~23:00 arrival', 'Bring photo ID + credit card for the SGD 300 damage-deposit hold'],
     activities: [
       { id:'d26a1', type:'activity', name:'Dubai DXB T3 Transit', time:'04:40', duration:315, note:'Arrive Dubai 04:40. Same terminal — no re-check. ~6 hours in transit. Explore Terminal 3, have breakfast. Find a lounge if you have access.', mapsUrl:'https://maps.apple.com/?daddr=Dubai+International+Airport' },
       { id:'d26a2', type:'flight', name:'EK352 Dubai → Singapore', time:'10:00', duration:420, note:'Emirates. Departs 10:00. Arrives Singapore Changi T1 at 21:45 local time.', flightNum:'EK352', from:'DXB', to:'SIN', fromTime:'10:00', toTime:'21:45', ref:'GKK5PW', mapsUrl:'', webUrl:'https://www.flightradar24.com/EK352' },
       { id:'d26a3', type:'activity', name:'Changi Jewel — waterfall visit', time:'22:00', duration:30, note:'The Jewel indoor waterfall cascade is a 10-min walk from T1. Worth a visit even at this hour. An extraordinary structure.', mapsUrl:'https://maps.apple.com/?daddr=Jewel+Changi+Airport+Singapore', webUrl:'https://www.jewelchangiairport.com' },
-      { id:'d26a4', type:'hotel', name:'Check in — Singapore hotel', time:'22:30', duration:30, note:'Very late arrival. Hotel late check-in pre-arranged. Don\'t push it — late dinner or room service.', mapsUrl:'https://maps.apple.com/?daddr=Marina+Bay+Sands+Singapore' }
+      { id:'d26a4', type:'hotel', name:'Check in — Dao by Dorsett AMTD Singapore', time:'23:00', duration:30, note:'6 Shenton Way, Marina Bay. Two-Bedroom Executive Suite with breakfast — S$1,967.68 PAID IN FULL. Confirm late-arrival instructions before travelling. Bring photo ID + credit card for the SGD 300 damage-deposit hold.', address:'6 Shenton Way, Singapore 068809', mapsUrl:'https://maps.apple.com/?daddr=Dao+by+Dorsett+AMTD+Singapore' }
     ]
   },
   '2026-09-28': {
@@ -1600,26 +1600,27 @@ const HOME_BASES = {
   rome: 'Navona Loft, Via dell Orso 80, Rome, Italy',
   sorrento: 'La casa dei ricordi, Via Dalmazia 1, Salerno, Italy',
   naples: 'Napoli DownTown, Via Agostino Depretis 102, Naples, Italy',
-  athens: 'Acropolis Classy Apartments, Makrigianni 3, Athens, Greece'
+  athens: 'Acropolis Classy Apartments, Makrigianni 3, Athens, Greece',
+  singapore: 'Dao by Dorsett AMTD Singapore, 6 Shenton Way, Singapore'
 };
 
 const TRIP_CHECKLIST = [
   { group:'Urgent', id:'jungfrau-pass', label:'Buy Jungfrau Travel Pass (10–14 Sep)' },
-  { group:'Urgent', id:'como-rome-train', label:'Book Como → Milan → Rome Frecciarossa' },
   { group:'Urgent', id:'uk-eta', label:'Complete UK ETA for all 4 passports' },
   { group:'Urgent', id:'insurance', label:'Confirm Macquarie Platinum travel insurance' },
-  { group:'Book next', id:'singapore-hotel', label:'Book Singapore hotel for 27–30 Sep' },
   { group:'Book next', id:'tower-london', label:'Book Tower of London for 5 Sep at 9:30am' },
   { group:'Book next', id:'churchill', label:'Book Churchill War Rooms for 7 Sep' },
   { group:'Book next', id:'colosseum', label:'Book Colosseum + Forum + Palatine for 18 Sep' },
-  { group:'Book next', id:'rome-salerno', label:'Book Rome → Salerno Frecciarossa for 20 Sep' },
   { group:'Book next', id:'travelmar', label:'Book Travelmar Salerno ↔ Maiori ferry for 21 Sep' },
   { group:'Book next', id:'acropolis', label:'Book Acropolis combination ticket for 24 Sep' },
   { group:'Before departure', id:'oyster', label:'Apply for Abby’s Zip Oyster card' },
   { group:'Before departure', id:'esim', label:'Buy and install Airalo eSIM' },
   { group:'Before departure', id:'passports', label:'Confirm passport validity to at least 1 Apr 2027' },
   { group:'Before departure', id:'adapters', label:'Pack Type G and Type C power adapters' },
-  { group:'Before departure', id:'bank', label:'Notify Macquarie of travel dates' }
+  { group:'Before departure', id:'bank', label:'Notify Macquarie of travel dates' },
+  { group:'Before departure', id:'salerno-arrival', label:'Message Salerno host about 16:15–16:30 arrival on 20 Sep' },
+  { group:'Before departure', id:'singapore-late-arrival', label:'Message Dao by Dorsett about late arrival on 27 Sep' },
+  { group:'Before departure', id:'como-payment', label:'Confirm La Vecia Curt €197.98 payment clears on 6 Sep' }
 ];
 
 // ══════════════════════════════════════════
@@ -2859,7 +2860,7 @@ function openSearchResult(dayKey) {
 function openHomeDirections(dayKey) {
   const day = DAY_DATA[dayKey];
   const destination = day ? HOME_BASES[day.destId] : '';
-  if (!destination) { showToast('Add the Singapore hotel first'); return; }
+  if (!destination) { showToast('No accommodation address available for this day'); return; }
   openUrl(`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}`);
 }
 
@@ -2909,11 +2910,17 @@ function renderInfo() {
         <div class="info-row"><div class="info-row-label">Chelsea Cloisters PIN</div><div class="info-row-value copyable" onclick="copyText('6151','PIN copied')">6151 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div></div>
         <div class="info-row"><div class="info-row-label">Apartment Schönegg (Grindelwald)</div><div class="info-row-value copyable" onclick="copyText('479895','Grindelwald ref copied')">479895 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div></div>
         <div class="info-row"><div class="info-row-label">Navona Loft Rome (RentalIn)</div><div class="info-row-value copyable" onclick="copyText('31402392','Rome ref copied')">#31402392 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div></div>
+        <div class="info-row"><div class="info-row-label">La Vecia Curt (Como)</div><div class="info-row-value copyable" onclick="copyText('5345617271','Como ref copied')">5345617271 · PIN 6771</div></div>
+        <div class="info-row"><div class="info-row-label">Napoli DownTown (Naples)</div><div class="info-row-value copyable" onclick="copyText('6167950968','Naples ref copied')">6167950968 · PIN 8062</div></div>
+        <div class="info-row"><div class="info-row-label">Acropolis Classy Apts (Athens)</div><div class="info-row-value copyable" onclick="copyText('5595734882','Athens ref copied')">5595734882 · PIN 6146</div></div>
+        <div class="info-row"><div class="info-row-label">Dao by Dorsett AMTD (Singapore)</div><div class="info-row-value copyable" onclick="copyText('6163239415','Singapore ref copied')">6163239415 · PIN 4076</div></div>
         <div class="info-row"><div class="info-row-label">Wicked (Apollo Victoria)</div><div class="info-row-value">AU$450.72 paid ✓</div></div>
         <div class="info-row"><div class="info-row-label">Buckingham Palace State Rooms</div><div class="info-row-value">AU$190.84 paid ✓ · 11:45am</div></div>
         <div class="info-row"><div class="info-row-label">Vatican Museums 4pm entry</div><div class="info-row-value">AU$131.03 paid ✓</div></div>
-        <div class="info-row"><div class="info-row-label">Napoli DownTown (Naples)</div><div class="info-row-value">Pay at property ~€152.45</div></div>
-        <div class="info-row"><div class="info-row-label">Acropolis Classy Apts (Athens)</div><div class="info-row-value">AU$1,097 · Keypad lockbox</div></div>
+        <div class="info-row"><div class="info-row-label">La Vecia Curt (Como)</div><div class="info-row-value">€197.98 auto-charges 6 Sep + €12 city tax</div></div>
+        <div class="info-row"><div class="info-row-label">Napoli DownTown (Naples)</div><div class="info-row-value">€141.45 + €11 city tax on arrival</div></div>
+        <div class="info-row"><div class="info-row-label">Acropolis Classy Apts (Athens)</div><div class="info-row-value">€664.80 auto-charge · lockbox</div></div>
+        <div class="info-row"><div class="info-row-label">Dao by Dorsett AMTD (Singapore)</div><div class="info-row-value">S$1,967.68 paid ✓ · SGD 300 hold at check-in</div></div>
         <div class="info-row"><div class="info-row-label">Salerno — La casa dei ricordi</div><div class="info-row-value">Pay later · ~AU$462</div></div>
       </div>
     </div>`;
@@ -2959,8 +2966,8 @@ function renderInfo() {
       <div class="info-card">
         <div class="info-row"><div class="info-row-label">Family</div><div class="info-row-value">Rick, Nina, Abby (13), Olivia (10)</div></div>
         <div class="info-row"><div class="info-row-label">Dates</div><div class="info-row-value">2 Sep – 1 Oct 2026</div></div>
-        <div class="info-row"><div class="info-row-label">Itinerary Source</div><div class="info-row-value">Master v9 · v12 route updates</div></div>
-        <div class="info-row"><div class="info-row-label">Total Budget</div><div class="info-row-value">AU$40,000 target</div></div>
+        <div class="info-row"><div class="info-row-label">Itinerary Source</div><div class="info-row-value">Master v10</div></div>
+        <div class="info-row"><div class="info-row-label">Total Budget</div><div class="info-row-value">AU$45,000–50,000 target</div></div>
         <div class="info-row"><div class="info-row-label">Baggage</div><div class="info-row-value">3 × 23kg checked bags</div></div>
         <div class="info-row"><div class="info-row-label">Cards</div><div class="info-row-value">Macquarie Platinum (card) + Macquarie Debit (ATM)</div></div>
         <div class="info-row"><div class="info-row-label">eSIM</div><div class="info-row-value">Airalo — Europe + Singapore</div></div>
@@ -2978,13 +2985,13 @@ function renderInfo() {
     <div class="info-section">
       <div class="info-card">
         <div class="info-row"><div class="info-row-label" style="flex:1">🔴 Jungfrau Travel Pass — buy before 10 Sep at jungfrau.ch</div></div>
-        <div class="info-row"><div class="info-row-label" style="flex:1">🔴 Como → Milan → Rome Frecciarossa — book now at trenitalia.com</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">✅ Italian rail booked: Como → Milan → Rome (16 Sep) and Rome → Salerno (20 Sep)</div></div>
         <div class="info-row copyable" onclick="openUrl('https://www.gov.uk/eta')"><div class="info-row-label" style="flex:1">🔴 UK ETA for all 4 passports — required for Australian travellers; tap for the official UK service</div></div>
         <div class="info-row copyable" onclick="openUrl('https://travel-europe.europa.eu/en/etias/about-etias/what-is-etias')"><div class="info-row-label" style="flex:1">🟢 ETIAS — official launch is currently planned for the last quarter of 2026, after this trip; tap to recheck before departure</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">🔴 Confirm Macquarie Platinum travel-insurance activation</div></div>
-        <div class="info-row"><div class="info-row-label" style="flex:1">🟡 Singapore hotel — 3 nights, late arrival Sun 27 Sep</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">🟡 Message Dao by Dorsett about your late arrival on Sun 27 Sep</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">🟡 Tower of London, Churchill War Rooms, Colosseum, Acropolis and Rome Catacombs — not yet booked</div></div>
-        <div class="info-row"><div class="info-row-label" style="flex:1">🟡 Rome → Salerno train, Travelmar ferry and Salerno → Naples train — not yet booked</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">🟡 Travelmar ferry is still to book; Salerno → Naples train will be bought in Italy</div></div>
       </div>
     </div>`;
 
@@ -2993,16 +3000,16 @@ function renderInfo() {
       <div class="info-card">
         <div class="info-row"><div class="info-row-label" style="flex:1">Rome Navona Loft: €560 balance + €150 damage deposit due on arrival (cash or card — check host instructions)</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">Salerno La casa dei ricordi: pay via Booking.com closer to date (~AU$462). Check-in window 12:00–16:00</div></div>
-        <div class="info-row"><div class="info-row-label" style="flex:1">Como La Vecia Curt: self check-in via OTP code emailed on arrival — need mobile data. €197.98 auto-charges 6 Sep</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">Como La Vecia Curt: door-code self check-in. Confirm the €197.98 auto-charge clears on 6 Sep; €12 city tax on arrival</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">Vatican: 4:00pm entry BOOKED (AU$131.03 paid) — move with purpose, closes 6pm. St Peter's Basilica in the morning (free)</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">Westminster Abbey Evensong: FREE, 5:00pm Fri 4 Sep — confirm service running closer to date</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">Switzerland uses CHF — not Euros</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">Grindelwald keys: GRIWA RENT AG, Dorfstrasse 118 — collect 2–5pm Wed 9 Sep only</div></div>
-        <div class="info-row"><div class="info-row-label" style="flex:1">Naples: pre-arrange 7am taxi night before (hotel front desk)</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">Naples: follow up on host request if needed; confirm 7am taxi and early breakfast the night before</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">EasyJet bag drop closes 08:35 — leave Naples hotel by 7am sharp</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">Day 22 Pompeii (optional): bags stored at Pompei Scavi station ~€5/bag — pre-book at radicalstorage.com</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">Athens apartment: arrange luggage storage for Sat 26 Sep after 11:00am checkout</div></div>
-        <div class="info-row"><div class="info-row-label" style="flex:1">Singapore: request late arrival instructions and late checkout when hotel is booked</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">Singapore: message Dao by Dorsett about ~23:00 arrival; bring photo ID + credit card for SGD 300 damage deposit</div></div>
       </div>
     </div>`;
 
@@ -3159,7 +3166,7 @@ const STOP_COORDS = {
   'Athens Airport Depart':        [37.9364, 23.9445, 'Athens Airport — EK104', 'Airport', 'Athens International Airport Eleftherios Venizelos, Greece'],
   // ── SINGAPORE ──
   'Changi Airport':               [1.3644, 103.9915, 'Changi Airport (SIN)', 'Airport', 'Singapore Changi Airport, Singapore'],
-  'Marina Bay Sands':             [1.2834, 103.8607, 'Hotel (Marina Bay area)', 'Hotel', 'Marina Bay Sands, Singapore'],
+  'Dao by Dorsett AMTD':          [1.2785, 103.8486, 'Dao by Dorsett AMTD', 'Hotel', '6 Shenton Way, Singapore'],
   'Gardens by the Bay':           [1.2816, 103.8636, 'Gardens by the Bay', 'Gardens', 'Gardens by the Bay, Singapore'],
   'Supertree Grove':              [1.2816, 103.8636, 'Supertree Grove', 'Supertrees', 'Supertree Grove, Gardens by the Bay, Singapore'],
   'Sentosa Island':               [1.2494, 103.8303, 'Sentosa Island', 'Sentosa', 'Sentosa Island, Singapore'],
@@ -3198,10 +3205,10 @@ const DAY_ROUTES = {
   '2026-09-24': { mode:'walking', stops:['Acropolis Classy Apartments','Acropolis','Acropolis Museum','Monastiraki'] },
   '2026-09-25': { mode:'driving', stops:['Acropolis Classy Apartments','Cape Sounion','Anafiotika'] },
   '2026-09-26': { mode:'walking', stops:['Acropolis Classy Apartments','Monastiraki','Athens Airport Depart'] },
-  '2026-09-27': { mode:'driving', stops:['Changi Airport','Marina Bay Sands','Jewel Changi'] },
-  '2026-09-28': { mode:'transit', stops:['Marina Bay Sands','Gardens by the Bay','Supertree Grove'] },
-  '2026-09-29': { mode:'driving', stops:['Marina Bay Sands','VivoCity','Universal Studios Singapore','Maxwell Food Centre'] },
-  '2026-09-30': { mode:'transit', stops:['Marina Bay Sands','Singapore Zoo','Orchard Road','Jewel Changi'] },
+  '2026-09-27': { mode:'driving', stops:['Changi Airport','Jewel Changi','Dao by Dorsett AMTD'] },
+  '2026-09-28': { mode:'transit', stops:['Dao by Dorsett AMTD','Gardens by the Bay','Supertree Grove'] },
+  '2026-09-29': { mode:'driving', stops:['Dao by Dorsett AMTD','VivoCity','Universal Studios Singapore','Maxwell Food Centre'] },
+  '2026-09-30': { mode:'transit', stops:['Dao by Dorsett AMTD','Singapore Zoo','Orchard Road','Jewel Changi'] },
 };
 
 let _leafletMaps = {}; // cache map instances by dayKey
