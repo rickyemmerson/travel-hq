@@ -136,9 +136,9 @@ body{height:100%;font-family:'Inter',sans-serif;background:#0a0a0f;color:#f0f0f5
 .dest-status.traveling{background:rgba(100,130,180,0.15);color:#5b7fa6}
 
 /* ─── DAY LIST (inside destination) ─── */
-.back-btn{display:flex;align-items:center;gap:6px;padding:14px 16px 0;cursor:pointer;color:var(--accent);font-size:14px;font-weight:500;position:sticky;top:0;z-index:21;background:rgba(10,10,15,0.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+.back-btn{display:flex;align-items:center;gap:6px;width:max-content;min-height:38px;margin:10px 0 0 12px;padding:8px 12px;cursor:pointer;color:var(--accent);font-size:13px;font-weight:700;line-height:1;position:sticky;top:8px;z-index:30;background:rgba(20,20,28,0.94);border:1px solid var(--border-bright);border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.22);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 @media(prefers-color-scheme:light){.back-btn{background:rgba(242,242,247,0.92)!important}}
-.back-btn svg{stroke:var(--accent)}
+.back-btn svg{stroke:var(--accent);flex-shrink:0}
 .days-list{padding:0 16px;display:flex;flex-direction:column;gap:8px;margin-top:12px}
 .day-row{
   background:var(--surface);border:1px solid var(--border);
