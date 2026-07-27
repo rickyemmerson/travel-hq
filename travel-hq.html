@@ -344,6 +344,8 @@ body{height:100%;font-family:'Inter',sans-serif;background:#0a0a0f;color:#f0f0f5
 .transit-detail{font-size:11px;color:var(--text-secondary);margin-top:2px}
 .transit-time{font-size:11px;font-weight:700;color:var(--text-muted)}
 .transit-map-btn{font-size:11px;font-weight:600;color:var(--accent);display:flex;align-items:center;gap:3px}
+.transit-route-btn{font-size:10px;font-weight:700;color:var(--text-secondary);border:1px solid var(--border-bright);border-radius:12px;padding:3px 7px;cursor:pointer}
+.transit-route-btn:active{background:var(--surface-raised)}
 
 /* FLIGHT CARD */
 .flight-card{
@@ -1199,7 +1201,7 @@ const DAY_DATA = {
       { id:'d02a2', type:'transit', name:'Walk to Harrods', time:'11:20', duration:20, note:'~15 min walk through Knightsbridge.', mapsUrl:'https://maps.apple.com/?daddr=Harrods+London&dirflg=w' },
       { id:'d02a3', type:'activity', name:'Harrods — brief look', time:'11:45', duration:60, note:'Experience, not a shopping trip. Food Halls, exterior, toy/souvenir areas. Finish about 12:45pm.', mapsUrl:'https://maps.apple.com/?daddr=Harrods+Knightsbridge+London', webUrl:'https://www.harrods.com' },
       { id:'d02a4', type:'food', name:'Lunch — Knightsbridge / Brompton Road', time:'12:45', duration:45, note:'Quick lunch near Harrods before heading into the West End.', mapsUrl:'https://maps.apple.com/?daddr=Brompton+Road+London', webUrl:'https://maps.google.com/?q=restaurants+knightsbridge+london' },
-      { id:'d02a5', type:'transit', name:'Bus 22 → Oxford Circus (double-decker)', time:'13:30', duration:30, note:'Red double-decker experience. Hop on Bus 22 from Knightsbridge/Sloane Street toward Oxford Circus. Sit upstairs at the front.', mapsUrl:'https://maps.apple.com/?daddr=Oxford+Circus+London&dirflg=r' },
+      { id:'d02a5', type:'transit', name:'Bus 22 → Oxford Circus (double-decker)', time:'13:30', duration:30, note:'Take the 22 towards Oxford Circus from Knightsbridge or Sloane Street. It runs via Hyde Park Corner, Green Park and Berkeley Square — sit upstairs at the front. Check the live destination display before boarding.', mapsUrl:'https://maps.apple.com/?daddr=Oxford+Circus+London&dirflg=r', routeUrl:'https://tfl.gov.uk/bus/timetable/22' },
       { id:'d02a6', type:'activity', name:'Regent Street + Carnaby Street + Liberty London', time:'14:00', duration:90, note:'Regent Street for the big London retail scene. Carnaby Street and Liberty London have much better character — better wandering. Liberty is worth 20 min inside even if not buying.', mapsUrl:'https://maps.apple.com/?daddr=Carnaby+Street+London', webUrl:'https://www.libertylondon.com' },
       { id:'d02a7', type:'activity', name:'Piccadilly Circus', time:'16:15', duration:45, note:'See it, absorb the energy, don\'t linger. Classic London moment.', mapsUrl:'https://maps.apple.com/?daddr=Piccadilly+Circus+London' },
       { id:'d02a8', type:'food', name:'Dinner — Soho / Covent Garden / Kingly Court', time:'18:30', duration:90, note:'Japanese, Thai, or casual family restaurant. Kingly Court (off Carnaby) has good choices across multiple levels.', mapsUrl:'https://maps.apple.com/?daddr=Kingly+Court+London', webUrl:'https://maps.google.com/?q=restaurants+soho+london' }
@@ -1268,7 +1270,7 @@ const DAY_DATA = {
     warnings: ['EARLY NIGHT — taxi departs 04:45am tomorrow for LHR Terminal 2', 'Pre-book taxi from Chelsea Cloisters tonight — essential, do NOT leave to the morning', 'Final packing tonight — in bed by 9:30pm'],
     activities: [
       { id:'d07a1', type:'activity', name:'Light packing + apartment breakfast', time:'08:00', duration:60, note:'Breakfast in apartment. Begin light packing for tomorrow\'s 4:45am departure.' },
-      { id:'d07a2', type:'transit', name:'Bus 11 → Westminster Pier', time:'09:30', duration:30, note:'Bus 11 toward Westminster Pier or London Eye Pier.', mapsUrl:'https://maps.apple.com/?daddr=Westminster+Pier+London&dirflg=r' },
+      { id:'d07a2', type:'transit', name:'Bus 11 → Westminster Pier', time:'09:30', duration:30, note:'Take the 11 towards Waterloo Station from the Chelsea/Sloane Square area; get off around Westminster Abbey or Parliament Square, then walk to the pier. Check the live destination display before boarding.', mapsUrl:'https://maps.apple.com/?daddr=Westminster+Pier+London&dirflg=r', routeUrl:'https://tfl.gov.uk/bus/timetable/11' },
       { id:'d07a3', type:'transit', name:'Thames Clipper → Greenwich', time:'10:00', duration:60, note:'Uber Boat by Thames Clippers eastbound. See London Eye from the river, central bridges, Tower Bridge, Canary Wharf skyline from the water.', mapsUrl:'https://maps.apple.com/?daddr=Greenwich+Pier+London&dirflg=r', webUrl:'https://www.thamesclippers.com' },
       { id:'d07a4', type:'activity', name:'Cutty Sark + Greenwich Market + village', time:'11:00', duration:150, note:'Cutty Sark exterior (striking sight, free from outside). Greenwich Market for casual lunch from stalls. Greenwich village streets. Optional: walk up to Royal Observatory viewpoint in Greenwich Park for the London skyline (free — paid Meridian courtyard is optional).', mapsUrl:'https://maps.apple.com/?daddr=Cutty+Sark+DLR+Station+London', webUrl:'https://www.rmg.co.uk/cutty-sark' },
       { id:'d07a5', type:'transit', name:'DLR / Thames Clipper back to Chelsea', time:'13:30', duration:60, note:'DLR from Cutty Sark → Bank is faster than the return boat if wanting speed. Then Tube or taxi to Chelsea Cloisters.', mapsUrl:'https://maps.apple.com/?daddr=Chelsea+Cloisters+London&dirflg=r' },
@@ -1310,7 +1312,7 @@ const DAY_DATA = {
     activities: [
       { id:'d10a1', type:'transit', name:'Train: Grindelwald → Lauterbrunnen', time:'08:00', duration:40, note:'Via Zweilütschinen. Covered by Jungfrau Pass.', mapsUrl:'https://maps.apple.com/?daddr=Lauterbrunnen+Switzerland&dirflg=r', webUrl:'https://www.sbb.ch' },
       { id:'d10a2', type:'activity', name:'Lauterbrunnen Valley + Staubbach Falls', time:'08:45', duration:45, note:'300m waterfall drops off the valley wall. Often creates rainbows in morning light. Easy flat walk.', mapsUrl:'https://maps.apple.com/?daddr=Staubbach+Falls+Lauterbrunnen', webUrl:'https://www.myswitzerland.com/en/destinations/lauterbrunnen' },
-      { id:'d10a3', type:'transit', name:'Bus to Trümmelbach Falls', time:'09:30', duration:15, note:'Short bus ride from Lauterbrunnen. Covered by Jungfrau Pass.', mapsUrl:'https://maps.apple.com/?daddr=Trümmelbach+Falls+Lauterbrunnen&dirflg=r' },
+      { id:'d10a3', type:'transit', name:'PostBus 141 → Trümmelbach Falls', time:'09:30', duration:15, note:'Take PostBus 141 towards Stechelberg from Lauterbrunnen Bahnhof; get off at Trümmelbachfälle. The route follows the Lauterbrunnen Valley through Schützenbach and Camping Jungfrau. Confirm the live departure in SBB Mobile.', mapsUrl:'https://maps.apple.com/?daddr=Trümmelbach+Falls+Lauterbrunnen&dirflg=r', routeUrl:'https://www.postauto.ch/-/media/postauto/fahrplan-und-netz/liniennetz/dokumente/berner-oberland/liniennetz-lauterbrunnental.pdf' },
       { id:'d10a4', type:'activity', name:'Trümmelbach Falls', time:'10:00', duration:90, note:'Glacial meltwater from the Jungfrau thunders through tunnels inside the mountain. Dark, loud, spectacular. One of the best Alpine experiences. Works in any weather. Covered by Jungfrau Pass.', mapsUrl:'https://maps.apple.com/?daddr=Trümmelbach+Falls', webUrl:'https://www.truemmelbach.ch' },
       { id:'d10a5', type:'food', name:'Lunch — Airtime Café, Lauterbrunnen', time:'12:00', duration:60, note:'Good relaxed lunch. Or simple bakery. CHF 70–120 family.', mapsUrl:'https://maps.apple.com/?daddr=Lauterbrunnen+Switzerland' },
       { id:'d10a6', type:'transit', name:'Cable car to Grütschalp → train to Mürren', time:'13:30', duration:40, note:'Cable car from Lauterbrunnen, then mountain railway to Mürren. ~40 min total. Covered by Jungfrau Pass.', mapsUrl:'https://maps.apple.com/?daddr=Mürren+Switzerland&dirflg=r' },
@@ -2063,6 +2065,7 @@ function renderTransitCard(act, dayKey) {
   const icons = { transit:'🚶', ferry:'⛴️', flight:'✈️' };
   const icon = icons[act.type] || '🚌';
   const mapsUrl = safeUrl(act.mapsUrl);
+  const routeUrl = safeUrl(act.routeUrl);
   const mapsHandler = mapsUrl ? `openUrl('${escapeJsString(mapsUrl)}')` : '';
   return `
     <div class="transit-card" onclick="${mapsHandler || `editActivity('${dayKey}','${act.id}')`}">
@@ -2074,6 +2077,7 @@ function renderTransitCard(act, dayKey) {
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
         ${act.time ? `<div class="transit-time">${formatTime(act.time)}</div>` : ''}
         ${act.duration ? `<div style="font-size:10px;color:var(--text-muted)">${formatDuration(act.duration)}</div>` : ''}
+        ${routeUrl ? `<div class="transit-route-btn" onclick="event.stopPropagation();openUrl('${escapeJsString(routeUrl)}')">View route</div>` : ''}
         ${mapsUrl ? `<div class="transit-map-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Open</div>` : ''}
       </div>
     </div>`;
