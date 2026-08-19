@@ -1253,7 +1253,7 @@ const DAY_DATA = {
       { id:'d03a6', type:'transit', name:'Bus 11: Victoria → Westminster', time:'15:30', duration:20, note:'Board near Victoria Station toward Waterloo Station. Alight “Westminster Stn / Parliament Square”. It is only a short ride, but saves legs after the Palace.', mapsUrl:'https://maps.apple.com/?daddr=Westminster+Station+London&dirflg=r', routeUrl:'https://tfl.gov.uk/bus/timetable/11' },
       { id:'d03a7', type:'activity', name:'Big Ben + Parliament Square + K2 phone box', time:'15:55', duration:60, note:'Parliament exterior, Westminster Bridge views and the K2 box on Great George Street. Skip this without guilt if the Palace visit runs long.', mapsUrl:'https://maps.apple.com/?daddr=Houses+of+Parliament+London' },
       { id:'d03a8', type:'transit', name:'Bus 11 → Chelsea', time:'17:00', duration:35, note:'Board at “Westminster Stn / Parliament Square” toward Fulham Town Hall and alight “Duke of York Square”; walk 8–10 min home. Tube fallback: District line Westminster → South Kensington.', mapsUrl:'https://maps.apple.com/?daddr=Duke+of+York+Square+London&dirflg=r', routeUrl:'https://tfl.gov.uk/bus/timetable/11' },
-      { id:'d03a9', type:'food', name:'Easy local dinner', time:'18:00', duration:75, note:'Keep the evening near Chelsea Cloisters. No Westminster Abbey service today—the full tourist visit is now Monday morning.', mapsUrl:'https://maps.apple.com/?daddr=Sloane+Square+London' }
+      { id:'d03a9', type:'food', name:'Easy local dinner', time:'18:00', duration:75, note:'Keep the evening near Chelsea Cloisters. No Westminster Abbey service today—the quick exterior visit is now Monday morning.', mapsUrl:'https://maps.apple.com/?daddr=Sloane+Square+London' }
     ]
   },
   '2026-09-05': {
@@ -1287,18 +1287,20 @@ const DAY_DATA = {
     ]
   },
   '2026-09-07': {
-    label: 'Mon 7 Sep', title: 'Westminster Abbey + Churchill War Rooms + Chinatown', destId: 'london',
+    label: 'Mon 7 Sep', title: 'Westminster landmarks + Churchill + National Gallery', destId: 'london',
     photo: 'https://images.unsplash.com/photo-1569585723035-0e9e39dfa90b?w=800&q=80',
-    warnings: ['Book Westminster Abbey tourist admission for 9:30am — two 1-adult + 1-child family tickets should total £62', 'Book Churchill War Rooms for 1:30pm and allow at least two hours', 'Recheck date-specific Abbey closures before purchase'],
+    warnings: ['Westminster Abbey is an exterior-only stop — free, quick and no booking required', 'Book Churchill War Rooms for opening at 10:00am and allow at least two hours', 'St Margaret’s Church and National Gallery general admission are free; check any day-specific closures'],
     activities: [
-      { id:'d06a1', type:'transit', name:'Bus 11 → Westminster Abbey', time:'08:40', duration:35, note:'Board at “Duke of York Square” (stop KP) toward Waterloo Station. Alight “Great Smith Street / Westminster Abbey”, then walk 2–3 min to the visitor entrance.', mapsUrl:'https://maps.apple.com/?daddr=Westminster+Abbey+London&dirflg=r', routeUrl:'https://tfl.gov.uk/bus/timetable/11' },
-      { id:'d06a2', type:'activity', name:'Westminster Abbey — tourist visit', time:'09:30', duration:120, note:'Book normal sightseeing admission, not a service. Two “1 adult + 1 child” family tickets should total £62. Allow about two hours for Poets’ Corner, royal tombs and the Coronation Chair.', mapsUrl:'https://maps.apple.com/?daddr=Westminster+Abbey+London', webUrl:'https://www.westminster-abbey.org/visit-us/prices-and-entry-times' },
-      { id:'d06a3', type:'food', name:'Seated lunch — Westminster', time:'11:45', duration:70, note:'Choose a bookable café/pub around Victoria Street or Whitehall. Stay local so the 1:30pm War Rooms booking is comfortable.', mapsUrl:'https://maps.apple.com/?daddr=Victoria+Street+Westminster+London', webUrl:'https://maps.google.com/?q=family+restaurants+westminster+london' },
-      { id:'d06a4', type:'activity', name:'Churchill War Rooms', time:'13:30', duration:135, note:'Book 1:30pm. Allow at least two hours for the Cabinet War Rooms, Map Room and Churchill Museum; the earlier 90-minute plan was too rushed.', mapsUrl:'https://maps.apple.com/?daddr=Churchill+War+Rooms+London', webUrl:'https://www.iwm.org.uk/visits/churchill-war-rooms' },
-      { id:'d06a5', type:'activity', name:'Whitehall + Trafalgar Square', time:'15:50', duration:45, note:'Walk past Horse Guards and down Whitehall to Trafalgar Square. Keep this optional if the museum holds everyone’s attention.', mapsUrl:'https://maps.apple.com/?daddr=Trafalgar+Square+London' },
-      { id:'d06a6', type:'transit', name:'Bus 24 → Leicester Square', time:'16:40', duration:20, note:'Board at “Trafalgar Sq / Charing Cross Stn” toward Royal Free Hospital and alight “Leicester Square Station”. It is a short scenic hop and saves legs.', mapsUrl:'https://maps.apple.com/?daddr=Leicester+Square+Station+London&dirflg=r', routeUrl:'https://tfl.gov.uk/bus/timetable/24' },
-      { id:'d06a7', type:'food', name:'Chinatown dinner — Rasa Sayang', time:'17:15', duration:90, note:'Good-value Malaysian/Singaporean option for a seated family meal. Gerrard Street alternatives are close if there is a queue.', mapsUrl:'https://maps.apple.com/?daddr=Rasa+Sayang+Macclesfield+Street+London', webUrl:'https://www.rasayangfood.com' },
-      { id:'d06a8', type:'transit', name:'Bus 19 → Chelsea', time:'18:50', duration:40, note:'Board at “Gerrard Place / Chinatown” toward Battersea Bridge and alight “Duke of York Square”; then walk 8–10 min home.', mapsUrl:'https://maps.apple.com/?daddr=Duke+of+York+Square+London&dirflg=r', routeUrl:'https://tfl.gov.uk/bus/timetable/19' }
+      { id:'d06a1', type:'transit', name:'Bus 11 → Westminster Abbey', time:'08:40', duration:35, note:'Board at “Duke of York Square” (stop KP) toward Waterloo Station. Alight “Great Smith Street / Westminster Abbey”, then walk 2–3 min to Broad Sanctuary.', mapsUrl:'https://maps.apple.com/?daddr=Westminster+Abbey+London&dirflg=r', routeUrl:'https://tfl.gov.uk/bus/timetable/11' },
+      { id:'d06a2', type:'activity', name:'Westminster Abbey exterior + Parliament Square', time:'09:15', duration:40, note:'Free exterior look only — no ticket or security queue. See the Great West Door and Parliament Square side, then photograph Big Ben and the Houses of Parliament. Leave by 9:55am.', mapsUrl:'https://maps.apple.com/?daddr=Westminster+Abbey+London', webUrl:'https://www.westminster-abbey.org/visit-us' },
+      { id:'d06a3', type:'activity', name:'Churchill War Rooms — opening entry', time:'10:00', duration:135, note:'Book 10:00am. The entrance is about a 5 min walk from Parliament Square. Allow at least two hours for the Cabinet War Rooms, Map Room and Churchill Museum.', mapsUrl:'https://maps.apple.com/?daddr=Churchill+War+Rooms+London', webUrl:'https://www.iwm.org.uk/visits/churchill-war-rooms' },
+      { id:'d06a4', type:'activity', name:'St Margaret’s Church — optional free look', time:'12:20', duration:25, note:'Free entry from 11:00am and directly beside Westminster Abbey. This is a short historic-church visit, not a substitute for the Abbey interior. Skip it if the War Rooms run long.', mapsUrl:'https://maps.apple.com/?daddr=St+Margarets+Church+Westminster+London', webUrl:'https://www.westminster-abbey.org/st-margaret-s-church' },
+      { id:'d06a5', type:'food', name:'Seated lunch — Westminster / Whitehall', time:'12:50', duration:70, note:'Choose a bookable café or pub around Victoria Street or Whitehall. This is the proper sit-down break after the underground museum.', mapsUrl:'https://maps.apple.com/?daddr=Victoria+Street+Westminster+London', webUrl:'https://maps.google.com/?q=family+restaurants+westminster+london' },
+      { id:'d06a6', type:'activity', name:'Whitehall walk → Trafalgar Square', time:'14:05', duration:35, note:'Walk north past the Cenotaph, Downing Street and Horse Guards to Trafalgar Square. If legs are tired, take bus 24 from “Westminster Stn / Parliament Square” and alight “Trafalgar Sq / Charing Cross Stn”.', mapsUrl:'https://maps.apple.com/?daddr=Trafalgar+Square+London&dirflg=w', routeUrl:'https://tfl.gov.uk/bus/timetable/24' },
+      { id:'d06a7', type:'activity', name:'National Gallery — free highlights visit', time:'14:45', duration:90, note:'General admission is free. Keep it targeted: choose roughly five famous paintings rather than attempting the whole collection. A free advance ticket can make entry smoother but this remains flexible.', mapsUrl:'https://maps.apple.com/?daddr=National+Gallery+London', webUrl:'https://www.nationalgallery.org.uk/visiting/plan-your-visit' },
+      { id:'d06a8', type:'activity', name:'Leicester Square + Chinatown wander', time:'16:20', duration:50, note:'Walk via Leicester Square into Chinatown. Slow down, browse and choose dinner without another fixed booking.', mapsUrl:'https://maps.apple.com/?daddr=Chinatown+London' },
+      { id:'d06a9', type:'food', name:'Chinatown dinner — Rasa Sayang', time:'17:15', duration:90, note:'Good-value Malaysian/Singaporean option for a seated family meal. Gerrard Street alternatives are close if there is a queue.', mapsUrl:'https://maps.apple.com/?daddr=Rasa+Sayang+Macclesfield+Street+London', webUrl:'https://www.rasayangfood.com' },
+      { id:'d06a10', type:'transit', name:'Bus 19 → Chelsea', time:'18:50', duration:40, note:'Board at “Gerrard Place / Chinatown” toward Battersea Bridge and alight “Duke of York Square”; then walk 8–10 min home.', mapsUrl:'https://maps.apple.com/?daddr=Duke+of+York+Square+London&dirflg=r', routeUrl:'https://tfl.gov.uk/bus/timetable/19' }
     ]
   },
   '2026-09-08': {
@@ -1636,8 +1638,7 @@ const TRIP_CHECKLIST = [
   { group:'Urgent', id:'jungfrau-pass', label:'Buy Jungfrau Travel Pass (10–14 Sep)' },
   { group:'Urgent', id:'uk-eta', label:'Complete UK ETA for all 4 passports' },
   { group:'Urgent', id:'insurance', label:'Confirm Macquarie Platinum travel insurance' },
-  { group:'Book next', id:'westminster-abbey', label:'Book Westminster Abbey for Mon 7 Sep at 9:30am' },
-  { group:'Book next', id:'churchill', label:'Book Churchill War Rooms for Mon 7 Sep at 1:30pm' },
+  { group:'Book next', id:'churchill', label:'Book Churchill War Rooms for Mon 7 Sep at 10:00am' },
   { group:'Book next', id:'tower-london', label:'Book Tower of London for Tue 8 Sep at 9:00am' },
   { group:'Book next', id:'nhm', label:'Reserve free Natural History Museum entry for Thu 3 Sep at 10:00am' },
   { group:'Book next', id:'heathrow-cars', label:'Pre-book Heathrow cars: T3 arrival and 5:00am T2 departure' },
@@ -3034,7 +3035,7 @@ function renderInfo() {
         <div class="info-row copyable" onclick="openUrl('https://travel-europe.europa.eu/en/etias/about-etias/what-is-etias')"><div class="info-row-label" style="flex:1">🟢 ETIAS — official launch is currently planned for the last quarter of 2026, after this trip; tap to recheck before departure</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">🔴 Confirm Macquarie Platinum travel-insurance activation</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">🟡 Message Dao by Dorsett about your late arrival on Sun 27 Sep</div></div>
-        <div class="info-row"><div class="info-row-label" style="flex:1">🟡 Westminster Abbey, Tower of London, Churchill War Rooms, Colosseum, Acropolis and Rome Catacombs — not yet booked</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">🟡 Tower of London, Churchill War Rooms, Colosseum, Acropolis and Rome Catacombs — not yet booked</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">🟡 Travelmar ferry is still to book; Salerno → Naples train will be bought in Italy</div></div>
       </div>
     </div>`;
@@ -3046,7 +3047,7 @@ function renderInfo() {
         <div class="info-row"><div class="info-row-label" style="flex:1">Salerno La casa dei ricordi: pay via Booking.com closer to date (~AU$462). Check-in window 12:00–16:00</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">Como La Vecia Curt: door-code self check-in. Confirm the €197.98 auto-charge clears on 6 Sep; €12 city tax on arrival</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">Vatican: 4:00pm entry BOOKED (AU$131.03 paid) — move with purpose, closes 6pm. St Peter's Basilica in the morning (free)</div></div>
-        <div class="info-row"><div class="info-row-label" style="flex:1">Westminster Abbey: book tourist admission for 9:30am Mon 7 Sep; two 1-adult + 1-child family tickets should total £62</div></div>
+        <div class="info-row"><div class="info-row-label" style="flex:1">Westminster Abbey: free exterior look at 9:15am Mon 7 Sep; optional free St Margaret’s Church after Churchill War Rooms</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">London buses: use Duke of York Square for routes 11, 19 and 22; use the Tube for Tower opening time and timed theatre travel</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">Switzerland uses CHF — not Euros</div></div>
         <div class="info-row"><div class="info-row-label" style="flex:1">Grindelwald keys: GRIWA RENT AG, Dorfstrasse 118 — collect 2–5pm Wed 9 Sep only</div></div>
@@ -3121,7 +3122,7 @@ function renderInfo() {
     `<div class="info-row copyable" onclick="openUrl('https://www.gov.uk/eta')"><div class="info-row-label" style="flex:1">🔴 UK ETA for all four passports — tap for the official service.</div></div>`,
     note('🔴 Confirm Macquarie Platinum travel-insurance activation.'),
     note('🟡 Message Dao by Dorsett about the late Singapore arrival.'),
-    note('🟡 London to book: Westminster Abbey Mon 7 Sep 9:30am, Churchill War Rooms 1:30pm, Tower of London Tue 8 Sep 9:00am and free NHM entry Thu 3 Sep 10:00am.'),
+    note('🟡 London to book: Churchill War Rooms Mon 7 Sep 10:00am, Tower of London Tue 8 Sep 9:00am and free NHM entry Thu 3 Sep 10:00am. Westminster Abbey is exterior-only and free.'),
     note('🚌 London bus base: Duke of York Square for routes 11, 19 and 22. Use the Tube for Tower opening time and timed theatre travel.'),
     note('🟡 Travelmar ferry is still to book; buy the Salerno → Naples train in Italy.')
   ].join('');
@@ -3209,7 +3210,9 @@ const STOP_COORDS = {
   'Pizza Pilgrims Victoria':      [51.4975, -0.1431, 'Pizza Pilgrims Victoria', 'Lunch', 'Pizza Pilgrims Victoria, London'],
   'State Rooms':                  [51.5014, -0.1419, 'State Rooms', 'State Rms', 'Buckingham Palace State Rooms, London'],
   'Trafalgar Square':             [51.5080, -0.1281, 'Trafalgar Square', 'Trafalgar', 'Trafalgar Square, London'],
+  'National Gallery':             [51.5089, -0.1283, 'National Gallery', 'Gallery', 'National Gallery, Trafalgar Square, London'],
   'Westminster Abbey':            [51.4994, -0.1273, 'Westminster Abbey', 'Abbey', 'Westminster Abbey, London'],
+  'St Margarets Church':          [51.4992, -0.1277, 'St Margaret’s Church', 'St Margaret’s', 'St Margarets Church, Westminster, London'],
   'Houses of Parliament':         [51.4995, -0.1248, 'Houses of Parliament', 'Parliament', 'Houses of Parliament, Westminster, London'],
   'Big Ben':                      [51.5007, -0.1246, 'Big Ben', 'Big Ben', 'Big Ben, Westminster Bridge Road, London'],
   'South Bank':                   [51.5055, -0.1143, 'South Bank', 'Dinner', 'South Bank, London'],
@@ -3318,7 +3321,7 @@ const DAY_ROUTES = {
   '2026-09-04': { mode:'transit', stops:['Chelsea Cloisters','Duke of York Square','Green Park Constitution Hill','St James Palace','Buckingham Palace','Pizza Pilgrims Victoria','Big Ben','Duke of York Square'] },
   '2026-09-05': { mode:'transit', stops:['Chelsea Cloisters','Westminster Pier','London Bridge City Pier','Hay’s Galleria','The Real Greek Bankside','Tate Modern','Millennium Bridge','St Pauls Cathedral'] },
   '2026-09-06': { mode:'transit', stops:['Chelsea Cloisters','HTB Brompton Road','Bills Victoria','Apollo Victoria Theatre','Duke of York Square'] },
-  '2026-09-07': { mode:'transit', stops:['Chelsea Cloisters','Westminster Abbey','Churchill War Rooms','Trafalgar Square','Chinatown','Rasa Sayang','Duke of York Square'] },
+  '2026-09-07': { mode:'transit', stops:['Chelsea Cloisters','Westminster Abbey','Churchill War Rooms','St Margarets Church','Trafalgar Square','National Gallery','Chinatown','Rasa Sayang','Duke of York Square'] },
   '2026-09-08': { mode:'transit', stops:['Chelsea Cloisters','Tower of London','The Real Greek Tower Bridge','Horizon 22','Chelsea Cloisters'] },
   '2026-09-09': { mode:'driving', stops:['Chelsea Cloisters','Zurich Airport','Grindelwald village'] },
   '2026-09-10': { mode:'walking', stops:['Grindelwald village','Grindelwald First','Pfingstegg'] },
