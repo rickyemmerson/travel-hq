@@ -538,6 +538,13 @@ select.form-input{-webkit-appearance:none;background-image:url("data:image/svg+x
 .dest-budget-fill.over{background:var(--red)}
 .dest-budget-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--text-secondary)}
 .dest-budget-spent{font-weight:600;color:var(--text-primary)}
+.dest-budget-note{font-size:10px;line-height:1.45;color:var(--text-muted);margin-top:9px}
+.country-budgets{padding:0 16px 16px}
+.country-budget-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.country-budget-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:12px}
+.country-budget-name{font-size:11px;color:var(--text-secondary);margin-bottom:4px}
+.country-budget-amount{font-size:17px;font-weight:750;color:var(--text-primary)}
+.country-budget-meta{font-size:10px;color:var(--text-muted);margin-top:3px}
 
 /* ─── SETTINGS / TRIP INFO ─── */
 .info-section{padding:0 16px 8px}
@@ -961,7 +968,7 @@ select.form-input{-webkit-appearance:none;background-image:url("data:image/svg+x
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </div>
     </div>
-    <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;line-height:1.5">Set on-ground spending target for this destination (AUD). Excludes flights and pre-paid accommodation.</p>
+    <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;line-height:1.5">Set the remaining trip-spending target for this destination (AUD). Includes accommodation, tickets and transport still to be paid; excludes flights and anything already paid.</p>
     <div class="form-group">
       <label class="form-label">Budget (AU$)</label>
       <input class="form-input" id="destBudgetInput" type="number" inputmode="decimal" placeholder="0">
@@ -1009,6 +1016,9 @@ const SUPA_URL = 'https://qeakwgownoldcmibyyur.supabase.co';
 const SUPA_KEY = 'sb_publishable_QsbcPtQVy20baZ1aVbHRhg_fLcBQMRm';
 const LOCAL_MODE = location.protocol === 'file:' || ['localhost','127.0.0.1','::1'].includes(location.hostname);
 const USE_CLOUD = !LOCAL_MODE || new URLSearchParams(location.search).get('cloud') === '1';
+const BUDGET_PLAN_VERSION = '2026-08-31-final';
+const FINAL_DEST_BUDGETS = { london:2850, grindelwald:3800, como:600, rome:2400, sorrento:1100, naples:700, athens:2100, singapore:2000 };
+const FINAL_PLANNING_RATES = { GBP:1.95, CHF:1.80, EUR:1.68, SGD:1.12 };
 let _cache = null;
 let syncTimeout = null;
 
@@ -1072,12 +1082,20 @@ const saveLocal = d => { localStorage.setItem('travelhq_v1', JSON.stringify(d));
 function load() {
   if (_cache) return _cache;
   _cache = loadLocal();
-  if (!_cache.rates) _cache.rates = { GBP: 1.95, CHF: 1.68, EUR: 1.65, SGD: 0.93 };
+  if (!_cache.rates) _cache.rates = { GBP: 1.95, CHF: 1.80, EUR: 1.68, SGD: 1.12 };
   if (!_cache.transactions) _cache.transactions = [];
   if (!_cache.customActivities) _cache.customActivities = {};
   if (!_cache.deletedActivities) _cache.deletedActivities = {};
   if (!_cache.dayPhotos) _cache.dayPhotos = {};
   if (!_cache.checklist) _cache.checklist = {};
+  // One-time migration so the local file app receives the final plan even if it has older saved overrides.
+  if (_cache.budgetPlanVersion !== BUDGET_PLAN_VERSION) {
+    _cache.customDestBudgets = Object.assign({}, _cache.customDestBudgets || {}, FINAL_DEST_BUDGETS);
+    _cache.rates = Object.assign({}, FINAL_PLANNING_RATES);
+    _cache.ratesUpdatedAt = '2026-08-31T03:06:10Z';
+    _cache.budgetPlanVersion = BUDGET_PLAN_VERSION;
+    saveLocal(_cache);
+  }
   if (USE_CLOUD) syncFromCloud(); else setTimeout(() => setSyncState('local'), 0);
   return _cache;
 }
@@ -1104,7 +1122,8 @@ const DESTINATIONS = [
     nights: 7,
     accent: '#5b7fa6',
     photo: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80',
-    budget: 5980,
+    budget: 2850,
+    budgetNote: 'Food 1,700 · buses, Tube and cars 400 · Tower/CWR/boat 485 · buffer 265. Lion King is not included; add up to AU$390 only if booked.',
     currency: 'GBP',
     weather: { temp: '18°C', desc: 'Mild, bring a jacket', icon: '🌤️' },
     tips: 'Near-cashless city. Adults need separate contactless cards/devices. Olivia (10) travels free with a paying adult; ask staff to add the Young Visitor discount to Abby’s Oyster for half-price PAYG. Duke of York Square is the useful nearby stop for buses 11, 19 and 22.',
@@ -1118,10 +1137,11 @@ const DESTINATIONS = [
     nights: 6,
     accent: '#4a8c7a',
     photo: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
-    budget: 3121,
+    budget: 3800,
+    budgetNote: '5-day Jungfrau Travel Pass 1,080 · food 2,450 · separate activities and buffer 270. If the pass is bought before departure, reduce this target by AU$1,080.',
     currency: 'CHF',
     weather: { temp: '12°C', desc: 'Alpine cool, layers essential', icon: '🏔️' },
-    tips: 'CHF not EUR. Very card friendly. UV intense at altitude — sunscreen essential. Jungfrau Pass covers all mountain transport.',
+    tips: 'CHF not EUR. Very card friendly. UV intense at altitude — sunscreen essential. The Jungfrau Pass covers the listed railways, cableways, boats and local buses; attraction and adventure-activity admission is separate.',
     days: ['2026-09-09','2026-09-10','2026-09-11','2026-09-12','2026-09-13','2026-09-14']
   },
   {
@@ -1132,7 +1152,8 @@ const DESTINATIONS = [
     nights: 1,
     accent: '#7a8f6e',
     photo: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?w=800&q=80',
-    budget: 347,
+    budget: 600,
+    budgetNote: 'Accommodation and city tax 355 · meals and funicular 175 · buffer 70. The 6 Sep accommodation charge is included because it is still to leave the account.',
     currency: 'EUR',
     weather: { temp: '24°C', desc: 'Warm and pleasant', icon: '🌅' },
     tips: 'CONFIRMED: La Vecia Curt, Via Vitani 22 — door-code self check-in, no host meeting. €197.98 auto-charges 6 Sep + €12 city tax on arrival. Check in 15:00–23:30; out by 10:00. Ref 5345617271 · PIN 6771.',
@@ -1146,7 +1167,8 @@ const DESTINATIONS = [
     nights: 4,
     accent: '#c47a4a',
     photo: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=80',
-    budget: 2360,
+    budget: 2400,
+    budgetNote: 'Accommodation balance 940 · food 900 · sights and local transport 360 · buffer 200. Keep capacity for the separate €150 refundable security hold.',
     currency: 'EUR',
     weather: { temp: '26°C', desc: 'Hot, plan around midday heat', icon: '☀️' },
     tips: 'Keep €100–150 cash. Navona Loft, Via dell’Orso 80, is booked for 4 nights. Vatican Museums entry is booked for 4:00pm Thu 17 Sep; visit St Peter’s Basilica that morning. Sun 20 Sep: booked 2:00pm Frecciarossa to Salerno.',
@@ -1161,6 +1183,7 @@ const DESTINATIONS = [
     accent: '#c4954a',
     photo: 'https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?w=800&q=80',
     budget: 1100,
+    budgetNote: 'Accommodation 462 · food 400 · ferry and local transport 160 · buffer 78.',
     currency: 'EUR',
     weather: { temp: '25°C', desc: 'Warm Mediterranean', icon: '🌊' },
     tips: 'Apartment: La casa dei ricordi, 1 Via Dalmazia. Check-in 12:00–16:00. Your booked train arrives 4:06pm, so message the host about an expected 4:15–4:30pm arrival. Lungomare Trieste is a 5 min walk.',
@@ -1174,7 +1197,8 @@ const DESTINATIONS = [
     nights: 1,
     accent: '#b85c4a',
     photo: 'https://images.unsplash.com/photo-1555992643-a87b2ce02bca?w=800&q=80',
-    budget: 572,
+    budget: 700,
+    budgetNote: 'Accommodation and tax 256 · food, airport taxi and local transport 250 · Pompeii/flex 194.',
     currency: 'EUR',
     weather: { temp: '25°C', desc: 'Warm, lively city', icon: '🍕' },
     tips: 'CONFIRMED: Napoli DownTown, Via Agostino Depretis 102. €141.45 + €11 city tax on arrival; breakfast included. Check in 08:00–00:00; out 10:00–10:30. Ref 6167950968 · PIN 8062. Confirm the requested 7am airport taxi and early breakfast the evening before.',
@@ -1188,7 +1212,8 @@ const DESTINATIONS = [
     nights: 3,
     accent: '#7a9bb5',
     photo: 'https://images.unsplash.com/photo-1555993539-1732b0258235?w=800&q=80',
-    budget: 1770,
+    budget: 2100,
+    budgetNote: 'Accommodation 1,117 · food 500 · Acropolis/Sounion and transport 350 · buffer 133.',
     currency: 'EUR',
     weather: { temp: '28°C', desc: 'Hot — Acropolis at 8am sharp', icon: '🏛️' },
     tips: 'CONFIRMED: Acropolis Classy Apartments, Makrigianni 3 — €664.80 charged automatically. Two-bedroom apartment; keys in on-site lockbox. Check in from 15:00; out by 11:00. Ref 5595734882 · PIN 6146. Acropolis opens 8am — go early.',
@@ -1202,7 +1227,8 @@ const DESTINATIONS = [
     nights: 3,
     accent: '#5a9e7a',
     photo: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800&q=80',
-    budget: 1256,
+    budget: 2000,
+    budgetNote: 'Universal, Gardens and Zoo 750 · food 700 · MRT/Grab 250 · buffer 300. Hotel and breakfast are already paid and excluded.',
     currency: 'SGD',
     weather: { temp: '31°C', desc: 'Hot and humid year-round', icon: '🌴' },
     tips: 'CONFIRMED & PAID: Dao by Dorsett AMTD Singapore, 6 Shenton Way, Marina Bay. Two-bedroom Executive Suite with breakfast; S$1,967.68 paid in full. Ref 6163239415 · PIN 4076. Message the hotel about your ~23:00 arrival; bring photo ID and credit card for the SGD 300 damage-deposit hold.',
@@ -2508,7 +2534,7 @@ function renderBudget() {
     </div>`;
 
   // Rates card
-  const rates = state.rates || { GBP: 1.95, CHF: 1.68, EUR: 1.65, SGD: 0.93 };
+  const rates = state.rates || { GBP: 1.95, CHF: 1.80, EUR: 1.68, SGD: 1.12 };
   html += `
     <div class="rates-section anim anim-3">
       <div class="rates-card">
@@ -2525,6 +2551,24 @@ function renderBudget() {
         </div>`).join('')}
       </div>
     </div>`;
+
+  // Country roll-up
+  const countryBudgets = {};
+  DESTINATIONS.forEach(dest => {
+    const budget = (state.customDestBudgets && state.customDestBudgets[dest.id]) || dest.budget;
+    if (!countryBudgets[dest.country]) countryBudgets[dest.country] = { budget: 0, spent: 0 };
+    countryBudgets[dest.country].budget += budget;
+    countryBudgets[dest.country].spent += txs.filter(t => dest.days.includes(t.date)).reduce((s,t) => s+t.aud, 0);
+  });
+  html += `<div class="country-budgets anim anim-3">
+    <div class="section-label" style="padding:0 0 8px">By Country</div>
+    <div class="country-budget-grid">${Object.entries(countryBudgets).map(([country,amounts]) => `
+      <div class="country-budget-card">
+        <div class="country-budget-name">${country}</div>
+        <div class="country-budget-amount">AU$${amounts.budget.toLocaleString()}</div>
+        <div class="country-budget-meta">AU$${amounts.spent.toFixed(0)} spent · AU$${Math.max(amounts.budget-amounts.spent,0).toFixed(0)} left</div>
+      </div>`).join('')}</div>
+  </div>`;
 
   // Destination budgets
   html += `<div class="dest-budgets anim anim-3">
@@ -2549,6 +2593,7 @@ function renderBudget() {
           <div><span class="dest-budget-spent">AU$${destSpent.toFixed(0)}</span> spent</div>
           <div>of AU$${destBudget.toLocaleString()} est.</div>
         </div>
+        <div class="dest-budget-note">${dest.budgetNote || ''}</div>
       </div>`;
   });
   html += '</div>';
@@ -2639,7 +2684,7 @@ function renderDonut(catTotals, total) {
 function updateConverter() {
   const amount = parseFloat(document.getElementById('convAmount')?.value) || 0;
   const currency = document.getElementById('convCurrency')?.value || 'EUR';
-  const rates = (load().rates) || { GBP: 1.95, CHF: 1.68, EUR: 1.65, SGD: 0.93 };
+  const rates = (load().rates) || { GBP: 1.95, CHF: 1.80, EUR: 1.68, SGD: 1.12 };
   const rate = rates[currency] || 1;
   const aud = amount * rate;
   const el = document.getElementById('convResult');
@@ -2706,7 +2751,7 @@ function editTransaction(id) {
 function updateTxPreview() {
   const amt = parseFloat(document.getElementById('txAmount').value) || 0;
   const cur = document.getElementById('txCurrency').value;
-  const rates = (load().rates) || { GBP: 1.95, CHF: 1.68, EUR: 1.65, SGD: 0.93 };
+  const rates = (load().rates) || { GBP: 1.95, CHF: 1.80, EUR: 1.68, SGD: 1.12 };
   if (cur === 'AUD') {
     document.getElementById('txAudPreview').textContent = amt > 0 ? `= AU$${amt.toFixed(2)}` : '';
   } else {
@@ -2735,7 +2780,7 @@ function submitTransaction() {
   const currency = document.getElementById('txCurrency').value;
   const note = document.getElementById('txNote').value.trim();
   const state = load();
-  const rates = state.rates || { GBP: 1.95, CHF: 1.68, EUR: 1.65, SGD: 0.93 };
+  const rates = state.rates || { GBP: 1.95, CHF: 1.80, EUR: 1.68, SGD: 1.12 };
   // Use the rate stored AT THE TIME of transaction
   const rateUsed = currency === 'AUD' ? 1 : (rates[currency] || 1);
   const aud = amount * rateUsed;
@@ -2794,7 +2839,7 @@ function undoDeleteTransaction() {
 // ══════════════════════════════════════════
 function openRatesModal() {
   const state = load();
-  const rates = state.rates || { GBP: 1.95, CHF: 1.68, EUR: 1.65, SGD: 0.93 };
+  const rates = state.rates || { GBP: 1.95, CHF: 1.80, EUR: 1.68, SGD: 1.12 };
   const pairs = [['GBP','🇬🇧','British Pound'],['CHF','🇨🇭','Swiss Franc'],['EUR','🇪🇺','Euro'],['SGD','🇸🇬','Singapore Dollar']];
   document.getElementById('ratesFormContent').innerHTML = pairs.map(([code,flag,name]) => `
     <div class="form-group">
